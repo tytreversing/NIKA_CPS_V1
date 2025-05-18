@@ -21,6 +21,10 @@ namespace NIKA_CPS_V1
         {
             PRODUCT_VERSION = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             InitializeComponent();
+            if (RegistryOperations.getProfileIntWithDefault("Setup", "ShowSplashScreen", 1) != 0)
+            {
+                new SplashScreen().ShowDialog();
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -58,7 +62,6 @@ namespace NIKA_CPS_V1
                 }
             }
             tbConsole.Text += "Программа загружена " + DateTime.Now.ToString() + "\r\n";
-
         }
 
         private void tsbFirmware_Click(object sender, EventArgs e)
@@ -85,6 +88,11 @@ namespace NIKA_CPS_V1
         {
             RegistryOperations.WriteProfileInt("Setup", "LastWindowWidth", this.Width);
             RegistryOperations.WriteProfileInt("Setup", "LastWindowHeight", this.Height);
+        }
+
+        private void tsbAbout_Click(object sender, EventArgs e)
+        {
+            new AboutForm().ShowDialog();
         }
     }
 }

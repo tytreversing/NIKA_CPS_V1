@@ -32,13 +32,13 @@
             this.tsUpdater = new System.Windows.Forms.ToolStrip();
             this.tsbOpen = new System.Windows.Forms.ToolStripButton();
             this.tsbUpdate = new System.Windows.Forms.ToolStripButton();
+            this.tbHelp = new System.Windows.Forms.ToolStripButton();
             this.gbRadioType = new System.Windows.Forms.GroupBox();
-            this.rbMD9600 = new System.Windows.Forms.RadioButton();
             this.rbMDUV380 = new System.Windows.Forms.RadioButton();
+            this.rbMD9600 = new System.Windows.Forms.RadioButton();
             this.pbUploading = new System.Windows.Forms.ProgressBar();
             this.tbConsole = new System.Windows.Forms.TextBox();
             this.lblText = new System.Windows.Forms.Label();
-            this.tbHelp = new System.Windows.Forms.ToolStripButton();
             this.ofdOpenFirmware = new System.Windows.Forms.OpenFileDialog();
             this.tsUpdater.SuspendLayout();
             this.gbRadioType.SuspendLayout();
@@ -54,9 +54,9 @@
             this.tsbOpen,
             this.tsbUpdate,
             this.tbHelp});
-            this.tsUpdater.Location = new System.Drawing.Point(0, 0);
+            this.tsUpdater.Location = new System.Drawing.Point(6, 6);
             this.tsUpdater.Name = "tsUpdater";
-            this.tsUpdater.Size = new System.Drawing.Size(53, 313);
+            this.tsUpdater.Size = new System.Drawing.Size(53, 297);
             this.tsUpdater.TabIndex = 0;
             this.tsUpdater.Text = "toolStrip1";
             // 
@@ -73,11 +73,23 @@
             // tsbUpdate
             // 
             this.tsbUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbUpdate.Enabled = false;
             this.tsbUpdate.Image = ((System.Drawing.Image)(resources.GetObject("tsbUpdate.Image")));
             this.tsbUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbUpdate.Name = "tsbUpdate";
             this.tsbUpdate.Size = new System.Drawing.Size(50, 52);
             this.tsbUpdate.Text = "Прошить рацию";
+            this.tsbUpdate.Click += new System.EventHandler(this.tsbUpdate_Click);
+            // 
+            // tbHelp
+            // 
+            this.tbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbHelp.Image = ((System.Drawing.Image)(resources.GetObject("tbHelp.Image")));
+            this.tbHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbHelp.Name = "tbHelp";
+            this.tbHelp.Size = new System.Drawing.Size(50, 52);
+            this.tbHelp.Text = "Подсказка";
+            this.tbHelp.Click += new System.EventHandler(this.tbHelp_Click);
             // 
             // gbRadioType
             // 
@@ -90,17 +102,6 @@
             this.gbRadioType.TabStop = false;
             this.gbRadioType.Text = " Тип рации ";
             // 
-            // rbMD9600
-            // 
-            this.rbMD9600.AutoSize = true;
-            this.rbMD9600.Location = new System.Drawing.Point(17, 23);
-            this.rbMD9600.Name = "rbMD9600";
-            this.rbMD9600.Size = new System.Drawing.Size(199, 19);
-            this.rbMD9600.TabIndex = 0;
-            this.rbMD9600.TabStop = true;
-            this.rbMD9600.Text = "TYT MD-9600 (Retevis RT-90)";
-            this.rbMD9600.UseVisualStyleBackColor = true;
-            // 
             // rbMDUV380
             // 
             this.rbMDUV380.AutoSize = true;
@@ -109,8 +110,21 @@
             this.rbMDUV380.Size = new System.Drawing.Size(236, 19);
             this.rbMDUV380.TabIndex = 1;
             this.rbMDUV380.TabStop = true;
+            this.rbMDUV380.Tag = "1";
             this.rbMDUV380.Text = "TYT MD-UV380/390 (Retevis RT-3S)";
             this.rbMDUV380.UseVisualStyleBackColor = true;
+            // 
+            // rbMD9600
+            // 
+            this.rbMD9600.AutoSize = true;
+            this.rbMD9600.Location = new System.Drawing.Point(17, 23);
+            this.rbMD9600.Name = "rbMD9600";
+            this.rbMD9600.Size = new System.Drawing.Size(199, 19);
+            this.rbMD9600.TabIndex = 0;
+            this.rbMD9600.TabStop = true;
+            this.rbMD9600.Tag = "0";
+            this.rbMD9600.Text = "TYT MD-9600 (Retevis RT-90)";
+            this.rbMD9600.UseVisualStyleBackColor = true;
             // 
             // pbUploading
             // 
@@ -134,20 +148,11 @@
             // lblText
             // 
             this.lblText.AutoSize = true;
-            this.lblText.Location = new System.Drawing.Point(358, 20);
+            this.lblText.Location = new System.Drawing.Point(364, 26);
             this.lblText.Name = "lblText";
             this.lblText.Size = new System.Drawing.Size(425, 60);
             this.lblText.TabIndex = 4;
             this.lblText.Text = resources.GetString("lblText.Text");
-            // 
-            // tbHelp
-            // 
-            this.tbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbHelp.Image = ((System.Drawing.Image)(resources.GetObject("tbHelp.Image")));
-            this.tbHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tbHelp.Name = "tbHelp";
-            this.tbHelp.Size = new System.Drawing.Size(50, 52);
-            this.tbHelp.Text = "Подсказка";
             // 
             // ofdOpenFirmware
             // 
@@ -158,7 +163,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(830, 313);
+            this.ClientSize = new System.Drawing.Size(830, 309);
             this.Controls.Add(this.lblText);
             this.Controls.Add(this.tbConsole);
             this.Controls.Add(this.pbUploading);
@@ -168,6 +173,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "FirmwareUploader";
+            this.Padding = new System.Windows.Forms.Padding(6);
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Загрузчик прошивки";
             this.tsUpdater.ResumeLayout(false);

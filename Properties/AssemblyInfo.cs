@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных со сборкой.
-[assembly: AssemblyTitle("NIKA_CPS_V1")]
+[assembly: AssemblyTitle("NIKA CPS V1")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NIKA_CPS_V1")]
-[assembly: AssemblyCopyright("Copyright ©  2025")]
+[assembly: AssemblyProduct("NIKA CPS V1")]
+[assembly: AssemblyCopyright("Copyright © Aufwiegler 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 //      Номер сборки
 //      Редакция
 //
-[assembly: AssemblyVersion("2025.5.18.37")]
-[assembly: AssemblyFileVersion("2025.5.18.37")]
+[assembly: AssemblyVersion("2025.5.18.153")]
+[assembly: AssemblyFileVersion("2025.5.18.153")]
 
-[assembly: AssemblyInformationalVersion("2025.5.18.37")]
+[assembly: AssemblyInformationalVersion("2025.5.18.153")]

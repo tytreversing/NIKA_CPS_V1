@@ -12,7 +12,9 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <AssemblyVersion>2025.5.18.37</AssemblyVersion>
+    <AssemblyVersion>2025.5.18.153</AssemblyVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,12 +52,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FirmwareUploader.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FirmwareUploader.Designer.cs">
       <DependentUpon>FirmwareUploader.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\FirmwareUpdateMessageEventArgs.cs" />
+    <Compile Include="Interfaces\FirmwareUpdateProgressEventArgs.cs" />
+    <Compile Include="Interfaces\FirmwareUpdateProgressEventHandler.cs" />
+    <Compile Include="Interfaces\STM32_DFU.cs" />
     <Compile Include="RegistryOperations.cs" />
     <Compile Include="NIKA_CPS.cs">
       <SubType>Form</SubType>
@@ -65,6 +77,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingleContact.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SingleContact.Designer.cs">
+      <DependentUpon>SingleContact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FirmwareUploader.resx">
       <DependentUpon>FirmwareUploader.cs</DependentUpon>
     </EmbeddedResource>
@@ -80,6 +107,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SingleContact.resx">
+      <DependentUpon>SingleContact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Help\Firmware.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,7 +130,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Help\About.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="MainIcon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

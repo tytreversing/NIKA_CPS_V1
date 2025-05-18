@@ -1,0 +1,16 @@
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Help\About.txt
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\NIKA_CPS_V1.exe.config
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\NIKA_CPS_V1.exe
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\NIKA_CPS_V1.pdb
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.csproj.AssemblyReference.cache
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.AboutForm.resources
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.FirmwareUploader.resources
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.MainForm.resources
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.Properties.Resources.resources
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.SingleContact.resources
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.SplashScreen.resources
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.csproj.GenerateResource.cache
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.csproj.CoreCompileInputs.cache
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.exe
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.pdb
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Help\Firmware.chm
