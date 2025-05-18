@@ -1,0 +1,11 @@
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NIKA_CPS_V1.exe.config
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NIKA_CPS_V1.exe
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NIKA_CPS_V1.pdb
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.AssemblyReference.cache
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.Properties.Resources.resources
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.GenerateResource.cache
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.CoreCompileInputs.cache
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.pdb
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.MainForm.resources
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.FirmwareUploader.resources
