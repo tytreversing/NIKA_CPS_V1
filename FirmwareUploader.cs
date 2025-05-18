@@ -16,5 +16,10 @@ namespace NIKA_CPS_V1
         {
             InitializeComponent();
         }
+
+        private void tsbOpen_Click(object sender, EventArgs e)
+        {
+            ofdOpenFirmware.ShowDialog();
+        }
     }
 }

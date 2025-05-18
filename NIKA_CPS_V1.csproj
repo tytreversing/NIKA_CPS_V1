@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <AssemblyVersion>2025.5.18.9</AssemblyVersion>
+    <AssemblyVersion>2025.5.18.37</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,6 +56,7 @@
     <Compile Include="FirmwareUploader.Designer.cs">
       <DependentUpon>FirmwareUploader.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegistryOperations.cs" />
     <Compile Include="NIKA_CPS.cs">
       <SubType>Form</SubType>
     </Compile>
