@@ -373,6 +373,7 @@ namespace NIKA_CPS_V1
                 WaitForDeviceIdle(hDevice);
                 Detach(hDevice, address);
                 this.DisplayMessage(this, new FirmwareUpdateMessageEventArgs(100f, "Прошивка рации завершена", isError: false));
+                System.Media.SystemSounds.Asterisk.Play();
                 this.UploadCompleted(this, null);
             }
             catch (Exception ex)

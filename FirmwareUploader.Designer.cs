@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FirmwareUploader));
             this.tsUpdater = new System.Windows.Forms.ToolStrip();
-            this.tsbOpen = new System.Windows.Forms.ToolStripButton();
+            this.tsbOpenFirmware = new System.Windows.Forms.ToolStripButton();
             this.tsbUpdate = new System.Windows.Forms.ToolStripButton();
-            this.tbHelp = new System.Windows.Forms.ToolStripButton();
+            this.tsbHelp = new System.Windows.Forms.ToolStripButton();
             this.gbRadioType = new System.Windows.Forms.GroupBox();
             this.rbMDUV380 = new System.Windows.Forms.RadioButton();
             this.rbMD9600 = new System.Windows.Forms.RadioButton();
@@ -40,6 +41,7 @@
             this.tbConsole = new System.Windows.Forms.TextBox();
             this.lblText = new System.Windows.Forms.Label();
             this.ofdOpenFirmware = new System.Windows.Forms.OpenFileDialog();
+            this.flashTimer = new System.Windows.Forms.Timer(this.components);
             this.tsUpdater.SuspendLayout();
             this.gbRadioType.SuspendLayout();
             this.SuspendLayout();
@@ -51,27 +53,29 @@
             this.tsUpdater.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsUpdater.ImageScalingSize = new System.Drawing.Size(48, 48);
             this.tsUpdater.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbOpen,
+            this.tsbOpenFirmware,
             this.tsbUpdate,
-            this.tbHelp});
+            this.tsbHelp});
             this.tsUpdater.Location = new System.Drawing.Point(6, 6);
             this.tsUpdater.Name = "tsUpdater";
             this.tsUpdater.Size = new System.Drawing.Size(53, 297);
             this.tsUpdater.TabIndex = 0;
             this.tsUpdater.Text = "toolStrip1";
             // 
-            // tsbOpen
+            // tsbOpenFirmware
             // 
-            this.tsbOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbOpen.Image = ((System.Drawing.Image)(resources.GetObject("tsbOpen.Image")));
-            this.tsbOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbOpen.Name = "tsbOpen";
-            this.tsbOpen.Size = new System.Drawing.Size(50, 52);
-            this.tsbOpen.Text = "Открыть файл прошивки";
-            this.tsbOpen.Click += new System.EventHandler(this.tsbOpen_Click);
+            this.tsbOpenFirmware.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbOpenFirmware.Image = ((System.Drawing.Image)(resources.GetObject("tsbOpenFirmware.Image")));
+            this.tsbOpenFirmware.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbOpenFirmware.Name = "tsbOpenFirmware";
+            this.tsbOpenFirmware.Size = new System.Drawing.Size(50, 52);
+            this.tsbOpenFirmware.Text = "Открыть файл прошивки";
+            this.tsbOpenFirmware.Click += new System.EventHandler(this.tsbOpen_Click);
+            this.tsbOpenFirmware.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // tsbUpdate
             // 
+            this.tsbUpdate.BackColor = System.Drawing.Color.Transparent;
             this.tsbUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbUpdate.Enabled = false;
             this.tsbUpdate.Image = ((System.Drawing.Image)(resources.GetObject("tsbUpdate.Image")));
@@ -80,16 +84,18 @@
             this.tsbUpdate.Size = new System.Drawing.Size(50, 52);
             this.tsbUpdate.Text = "Прошить рацию";
             this.tsbUpdate.Click += new System.EventHandler(this.tsbUpdate_Click);
+            this.tsbUpdate.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
-            // tbHelp
+            // tsbHelp
             // 
-            this.tbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbHelp.Image = ((System.Drawing.Image)(resources.GetObject("tbHelp.Image")));
-            this.tbHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tbHelp.Name = "tbHelp";
-            this.tbHelp.Size = new System.Drawing.Size(50, 52);
-            this.tbHelp.Text = "Подсказка";
-            this.tbHelp.Click += new System.EventHandler(this.tbHelp_Click);
+            this.tsbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbHelp.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelp.Image")));
+            this.tsbHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbHelp.Name = "tsbHelp";
+            this.tsbHelp.Size = new System.Drawing.Size(50, 52);
+            this.tsbHelp.Text = "Подсказка";
+            this.tsbHelp.Click += new System.EventHandler(this.tbHelp_Click);
+            this.tsbHelp.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // gbRadioType
             // 
@@ -158,6 +164,11 @@
             // 
             this.ofdOpenFirmware.Filter = "Файлы прошивки|*.nff";
             // 
+            // flashTimer
+            // 
+            this.flashTimer.Interval = 700;
+            this.flashTimer.Tick += new System.EventHandler(this.flashTimer_Tick);
+            // 
             // FirmwareUploader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -189,7 +200,7 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip tsUpdater;
-        private System.Windows.Forms.ToolStripButton tsbOpen;
+        private System.Windows.Forms.ToolStripButton tsbOpenFirmware;
         private System.Windows.Forms.ToolStripButton tsbUpdate;
         private System.Windows.Forms.GroupBox gbRadioType;
         private System.Windows.Forms.RadioButton rbMDUV380;
@@ -197,7 +208,8 @@
         private System.Windows.Forms.ProgressBar pbUploading;
         private System.Windows.Forms.TextBox tbConsole;
         private System.Windows.Forms.Label lblText;
-        private System.Windows.Forms.ToolStripButton tbHelp;
+        private System.Windows.Forms.ToolStripButton tsbHelp;
         private System.Windows.Forms.OpenFileDialog ofdOpenFirmware;
+        private System.Windows.Forms.Timer flashTimer;
     }
 }
