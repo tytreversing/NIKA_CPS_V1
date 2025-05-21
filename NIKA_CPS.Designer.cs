@@ -29,370 +29,370 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode371 = new System.Windows.Forms.TreeNode("Узел5");
-            System.Windows.Forms.TreeNode treeNode372 = new System.Windows.Forms.TreeNode("Настройки", new System.Windows.Forms.TreeNode[] {
-            treeNode371});
-            System.Windows.Forms.TreeNode treeNode373 = new System.Windows.Forms.TreeNode("Узел6");
-            System.Windows.Forms.TreeNode treeNode374 = new System.Windows.Forms.TreeNode("Узел7");
-            System.Windows.Forms.TreeNode treeNode375 = new System.Windows.Forms.TreeNode("Узел8");
-            System.Windows.Forms.TreeNode treeNode376 = new System.Windows.Forms.TreeNode("Узел0");
-            System.Windows.Forms.TreeNode treeNode377 = new System.Windows.Forms.TreeNode("Узел1");
-            System.Windows.Forms.TreeNode treeNode378 = new System.Windows.Forms.TreeNode("Узел2");
-            System.Windows.Forms.TreeNode treeNode379 = new System.Windows.Forms.TreeNode("Узел3");
-            System.Windows.Forms.TreeNode treeNode380 = new System.Windows.Forms.TreeNode("Узел4");
-            System.Windows.Forms.TreeNode treeNode381 = new System.Windows.Forms.TreeNode("Узел5");
-            System.Windows.Forms.TreeNode treeNode382 = new System.Windows.Forms.TreeNode("Узел6");
-            System.Windows.Forms.TreeNode treeNode383 = new System.Windows.Forms.TreeNode("Узел7");
-            System.Windows.Forms.TreeNode treeNode384 = new System.Windows.Forms.TreeNode("Узел8");
-            System.Windows.Forms.TreeNode treeNode385 = new System.Windows.Forms.TreeNode("Узел9");
-            System.Windows.Forms.TreeNode treeNode386 = new System.Windows.Forms.TreeNode("Узел10");
-            System.Windows.Forms.TreeNode treeNode387 = new System.Windows.Forms.TreeNode("Узел11");
-            System.Windows.Forms.TreeNode treeNode388 = new System.Windows.Forms.TreeNode("Узел12");
-            System.Windows.Forms.TreeNode treeNode389 = new System.Windows.Forms.TreeNode("Узел13");
-            System.Windows.Forms.TreeNode treeNode390 = new System.Windows.Forms.TreeNode("Узел14");
-            System.Windows.Forms.TreeNode treeNode391 = new System.Windows.Forms.TreeNode("Узел15");
-            System.Windows.Forms.TreeNode treeNode392 = new System.Windows.Forms.TreeNode("Узел16");
-            System.Windows.Forms.TreeNode treeNode393 = new System.Windows.Forms.TreeNode("Узел17");
-            System.Windows.Forms.TreeNode treeNode394 = new System.Windows.Forms.TreeNode("Узел18");
-            System.Windows.Forms.TreeNode treeNode395 = new System.Windows.Forms.TreeNode("Узел19");
-            System.Windows.Forms.TreeNode treeNode396 = new System.Windows.Forms.TreeNode("Узел20");
-            System.Windows.Forms.TreeNode treeNode397 = new System.Windows.Forms.TreeNode("Узел21");
-            System.Windows.Forms.TreeNode treeNode398 = new System.Windows.Forms.TreeNode("Узел22");
-            System.Windows.Forms.TreeNode treeNode399 = new System.Windows.Forms.TreeNode("Узел23");
-            System.Windows.Forms.TreeNode treeNode400 = new System.Windows.Forms.TreeNode("Узел24");
-            System.Windows.Forms.TreeNode treeNode401 = new System.Windows.Forms.TreeNode("Узел25");
-            System.Windows.Forms.TreeNode treeNode402 = new System.Windows.Forms.TreeNode("Узел26");
-            System.Windows.Forms.TreeNode treeNode403 = new System.Windows.Forms.TreeNode("Узел27");
-            System.Windows.Forms.TreeNode treeNode404 = new System.Windows.Forms.TreeNode("Узел28");
-            System.Windows.Forms.TreeNode treeNode405 = new System.Windows.Forms.TreeNode("Узел29");
-            System.Windows.Forms.TreeNode treeNode406 = new System.Windows.Forms.TreeNode("Узел30");
-            System.Windows.Forms.TreeNode treeNode407 = new System.Windows.Forms.TreeNode("Узел31");
-            System.Windows.Forms.TreeNode treeNode408 = new System.Windows.Forms.TreeNode("Узел32");
-            System.Windows.Forms.TreeNode treeNode409 = new System.Windows.Forms.TreeNode("Узел33");
-            System.Windows.Forms.TreeNode treeNode410 = new System.Windows.Forms.TreeNode("Узел34");
-            System.Windows.Forms.TreeNode treeNode411 = new System.Windows.Forms.TreeNode("Узел35");
-            System.Windows.Forms.TreeNode treeNode412 = new System.Windows.Forms.TreeNode("Узел36");
-            System.Windows.Forms.TreeNode treeNode413 = new System.Windows.Forms.TreeNode("Узел37");
-            System.Windows.Forms.TreeNode treeNode414 = new System.Windows.Forms.TreeNode("Узел38");
-            System.Windows.Forms.TreeNode treeNode415 = new System.Windows.Forms.TreeNode("Узел39");
-            System.Windows.Forms.TreeNode treeNode416 = new System.Windows.Forms.TreeNode("Узел40");
-            System.Windows.Forms.TreeNode treeNode417 = new System.Windows.Forms.TreeNode("Узел41");
-            System.Windows.Forms.TreeNode treeNode418 = new System.Windows.Forms.TreeNode("Узел42");
-            System.Windows.Forms.TreeNode treeNode419 = new System.Windows.Forms.TreeNode("Узел43");
-            System.Windows.Forms.TreeNode treeNode420 = new System.Windows.Forms.TreeNode("Узел44");
-            System.Windows.Forms.TreeNode treeNode421 = new System.Windows.Forms.TreeNode("Узел45");
-            System.Windows.Forms.TreeNode treeNode422 = new System.Windows.Forms.TreeNode("Узел46");
-            System.Windows.Forms.TreeNode treeNode423 = new System.Windows.Forms.TreeNode("Узел47");
-            System.Windows.Forms.TreeNode treeNode424 = new System.Windows.Forms.TreeNode("Узел48");
-            System.Windows.Forms.TreeNode treeNode425 = new System.Windows.Forms.TreeNode("Узел49");
-            System.Windows.Forms.TreeNode treeNode426 = new System.Windows.Forms.TreeNode("Узел50");
-            System.Windows.Forms.TreeNode treeNode427 = new System.Windows.Forms.TreeNode("Узел51");
-            System.Windows.Forms.TreeNode treeNode428 = new System.Windows.Forms.TreeNode("Узел52");
-            System.Windows.Forms.TreeNode treeNode429 = new System.Windows.Forms.TreeNode("Узел53");
-            System.Windows.Forms.TreeNode treeNode430 = new System.Windows.Forms.TreeNode("Узел54");
-            System.Windows.Forms.TreeNode treeNode431 = new System.Windows.Forms.TreeNode("Узел55");
-            System.Windows.Forms.TreeNode treeNode432 = new System.Windows.Forms.TreeNode("Узел56");
-            System.Windows.Forms.TreeNode treeNode433 = new System.Windows.Forms.TreeNode("Узел57");
-            System.Windows.Forms.TreeNode treeNode434 = new System.Windows.Forms.TreeNode("Узел58");
-            System.Windows.Forms.TreeNode treeNode435 = new System.Windows.Forms.TreeNode("Узел59");
-            System.Windows.Forms.TreeNode treeNode436 = new System.Windows.Forms.TreeNode("Узел60");
-            System.Windows.Forms.TreeNode treeNode437 = new System.Windows.Forms.TreeNode("Узел61");
-            System.Windows.Forms.TreeNode treeNode438 = new System.Windows.Forms.TreeNode("Узел62");
-            System.Windows.Forms.TreeNode treeNode439 = new System.Windows.Forms.TreeNode("Узел63");
-            System.Windows.Forms.TreeNode treeNode440 = new System.Windows.Forms.TreeNode("Узел64");
-            System.Windows.Forms.TreeNode treeNode441 = new System.Windows.Forms.TreeNode("Узел65");
-            System.Windows.Forms.TreeNode treeNode442 = new System.Windows.Forms.TreeNode("Узел66");
-            System.Windows.Forms.TreeNode treeNode443 = new System.Windows.Forms.TreeNode("Узел67");
-            System.Windows.Forms.TreeNode treeNode444 = new System.Windows.Forms.TreeNode("Узел68");
-            System.Windows.Forms.TreeNode treeNode445 = new System.Windows.Forms.TreeNode("Узел69");
-            System.Windows.Forms.TreeNode treeNode446 = new System.Windows.Forms.TreeNode("Узел70");
-            System.Windows.Forms.TreeNode treeNode447 = new System.Windows.Forms.TreeNode("Узел71");
-            System.Windows.Forms.TreeNode treeNode448 = new System.Windows.Forms.TreeNode("Контакты", new System.Windows.Forms.TreeNode[] {
-            treeNode373,
-            treeNode374,
-            treeNode375,
-            treeNode376,
-            treeNode377,
-            treeNode378,
-            treeNode379,
-            treeNode380,
-            treeNode381,
-            treeNode382,
-            treeNode383,
-            treeNode384,
-            treeNode385,
-            treeNode386,
-            treeNode387,
-            treeNode388,
-            treeNode389,
-            treeNode390,
-            treeNode391,
-            treeNode392,
-            treeNode393,
-            treeNode394,
-            treeNode395,
-            treeNode396,
-            treeNode397,
-            treeNode398,
-            treeNode399,
-            treeNode400,
-            treeNode401,
-            treeNode402,
-            treeNode403,
-            treeNode404,
-            treeNode405,
-            treeNode406,
-            treeNode407,
-            treeNode408,
-            treeNode409,
-            treeNode410,
-            treeNode411,
-            treeNode412,
-            treeNode413,
-            treeNode414,
-            treeNode415,
-            treeNode416,
-            treeNode417,
-            treeNode418,
-            treeNode419,
-            treeNode420,
-            treeNode421,
-            treeNode422,
-            treeNode423,
-            treeNode424,
-            treeNode425,
-            treeNode426,
-            treeNode427,
-            treeNode428,
-            treeNode429,
-            treeNode430,
-            treeNode431,
-            treeNode432,
-            treeNode433,
-            treeNode434,
-            treeNode435,
-            treeNode436,
-            treeNode437,
-            treeNode438,
-            treeNode439,
-            treeNode440,
-            treeNode441,
-            treeNode442,
-            treeNode443,
-            treeNode444,
-            treeNode445,
-            treeNode446,
-            treeNode447});
-            System.Windows.Forms.TreeNode treeNode449 = new System.Windows.Forms.TreeNode("Узел20");
-            System.Windows.Forms.TreeNode treeNode450 = new System.Windows.Forms.TreeNode("Узел21");
-            System.Windows.Forms.TreeNode treeNode451 = new System.Windows.Forms.TreeNode("Узел22");
-            System.Windows.Forms.TreeNode treeNode452 = new System.Windows.Forms.TreeNode("Списки групп", new System.Windows.Forms.TreeNode[] {
-            treeNode449,
-            treeNode450,
-            treeNode451});
-            System.Windows.Forms.TreeNode treeNode453 = new System.Windows.Forms.TreeNode("Узел9");
-            System.Windows.Forms.TreeNode treeNode454 = new System.Windows.Forms.TreeNode("Узел10");
-            System.Windows.Forms.TreeNode treeNode455 = new System.Windows.Forms.TreeNode("Узел11");
-            System.Windows.Forms.TreeNode treeNode456 = new System.Windows.Forms.TreeNode("Зоны", new System.Windows.Forms.TreeNode[] {
-            treeNode453,
-            treeNode454,
-            treeNode455});
-            System.Windows.Forms.TreeNode treeNode457 = new System.Windows.Forms.TreeNode("Узел13");
-            System.Windows.Forms.TreeNode treeNode458 = new System.Windows.Forms.TreeNode("Узел14");
-            System.Windows.Forms.TreeNode treeNode459 = new System.Windows.Forms.TreeNode("Узел15");
-            System.Windows.Forms.TreeNode treeNode460 = new System.Windows.Forms.TreeNode("Узел16");
-            System.Windows.Forms.TreeNode treeNode461 = new System.Windows.Forms.TreeNode("Узел2");
-            System.Windows.Forms.TreeNode treeNode462 = new System.Windows.Forms.TreeNode("Узел3");
-            System.Windows.Forms.TreeNode treeNode463 = new System.Windows.Forms.TreeNode("Узел4");
-            System.Windows.Forms.TreeNode treeNode464 = new System.Windows.Forms.TreeNode("Узел5");
-            System.Windows.Forms.TreeNode treeNode465 = new System.Windows.Forms.TreeNode("Узел6");
-            System.Windows.Forms.TreeNode treeNode466 = new System.Windows.Forms.TreeNode("Узел7");
-            System.Windows.Forms.TreeNode treeNode467 = new System.Windows.Forms.TreeNode("Узел8");
-            System.Windows.Forms.TreeNode treeNode468 = new System.Windows.Forms.TreeNode("Узел9");
-            System.Windows.Forms.TreeNode treeNode469 = new System.Windows.Forms.TreeNode("Узел10");
-            System.Windows.Forms.TreeNode treeNode470 = new System.Windows.Forms.TreeNode("Узел11");
-            System.Windows.Forms.TreeNode treeNode471 = new System.Windows.Forms.TreeNode("Узел12");
-            System.Windows.Forms.TreeNode treeNode472 = new System.Windows.Forms.TreeNode("Узел13");
-            System.Windows.Forms.TreeNode treeNode473 = new System.Windows.Forms.TreeNode("Узел14");
-            System.Windows.Forms.TreeNode treeNode474 = new System.Windows.Forms.TreeNode("Узел15");
-            System.Windows.Forms.TreeNode treeNode475 = new System.Windows.Forms.TreeNode("Узел16");
-            System.Windows.Forms.TreeNode treeNode476 = new System.Windows.Forms.TreeNode("Узел17");
-            System.Windows.Forms.TreeNode treeNode477 = new System.Windows.Forms.TreeNode("Узел18");
-            System.Windows.Forms.TreeNode treeNode478 = new System.Windows.Forms.TreeNode("Узел19");
-            System.Windows.Forms.TreeNode treeNode479 = new System.Windows.Forms.TreeNode("Узел20");
-            System.Windows.Forms.TreeNode treeNode480 = new System.Windows.Forms.TreeNode("Узел21");
-            System.Windows.Forms.TreeNode treeNode481 = new System.Windows.Forms.TreeNode("Узел22");
-            System.Windows.Forms.TreeNode treeNode482 = new System.Windows.Forms.TreeNode("Узел23");
-            System.Windows.Forms.TreeNode treeNode483 = new System.Windows.Forms.TreeNode("Узел24");
-            System.Windows.Forms.TreeNode treeNode484 = new System.Windows.Forms.TreeNode("Узел25");
-            System.Windows.Forms.TreeNode treeNode485 = new System.Windows.Forms.TreeNode("Узел26");
-            System.Windows.Forms.TreeNode treeNode486 = new System.Windows.Forms.TreeNode("Узел27");
-            System.Windows.Forms.TreeNode treeNode487 = new System.Windows.Forms.TreeNode("Узел28");
-            System.Windows.Forms.TreeNode treeNode488 = new System.Windows.Forms.TreeNode("Узел29");
-            System.Windows.Forms.TreeNode treeNode489 = new System.Windows.Forms.TreeNode("Узел30");
-            System.Windows.Forms.TreeNode treeNode490 = new System.Windows.Forms.TreeNode("Узел31");
-            System.Windows.Forms.TreeNode treeNode491 = new System.Windows.Forms.TreeNode("Узел32");
-            System.Windows.Forms.TreeNode treeNode492 = new System.Windows.Forms.TreeNode("Узел33");
-            System.Windows.Forms.TreeNode treeNode493 = new System.Windows.Forms.TreeNode("Узел34");
-            System.Windows.Forms.TreeNode treeNode494 = new System.Windows.Forms.TreeNode("Узел35");
-            System.Windows.Forms.TreeNode treeNode495 = new System.Windows.Forms.TreeNode("Узел36");
-            System.Windows.Forms.TreeNode treeNode496 = new System.Windows.Forms.TreeNode("Узел37");
-            System.Windows.Forms.TreeNode treeNode497 = new System.Windows.Forms.TreeNode("Узел38");
-            System.Windows.Forms.TreeNode treeNode498 = new System.Windows.Forms.TreeNode("Узел39");
-            System.Windows.Forms.TreeNode treeNode499 = new System.Windows.Forms.TreeNode("Узел40");
-            System.Windows.Forms.TreeNode treeNode500 = new System.Windows.Forms.TreeNode("Узел41");
-            System.Windows.Forms.TreeNode treeNode501 = new System.Windows.Forms.TreeNode("Узел42");
-            System.Windows.Forms.TreeNode treeNode502 = new System.Windows.Forms.TreeNode("Узел43");
-            System.Windows.Forms.TreeNode treeNode503 = new System.Windows.Forms.TreeNode("Узел44");
-            System.Windows.Forms.TreeNode treeNode504 = new System.Windows.Forms.TreeNode("Узел45");
-            System.Windows.Forms.TreeNode treeNode505 = new System.Windows.Forms.TreeNode("Узел46");
-            System.Windows.Forms.TreeNode treeNode506 = new System.Windows.Forms.TreeNode("Узел47");
-            System.Windows.Forms.TreeNode treeNode507 = new System.Windows.Forms.TreeNode("Узел48");
-            System.Windows.Forms.TreeNode treeNode508 = new System.Windows.Forms.TreeNode("Узел49");
-            System.Windows.Forms.TreeNode treeNode509 = new System.Windows.Forms.TreeNode("Узел50");
-            System.Windows.Forms.TreeNode treeNode510 = new System.Windows.Forms.TreeNode("Узел51");
-            System.Windows.Forms.TreeNode treeNode511 = new System.Windows.Forms.TreeNode("Узел52");
-            System.Windows.Forms.TreeNode treeNode512 = new System.Windows.Forms.TreeNode("Узел53");
-            System.Windows.Forms.TreeNode treeNode513 = new System.Windows.Forms.TreeNode("Узел54");
-            System.Windows.Forms.TreeNode treeNode514 = new System.Windows.Forms.TreeNode("Узел55");
-            System.Windows.Forms.TreeNode treeNode515 = new System.Windows.Forms.TreeNode("Узел56");
-            System.Windows.Forms.TreeNode treeNode516 = new System.Windows.Forms.TreeNode("Узел57");
-            System.Windows.Forms.TreeNode treeNode517 = new System.Windows.Forms.TreeNode("Узел58");
-            System.Windows.Forms.TreeNode treeNode518 = new System.Windows.Forms.TreeNode("Узел59");
-            System.Windows.Forms.TreeNode treeNode519 = new System.Windows.Forms.TreeNode("Узел60");
-            System.Windows.Forms.TreeNode treeNode520 = new System.Windows.Forms.TreeNode("Узел61");
-            System.Windows.Forms.TreeNode treeNode521 = new System.Windows.Forms.TreeNode("Узел62");
-            System.Windows.Forms.TreeNode treeNode522 = new System.Windows.Forms.TreeNode("Узел63");
-            System.Windows.Forms.TreeNode treeNode523 = new System.Windows.Forms.TreeNode("Узел64");
-            System.Windows.Forms.TreeNode treeNode524 = new System.Windows.Forms.TreeNode("Узел65");
-            System.Windows.Forms.TreeNode treeNode525 = new System.Windows.Forms.TreeNode("Узел66");
-            System.Windows.Forms.TreeNode treeNode526 = new System.Windows.Forms.TreeNode("Узел67");
-            System.Windows.Forms.TreeNode treeNode527 = new System.Windows.Forms.TreeNode("Узел68");
-            System.Windows.Forms.TreeNode treeNode528 = new System.Windows.Forms.TreeNode("Узел69");
-            System.Windows.Forms.TreeNode treeNode529 = new System.Windows.Forms.TreeNode("Узел70");
-            System.Windows.Forms.TreeNode treeNode530 = new System.Windows.Forms.TreeNode("Узел71");
-            System.Windows.Forms.TreeNode treeNode531 = new System.Windows.Forms.TreeNode("Узел72");
-            System.Windows.Forms.TreeNode treeNode532 = new System.Windows.Forms.TreeNode("Узел73");
-            System.Windows.Forms.TreeNode treeNode533 = new System.Windows.Forms.TreeNode("Узел74");
-            System.Windows.Forms.TreeNode treeNode534 = new System.Windows.Forms.TreeNode("Узел75");
-            System.Windows.Forms.TreeNode treeNode535 = new System.Windows.Forms.TreeNode("Узел76");
-            System.Windows.Forms.TreeNode treeNode536 = new System.Windows.Forms.TreeNode("Узел77");
-            System.Windows.Forms.TreeNode treeNode537 = new System.Windows.Forms.TreeNode("Узел78");
-            System.Windows.Forms.TreeNode treeNode538 = new System.Windows.Forms.TreeNode("Узел79");
-            System.Windows.Forms.TreeNode treeNode539 = new System.Windows.Forms.TreeNode("Узел80");
-            System.Windows.Forms.TreeNode treeNode540 = new System.Windows.Forms.TreeNode("Узел81");
-            System.Windows.Forms.TreeNode treeNode541 = new System.Windows.Forms.TreeNode("Узел82");
-            System.Windows.Forms.TreeNode treeNode542 = new System.Windows.Forms.TreeNode("Узел83");
-            System.Windows.Forms.TreeNode treeNode543 = new System.Windows.Forms.TreeNode("Узел84");
-            System.Windows.Forms.TreeNode treeNode544 = new System.Windows.Forms.TreeNode("Узел85");
-            System.Windows.Forms.TreeNode treeNode545 = new System.Windows.Forms.TreeNode("Узел86");
-            System.Windows.Forms.TreeNode treeNode546 = new System.Windows.Forms.TreeNode("Узел87");
-            System.Windows.Forms.TreeNode treeNode547 = new System.Windows.Forms.TreeNode("Узел88");
-            System.Windows.Forms.TreeNode treeNode548 = new System.Windows.Forms.TreeNode("Узел89");
-            System.Windows.Forms.TreeNode treeNode549 = new System.Windows.Forms.TreeNode("Узел90");
-            System.Windows.Forms.TreeNode treeNode550 = new System.Windows.Forms.TreeNode("Узел91");
-            System.Windows.Forms.TreeNode treeNode551 = new System.Windows.Forms.TreeNode("Узел92");
-            System.Windows.Forms.TreeNode treeNode552 = new System.Windows.Forms.TreeNode("Каналы", new System.Windows.Forms.TreeNode[] {
-            treeNode457,
-            treeNode458,
-            treeNode459,
-            treeNode460,
-            treeNode461,
-            treeNode462,
-            treeNode463,
-            treeNode464,
-            treeNode465,
-            treeNode466,
-            treeNode467,
-            treeNode468,
-            treeNode469,
-            treeNode470,
-            treeNode471,
-            treeNode472,
-            treeNode473,
-            treeNode474,
-            treeNode475,
-            treeNode476,
-            treeNode477,
-            treeNode478,
-            treeNode479,
-            treeNode480,
-            treeNode481,
-            treeNode482,
-            treeNode483,
-            treeNode484,
-            treeNode485,
-            treeNode486,
-            treeNode487,
-            treeNode488,
-            treeNode489,
-            treeNode490,
-            treeNode491,
-            treeNode492,
-            treeNode493,
-            treeNode494,
-            treeNode495,
-            treeNode496,
-            treeNode497,
-            treeNode498,
-            treeNode499,
-            treeNode500,
-            treeNode501,
-            treeNode502,
-            treeNode503,
-            treeNode504,
-            treeNode505,
-            treeNode506,
-            treeNode507,
-            treeNode508,
-            treeNode509,
-            treeNode510,
-            treeNode511,
-            treeNode512,
-            treeNode513,
-            treeNode514,
-            treeNode515,
-            treeNode516,
-            treeNode517,
-            treeNode518,
-            treeNode519,
-            treeNode520,
-            treeNode521,
-            treeNode522,
-            treeNode523,
-            treeNode524,
-            treeNode525,
-            treeNode526,
-            treeNode527,
-            treeNode528,
-            treeNode529,
-            treeNode530,
-            treeNode531,
-            treeNode532,
-            treeNode533,
-            treeNode534,
-            treeNode535,
-            treeNode536,
-            treeNode537,
-            treeNode538,
-            treeNode539,
-            treeNode540,
-            treeNode541,
-            treeNode542,
-            treeNode543,
-            treeNode544,
-            treeNode545,
-            treeNode546,
-            treeNode547,
-            treeNode548,
-            treeNode549,
-            treeNode550,
-            treeNode551});
-            System.Windows.Forms.TreeNode treeNode553 = new System.Windows.Forms.TreeNode("Узел17");
-            System.Windows.Forms.TreeNode treeNode554 = new System.Windows.Forms.TreeNode("Узел18");
-            System.Windows.Forms.TreeNode treeNode555 = new System.Windows.Forms.TreeNode("VFO", new System.Windows.Forms.TreeNode[] {
-            treeNode553,
-            treeNode554});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Узел5");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Настройки", new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Узел6");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Узел7");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Узел8");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Узел0");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Узел1");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Узел2");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Узел3");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Узел4");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Узел5");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Узел6");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Узел7");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Узел8");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Узел9");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Узел10");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Узел11");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Узел12");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Узел13");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Узел14");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Узел15");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Узел16");
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Узел17");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Узел18");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Узел19");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Узел20");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Узел21");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Узел22");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Узел23");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Узел24");
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Узел25");
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Узел26");
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Узел27");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Узел28");
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Узел29");
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Узел30");
+            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Узел31");
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("Узел32");
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("Узел33");
+            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("Узел34");
+            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("Узел35");
+            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("Узел36");
+            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("Узел37");
+            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("Узел38");
+            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("Узел39");
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Узел40");
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("Узел41");
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("Узел42");
+            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("Узел43");
+            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("Узел44");
+            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("Узел45");
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("Узел46");
+            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("Узел47");
+            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("Узел48");
+            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("Узел49");
+            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("Узел50");
+            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("Узел51");
+            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("Узел52");
+            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("Узел53");
+            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("Узел54");
+            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("Узел55");
+            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("Узел56");
+            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("Узел57");
+            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode("Узел58");
+            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("Узел59");
+            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("Узел60");
+            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("Узел61");
+            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("Узел62");
+            System.Windows.Forms.TreeNode treeNode69 = new System.Windows.Forms.TreeNode("Узел63");
+            System.Windows.Forms.TreeNode treeNode70 = new System.Windows.Forms.TreeNode("Узел64");
+            System.Windows.Forms.TreeNode treeNode71 = new System.Windows.Forms.TreeNode("Узел65");
+            System.Windows.Forms.TreeNode treeNode72 = new System.Windows.Forms.TreeNode("Узел66");
+            System.Windows.Forms.TreeNode treeNode73 = new System.Windows.Forms.TreeNode("Узел67");
+            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("Узел68");
+            System.Windows.Forms.TreeNode treeNode75 = new System.Windows.Forms.TreeNode("Узел69");
+            System.Windows.Forms.TreeNode treeNode76 = new System.Windows.Forms.TreeNode("Узел70");
+            System.Windows.Forms.TreeNode treeNode77 = new System.Windows.Forms.TreeNode("Узел71");
+            System.Windows.Forms.TreeNode treeNode78 = new System.Windows.Forms.TreeNode("Контакты", new System.Windows.Forms.TreeNode[] {
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12,
+            treeNode13,
+            treeNode14,
+            treeNode15,
+            treeNode16,
+            treeNode17,
+            treeNode18,
+            treeNode19,
+            treeNode20,
+            treeNode21,
+            treeNode22,
+            treeNode23,
+            treeNode24,
+            treeNode25,
+            treeNode26,
+            treeNode27,
+            treeNode28,
+            treeNode29,
+            treeNode30,
+            treeNode31,
+            treeNode32,
+            treeNode33,
+            treeNode34,
+            treeNode35,
+            treeNode36,
+            treeNode37,
+            treeNode38,
+            treeNode39,
+            treeNode40,
+            treeNode41,
+            treeNode42,
+            treeNode43,
+            treeNode44,
+            treeNode45,
+            treeNode46,
+            treeNode47,
+            treeNode48,
+            treeNode49,
+            treeNode50,
+            treeNode51,
+            treeNode52,
+            treeNode53,
+            treeNode54,
+            treeNode55,
+            treeNode56,
+            treeNode57,
+            treeNode58,
+            treeNode59,
+            treeNode60,
+            treeNode61,
+            treeNode62,
+            treeNode63,
+            treeNode64,
+            treeNode65,
+            treeNode66,
+            treeNode67,
+            treeNode68,
+            treeNode69,
+            treeNode70,
+            treeNode71,
+            treeNode72,
+            treeNode73,
+            treeNode74,
+            treeNode75,
+            treeNode76,
+            treeNode77});
+            System.Windows.Forms.TreeNode treeNode79 = new System.Windows.Forms.TreeNode("Узел20");
+            System.Windows.Forms.TreeNode treeNode80 = new System.Windows.Forms.TreeNode("Узел21");
+            System.Windows.Forms.TreeNode treeNode81 = new System.Windows.Forms.TreeNode("Узел22");
+            System.Windows.Forms.TreeNode treeNode82 = new System.Windows.Forms.TreeNode("Списки групп", new System.Windows.Forms.TreeNode[] {
+            treeNode79,
+            treeNode80,
+            treeNode81});
+            System.Windows.Forms.TreeNode treeNode83 = new System.Windows.Forms.TreeNode("Узел9");
+            System.Windows.Forms.TreeNode treeNode84 = new System.Windows.Forms.TreeNode("Узел10");
+            System.Windows.Forms.TreeNode treeNode85 = new System.Windows.Forms.TreeNode("Узел11");
+            System.Windows.Forms.TreeNode treeNode86 = new System.Windows.Forms.TreeNode("Зоны", new System.Windows.Forms.TreeNode[] {
+            treeNode83,
+            treeNode84,
+            treeNode85});
+            System.Windows.Forms.TreeNode treeNode87 = new System.Windows.Forms.TreeNode("Узел13");
+            System.Windows.Forms.TreeNode treeNode88 = new System.Windows.Forms.TreeNode("Узел14");
+            System.Windows.Forms.TreeNode treeNode89 = new System.Windows.Forms.TreeNode("Узел15");
+            System.Windows.Forms.TreeNode treeNode90 = new System.Windows.Forms.TreeNode("Узел16");
+            System.Windows.Forms.TreeNode treeNode91 = new System.Windows.Forms.TreeNode("Узел2");
+            System.Windows.Forms.TreeNode treeNode92 = new System.Windows.Forms.TreeNode("Узел3");
+            System.Windows.Forms.TreeNode treeNode93 = new System.Windows.Forms.TreeNode("Узел4");
+            System.Windows.Forms.TreeNode treeNode94 = new System.Windows.Forms.TreeNode("Узел5");
+            System.Windows.Forms.TreeNode treeNode95 = new System.Windows.Forms.TreeNode("Узел6");
+            System.Windows.Forms.TreeNode treeNode96 = new System.Windows.Forms.TreeNode("Узел7");
+            System.Windows.Forms.TreeNode treeNode97 = new System.Windows.Forms.TreeNode("Узел8");
+            System.Windows.Forms.TreeNode treeNode98 = new System.Windows.Forms.TreeNode("Узел9");
+            System.Windows.Forms.TreeNode treeNode99 = new System.Windows.Forms.TreeNode("Узел10");
+            System.Windows.Forms.TreeNode treeNode100 = new System.Windows.Forms.TreeNode("Узел11");
+            System.Windows.Forms.TreeNode treeNode101 = new System.Windows.Forms.TreeNode("Узел12");
+            System.Windows.Forms.TreeNode treeNode102 = new System.Windows.Forms.TreeNode("Узел13");
+            System.Windows.Forms.TreeNode treeNode103 = new System.Windows.Forms.TreeNode("Узел14");
+            System.Windows.Forms.TreeNode treeNode104 = new System.Windows.Forms.TreeNode("Узел15");
+            System.Windows.Forms.TreeNode treeNode105 = new System.Windows.Forms.TreeNode("Узел16");
+            System.Windows.Forms.TreeNode treeNode106 = new System.Windows.Forms.TreeNode("Узел17");
+            System.Windows.Forms.TreeNode treeNode107 = new System.Windows.Forms.TreeNode("Узел18");
+            System.Windows.Forms.TreeNode treeNode108 = new System.Windows.Forms.TreeNode("Узел19");
+            System.Windows.Forms.TreeNode treeNode109 = new System.Windows.Forms.TreeNode("Узел20");
+            System.Windows.Forms.TreeNode treeNode110 = new System.Windows.Forms.TreeNode("Узел21");
+            System.Windows.Forms.TreeNode treeNode111 = new System.Windows.Forms.TreeNode("Узел22");
+            System.Windows.Forms.TreeNode treeNode112 = new System.Windows.Forms.TreeNode("Узел23");
+            System.Windows.Forms.TreeNode treeNode113 = new System.Windows.Forms.TreeNode("Узел24");
+            System.Windows.Forms.TreeNode treeNode114 = new System.Windows.Forms.TreeNode("Узел25");
+            System.Windows.Forms.TreeNode treeNode115 = new System.Windows.Forms.TreeNode("Узел26");
+            System.Windows.Forms.TreeNode treeNode116 = new System.Windows.Forms.TreeNode("Узел27");
+            System.Windows.Forms.TreeNode treeNode117 = new System.Windows.Forms.TreeNode("Узел28");
+            System.Windows.Forms.TreeNode treeNode118 = new System.Windows.Forms.TreeNode("Узел29");
+            System.Windows.Forms.TreeNode treeNode119 = new System.Windows.Forms.TreeNode("Узел30");
+            System.Windows.Forms.TreeNode treeNode120 = new System.Windows.Forms.TreeNode("Узел31");
+            System.Windows.Forms.TreeNode treeNode121 = new System.Windows.Forms.TreeNode("Узел32");
+            System.Windows.Forms.TreeNode treeNode122 = new System.Windows.Forms.TreeNode("Узел33");
+            System.Windows.Forms.TreeNode treeNode123 = new System.Windows.Forms.TreeNode("Узел34");
+            System.Windows.Forms.TreeNode treeNode124 = new System.Windows.Forms.TreeNode("Узел35");
+            System.Windows.Forms.TreeNode treeNode125 = new System.Windows.Forms.TreeNode("Узел36");
+            System.Windows.Forms.TreeNode treeNode126 = new System.Windows.Forms.TreeNode("Узел37");
+            System.Windows.Forms.TreeNode treeNode127 = new System.Windows.Forms.TreeNode("Узел38");
+            System.Windows.Forms.TreeNode treeNode128 = new System.Windows.Forms.TreeNode("Узел39");
+            System.Windows.Forms.TreeNode treeNode129 = new System.Windows.Forms.TreeNode("Узел40");
+            System.Windows.Forms.TreeNode treeNode130 = new System.Windows.Forms.TreeNode("Узел41");
+            System.Windows.Forms.TreeNode treeNode131 = new System.Windows.Forms.TreeNode("Узел42");
+            System.Windows.Forms.TreeNode treeNode132 = new System.Windows.Forms.TreeNode("Узел43");
+            System.Windows.Forms.TreeNode treeNode133 = new System.Windows.Forms.TreeNode("Узел44");
+            System.Windows.Forms.TreeNode treeNode134 = new System.Windows.Forms.TreeNode("Узел45");
+            System.Windows.Forms.TreeNode treeNode135 = new System.Windows.Forms.TreeNode("Узел46");
+            System.Windows.Forms.TreeNode treeNode136 = new System.Windows.Forms.TreeNode("Узел47");
+            System.Windows.Forms.TreeNode treeNode137 = new System.Windows.Forms.TreeNode("Узел48");
+            System.Windows.Forms.TreeNode treeNode138 = new System.Windows.Forms.TreeNode("Узел49");
+            System.Windows.Forms.TreeNode treeNode139 = new System.Windows.Forms.TreeNode("Узел50");
+            System.Windows.Forms.TreeNode treeNode140 = new System.Windows.Forms.TreeNode("Узел51");
+            System.Windows.Forms.TreeNode treeNode141 = new System.Windows.Forms.TreeNode("Узел52");
+            System.Windows.Forms.TreeNode treeNode142 = new System.Windows.Forms.TreeNode("Узел53");
+            System.Windows.Forms.TreeNode treeNode143 = new System.Windows.Forms.TreeNode("Узел54");
+            System.Windows.Forms.TreeNode treeNode144 = new System.Windows.Forms.TreeNode("Узел55");
+            System.Windows.Forms.TreeNode treeNode145 = new System.Windows.Forms.TreeNode("Узел56");
+            System.Windows.Forms.TreeNode treeNode146 = new System.Windows.Forms.TreeNode("Узел57");
+            System.Windows.Forms.TreeNode treeNode147 = new System.Windows.Forms.TreeNode("Узел58");
+            System.Windows.Forms.TreeNode treeNode148 = new System.Windows.Forms.TreeNode("Узел59");
+            System.Windows.Forms.TreeNode treeNode149 = new System.Windows.Forms.TreeNode("Узел60");
+            System.Windows.Forms.TreeNode treeNode150 = new System.Windows.Forms.TreeNode("Узел61");
+            System.Windows.Forms.TreeNode treeNode151 = new System.Windows.Forms.TreeNode("Узел62");
+            System.Windows.Forms.TreeNode treeNode152 = new System.Windows.Forms.TreeNode("Узел63");
+            System.Windows.Forms.TreeNode treeNode153 = new System.Windows.Forms.TreeNode("Узел64");
+            System.Windows.Forms.TreeNode treeNode154 = new System.Windows.Forms.TreeNode("Узел65");
+            System.Windows.Forms.TreeNode treeNode155 = new System.Windows.Forms.TreeNode("Узел66");
+            System.Windows.Forms.TreeNode treeNode156 = new System.Windows.Forms.TreeNode("Узел67");
+            System.Windows.Forms.TreeNode treeNode157 = new System.Windows.Forms.TreeNode("Узел68");
+            System.Windows.Forms.TreeNode treeNode158 = new System.Windows.Forms.TreeNode("Узел69");
+            System.Windows.Forms.TreeNode treeNode159 = new System.Windows.Forms.TreeNode("Узел70");
+            System.Windows.Forms.TreeNode treeNode160 = new System.Windows.Forms.TreeNode("Узел71");
+            System.Windows.Forms.TreeNode treeNode161 = new System.Windows.Forms.TreeNode("Узел72");
+            System.Windows.Forms.TreeNode treeNode162 = new System.Windows.Forms.TreeNode("Узел73");
+            System.Windows.Forms.TreeNode treeNode163 = new System.Windows.Forms.TreeNode("Узел74");
+            System.Windows.Forms.TreeNode treeNode164 = new System.Windows.Forms.TreeNode("Узел75");
+            System.Windows.Forms.TreeNode treeNode165 = new System.Windows.Forms.TreeNode("Узел76");
+            System.Windows.Forms.TreeNode treeNode166 = new System.Windows.Forms.TreeNode("Узел77");
+            System.Windows.Forms.TreeNode treeNode167 = new System.Windows.Forms.TreeNode("Узел78");
+            System.Windows.Forms.TreeNode treeNode168 = new System.Windows.Forms.TreeNode("Узел79");
+            System.Windows.Forms.TreeNode treeNode169 = new System.Windows.Forms.TreeNode("Узел80");
+            System.Windows.Forms.TreeNode treeNode170 = new System.Windows.Forms.TreeNode("Узел81");
+            System.Windows.Forms.TreeNode treeNode171 = new System.Windows.Forms.TreeNode("Узел82");
+            System.Windows.Forms.TreeNode treeNode172 = new System.Windows.Forms.TreeNode("Узел83");
+            System.Windows.Forms.TreeNode treeNode173 = new System.Windows.Forms.TreeNode("Узел84");
+            System.Windows.Forms.TreeNode treeNode174 = new System.Windows.Forms.TreeNode("Узел85");
+            System.Windows.Forms.TreeNode treeNode175 = new System.Windows.Forms.TreeNode("Узел86");
+            System.Windows.Forms.TreeNode treeNode176 = new System.Windows.Forms.TreeNode("Узел87");
+            System.Windows.Forms.TreeNode treeNode177 = new System.Windows.Forms.TreeNode("Узел88");
+            System.Windows.Forms.TreeNode treeNode178 = new System.Windows.Forms.TreeNode("Узел89");
+            System.Windows.Forms.TreeNode treeNode179 = new System.Windows.Forms.TreeNode("Узел90");
+            System.Windows.Forms.TreeNode treeNode180 = new System.Windows.Forms.TreeNode("Узел91");
+            System.Windows.Forms.TreeNode treeNode181 = new System.Windows.Forms.TreeNode("Узел92");
+            System.Windows.Forms.TreeNode treeNode182 = new System.Windows.Forms.TreeNode("Каналы", new System.Windows.Forms.TreeNode[] {
+            treeNode87,
+            treeNode88,
+            treeNode89,
+            treeNode90,
+            treeNode91,
+            treeNode92,
+            treeNode93,
+            treeNode94,
+            treeNode95,
+            treeNode96,
+            treeNode97,
+            treeNode98,
+            treeNode99,
+            treeNode100,
+            treeNode101,
+            treeNode102,
+            treeNode103,
+            treeNode104,
+            treeNode105,
+            treeNode106,
+            treeNode107,
+            treeNode108,
+            treeNode109,
+            treeNode110,
+            treeNode111,
+            treeNode112,
+            treeNode113,
+            treeNode114,
+            treeNode115,
+            treeNode116,
+            treeNode117,
+            treeNode118,
+            treeNode119,
+            treeNode120,
+            treeNode121,
+            treeNode122,
+            treeNode123,
+            treeNode124,
+            treeNode125,
+            treeNode126,
+            treeNode127,
+            treeNode128,
+            treeNode129,
+            treeNode130,
+            treeNode131,
+            treeNode132,
+            treeNode133,
+            treeNode134,
+            treeNode135,
+            treeNode136,
+            treeNode137,
+            treeNode138,
+            treeNode139,
+            treeNode140,
+            treeNode141,
+            treeNode142,
+            treeNode143,
+            treeNode144,
+            treeNode145,
+            treeNode146,
+            treeNode147,
+            treeNode148,
+            treeNode149,
+            treeNode150,
+            treeNode151,
+            treeNode152,
+            treeNode153,
+            treeNode154,
+            treeNode155,
+            treeNode156,
+            treeNode157,
+            treeNode158,
+            treeNode159,
+            treeNode160,
+            treeNode161,
+            treeNode162,
+            treeNode163,
+            treeNode164,
+            treeNode165,
+            treeNode166,
+            treeNode167,
+            treeNode168,
+            treeNode169,
+            treeNode170,
+            treeNode171,
+            treeNode172,
+            treeNode173,
+            treeNode174,
+            treeNode175,
+            treeNode176,
+            treeNode177,
+            treeNode178,
+            treeNode179,
+            treeNode180,
+            treeNode181});
+            System.Windows.Forms.TreeNode treeNode183 = new System.Windows.Forms.TreeNode("Узел17");
+            System.Windows.Forms.TreeNode treeNode184 = new System.Windows.Forms.TreeNode("Узел18");
+            System.Windows.Forms.TreeNode treeNode185 = new System.Windows.Forms.TreeNode("VFO", new System.Windows.Forms.TreeNode[] {
+            treeNode183,
+            treeNode184});
             this.tsMainControls = new System.Windows.Forms.ToolStrip();
             this.tsbMenuToggle = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -457,6 +457,7 @@
             this.tsbMenuToggle.Name = "tsbMenuToggle";
             this.tsbMenuToggle.Size = new System.Drawing.Size(50, 52);
             this.tsbMenuToggle.Text = "Строка меню";
+            this.tsbMenuToggle.Click += new System.EventHandler(this.tsbMenuToggle_Click);
             this.tsbMenuToggle.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // toolStripSeparator4
@@ -569,6 +570,7 @@
             this.tsbSettings.Name = "tsbSettings";
             this.tsbSettings.Size = new System.Drawing.Size(50, 52);
             this.tsbSettings.Text = "Настройки приложения";
+            this.tsbSettings.Click += new System.EventHandler(this.tsbSettings_Click);
             this.tsbSettings.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // tsbAbout
@@ -591,383 +593,383 @@
             this.tvMain.Location = new System.Drawing.Point(59, 6);
             this.tvMain.Margin = new System.Windows.Forms.Padding(8, 8, 4, 3);
             this.tvMain.Name = "tvMain";
-            treeNode371.Name = "Узел5";
-            treeNode371.Text = "Узел5";
-            treeNode372.Name = "Узел0";
-            treeNode372.Text = "Настройки";
-            treeNode373.Name = "Узел6";
-            treeNode373.Text = "Узел6";
-            treeNode374.Name = "Узел7";
-            treeNode374.Text = "Узел7";
-            treeNode375.Name = "Узел8";
-            treeNode375.Text = "Узел8";
-            treeNode376.Name = "Узел0";
-            treeNode376.Text = "Узел0";
-            treeNode377.Name = "Узел1";
-            treeNode377.Text = "Узел1";
-            treeNode378.Name = "Узел2";
-            treeNode378.Text = "Узел2";
-            treeNode379.Name = "Узел3";
-            treeNode379.Text = "Узел3";
-            treeNode380.Name = "Узел4";
-            treeNode380.Text = "Узел4";
-            treeNode381.Name = "Узел5";
-            treeNode381.Text = "Узел5";
-            treeNode382.Name = "Узел6";
-            treeNode382.Text = "Узел6";
-            treeNode383.Name = "Узел7";
-            treeNode383.Text = "Узел7";
-            treeNode384.Name = "Узел8";
-            treeNode384.Text = "Узел8";
-            treeNode385.Name = "Узел9";
-            treeNode385.Text = "Узел9";
-            treeNode386.Name = "Узел10";
-            treeNode386.Text = "Узел10";
-            treeNode387.Name = "Узел11";
-            treeNode387.Text = "Узел11";
-            treeNode388.Name = "Узел12";
-            treeNode388.Text = "Узел12";
-            treeNode389.Name = "Узел13";
-            treeNode389.Text = "Узел13";
-            treeNode390.Name = "Узел14";
-            treeNode390.Text = "Узел14";
-            treeNode391.Name = "Узел15";
-            treeNode391.Text = "Узел15";
-            treeNode392.Name = "Узел16";
-            treeNode392.Text = "Узел16";
-            treeNode393.Name = "Узел17";
-            treeNode393.Text = "Узел17";
-            treeNode394.Name = "Узел18";
-            treeNode394.Text = "Узел18";
-            treeNode395.Name = "Узел19";
-            treeNode395.Text = "Узел19";
-            treeNode396.Name = "Узел20";
-            treeNode396.Text = "Узел20";
-            treeNode397.Name = "Узел21";
-            treeNode397.Text = "Узел21";
-            treeNode398.Name = "Узел22";
-            treeNode398.Text = "Узел22";
-            treeNode399.Name = "Узел23";
-            treeNode399.Text = "Узел23";
-            treeNode400.Name = "Узел24";
-            treeNode400.Text = "Узел24";
-            treeNode401.Name = "Узел25";
-            treeNode401.Text = "Узел25";
-            treeNode402.Name = "Узел26";
-            treeNode402.Text = "Узел26";
-            treeNode403.Name = "Узел27";
-            treeNode403.Text = "Узел27";
-            treeNode404.Name = "Узел28";
-            treeNode404.Text = "Узел28";
-            treeNode405.Name = "Узел29";
-            treeNode405.Text = "Узел29";
-            treeNode406.Name = "Узел30";
-            treeNode406.Text = "Узел30";
-            treeNode407.Name = "Узел31";
-            treeNode407.Text = "Узел31";
-            treeNode408.Name = "Узел32";
-            treeNode408.Text = "Узел32";
-            treeNode409.Name = "Узел33";
-            treeNode409.Text = "Узел33";
-            treeNode410.Name = "Узел34";
-            treeNode410.Text = "Узел34";
-            treeNode411.Name = "Узел35";
-            treeNode411.Text = "Узел35";
-            treeNode412.Name = "Узел36";
-            treeNode412.Text = "Узел36";
-            treeNode413.Name = "Узел37";
-            treeNode413.Text = "Узел37";
-            treeNode414.Name = "Узел38";
-            treeNode414.Text = "Узел38";
-            treeNode415.Name = "Узел39";
-            treeNode415.Text = "Узел39";
-            treeNode416.Name = "Узел40";
-            treeNode416.Text = "Узел40";
-            treeNode417.Name = "Узел41";
-            treeNode417.Text = "Узел41";
-            treeNode418.Name = "Узел42";
-            treeNode418.Text = "Узел42";
-            treeNode419.Name = "Узел43";
-            treeNode419.Text = "Узел43";
-            treeNode420.Name = "Узел44";
-            treeNode420.Text = "Узел44";
-            treeNode421.Name = "Узел45";
-            treeNode421.Text = "Узел45";
-            treeNode422.Name = "Узел46";
-            treeNode422.Text = "Узел46";
-            treeNode423.Name = "Узел47";
-            treeNode423.Text = "Узел47";
-            treeNode424.Name = "Узел48";
-            treeNode424.Text = "Узел48";
-            treeNode425.Name = "Узел49";
-            treeNode425.Text = "Узел49";
-            treeNode426.Name = "Узел50";
-            treeNode426.Text = "Узел50";
-            treeNode427.Name = "Узел51";
-            treeNode427.Text = "Узел51";
-            treeNode428.Name = "Узел52";
-            treeNode428.Text = "Узел52";
-            treeNode429.Name = "Узел53";
-            treeNode429.Text = "Узел53";
-            treeNode430.Name = "Узел54";
-            treeNode430.Text = "Узел54";
-            treeNode431.Name = "Узел55";
-            treeNode431.Text = "Узел55";
-            treeNode432.Name = "Узел56";
-            treeNode432.Text = "Узел56";
-            treeNode433.Name = "Узел57";
-            treeNode433.Text = "Узел57";
-            treeNode434.Name = "Узел58";
-            treeNode434.Text = "Узел58";
-            treeNode435.Name = "Узел59";
-            treeNode435.Text = "Узел59";
-            treeNode436.Name = "Узел60";
-            treeNode436.Text = "Узел60";
-            treeNode437.Name = "Узел61";
-            treeNode437.Text = "Узел61";
-            treeNode438.Name = "Узел62";
-            treeNode438.Text = "Узел62";
-            treeNode439.Name = "Узел63";
-            treeNode439.Text = "Узел63";
-            treeNode440.Name = "Узел64";
-            treeNode440.Text = "Узел64";
-            treeNode441.Name = "Узел65";
-            treeNode441.Text = "Узел65";
-            treeNode442.Name = "Узел66";
-            treeNode442.Text = "Узел66";
-            treeNode443.Name = "Узел67";
-            treeNode443.Text = "Узел67";
-            treeNode444.Name = "Узел68";
-            treeNode444.Text = "Узел68";
-            treeNode445.Name = "Узел69";
-            treeNode445.Text = "Узел69";
-            treeNode446.Name = "Узел70";
-            treeNode446.Text = "Узел70";
-            treeNode447.Name = "Узел71";
-            treeNode447.Text = "Узел71";
-            treeNode448.Name = "Узел1";
-            treeNode448.Text = "Контакты";
-            treeNode449.Name = "Узел20";
-            treeNode449.Text = "Узел20";
-            treeNode450.Name = "Узел21";
-            treeNode450.Text = "Узел21";
-            treeNode451.Name = "Узел22";
-            treeNode451.Text = "Узел22";
-            treeNode452.Name = "Узел19";
-            treeNode452.Text = "Списки групп";
-            treeNode453.Name = "Узел9";
-            treeNode453.Text = "Узел9";
-            treeNode454.Name = "Узел10";
-            treeNode454.Text = "Узел10";
-            treeNode455.Name = "Узел11";
-            treeNode455.Text = "Узел11";
-            treeNode456.Name = "Узел2";
-            treeNode456.Text = "Зоны";
-            treeNode457.Name = "Узел13";
-            treeNode457.Text = "Узел13";
-            treeNode458.Name = "Узел14";
-            treeNode458.Text = "Узел14";
-            treeNode459.Name = "Узел15";
-            treeNode459.Text = "Узел15";
-            treeNode460.Name = "Узел16";
-            treeNode460.Text = "Узел16";
-            treeNode461.Name = "Узел2";
-            treeNode461.Text = "Узел2";
-            treeNode462.Name = "Узел3";
-            treeNode462.Text = "Узел3";
-            treeNode463.Name = "Узел4";
-            treeNode463.Text = "Узел4";
-            treeNode464.Name = "Узел5";
-            treeNode464.Text = "Узел5";
-            treeNode465.Name = "Узел6";
-            treeNode465.Text = "Узел6";
-            treeNode466.Name = "Узел7";
-            treeNode466.Text = "Узел7";
-            treeNode467.Name = "Узел8";
-            treeNode467.Text = "Узел8";
-            treeNode468.Name = "Узел9";
-            treeNode468.Text = "Узел9";
-            treeNode469.Name = "Узел10";
-            treeNode469.Text = "Узел10";
-            treeNode470.Name = "Узел11";
-            treeNode470.Text = "Узел11";
-            treeNode471.Name = "Узел12";
-            treeNode471.Text = "Узел12";
-            treeNode472.Name = "Узел13";
-            treeNode472.Text = "Узел13";
-            treeNode473.Name = "Узел14";
-            treeNode473.Text = "Узел14";
-            treeNode474.Name = "Узел15";
-            treeNode474.Text = "Узел15";
-            treeNode475.Name = "Узел16";
-            treeNode475.Text = "Узел16";
-            treeNode476.Name = "Узел17";
-            treeNode476.Text = "Узел17";
-            treeNode477.Name = "Узел18";
-            treeNode477.Text = "Узел18";
-            treeNode478.Name = "Узел19";
-            treeNode478.Text = "Узел19";
-            treeNode479.Name = "Узел20";
-            treeNode479.Text = "Узел20";
-            treeNode480.Name = "Узел21";
-            treeNode480.Text = "Узел21";
-            treeNode481.Name = "Узел22";
-            treeNode481.Text = "Узел22";
-            treeNode482.Name = "Узел23";
-            treeNode482.Text = "Узел23";
-            treeNode483.Name = "Узел24";
-            treeNode483.Text = "Узел24";
-            treeNode484.Name = "Узел25";
-            treeNode484.Text = "Узел25";
-            treeNode485.Name = "Узел26";
-            treeNode485.Text = "Узел26";
-            treeNode486.Name = "Узел27";
-            treeNode486.Text = "Узел27";
-            treeNode487.Name = "Узел28";
-            treeNode487.Text = "Узел28";
-            treeNode488.Name = "Узел29";
-            treeNode488.Text = "Узел29";
-            treeNode489.Name = "Узел30";
-            treeNode489.Text = "Узел30";
-            treeNode490.Name = "Узел31";
-            treeNode490.Text = "Узел31";
-            treeNode491.Name = "Узел32";
-            treeNode491.Text = "Узел32";
-            treeNode492.Name = "Узел33";
-            treeNode492.Text = "Узел33";
-            treeNode493.Name = "Узел34";
-            treeNode493.Text = "Узел34";
-            treeNode494.Name = "Узел35";
-            treeNode494.Text = "Узел35";
-            treeNode495.Name = "Узел36";
-            treeNode495.Text = "Узел36";
-            treeNode496.Name = "Узел37";
-            treeNode496.Text = "Узел37";
-            treeNode497.Name = "Узел38";
-            treeNode497.Text = "Узел38";
-            treeNode498.Name = "Узел39";
-            treeNode498.Text = "Узел39";
-            treeNode499.Name = "Узел40";
-            treeNode499.Text = "Узел40";
-            treeNode500.Name = "Узел41";
-            treeNode500.Text = "Узел41";
-            treeNode501.Name = "Узел42";
-            treeNode501.Text = "Узел42";
-            treeNode502.Name = "Узел43";
-            treeNode502.Text = "Узел43";
-            treeNode503.Name = "Узел44";
-            treeNode503.Text = "Узел44";
-            treeNode504.Name = "Узел45";
-            treeNode504.Text = "Узел45";
-            treeNode505.Name = "Узел46";
-            treeNode505.Text = "Узел46";
-            treeNode506.Name = "Узел47";
-            treeNode506.Text = "Узел47";
-            treeNode507.Name = "Узел48";
-            treeNode507.Text = "Узел48";
-            treeNode508.Name = "Узел49";
-            treeNode508.Text = "Узел49";
-            treeNode509.Name = "Узел50";
-            treeNode509.Text = "Узел50";
-            treeNode510.Name = "Узел51";
-            treeNode510.Text = "Узел51";
-            treeNode511.Name = "Узел52";
-            treeNode511.Text = "Узел52";
-            treeNode512.Name = "Узел53";
-            treeNode512.Text = "Узел53";
-            treeNode513.Name = "Узел54";
-            treeNode513.Text = "Узел54";
-            treeNode514.Name = "Узел55";
-            treeNode514.Text = "Узел55";
-            treeNode515.Name = "Узел56";
-            treeNode515.Text = "Узел56";
-            treeNode516.Name = "Узел57";
-            treeNode516.Text = "Узел57";
-            treeNode517.Name = "Узел58";
-            treeNode517.Text = "Узел58";
-            treeNode518.Name = "Узел59";
-            treeNode518.Text = "Узел59";
-            treeNode519.Name = "Узел60";
-            treeNode519.Text = "Узел60";
-            treeNode520.Name = "Узел61";
-            treeNode520.Text = "Узел61";
-            treeNode521.Name = "Узел62";
-            treeNode521.Text = "Узел62";
-            treeNode522.Name = "Узел63";
-            treeNode522.Text = "Узел63";
-            treeNode523.Name = "Узел64";
-            treeNode523.Text = "Узел64";
-            treeNode524.Name = "Узел65";
-            treeNode524.Text = "Узел65";
-            treeNode525.Name = "Узел66";
-            treeNode525.Text = "Узел66";
-            treeNode526.Name = "Узел67";
-            treeNode526.Text = "Узел67";
-            treeNode527.Name = "Узел68";
-            treeNode527.Text = "Узел68";
-            treeNode528.Name = "Узел69";
-            treeNode528.Text = "Узел69";
-            treeNode529.Name = "Узел70";
-            treeNode529.Text = "Узел70";
-            treeNode530.Name = "Узел71";
-            treeNode530.Text = "Узел71";
-            treeNode531.Name = "Узел72";
-            treeNode531.Text = "Узел72";
-            treeNode532.Name = "Узел73";
-            treeNode532.Text = "Узел73";
-            treeNode533.Name = "Узел74";
-            treeNode533.Text = "Узел74";
-            treeNode534.Name = "Узел75";
-            treeNode534.Text = "Узел75";
-            treeNode535.Name = "Узел76";
-            treeNode535.Text = "Узел76";
-            treeNode536.Name = "Узел77";
-            treeNode536.Text = "Узел77";
-            treeNode537.Name = "Узел78";
-            treeNode537.Text = "Узел78";
-            treeNode538.Name = "Узел79";
-            treeNode538.Text = "Узел79";
-            treeNode539.Name = "Узел80";
-            treeNode539.Text = "Узел80";
-            treeNode540.Name = "Узел81";
-            treeNode540.Text = "Узел81";
-            treeNode541.Name = "Узел82";
-            treeNode541.Text = "Узел82";
-            treeNode542.Name = "Узел83";
-            treeNode542.Text = "Узел83";
-            treeNode543.Name = "Узел84";
-            treeNode543.Text = "Узел84";
-            treeNode544.Name = "Узел85";
-            treeNode544.Text = "Узел85";
-            treeNode545.Name = "Узел86";
-            treeNode545.Text = "Узел86";
-            treeNode546.Name = "Узел87";
-            treeNode546.Text = "Узел87";
-            treeNode547.Name = "Узел88";
-            treeNode547.Text = "Узел88";
-            treeNode548.Name = "Узел89";
-            treeNode548.Text = "Узел89";
-            treeNode549.Name = "Узел90";
-            treeNode549.Text = "Узел90";
-            treeNode550.Name = "Узел91";
-            treeNode550.Text = "Узел91";
-            treeNode551.Name = "Узел92";
-            treeNode551.Text = "Узел92";
-            treeNode552.Name = "Узел3";
-            treeNode552.Text = "Каналы";
-            treeNode553.Name = "Узел17";
-            treeNode553.Text = "Узел17";
-            treeNode554.Name = "Узел18";
-            treeNode554.Text = "Узел18";
-            treeNode555.Name = "Узел4";
-            treeNode555.Text = "VFO";
+            treeNode1.Name = "Узел5";
+            treeNode1.Text = "Узел5";
+            treeNode2.Name = "Узел0";
+            treeNode2.Text = "Настройки";
+            treeNode3.Name = "Узел6";
+            treeNode3.Text = "Узел6";
+            treeNode4.Name = "Узел7";
+            treeNode4.Text = "Узел7";
+            treeNode5.Name = "Узел8";
+            treeNode5.Text = "Узел8";
+            treeNode6.Name = "Узел0";
+            treeNode6.Text = "Узел0";
+            treeNode7.Name = "Узел1";
+            treeNode7.Text = "Узел1";
+            treeNode8.Name = "Узел2";
+            treeNode8.Text = "Узел2";
+            treeNode9.Name = "Узел3";
+            treeNode9.Text = "Узел3";
+            treeNode10.Name = "Узел4";
+            treeNode10.Text = "Узел4";
+            treeNode11.Name = "Узел5";
+            treeNode11.Text = "Узел5";
+            treeNode12.Name = "Узел6";
+            treeNode12.Text = "Узел6";
+            treeNode13.Name = "Узел7";
+            treeNode13.Text = "Узел7";
+            treeNode14.Name = "Узел8";
+            treeNode14.Text = "Узел8";
+            treeNode15.Name = "Узел9";
+            treeNode15.Text = "Узел9";
+            treeNode16.Name = "Узел10";
+            treeNode16.Text = "Узел10";
+            treeNode17.Name = "Узел11";
+            treeNode17.Text = "Узел11";
+            treeNode18.Name = "Узел12";
+            treeNode18.Text = "Узел12";
+            treeNode19.Name = "Узел13";
+            treeNode19.Text = "Узел13";
+            treeNode20.Name = "Узел14";
+            treeNode20.Text = "Узел14";
+            treeNode21.Name = "Узел15";
+            treeNode21.Text = "Узел15";
+            treeNode22.Name = "Узел16";
+            treeNode22.Text = "Узел16";
+            treeNode23.Name = "Узел17";
+            treeNode23.Text = "Узел17";
+            treeNode24.Name = "Узел18";
+            treeNode24.Text = "Узел18";
+            treeNode25.Name = "Узел19";
+            treeNode25.Text = "Узел19";
+            treeNode26.Name = "Узел20";
+            treeNode26.Text = "Узел20";
+            treeNode27.Name = "Узел21";
+            treeNode27.Text = "Узел21";
+            treeNode28.Name = "Узел22";
+            treeNode28.Text = "Узел22";
+            treeNode29.Name = "Узел23";
+            treeNode29.Text = "Узел23";
+            treeNode30.Name = "Узел24";
+            treeNode30.Text = "Узел24";
+            treeNode31.Name = "Узел25";
+            treeNode31.Text = "Узел25";
+            treeNode32.Name = "Узел26";
+            treeNode32.Text = "Узел26";
+            treeNode33.Name = "Узел27";
+            treeNode33.Text = "Узел27";
+            treeNode34.Name = "Узел28";
+            treeNode34.Text = "Узел28";
+            treeNode35.Name = "Узел29";
+            treeNode35.Text = "Узел29";
+            treeNode36.Name = "Узел30";
+            treeNode36.Text = "Узел30";
+            treeNode37.Name = "Узел31";
+            treeNode37.Text = "Узел31";
+            treeNode38.Name = "Узел32";
+            treeNode38.Text = "Узел32";
+            treeNode39.Name = "Узел33";
+            treeNode39.Text = "Узел33";
+            treeNode40.Name = "Узел34";
+            treeNode40.Text = "Узел34";
+            treeNode41.Name = "Узел35";
+            treeNode41.Text = "Узел35";
+            treeNode42.Name = "Узел36";
+            treeNode42.Text = "Узел36";
+            treeNode43.Name = "Узел37";
+            treeNode43.Text = "Узел37";
+            treeNode44.Name = "Узел38";
+            treeNode44.Text = "Узел38";
+            treeNode45.Name = "Узел39";
+            treeNode45.Text = "Узел39";
+            treeNode46.Name = "Узел40";
+            treeNode46.Text = "Узел40";
+            treeNode47.Name = "Узел41";
+            treeNode47.Text = "Узел41";
+            treeNode48.Name = "Узел42";
+            treeNode48.Text = "Узел42";
+            treeNode49.Name = "Узел43";
+            treeNode49.Text = "Узел43";
+            treeNode50.Name = "Узел44";
+            treeNode50.Text = "Узел44";
+            treeNode51.Name = "Узел45";
+            treeNode51.Text = "Узел45";
+            treeNode52.Name = "Узел46";
+            treeNode52.Text = "Узел46";
+            treeNode53.Name = "Узел47";
+            treeNode53.Text = "Узел47";
+            treeNode54.Name = "Узел48";
+            treeNode54.Text = "Узел48";
+            treeNode55.Name = "Узел49";
+            treeNode55.Text = "Узел49";
+            treeNode56.Name = "Узел50";
+            treeNode56.Text = "Узел50";
+            treeNode57.Name = "Узел51";
+            treeNode57.Text = "Узел51";
+            treeNode58.Name = "Узел52";
+            treeNode58.Text = "Узел52";
+            treeNode59.Name = "Узел53";
+            treeNode59.Text = "Узел53";
+            treeNode60.Name = "Узел54";
+            treeNode60.Text = "Узел54";
+            treeNode61.Name = "Узел55";
+            treeNode61.Text = "Узел55";
+            treeNode62.Name = "Узел56";
+            treeNode62.Text = "Узел56";
+            treeNode63.Name = "Узел57";
+            treeNode63.Text = "Узел57";
+            treeNode64.Name = "Узел58";
+            treeNode64.Text = "Узел58";
+            treeNode65.Name = "Узел59";
+            treeNode65.Text = "Узел59";
+            treeNode66.Name = "Узел60";
+            treeNode66.Text = "Узел60";
+            treeNode67.Name = "Узел61";
+            treeNode67.Text = "Узел61";
+            treeNode68.Name = "Узел62";
+            treeNode68.Text = "Узел62";
+            treeNode69.Name = "Узел63";
+            treeNode69.Text = "Узел63";
+            treeNode70.Name = "Узел64";
+            treeNode70.Text = "Узел64";
+            treeNode71.Name = "Узел65";
+            treeNode71.Text = "Узел65";
+            treeNode72.Name = "Узел66";
+            treeNode72.Text = "Узел66";
+            treeNode73.Name = "Узел67";
+            treeNode73.Text = "Узел67";
+            treeNode74.Name = "Узел68";
+            treeNode74.Text = "Узел68";
+            treeNode75.Name = "Узел69";
+            treeNode75.Text = "Узел69";
+            treeNode76.Name = "Узел70";
+            treeNode76.Text = "Узел70";
+            treeNode77.Name = "Узел71";
+            treeNode77.Text = "Узел71";
+            treeNode78.Name = "Узел1";
+            treeNode78.Text = "Контакты";
+            treeNode79.Name = "Узел20";
+            treeNode79.Text = "Узел20";
+            treeNode80.Name = "Узел21";
+            treeNode80.Text = "Узел21";
+            treeNode81.Name = "Узел22";
+            treeNode81.Text = "Узел22";
+            treeNode82.Name = "Узел19";
+            treeNode82.Text = "Списки групп";
+            treeNode83.Name = "Узел9";
+            treeNode83.Text = "Узел9";
+            treeNode84.Name = "Узел10";
+            treeNode84.Text = "Узел10";
+            treeNode85.Name = "Узел11";
+            treeNode85.Text = "Узел11";
+            treeNode86.Name = "Узел2";
+            treeNode86.Text = "Зоны";
+            treeNode87.Name = "Узел13";
+            treeNode87.Text = "Узел13";
+            treeNode88.Name = "Узел14";
+            treeNode88.Text = "Узел14";
+            treeNode89.Name = "Узел15";
+            treeNode89.Text = "Узел15";
+            treeNode90.Name = "Узел16";
+            treeNode90.Text = "Узел16";
+            treeNode91.Name = "Узел2";
+            treeNode91.Text = "Узел2";
+            treeNode92.Name = "Узел3";
+            treeNode92.Text = "Узел3";
+            treeNode93.Name = "Узел4";
+            treeNode93.Text = "Узел4";
+            treeNode94.Name = "Узел5";
+            treeNode94.Text = "Узел5";
+            treeNode95.Name = "Узел6";
+            treeNode95.Text = "Узел6";
+            treeNode96.Name = "Узел7";
+            treeNode96.Text = "Узел7";
+            treeNode97.Name = "Узел8";
+            treeNode97.Text = "Узел8";
+            treeNode98.Name = "Узел9";
+            treeNode98.Text = "Узел9";
+            treeNode99.Name = "Узел10";
+            treeNode99.Text = "Узел10";
+            treeNode100.Name = "Узел11";
+            treeNode100.Text = "Узел11";
+            treeNode101.Name = "Узел12";
+            treeNode101.Text = "Узел12";
+            treeNode102.Name = "Узел13";
+            treeNode102.Text = "Узел13";
+            treeNode103.Name = "Узел14";
+            treeNode103.Text = "Узел14";
+            treeNode104.Name = "Узел15";
+            treeNode104.Text = "Узел15";
+            treeNode105.Name = "Узел16";
+            treeNode105.Text = "Узел16";
+            treeNode106.Name = "Узел17";
+            treeNode106.Text = "Узел17";
+            treeNode107.Name = "Узел18";
+            treeNode107.Text = "Узел18";
+            treeNode108.Name = "Узел19";
+            treeNode108.Text = "Узел19";
+            treeNode109.Name = "Узел20";
+            treeNode109.Text = "Узел20";
+            treeNode110.Name = "Узел21";
+            treeNode110.Text = "Узел21";
+            treeNode111.Name = "Узел22";
+            treeNode111.Text = "Узел22";
+            treeNode112.Name = "Узел23";
+            treeNode112.Text = "Узел23";
+            treeNode113.Name = "Узел24";
+            treeNode113.Text = "Узел24";
+            treeNode114.Name = "Узел25";
+            treeNode114.Text = "Узел25";
+            treeNode115.Name = "Узел26";
+            treeNode115.Text = "Узел26";
+            treeNode116.Name = "Узел27";
+            treeNode116.Text = "Узел27";
+            treeNode117.Name = "Узел28";
+            treeNode117.Text = "Узел28";
+            treeNode118.Name = "Узел29";
+            treeNode118.Text = "Узел29";
+            treeNode119.Name = "Узел30";
+            treeNode119.Text = "Узел30";
+            treeNode120.Name = "Узел31";
+            treeNode120.Text = "Узел31";
+            treeNode121.Name = "Узел32";
+            treeNode121.Text = "Узел32";
+            treeNode122.Name = "Узел33";
+            treeNode122.Text = "Узел33";
+            treeNode123.Name = "Узел34";
+            treeNode123.Text = "Узел34";
+            treeNode124.Name = "Узел35";
+            treeNode124.Text = "Узел35";
+            treeNode125.Name = "Узел36";
+            treeNode125.Text = "Узел36";
+            treeNode126.Name = "Узел37";
+            treeNode126.Text = "Узел37";
+            treeNode127.Name = "Узел38";
+            treeNode127.Text = "Узел38";
+            treeNode128.Name = "Узел39";
+            treeNode128.Text = "Узел39";
+            treeNode129.Name = "Узел40";
+            treeNode129.Text = "Узел40";
+            treeNode130.Name = "Узел41";
+            treeNode130.Text = "Узел41";
+            treeNode131.Name = "Узел42";
+            treeNode131.Text = "Узел42";
+            treeNode132.Name = "Узел43";
+            treeNode132.Text = "Узел43";
+            treeNode133.Name = "Узел44";
+            treeNode133.Text = "Узел44";
+            treeNode134.Name = "Узел45";
+            treeNode134.Text = "Узел45";
+            treeNode135.Name = "Узел46";
+            treeNode135.Text = "Узел46";
+            treeNode136.Name = "Узел47";
+            treeNode136.Text = "Узел47";
+            treeNode137.Name = "Узел48";
+            treeNode137.Text = "Узел48";
+            treeNode138.Name = "Узел49";
+            treeNode138.Text = "Узел49";
+            treeNode139.Name = "Узел50";
+            treeNode139.Text = "Узел50";
+            treeNode140.Name = "Узел51";
+            treeNode140.Text = "Узел51";
+            treeNode141.Name = "Узел52";
+            treeNode141.Text = "Узел52";
+            treeNode142.Name = "Узел53";
+            treeNode142.Text = "Узел53";
+            treeNode143.Name = "Узел54";
+            treeNode143.Text = "Узел54";
+            treeNode144.Name = "Узел55";
+            treeNode144.Text = "Узел55";
+            treeNode145.Name = "Узел56";
+            treeNode145.Text = "Узел56";
+            treeNode146.Name = "Узел57";
+            treeNode146.Text = "Узел57";
+            treeNode147.Name = "Узел58";
+            treeNode147.Text = "Узел58";
+            treeNode148.Name = "Узел59";
+            treeNode148.Text = "Узел59";
+            treeNode149.Name = "Узел60";
+            treeNode149.Text = "Узел60";
+            treeNode150.Name = "Узел61";
+            treeNode150.Text = "Узел61";
+            treeNode151.Name = "Узел62";
+            treeNode151.Text = "Узел62";
+            treeNode152.Name = "Узел63";
+            treeNode152.Text = "Узел63";
+            treeNode153.Name = "Узел64";
+            treeNode153.Text = "Узел64";
+            treeNode154.Name = "Узел65";
+            treeNode154.Text = "Узел65";
+            treeNode155.Name = "Узел66";
+            treeNode155.Text = "Узел66";
+            treeNode156.Name = "Узел67";
+            treeNode156.Text = "Узел67";
+            treeNode157.Name = "Узел68";
+            treeNode157.Text = "Узел68";
+            treeNode158.Name = "Узел69";
+            treeNode158.Text = "Узел69";
+            treeNode159.Name = "Узел70";
+            treeNode159.Text = "Узел70";
+            treeNode160.Name = "Узел71";
+            treeNode160.Text = "Узел71";
+            treeNode161.Name = "Узел72";
+            treeNode161.Text = "Узел72";
+            treeNode162.Name = "Узел73";
+            treeNode162.Text = "Узел73";
+            treeNode163.Name = "Узел74";
+            treeNode163.Text = "Узел74";
+            treeNode164.Name = "Узел75";
+            treeNode164.Text = "Узел75";
+            treeNode165.Name = "Узел76";
+            treeNode165.Text = "Узел76";
+            treeNode166.Name = "Узел77";
+            treeNode166.Text = "Узел77";
+            treeNode167.Name = "Узел78";
+            treeNode167.Text = "Узел78";
+            treeNode168.Name = "Узел79";
+            treeNode168.Text = "Узел79";
+            treeNode169.Name = "Узел80";
+            treeNode169.Text = "Узел80";
+            treeNode170.Name = "Узел81";
+            treeNode170.Text = "Узел81";
+            treeNode171.Name = "Узел82";
+            treeNode171.Text = "Узел82";
+            treeNode172.Name = "Узел83";
+            treeNode172.Text = "Узел83";
+            treeNode173.Name = "Узел84";
+            treeNode173.Text = "Узел84";
+            treeNode174.Name = "Узел85";
+            treeNode174.Text = "Узел85";
+            treeNode175.Name = "Узел86";
+            treeNode175.Text = "Узел86";
+            treeNode176.Name = "Узел87";
+            treeNode176.Text = "Узел87";
+            treeNode177.Name = "Узел88";
+            treeNode177.Text = "Узел88";
+            treeNode178.Name = "Узел89";
+            treeNode178.Text = "Узел89";
+            treeNode179.Name = "Узел90";
+            treeNode179.Text = "Узел90";
+            treeNode180.Name = "Узел91";
+            treeNode180.Text = "Узел91";
+            treeNode181.Name = "Узел92";
+            treeNode181.Text = "Узел92";
+            treeNode182.Name = "Узел3";
+            treeNode182.Text = "Каналы";
+            treeNode183.Name = "Узел17";
+            treeNode183.Text = "Узел17";
+            treeNode184.Name = "Узел18";
+            treeNode184.Text = "Узел18";
+            treeNode185.Name = "Узел4";
+            treeNode185.Text = "VFO";
             this.tvMain.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode372,
-            treeNode448,
-            treeNode452,
-            treeNode456,
-            treeNode552,
-            treeNode555});
+            treeNode2,
+            treeNode78,
+            treeNode82,
+            treeNode86,
+            treeNode182,
+            treeNode185});
             this.tvMain.ShowNodeToolTips = true;
             this.tvMain.Size = new System.Drawing.Size(1103, 605);
             this.tvMain.TabIndex = 1;

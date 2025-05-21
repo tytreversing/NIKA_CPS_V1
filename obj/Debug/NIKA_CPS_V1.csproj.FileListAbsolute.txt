@@ -51,3 +51,6 @@ C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Debug\Sounds\tsbOpenFirmware.mp3
 C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Debug\Sounds\tsbHelp.mp3
 C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Debug\Sounds\tsbUpdate.mp3
 C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Debug\Sounds\nowYouCanUpload.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\firmwareError.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\firmwareReadingError.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.Settings.resources

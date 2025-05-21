@@ -186,6 +186,7 @@
             this.Name = "FirmwareUploader";
             this.Padding = new System.Windows.Forms.Padding(6);
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Загрузчик прошивки";
             this.tsUpdater.ResumeLayout(false);

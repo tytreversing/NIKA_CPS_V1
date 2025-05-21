@@ -47,3 +47,9 @@ C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.WinMM.xml
 C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\System.Security.AccessControl.xml
 C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\System.Security.Principal.Windows.xml
 C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\obj\Release\NIKA_CPS.64BC111C.Up2Date
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\firmwareError.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\firmwareReadingError.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\nowYouCanUpload.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbHelp.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbOpenFirmware.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbUpdate.mp3

@@ -34,7 +34,7 @@ namespace NIKA_CPS_V1
             {
                 new SplashScreen().ShowDialog();
             }
-            playAudio = (RegistryOperations.getProfileIntWithDefault("Setup", "AccessibilityOptions", 1) != 0);
+            playAudio = (RegistryOperations.getProfileIntWithDefault("Setup", "AccessibilityOptions", 0) != 0);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -81,7 +81,15 @@ namespace NIKA_CPS_V1
 
         private void tsbMenuToggle_Click(object sender, EventArgs e)
         {
-
+            msMain.Visible = !msMain.Visible;
+            if (msMain.Visible)
+            {
+                RegistryOperations.WriteProfileInt("Setup", "MenuStringVisible", 1);
+            }
+            else
+            {
+                RegistryOperations.WriteProfileInt("Setup", "MenuStringVisible", 0);
+            }
         }
 
         private void MainForm_ResizeEnd(object sender, EventArgs e)
@@ -153,6 +161,9 @@ namespace NIKA_CPS_V1
             
         }
 
-
+        private void tsbSettings_Click(object sender, EventArgs e)
+        {
+            new Settings(this).ShowDialog();
+        }
     }
 }
