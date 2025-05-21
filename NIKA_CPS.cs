@@ -1,4 +1,6 @@
-﻿using NIKA_CPS_V1.Properties;
+﻿using NAudio.Wave;
+using NIKA_CPS_V1.Interfaces;
+using NIKA_CPS_V1.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +14,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NAudio.Wave;
+
 
 namespace NIKA_CPS_V1
 {
@@ -25,12 +27,14 @@ namespace NIKA_CPS_V1
         public AudioFileReader audioFileReader;
 
         public bool playAudio = false;
+        public bool foundDFUDevice = false;
+        public bool foundFlashedRadio = false;
 
         public MainForm()
         {
             PRODUCT_VERSION = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             InitializeComponent();
-            if (RegistryOperations.getProfileIntWithDefault("Setup", "ShowSplashScreen", 0) != 0)
+            if (RegistryOperations.getProfileIntWithDefault("Setup", "ShowSplashScreen", 1) != 0)
             {
                 new SplashScreen().ShowDialog();
             }
@@ -47,12 +51,14 @@ namespace NIKA_CPS_V1
 
             if (isElevated == false && thisFilePath.Contains("Program Files"))
             {
-                MessageBox.Show("Программа установлена в папку " + thisFilePath + ", но не запущена от имени администратора. Автообновление файла локализации и ручное его скачивание через Загрузчик прошивки будет недоступно из-за ограничений Windows. Удалите программу и переустановите ее в другую папку, либо установите для исполняемого файла программы галочку запуска от имени администратора.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Программа установлена в папку " + thisFilePath + ", но не запущена от имени администратора. Часть функций программы может быть недоступной из-за ограничений Windows. Удалите программу и переустановите ее в другую папку, либо установите для исполняемого файла программы галочку запуска от имени администратора.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]";
             Width = RegistryOperations.getProfileIntWithDefault("Setup", "LastWindowWidth", 1000);
             Height = RegistryOperations.getProfileIntWithDefault("Setup", "LastWindowHeight", 800);
             msMain.Visible = (RegistryOperations.getProfileIntWithDefault("Setup", "MenuStringVisible", 0) != 0);
+            tsbReadFromRadio.Enabled = false;
+            tsbWriteToRadio.Enabled = false;
             if (RegistryOperations.getProfileStringWithDefault("Setup", "AgreementConfirmed", "NO") == "NO")
             {
                 if (MessageBox.Show("Программное обеспечение НИКА предоставляется бесплатно на условиях «КАК ЕСТЬ». Все действия, производимые с оборудованием и программным обеспечением, находятся исключительно на ответственности конечного пользователя. Разработчик не несет ответственности за возможный ущерб, причиненный действиями конечного пользователя программного обеспечения.\r\nСовместимость программного обеспечения с радиостанциями гарантируется в объеме, обеспеченном тестированием на момент публикации данной версии.\r\nЕсли Вы согласны с условиями предоставления программного обеспечения, нажмите «ДА».", "Пользовательское соглашение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
@@ -71,12 +77,16 @@ namespace NIKA_CPS_V1
                     RegistryOperations.WriteProfileString("Setup", "AgreementConfirmed", "YES");
                 }
             }
-            tbConsole.Text += "Программа загружена " + DateTime.Now.ToString() + "\r\n";
+            tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
+            pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("Setup", "UsingFastPolling", 1) == 1) ? 500 : 1000;
+            pollingTimer.Start();
         }
 
         private void tsbFirmware_Click(object sender, EventArgs e)
         {
+            pollingTimer.Stop();
             new FirmwareUploader(this).ShowDialog();
+            pollingTimer.Start();
         }
 
         private void tsbMenuToggle_Click(object sender, EventArgs e)
@@ -96,6 +106,43 @@ namespace NIKA_CPS_V1
         {
             RegistryOperations.WriteProfileInt("Setup", "LastWindowWidth", this.Width);
             RegistryOperations.WriteProfileInt("Setup", "LastWindowHeight", this.Height);
+        }
+
+        private void playMessage(string message)
+        {
+            if (playAudio)
+            {
+                // Остановить предыдущее воспроизведение
+                waveOut?.Stop();
+                waveOut?.Dispose();
+                audioFileReader?.Dispose();
+
+                if (string.IsNullOrEmpty(message)) return;
+
+                // Путь к файлу
+                string soundPath = Path.Combine(
+                    Application.StartupPath,
+                    "Sounds",
+                    $"{message}.mp3");
+
+                // Проверка существования файла
+                if (!File.Exists(soundPath)) return;
+
+                try
+                {
+                    // Инициализация аудиопотока
+                    audioFileReader = new AudioFileReader(soundPath);
+                    waveOut = new WaveOutEvent();
+                    waveOut.Init(audioFileReader);
+                    waveOut.Play();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка воспроизведения: {ex.Message}");
+                    CleanupAudio();
+                }
+            }
+
         }
 
         private void Control_MouseEnter(object sender, EventArgs e)
@@ -163,7 +210,49 @@ namespace NIKA_CPS_V1
 
         private void tsbSettings_Click(object sender, EventArgs e)
         {
-            new Settings(this).ShowDialog();
+            Settings settingsForm = new Settings(this);
+            if (settingsForm.ShowDialog() == DialogResult.OK)
+            {
+                playMessage("settingsSaved");
+                tbConsole.AppendText("Настройки программы сохранены\r\n");
+                pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("Setup", "UsingFastPolling", 1) == 1) ? 500 : 1000;
+            }
+                
         }
+
+        private void pollingTimer_Tick(object sender, EventArgs e)
+        {
+            if (USBChecker.IsUsbDeviceConnected("0483", "DF11"))
+            {
+                if (!foundDFUDevice)
+                {
+                    tbConsole.AppendText("Обнаружен подключенный STM32-совместимый процессор в режиме DFU\r\n");
+                    System.Media.SystemSounds.Asterisk.Play();
+                    foundDFUDevice = true;
+                }
+            }
+            else
+                foundDFUDevice = false;
+            if (USBChecker.IsUsbDeviceConnected("1FC9", "0094"))
+            {
+                if (!foundFlashedRadio)
+                {
+                    tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с этими прошивками не поддерживается!\r\n");
+                    System.Media.SystemSounds.Hand.Play();
+                    foundFlashedRadio = true;
+                    tsbReadFromRadio.Enabled = true;
+                    tsbWriteToRadio.Enabled = true;
+                }
+            }
+            else
+            {
+                foundFlashedRadio = false;
+                tsbReadFromRadio.Enabled = false;
+                tsbWriteToRadio.Enabled = false;
+            }
+
+        }
+
+
     }
 }

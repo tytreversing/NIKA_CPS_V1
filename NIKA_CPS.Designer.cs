@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Узел5");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Настройки", new System.Windows.Forms.TreeNode[] {
@@ -418,6 +419,7 @@
             this.msiDMRMon = new System.Windows.Forms.ToolStripMenuItem();
             this.msiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tbConsole = new System.Windows.Forms.TextBox();
+            this.pollingTimer = new System.Windows.Forms.Timer(this.components);
             this.tsMainControls.SuspendLayout();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
@@ -1042,6 +1044,11 @@
             this.tbConsole.Size = new System.Drawing.Size(1103, 70);
             this.tbConsole.TabIndex = 3;
             // 
+            // pollingTimer
+            // 
+            this.pollingTimer.Interval = 500;
+            this.pollingTimer.Tick += new System.EventHandler(this.pollingTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1097,6 +1104,7 @@
         private System.Windows.Forms.ToolStripButton tsbCSV;
         private System.Windows.Forms.TextBox tbConsole;
         private System.Windows.Forms.ToolStripMenuItem msiDMRMon;
+        private System.Windows.Forms.Timer pollingTimer;
     }
 }
 

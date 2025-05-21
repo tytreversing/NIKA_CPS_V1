@@ -54,3 +54,13 @@ C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Debug\Sounds\nowYouCanUpload.mp3
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\firmwareError.mp3
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\firmwareReadingError.mp3
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.Settings.resources
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\bSaveAppSettings.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\cbShowSplashScreen.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\cbUseVoiceHelp.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\settingsSaved.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\System.CodeDom.dll
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\System.CodeDom.xml
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\AGauge.dll
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\AGauge.pdb
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\rbFastPolling.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\rbSlowPolling.mp3

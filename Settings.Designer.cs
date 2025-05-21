@@ -28,7 +28,86 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.cbShowSplashScreen = new System.Windows.Forms.CheckBox();
+            this.cbUseVoiceHelp = new System.Windows.Forms.CheckBox();
+            this.bSaveAppSettings = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.rbFastPolling = new System.Windows.Forms.RadioButton();
+            this.rbSlowPolling = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
+            // 
+            // cbShowSplashScreen
+            // 
+            this.cbShowSplashScreen.AutoSize = true;
+            this.cbShowSplashScreen.Location = new System.Drawing.Point(13, 13);
+            this.cbShowSplashScreen.Name = "cbShowSplashScreen";
+            this.cbShowSplashScreen.Size = new System.Drawing.Size(236, 19);
+            this.cbShowSplashScreen.TabIndex = 0;
+            this.cbShowSplashScreen.Text = "Показывать заставку при запуске";
+            this.cbShowSplashScreen.UseVisualStyleBackColor = true;
+            this.cbShowSplashScreen.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
+            // 
+            // cbUseVoiceHelp
+            // 
+            this.cbUseVoiceHelp.AutoSize = true;
+            this.cbUseVoiceHelp.Location = new System.Drawing.Point(13, 39);
+            this.cbUseVoiceHelp.Name = "cbUseVoiceHelp";
+            this.cbUseVoiceHelp.Size = new System.Drawing.Size(240, 19);
+            this.cbUseVoiceHelp.TabIndex = 1;
+            this.cbUseVoiceHelp.Text = "Проигрывать голосовые подсказки";
+            this.cbUseVoiceHelp.UseVisualStyleBackColor = true;
+            this.cbUseVoiceHelp.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
+            // 
+            // bSaveAppSettings
+            // 
+            this.bSaveAppSettings.BackColor = System.Drawing.Color.White;
+            this.bSaveAppSettings.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.bSaveAppSettings.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.bSaveAppSettings.FlatAppearance.BorderSize = 2;
+            this.bSaveAppSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.bSaveAppSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
+            this.bSaveAppSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bSaveAppSettings.Location = new System.Drawing.Point(314, 478);
+            this.bSaveAppSettings.Name = "bSaveAppSettings";
+            this.bSaveAppSettings.Size = new System.Drawing.Size(204, 28);
+            this.bSaveAppSettings.TabIndex = 2;
+            this.bSaveAppSettings.Text = "Сохранить настройки";
+            this.bSaveAppSettings.UseVisualStyleBackColor = false;
+            this.bSaveAppSettings.Click += new System.EventHandler(this.bSaveAppSettings_Click);
+            this.bSaveAppSettings.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(110, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Таймер поллинга";
+            // 
+            // rbFastPolling
+            // 
+            this.rbFastPolling.AutoSize = true;
+            this.rbFastPolling.Location = new System.Drawing.Point(127, 65);
+            this.rbFastPolling.Name = "rbFastPolling";
+            this.rbFastPolling.Size = new System.Drawing.Size(80, 19);
+            this.rbFastPolling.TabIndex = 4;
+            this.rbFastPolling.TabStop = true;
+            this.rbFastPolling.Text = "быстрый";
+            this.rbFastPolling.UseVisualStyleBackColor = true;
+            this.rbFastPolling.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
+            // 
+            // rbSlowPolling
+            // 
+            this.rbSlowPolling.AutoSize = true;
+            this.rbSlowPolling.Location = new System.Drawing.Point(127, 91);
+            this.rbSlowPolling.Name = "rbSlowPolling";
+            this.rbSlowPolling.Size = new System.Drawing.Size(95, 19);
+            this.rbSlowPolling.TabIndex = 5;
+            this.rbSlowPolling.TabStop = true;
+            this.rbSlowPolling.Text = "медленный";
+            this.rbSlowPolling.UseVisualStyleBackColor = true;
+            this.rbSlowPolling.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // Settings
             // 
@@ -36,6 +115,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(933, 519);
+            this.Controls.Add(this.rbSlowPolling);
+            this.Controls.Add(this.rbFastPolling);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.bSaveAppSettings);
+            this.Controls.Add(this.cbUseVoiceHelp);
+            this.Controls.Add(this.cbShowSplashScreen);
             this.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -47,10 +132,19 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Настройки программы";
+            this.Load += new System.EventHandler(this.Settings_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.CheckBox cbShowSplashScreen;
+        private System.Windows.Forms.CheckBox cbUseVoiceHelp;
+        private System.Windows.Forms.Button bSaveAppSettings;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton rbFastPolling;
+        private System.Windows.Forms.RadioButton rbSlowPolling;
     }
 }

@@ -202,7 +202,7 @@ namespace NIKA_CPS_V1
 
         private void DisplayMessage(object sender, FirmwareUpdateMessageEventArgs e)
         {
-            if (pbUploading.InvokeRequired)
+            if (agProgress.InvokeRequired)
             {
                 Invoke(new EventHandler<FirmwareUpdateMessageEventArgs>(DisplayMessage), sender, e);
                 return;
@@ -212,17 +212,17 @@ namespace NIKA_CPS_V1
             if (e.IsError)
             {
                 MessageBox.Show(e.Message, "Ошибка!");
-                pbUploading.Value = 0;
+                agProgress.Value = 0;
             }
             else
             {
-                pbUploading.Value = (int)e.Percentage;
+                agProgress.Value = e.Percentage;
             }
         }
 
         private void UploadCompleted(object sender, FirmwareUpdateMessageEventArgs e)
         {
-            if (pbUploading.InvokeRequired)
+            if (agProgress.InvokeRequired)
             {
                 Invoke(new EventHandler<FirmwareUpdateMessageEventArgs>(UploadCompleted), sender, e);
                 return;
@@ -273,7 +273,7 @@ namespace NIKA_CPS_V1
                 RegistryOperations.WriteProfileString("Setup", "LastFlashedRadio", rbMDUV380.Text);
                 outputType = OutputType.OutputType_MDUV380;
             }
-            pbUploading.Value = 0;
+            agProgress.Value = 0;
             ofdOpenFirmware.InitialDirectory = RegistryOperations.getProfileStringWithDefault("Setup", "FirmwareLocation", null);
             if (ofdOpenFirmware.ShowDialog() != DialogResult.OK)
             {

@@ -37,13 +37,14 @@
             this.gbRadioType = new System.Windows.Forms.GroupBox();
             this.rbMDUV380 = new System.Windows.Forms.RadioButton();
             this.rbMD9600 = new System.Windows.Forms.RadioButton();
-            this.pbUploading = new System.Windows.Forms.ProgressBar();
             this.tbConsole = new System.Windows.Forms.TextBox();
             this.lblText = new System.Windows.Forms.Label();
             this.ofdOpenFirmware = new System.Windows.Forms.OpenFileDialog();
             this.flashTimer = new System.Windows.Forms.Timer(this.components);
+            this.agProgress = new System.Windows.Forms.AGauge();
             this.tsUpdater.SuspendLayout();
             this.gbRadioType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.agProgress)).BeginInit();
             this.SuspendLayout();
             // 
             // tsUpdater
@@ -132,23 +133,14 @@
             this.rbMD9600.Text = "TYT MD-9600 (Retevis RT-90)";
             this.rbMD9600.UseVisualStyleBackColor = true;
             // 
-            // pbUploading
-            // 
-            this.pbUploading.BackColor = System.Drawing.Color.White;
-            this.pbUploading.Location = new System.Drawing.Point(75, 111);
-            this.pbUploading.Name = "pbUploading";
-            this.pbUploading.Size = new System.Drawing.Size(735, 23);
-            this.pbUploading.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.pbUploading.TabIndex = 2;
-            // 
             // tbConsole
             // 
-            this.tbConsole.Location = new System.Drawing.Point(75, 149);
+            this.tbConsole.Location = new System.Drawing.Point(75, 110);
             this.tbConsole.Multiline = true;
             this.tbConsole.Name = "tbConsole";
             this.tbConsole.ReadOnly = true;
             this.tbConsole.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbConsole.Size = new System.Drawing.Size(735, 147);
+            this.tbConsole.Size = new System.Drawing.Size(714, 186);
             this.tbConsole.TabIndex = 3;
             // 
             // lblText
@@ -169,15 +161,43 @@
             this.flashTimer.Interval = 700;
             this.flashTimer.Tick += new System.EventHandler(this.flashTimer_Tick);
             // 
+            // agProgress
+            // 
+            this.agProgress.BaseArcColor = System.Drawing.Color.Black;
+            this.agProgress.BaseArcRadius = 120;
+            this.agProgress.Center = new System.Drawing.Point(130, 130);
+            this.agProgress.Location = new System.Drawing.Point(806, 44);
+            this.agProgress.MaxValue = 100F;
+            this.agProgress.MinValue = 0F;
+            this.agProgress.Name = "agProgress";
+            this.agProgress.NeedleColor1 = System.Windows.Forms.AGaugeNeedleColor.Red;
+            this.agProgress.NeedleColor2 = System.Drawing.Color.Black;
+            this.agProgress.NeedleRadius = 115;
+            this.agProgress.ScaleLinesInterInnerRadius = 110;
+            this.agProgress.ScaleLinesInterOuterRadius = 120;
+            this.agProgress.ScaleLinesInterWidth = 3;
+            this.agProgress.ScaleLinesMajorInnerRadius = 100;
+            this.agProgress.ScaleLinesMajorOuterRadius = 120;
+            this.agProgress.ScaleLinesMajorStepValue = 10F;
+            this.agProgress.ScaleLinesMajorWidth = 3;
+            this.agProgress.ScaleLinesMinorInnerRadius = 115;
+            this.agProgress.ScaleLinesMinorOuterRadius = 120;
+            this.agProgress.ScaleLinesMinorTicks = 10;
+            this.agProgress.ScaleNumbersRadius = 90;
+            this.agProgress.Size = new System.Drawing.Size(260, 260);
+            this.agProgress.TabIndex = 5;
+            this.agProgress.Text = "aGauge1";
+            this.agProgress.Value = 0F;
+            // 
             // FirmwareUploader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(830, 309);
+            this.ClientSize = new System.Drawing.Size(1087, 309);
+            this.Controls.Add(this.agProgress);
             this.Controls.Add(this.lblText);
             this.Controls.Add(this.tbConsole);
-            this.Controls.Add(this.pbUploading);
             this.Controls.Add(this.gbRadioType);
             this.Controls.Add(this.tsUpdater);
             this.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -193,6 +213,7 @@
             this.tsUpdater.PerformLayout();
             this.gbRadioType.ResumeLayout(false);
             this.gbRadioType.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.agProgress)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,11 +227,11 @@
         private System.Windows.Forms.GroupBox gbRadioType;
         private System.Windows.Forms.RadioButton rbMDUV380;
         private System.Windows.Forms.RadioButton rbMD9600;
-        private System.Windows.Forms.ProgressBar pbUploading;
         private System.Windows.Forms.TextBox tbConsole;
         private System.Windows.Forms.Label lblText;
         private System.Windows.Forms.ToolStripButton tsbHelp;
         private System.Windows.Forms.OpenFileDialog ofdOpenFirmware;
         private System.Windows.Forms.Timer flashTimer;
+        private System.Windows.Forms.AGauge agProgress;
     }
 }
