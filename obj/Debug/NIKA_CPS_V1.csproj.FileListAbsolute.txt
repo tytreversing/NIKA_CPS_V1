@@ -61,6 +61,79 @@ C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\settingsSaved.mp3
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\System.CodeDom.dll
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\System.CodeDom.xml
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\AGauge.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\AGauge.pdb
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\rbFastPolling.mp3
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\rbSlowPolling.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\STDFU.dll
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\STTubeDevice30.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbAbout.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbCSV.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbEngineering.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbFirmware.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbOpenFile.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbReadFromRadio.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbSaveFile.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbSettings.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbWriteToRadio.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Help\About.txt
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\AGauge.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\bSaveAppSettings.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\cbShowSplashScreen.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\cbUseVoiceHelp.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\firmwareError.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\firmwareReadingError.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\nowYouCanUpload.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\rbFastPolling.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\rbSlowPolling.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\settingsSaved.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbHelp.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbMenuToggle.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbNewFile.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbOpenFirmware.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\tsbUpdate.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Sounds\uploadCompleted.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\STDFU.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\STTubeDevice30.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Help\Firmware.chm
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NIKA_CPS_V1.exe.config
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NIKA_CPS_V1.exe
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NIKA_CPS_V1.pdb
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\HidSharp.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Microsoft.Win32.Registry.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.Asio.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.Core.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.Midi.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.Wasapi.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.WinForms.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.WinMM.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\System.CodeDom.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\System.Security.AccessControl.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\System.Security.Principal.Windows.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\HidSharp.pdb
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\HidSharp.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\Microsoft.Win32.Registry.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.Asio.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.Core.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.Midi.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.Wasapi.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.WinForms.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\NAudio.WinMM.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\System.CodeDom.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\System.Security.AccessControl.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Debug\System.Security.Principal.Windows.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.csproj.AssemblyReference.cache
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.exe.config
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.AboutForm.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.FirmwareUploader.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.MainForm.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.Properties.Resources.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.Settings.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.SingleContact.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.SplashScreen.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.csproj.GenerateResource.cache
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.csproj.CoreCompileInputs.cache
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS.64BC111C.Up2Date
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.exe
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Debug\NIKA_CPS_V1.pdb
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Debug\Sounds\uploadCompleted.mp3

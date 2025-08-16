@@ -30,6 +30,7 @@ namespace NIKA_CPS_V1
         public bool foundDFUDevice = false;
         public bool foundFlashedRadio = false;
 
+
         public MainForm()
         {
             PRODUCT_VERSION = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -226,7 +227,8 @@ namespace NIKA_CPS_V1
             {
                 if (!foundDFUDevice)
                 {
-                    tbConsole.AppendText("Обнаружен подключенный STM32-совместимый процессор в режиме DFU\r\n");
+                    tbConsole.AppendText("Обнаружен подключенный STM32-совместимый процессор в режиме DFU.\r\nИмя устройства: ");
+                    tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                     System.Media.SystemSounds.Asterisk.Play();
                     foundDFUDevice = true;
                 }
@@ -237,7 +239,8 @@ namespace NIKA_CPS_V1
             {
                 if (!foundFlashedRadio)
                 {
-                    tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с этими прошивками не поддерживается!\r\n");
+                    tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с этими прошивками не поддерживается!\r\nИмя устройства: ");
+                    tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                     System.Media.SystemSounds.Hand.Play();
                     foundFlashedRadio = true;
                     tsbReadFromRadio.Enabled = true;

@@ -357,7 +357,7 @@ namespace NIKA_CPS_V1
                 this.DisplayMessage(this, new FirmwareUpdateMessageEventArgs(100f, "Идет запись прошивки...", isError: false));
                 for (uint num4 = 0u; num4 <= num / 1024; num4++)
                 {
-                    this.DisplayMessage(this, new FirmwareUpdateMessageEventArgs(20 + 80 * num4 * 1024 / num, "", isError: false));
+                    this.DisplayMessage(this, new FirmwareUpdateMessageEventArgs(100 * num4 * 1024 / num, "", isError: false));
                     byte[] array5 = openFirmwareData.Skip((int)(1024 * num4)).Take(1024).ToArray();
                     if (array5.Length < 1024)
                     {
@@ -446,6 +446,8 @@ namespace NIKA_CPS_V1
                 if (num2 > array[i] && startAddress < array[i + 1])
                 {
                     this.DisplayMessage(this, new FirmwareUpdateMessageEventArgs(4 + num++ * 2, "Стирание" + $" 0x{startAddress:X} - 0x{num2:X}", isError: false));
+                    
+
                     if (EraseSector(hDevice, array[i]) != 0)
                     {
                         throw new Exception("Ошибка стирания" + " " + array[i].ToString("X2"));

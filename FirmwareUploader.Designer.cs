@@ -42,6 +42,7 @@
             this.ofdOpenFirmware = new System.Windows.Forms.OpenFileDialog();
             this.flashTimer = new System.Windows.Forms.Timer(this.components);
             this.agProgress = new System.Windows.Forms.AGauge();
+            this.needleTimer = new System.Windows.Forms.Timer(this.components);
             this.tsUpdater.SuspendLayout();
             this.gbRadioType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.agProgress)).BeginInit();
@@ -189,6 +190,10 @@
             this.agProgress.Text = "aGauge1";
             this.agProgress.Value = 0F;
             // 
+            // needleTimer
+            // 
+            this.needleTimer.Tick += new System.EventHandler(this.needleTimer_Tick);
+            // 
             // FirmwareUploader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -233,5 +238,6 @@
         private System.Windows.Forms.OpenFileDialog ofdOpenFirmware;
         private System.Windows.Forms.Timer flashTimer;
         private System.Windows.Forms.AGauge agProgress;
+        private System.Windows.Forms.Timer needleTimer;
     }
 }

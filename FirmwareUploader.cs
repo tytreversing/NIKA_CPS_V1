@@ -227,6 +227,8 @@ namespace NIKA_CPS_V1
                 Invoke(new EventHandler<FirmwareUpdateMessageEventArgs>(UploadCompleted), sender, e);
                 return;
             }
+            needleTimer.Start();
+            playMessage("uploadCompleted");
         }
 
         private bool containsStringSequence(byte[] data, string marker)
@@ -365,6 +367,14 @@ namespace NIKA_CPS_V1
                 this.flashTimer.Stop();
                 flashCount = 0;
             }
+        }
+
+        private void needleTimer_Tick(object sender, EventArgs e)
+        {
+            if (agProgress.Value > 0)
+                agProgress.Value--;
+            else
+                needleTimer.Stop();
         }
     }
 }
