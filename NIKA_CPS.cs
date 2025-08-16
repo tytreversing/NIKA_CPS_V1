@@ -12,6 +12,7 @@ using System.Media;
 using System.Reflection;
 using System.Security.Principal;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -30,6 +31,17 @@ namespace NIKA_CPS_V1
         public bool foundDFUDevice = false;
         public bool foundFlashedRadio = false;
 
+        public string radioVID = "";
+        public string radioPID = "";
+
+        public bool isValidHex(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                return false;
+            // Проверяем, что строка состоит ровно из 4 шестнадцатеричных символов
+            // (регистронезависимо, без префиксов и пробелов)
+            return Regex.IsMatch(input.Trim(), @"^[0-9a-fA-F]{4}$");
+        }
 
         public MainForm()
         {
@@ -40,6 +52,8 @@ namespace NIKA_CPS_V1
                 new SplashScreen().ShowDialog();
             }
             playAudio = (RegistryOperations.getProfileIntWithDefault("Setup", "AccessibilityOptions", 0) != 0);
+            radioVID = RegistryOperations.getProfileStringWithDefault("Setup", "DeviceVID", "1FC9");
+            radioPID = RegistryOperations.getProfileStringWithDefault("Setup", "DevicePID", "0094");
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -235,7 +249,7 @@ namespace NIKA_CPS_V1
             }
             else
                 foundDFUDevice = false;
-            if (USBChecker.IsUsbDeviceConnected("1FC9", "0094"))
+            if (USBChecker.IsUsbDeviceConnected(radioVID, radioPID))
             {
                 if (!foundFlashedRadio)
                 {
@@ -258,8 +272,7 @@ namespace NIKA_CPS_V1
 
         private void msiCalibration_Click(object sender, EventArgs e)
         {
-            CalibrationForm cForm = new CalibrationForm(this);
-            cForm.ShowDialog();
+            new CalibrationForm(this).ShowDialog();
         }
     }
 }

@@ -34,6 +34,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.rbFastPolling = new System.Windows.Forms.RadioButton();
             this.rbSlowPolling = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbRadioVID = new System.Windows.Forms.TextBox();
+            this.tbRadioPID = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // cbShowSplashScreen
@@ -109,12 +113,48 @@
             this.rbSlowPolling.UseVisualStyleBackColor = true;
             this.rbSlowPolling.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 123);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(101, 15);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "VID устройства";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 155);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(101, 15);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "PID устройства";
+            // 
+            // tbRadioVID
+            // 
+            this.tbRadioVID.Location = new System.Drawing.Point(122, 119);
+            this.tbRadioVID.Name = "tbRadioVID";
+            this.tbRadioVID.Size = new System.Drawing.Size(117, 23);
+            this.tbRadioVID.TabIndex = 8;
+            // 
+            // tbRadioPID
+            // 
+            this.tbRadioPID.Location = new System.Drawing.Point(122, 152);
+            this.tbRadioPID.Name = "tbRadioPID";
+            this.tbRadioPID.Size = new System.Drawing.Size(117, 23);
+            this.tbRadioPID.TabIndex = 9;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(933, 519);
+            this.Controls.Add(this.tbRadioPID);
+            this.Controls.Add(this.tbRadioVID);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.rbSlowPolling);
             this.Controls.Add(this.rbFastPolling);
             this.Controls.Add(this.label1);
@@ -127,7 +167,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Settings";
-            this.Padding = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.Padding = new System.Windows.Forms.Padding(7);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -146,5 +186,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton rbFastPolling;
         private System.Windows.Forms.RadioButton rbSlowPolling;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbRadioVID;
+        private System.Windows.Forms.TextBox tbRadioPID;
     }
 }

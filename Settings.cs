@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,6 +20,8 @@ namespace NIKA_CPS_V1
         private AudioFileReader audioFileReader;
 
         private MainForm _parent;
+
+
         public Settings(MainForm parent)
         {
             InitializeComponent();
@@ -31,6 +34,8 @@ namespace NIKA_CPS_V1
             cbUseVoiceHelp.Checked = (RegistryOperations.getProfileIntWithDefault("Setup", "AccessibilityOptions", 0) != 0);
             rbFastPolling.Checked = (RegistryOperations.getProfileIntWithDefault("Setup", "UsingFastPolling", 1) != 0);
             rbSlowPolling.Checked = !rbFastPolling.Checked;
+            tbRadioVID.Text = _parent.radioVID;
+            tbRadioPID.Text = _parent.radioPID;
         }
 
         private void bSaveAppSettings_Click(object sender, EventArgs e)
@@ -39,6 +44,16 @@ namespace NIKA_CPS_V1
             RegistryOperations.WriteProfileInt("Setup", "AccessibilityOptions", (cbUseVoiceHelp.Checked ? 1 : 0));
             RegistryOperations.WriteProfileInt("Setup", "UsingFastPolling", (rbFastPolling.Checked ? 1 : 0));
             _parent.playAudio = cbUseVoiceHelp.Checked;
+            if (_parent.isValidHex(tbRadioVID.Text))
+            {
+                RegistryOperations.WriteProfileString("Setup", "DeviceVID", tbRadioVID.Text);
+                _parent.radioVID = tbRadioVID.Text.ToUpper();
+            }
+            if (_parent.isValidHex(tbRadioPID.Text))
+            {
+                RegistryOperations.WriteProfileString("Setup", "DevicePID", tbRadioPID.Text);
+                _parent.radioPID = tbRadioPID.Text.ToUpper();
+            }
             Close();
         }
 

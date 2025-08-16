@@ -128,11 +128,14 @@ namespace NIKA_CPS_V1
         private Button btnChart;
         CalibrationDataSTM32 CalData = new CalibrationDataSTM32();
 
+        private MainForm _parent;
+
         public CalibrationForm(MainForm parent)
         {
             InitializeComponent();
             base.Icon = Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
             calibrationDataSTM32 = new byte[CALIBRATION_DATA_SIZE_STM32];
+            _parent = parent;
             prepareTables();
         }
 
