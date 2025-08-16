@@ -61,11 +61,9 @@ C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\rbSlowPolling.mp3
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\settingsSaved.mp3
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\STDFU.dll
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\STTubeDevice30.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\HidSharp.dll
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\System.CodeDom.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\HidSharp.pdb
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\HidSharp.xml
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\System.CodeDom.xml
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.Settings.resources
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe.config
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\uploadCompleted.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.CalibrationForm.resources

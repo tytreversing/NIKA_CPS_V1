@@ -256,6 +256,10 @@ namespace NIKA_CPS_V1
 
         }
 
-
+        private void msiCalibration_Click(object sender, EventArgs e)
+        {
+            CalibrationForm cForm = new CalibrationForm(this);
+            cForm.ShowDialog();
+        }
     }
 }

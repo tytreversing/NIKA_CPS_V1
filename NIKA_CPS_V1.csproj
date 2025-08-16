@@ -12,9 +12,12 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <AssemblyVersion>2025.8.16.4</AssemblyVersion>
+    <AssemblyVersion>2025.8.16.17</AssemblyVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -100,17 +103,23 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CalibrationData.cs" />
+    <Compile Include="CalibrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FirmwareUploader.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FirmwareUploader.Designer.cs">
       <DependentUpon>FirmwareUploader.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\DataTransfer.cs" />
     <Compile Include="Interfaces\FirmwareUpdateMessageEventArgs.cs" />
     <Compile Include="Interfaces\FirmwareUpdateProgressEventArgs.cs" />
     <Compile Include="Interfaces\FirmwareUpdateProgressEventHandler.cs" />
     <Compile Include="Interfaces\STM32_DFU.cs" />
     <Compile Include="Interfaces\USBChecker.cs" />
+    <Compile Include="PowerSettingData.cs" />
     <Compile Include="RegistryOperations.cs" />
     <Compile Include="NIKA_CPS.cs">
       <SubType>Form</SubType>
@@ -140,6 +149,9 @@
     </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalibrationForm.resx">
+      <DependentUpon>CalibrationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FirmwareUploader.resx">
       <DependentUpon>FirmwareUploader.cs</DependentUpon>
