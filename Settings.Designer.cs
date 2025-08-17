@@ -38,6 +38,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbRadioVID = new System.Windows.Forms.TextBox();
             this.tbRadioPID = new System.Windows.Forms.TextBox();
+            this.cbPorts = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbShowSplashScreen
@@ -145,12 +147,32 @@
             this.tbRadioPID.Size = new System.Drawing.Size(117, 23);
             this.tbRadioPID.TabIndex = 9;
             // 
+            // cbPorts
+            // 
+            this.cbPorts.FormattingEnabled = true;
+            this.cbPorts.Location = new System.Drawing.Point(440, 67);
+            this.cbPorts.Name = "cbPorts";
+            this.cbPorts.Size = new System.Drawing.Size(155, 23);
+            this.cbPorts.Sorted = true;
+            this.cbPorts.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(286, 67);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(111, 15);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Порт соединения";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(933, 519);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.cbPorts);
             this.Controls.Add(this.tbRadioPID);
             this.Controls.Add(this.tbRadioVID);
             this.Controls.Add(this.label3);
@@ -190,5 +212,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbRadioVID;
         private System.Windows.Forms.TextBox tbRadioPID;
+        private System.Windows.Forms.ComboBox cbPorts;
+        private System.Windows.Forms.Label label4;
     }
 }

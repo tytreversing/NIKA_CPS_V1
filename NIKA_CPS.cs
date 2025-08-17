@@ -5,9 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
+using System.Management;
 using System.Media;
 using System.Reflection;
 using System.Security.Principal;
@@ -15,6 +18,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 
 namespace NIKA_CPS_V1
@@ -34,6 +38,11 @@ namespace NIKA_CPS_V1
         public string radioVID = "";
         public string radioPID = "";
 
+        public List<string> availablePorts;
+        public List<string> availablePortsWithVIDPID;
+
+        public Logger log = new Logger("NIKA_CPS_V1.log");
+
         public bool isValidHex(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
@@ -41,6 +50,112 @@ namespace NIKA_CPS_V1
             // Проверяем, что строка состоит ровно из 4 шестнадцатеричных символов
             // (регистронезависимо, без префиксов и пробелов)
             return Regex.IsMatch(input.Trim(), @"^[0-9a-fA-F]{4}$");
+        }
+
+        private string ExtractVidPid(string pnpDeviceId, string prefix)
+        {
+            if (string.IsNullOrEmpty(pnpDeviceId)) return null;
+
+            int startIndex = pnpDeviceId.IndexOf(prefix);
+            if (startIndex < 0) return null;
+
+            startIndex += prefix.Length;
+            int endIndex = pnpDeviceId.IndexOf('&', startIndex);
+            if (endIndex < 0) endIndex = pnpDeviceId.Length;
+
+            return pnpDeviceId.Substring(startIndex, endIndex - startIndex);
+        }
+
+
+        public List<string> GetAvailableComPorts()
+        {
+            List<string> comPorts = new List<string>();
+
+            try
+            {
+                string[] ports = SerialPort.GetPortNames();
+                comPorts.AddRange(ports);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при получении списка COM-портов: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return comPorts;
+        }
+
+        public List<string> GetComPortsWithVidPid()
+        {
+            List<string> comPortInfoList = new List<string>();
+
+            try
+            {
+                // Получаем все доступные COM-порты
+                string[] portNames = SerialPort.GetPortNames();
+
+                if (portNames.Length == 0)
+                {
+                    comPortInfoList.Add("COM-порты не обнаружены");
+                    return comPortInfoList;
+                }
+
+                // Запрос WMI для получения информации о последовательных портах
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher(
+                    "SELECT * FROM Win32_PnPEntity WHERE Caption LIKE '%(COM%'");
+
+                foreach (ManagementObject queryObj in searcher.Get())
+                {
+                    string caption = queryObj["Caption"]?.ToString() ?? string.Empty;
+                    string pnpDeviceId = queryObj["PNPDeviceID"]?.ToString() ?? string.Empty;
+
+                    // Извлекаем VID и PID с обработкой обратных слешей
+                    string vid = ExtractHardwareId(pnpDeviceId, "VID_");
+                    string pid = ExtractHardwareId(pnpDeviceId, "PID_");
+
+                    // Извлекаем номер COM-порта
+                    string comPort = ExtractComPort(caption);
+
+                    if (!string.IsNullOrEmpty(comPort))
+                    {
+                        comPortInfoList.Add($"Порт: {comPort.PadRight(6)} VID: {vid?.PadRight(6) ?? "N/A".PadRight(6)} PID: {pid ?? "N/A"}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                comPortInfoList.Add($"Ошибка при получении информации о COM-портах: {ex.Message}");
+            }
+
+            return comPortInfoList;
+        }
+
+        private static string ExtractHardwareId(string pnpDeviceId, string prefix)
+        {
+            if (string.IsNullOrEmpty(pnpDeviceId)) return null;
+
+            // Ищем начало идентификатора (VID_ или PID_)
+            int startIndex = pnpDeviceId.IndexOf(prefix, StringComparison.OrdinalIgnoreCase);
+            if (startIndex < 0) return null;
+
+            startIndex += prefix.Length;
+
+            // Ищем конец идентификатора (до следующего разделителя)
+            int endIndex = pnpDeviceId.IndexOfAny(new[] { '\\', '&', '|', '#' }, startIndex);
+            if (endIndex < 0) endIndex = pnpDeviceId.Length;
+
+            // Извлекаем подстроку и удаляем возможные лишние символы
+            string result = pnpDeviceId.Substring(startIndex, endIndex - startIndex);
+
+            // Удаляем все не шестнадцатеричные символы (на всякий случай)
+            return Regex.Replace(result, "[^0-9A-Fa-f]", "");
+        }
+
+        private static string ExtractComPort(string caption)
+        {
+            if (string.IsNullOrEmpty(caption)) return null;
+
+            // Используем регулярное выражение для более надежного извлечения
+            var match = Regex.Match(caption, @"\(COM\d+\)");
+            return match.Success ? match.Value.Trim('(', ')') : null;
         }
 
         public MainForm()
@@ -94,6 +209,30 @@ namespace NIKA_CPS_V1
             }
             tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
             pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("Setup", "UsingFastPolling", 1) == 1) ? 500 : 1000;
+
+            availablePorts = GetAvailableComPorts();
+            if (availablePorts.Count > 0)
+            {
+                tbConsole.AppendText("Доступные COM-порты:\r\n");
+                foreach (string port in availablePorts)
+                {
+                    tbConsole.AppendText(port + "\r\n");
+                }
+            }
+            else
+            {
+                tbConsole.AppendText("Активные COM-порты не обнаружены!\r\n");
+            }
+            availablePortsWithVIDPID = GetComPortsWithVidPid();
+            if (availablePortsWithVIDPID.Count > 0)
+            {
+                tbConsole.AppendText("Данные о портах:\r\n");
+                foreach (string port in availablePortsWithVIDPID)
+                {
+                    tbConsole.AppendText(port + "\r\n");
+                    log.Add(port);
+                }
+            }
             pollingTimer.Start();
         }
 
@@ -210,6 +349,7 @@ namespace NIKA_CPS_V1
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             CleanupAudio();
+            log.Close();
             base.OnFormClosing(e);
         }
 
@@ -242,6 +382,7 @@ namespace NIKA_CPS_V1
                 if (!foundDFUDevice)
                 {
                     tbConsole.AppendText("Обнаружен подключенный STM32-совместимый процессор в режиме DFU.\r\nИмя устройства: ");
+                    log.Add("Обнаружен подключенный STM32-совместимый процессор в режиме DFU.\r\nИмя устройства: " + USBChecker.DeviceDescription());
                     tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                     System.Media.SystemSounds.Asterisk.Play();
                     foundDFUDevice = true;
@@ -255,6 +396,7 @@ namespace NIKA_CPS_V1
                 {
                     tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с этими прошивками не поддерживается!\r\nИмя устройства: ");
                     tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
+                    log.Add("Подключена рация с прошивкой OpenGD77");
                     System.Media.SystemSounds.Hand.Play();
                     foundFlashedRadio = true;
                     tsbReadFromRadio.Enabled = true;

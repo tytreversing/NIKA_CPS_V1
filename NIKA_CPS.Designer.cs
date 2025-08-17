@@ -974,7 +974,7 @@
             treeNode182,
             treeNode185});
             this.tvMain.ShowNodeToolTips = true;
-            this.tvMain.Size = new System.Drawing.Size(1103, 605);
+            this.tvMain.Size = new System.Drawing.Size(1103, 544);
             this.tvMain.TabIndex = 1;
             // 
             // msMain
@@ -1045,12 +1045,12 @@
             // 
             this.tbConsole.BackColor = System.Drawing.Color.White;
             this.tbConsole.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tbConsole.Location = new System.Drawing.Point(59, 611);
+            this.tbConsole.Location = new System.Drawing.Point(59, 550);
             this.tbConsole.Multiline = true;
             this.tbConsole.Name = "tbConsole";
             this.tbConsole.ReadOnly = true;
             this.tbConsole.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbConsole.Size = new System.Drawing.Size(1103, 70);
+            this.tbConsole.Size = new System.Drawing.Size(1103, 131);
             this.tbConsole.TabIndex = 3;
             // 
             // pollingTimer

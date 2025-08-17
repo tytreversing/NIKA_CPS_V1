@@ -198,15 +198,15 @@ namespace NIKA_CPS_V1
                 return false;
             }
 
-            DataTransfer openGD77CommsTransferData = new DataTransfer();
-            openGD77CommsTransferData.mode = DataTransfer.CommsDataMode.DataModeReadBandlimits;
-            openGD77CommsTransferData.localDataBufferStartPosition = 0;
-            openGD77CommsTransferData.transferLength = 0;
-            openGD77CommsTransferData.dataBuff = new byte[128];
+            DataTransfer transferBuffer = new DataTransfer();
+            transferBuffer.mode = DataTransfer.CommsDataMode.DataModeReadBandlimits;
+            transferBuffer.localDataBufferStartPosition = 0;
+            transferBuffer.transferLength = 0;
+            transferBuffer.dataBuff = new byte[128];
             radioBandlimits = default(RadioBandlimits);
-            if (ReadRadioBandlimits(commPort, openGD77CommsTransferData))
+            if (ReadRadioBandlimits(commPort, transferBuffer))
             {
-                radioBandlimits = ByteArrayToRadioBandlimits(openGD77CommsTransferData.dataBuff);
+                radioBandlimits = ByteArrayToRadioBandlimits(transferBuffer.dataBuff);
             
             }
             commPort.Close();
@@ -292,7 +292,7 @@ namespace NIKA_CPS_V1
         }
 
 
-        private bool ReadFlashOrEEPROM(SerialPort port, DataTransfer dataObj)
+        private bool ReadFlash(SerialPort port, DataTransfer dataObj)
         {
             int num = 0;
             byte[] array = new byte[512];
@@ -373,7 +373,7 @@ namespace NIKA_CPS_V1
                 MessageBox.Show(StringsDict["No_com_port"]);
                 return false;
             }
-            DataTransfer openGD77CommsTransferData = new DataTransfer();
+            DataTransfer transferBuffer = new DataTransfer();
             sendCommand(commPort, 0);
             sendCommand(commPort, 1);
             sendCommand(commPort, 2, 0, 0, 3, 1, 0, "CPS");
@@ -381,15 +381,15 @@ namespace NIKA_CPS_V1
             sendCommand(commPort, 2, 0, 32, 3, 1, 0, StringsDict["RADIO_DISPLAY_Calibrations"]);
             sendCommand(commPort, 3);
             sendCommand(commPort, 6, 3);
-            openGD77CommsTransferData.mode = DataTransfer.CommsDataMode.DataModeReadFlash;
-            openGD77CommsTransferData.dataBuff = new byte[CALIBRATION_DATA_SIZE_STM32];
-            openGD77CommsTransferData.localDataBufferStartPosition = 0;
-            openGD77CommsTransferData.startDataAddressInTheRadio = MEMORY_LOCATION_STM32;
-            openGD77CommsTransferData.transferLength = CALIBRATION_DATA_SIZE_STM32;
-            if (!ReadFlashOrEEPROM(commPort, openGD77CommsTransferData))
+            transferBuffer.mode = DataTransfer.CommsDataMode.DataModeReadFlash;
+            transferBuffer.dataBuff = new byte[CALIBRATION_DATA_SIZE_STM32];
+            transferBuffer.localDataBufferStartPosition = 0;
+            transferBuffer.startDataAddressInTheRadio = MEMORY_LOCATION_STM32;
+            transferBuffer.transferLength = CALIBRATION_DATA_SIZE_STM32;
+            if (!ReadFlash(commPort, transferBuffer))
             {
                 result = false;
-                openGD77CommsTransferData.responseCode = 1;
+                transferBuffer.responseCode = 1;
             }
             else
             {
@@ -401,7 +401,7 @@ namespace NIKA_CPS_V1
             sendCommand(commPort, 7);
             commPort.Close();
             commPort = null;
-            CalData = ByteArrayToCalData(openGD77CommsTransferData.dataBuff);
+            CalData = ByteArrayToCalData(transferBuffer.dataBuff);
             buildVariablesFromCalData(CalData);
             return result;
         }
@@ -482,10 +482,10 @@ namespace NIKA_CPS_V1
                 return;
             }*/
             buildCalDataFromVariables(CalData);
-            DataTransfer openGD77CommsTransferData = new DataTransfer();
-            openGD77CommsTransferData.dataBuff = new byte[CALIBRATION_DATA_SIZE_STM32];
+            DataTransfer transferBuffer = new DataTransfer();
+            transferBuffer.dataBuff = new byte[CALIBRATION_DATA_SIZE_STM32];
             calibrationDataSTM32 = DataToByte(CalData);
-            Array.Copy(calibrationDataSTM32, 0, openGD77CommsTransferData.dataBuff, 0, CALIBRATION_DATA_SIZE_STM32);
+            Array.Copy(calibrationDataSTM32, 0, transferBuffer.dataBuff, 0, CALIBRATION_DATA_SIZE_STM32);
             sendCommand(commPort, 0);
             sendCommand(commPort, 1);
             sendCommand(commPort, 2, 0, 0, 3, 1, 0, "CPS");
@@ -493,14 +493,14 @@ namespace NIKA_CPS_V1
             sendCommand(commPort, 2, 0, 32, 3, 1, 0, StringsDict["RADIO_DISPLAY_Calibrations"]);
             sendCommand(commPort, 3);
             sendCommand(commPort, 6, 4);
-            openGD77CommsTransferData.mode = DataTransfer.CommsDataMode.DataModeWriteFlash;
-            openGD77CommsTransferData.localDataBufferStartPosition = 0;
-            openGD77CommsTransferData.startDataAddressInTheRadio = MEMORY_LOCATION_STM32 ;
-            openGD77CommsTransferData.transferLength = CALIBRATION_DATA_SIZE_STM32;
-            if (!WriteFlash(commPort, openGD77CommsTransferData))
+            transferBuffer.mode = DataTransfer.CommsDataMode.DataModeWriteFlash;
+            transferBuffer.localDataBufferStartPosition = 0;
+            transferBuffer.startDataAddressInTheRadio = MEMORY_LOCATION_STM32 ;
+            transferBuffer.transferLength = CALIBRATION_DATA_SIZE_STM32;
+            if (!WriteFlash(commPort, transferBuffer))
             {
                 MessageBox.Show("Ошибка при записи!");
-                openGD77CommsTransferData.responseCode = 1;
+                transferBuffer.responseCode = 1;
             }
             sendCommand(commPort, 6, 2);
             sendCommand(commPort, 6, 1);
@@ -752,10 +752,10 @@ namespace NIKA_CPS_V1
             {
                 CalData.MARKER[i] = 0x00;
             }
-            DataTransfer openGD77CommsTransferData = new DataTransfer();
-            openGD77CommsTransferData.dataBuff = new byte[CALIBRATION_DATA_SIZE_STM32];
+            DataTransfer transferBuffer = new DataTransfer();
+            transferBuffer.dataBuff = new byte[CALIBRATION_DATA_SIZE_STM32];
             calibrationDataSTM32 = DataToByte(CalData);
-            Array.Copy(calibrationDataSTM32, 0, openGD77CommsTransferData.dataBuff, 0, CALIBRATION_DATA_SIZE_STM32);
+            Array.Copy(calibrationDataSTM32, 0, transferBuffer.dataBuff, 0, CALIBRATION_DATA_SIZE_STM32);
             sendCommand(commPort, 0);
             sendCommand(commPort, 1);
             sendCommand(commPort, 2, 0, 0, 3, 1, 0, "CPS");
@@ -763,14 +763,14 @@ namespace NIKA_CPS_V1
             sendCommand(commPort, 2, 0, 32, 3, 1, 0, StringsDict["RADIO_DISPLAY_Calibrations"]);
             sendCommand(commPort, 3);
             sendCommand(commPort, 6, 4);
-            openGD77CommsTransferData.mode = DataTransfer.CommsDataMode.DataModeWriteFlash;
-            openGD77CommsTransferData.localDataBufferStartPosition = 0;
-            openGD77CommsTransferData.startDataAddressInTheRadio = MEMORY_LOCATION_STM32;
-            openGD77CommsTransferData.transferLength = CALIBRATION_DATA_SIZE_STM32;
-            if (!WriteFlash(commPort, openGD77CommsTransferData))
+            transferBuffer.mode = DataTransfer.CommsDataMode.DataModeWriteFlash;
+            transferBuffer.localDataBufferStartPosition = 0;
+            transferBuffer.startDataAddressInTheRadio = MEMORY_LOCATION_STM32;
+            transferBuffer.transferLength = CALIBRATION_DATA_SIZE_STM32;
+            if (!WriteFlash(commPort, transferBuffer))
             {
                 MessageBox.Show("Ошибка при восстановлении!");
-                openGD77CommsTransferData.responseCode = 1;
+                transferBuffer.responseCode = 1;
             }
             sendCommand(commPort, 6, 2);
             sendCommand(commPort, 6, 1);

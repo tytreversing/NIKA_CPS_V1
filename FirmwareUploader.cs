@@ -40,9 +40,11 @@ namespace NIKA_CPS_V1
         {
             InitializeComponent();
             _parent = parent;
+            _parent.log.Add("Запущен программатор");
             string lastRadioType = RegistryOperations.getProfileStringWithDefault("Setup", "LastFlashedRadio", null);
             if (lastRadioType != "")
             {
+                _parent.log.Add("Последняя программировавшаяся рация: " + lastRadioType);
                 foreach (RadioButton control in gbRadioType.Controls)
                 {
                     if (control.Text == lastRadioType)
@@ -229,6 +231,7 @@ namespace NIKA_CPS_V1
             }
             needleTimer.Start();
             playMessage("uploadCompleted");
+            _parent.log.Add("Программирование рации завершено");
         }
 
         private bool containsStringSequence(byte[] data, string marker)
@@ -291,18 +294,21 @@ namespace NIKA_CPS_V1
             catch
             {
                 tbConsole.AppendText("Ошибка при открытии файла!\r\n");
+                _parent.log.Add("Ошибка при открытии файла " + ofdOpenFirmware.FileName);
                 playMessage("firmwareReadingError");
                 return;
             }
             finally
             {
                 tbConsole.AppendText("Файл прошивки открыт и успешно считан\r\n");
+                _parent.log.Add("Успешно открыт файл прошивки " + ofdOpenFirmware.FileName);
                 tsbUpdate.Enabled = true;
             }
             tbConsole.AppendText("Проверка валидности прошивки...  ");
             if (containsStringSequence(decryptedFirmware, "TYT MD-9600"))
             {
                 tbConsole.AppendText("OK: прошивка НИКА для TYT MD-9600/Retevis RT-90\r\n");
+                _parent.log.Add("Прошивка корректна для TYT MD-9600");
                 if (!rbMD9600.Checked)
                     if (MessageBox.Show("Загруженный файл прошивки предназначен для TYT MD-9600/Retevis RT-90, однако как целевая рация выбрана другая модель.\r\nУстановить эту рацию целевой моделью для программирования?", "ВНИМАНИЕ!", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
                     {
@@ -314,6 +320,7 @@ namespace NIKA_CPS_V1
             else if (containsStringSequence(decryptedFirmware, "TYT MD-UV3xx"))
             {
                 tbConsole.AppendText("OK: прошивка НИКА для раций семейства TYT MD-UV3xx/Retevis RT-3S\r\n");
+                _parent.log.Add("Прошивка корректна для TYT MD-UV3xx");
                 if (!rbMDUV380.Checked)
                     if (MessageBox.Show("Загруженный файл прошивки предназначен для TYT MD-UV380/390/Retevis RT-3S, однако как целевая рация выбрана другая модель.\r\nУстановить эту рацию целевой моделью для программирования?", "ВНИМАНИЕ!", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
                     {
@@ -325,12 +332,14 @@ namespace NIKA_CPS_V1
             else
             {
                 tbConsole.AppendText("ОШИБКА: Файл поврежден или не является файлом прошивки НИКА!\r\n");
+                _parent.log.Add("Файл прошивки не валиден");
                 System.Media.SystemSounds.Hand.Play();
                 playMessage("firmwareError");
                 tsbUpdate.Enabled = false;
                 return;
             }
             tbConsole.AppendText("Контрольная сумма файла прошивки: 0x" + CalculateChecksum(openFirmwareBuf) + "\r\n");
+            _parent.log.Add("Контрольная сумма файла прошивки: 0x" + CalculateChecksum(openFirmwareBuf));
             tbConsole.AppendText("Контрольная сумма дешифрованной прошивки: 0x" + CalculateChecksum(decryptedFirmware) + "\r\n");
             tbConsole.AppendText("Теперь запишите прошивку в радиостанцию\r\n");
             playMessage("nowYouCanUpload");
@@ -349,6 +358,7 @@ namespace NIKA_CPS_V1
         {
             if (firmwareVerified)
             {
+                _parent.log.Add("Запущена прошивка");
                 fwUpdate.UpdateRadioFirmware(this, decryptedFirmware, outputType);
             }
         }

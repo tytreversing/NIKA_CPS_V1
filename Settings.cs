@@ -36,6 +36,10 @@ namespace NIKA_CPS_V1
             rbSlowPolling.Checked = !rbFastPolling.Checked;
             tbRadioVID.Text = _parent.radioVID;
             tbRadioPID.Text = _parent.radioPID;
+            foreach (string port in _parent.availablePorts)
+            {
+                cbPorts.Items.Add(port);
+            }
         }
 
         private void bSaveAppSettings_Click(object sender, EventArgs e)
