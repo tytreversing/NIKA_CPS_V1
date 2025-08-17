@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|d:\\opengd77 repo\\nika_cps_v1\\nika_cps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:nika_cps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\nika_cps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:nika_cps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\firmwareuploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:firmwareuploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
@@ -31,6 +39,31 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "NIKA_CPS.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\NIKA_CPS.cs",
+              "RelativeDocumentMoniker": "NIKA_CPS.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\NIKA_CPS.cs",
+              "RelativeToolTip": "NIKA_CPS.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T18:45:14.437Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NIKA_CPS.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\NIKA_CPS.cs",
+              "RelativeDocumentMoniker": "NIKA_CPS.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\NIKA_CPS.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "NIKA_CPS.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T18:45:06.847Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "FirmwareUploader.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\FirmwareUploader.cs",
               "RelativeDocumentMoniker": "FirmwareUploader.cs",

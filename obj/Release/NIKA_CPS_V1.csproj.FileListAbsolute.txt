@@ -96,7 +96,6 @@ D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\System.CodeDom.xml
 D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\System.Security.AccessControl.xml
 D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\System.Security.Principal.Windows.xml
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.AssemblyReference.cache
-D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe.config
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.AboutForm.resources
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.CalibrationForm.resources
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.FirmwareUploader.resources

@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <AssemblyVersion>2025.8.17.31</AssemblyVersion>
+    <AssemblyVersion>2025.8.17.33</AssemblyVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -351,6 +351,8 @@
     <Error Condition="!Exists('..\NIKA_CPS_V1\packages\Fody.6.8.2\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\NIKA_CPS_V1\packages\Fody.6.8.2\build\Fody.targets'))" />
     <Error Condition="!Exists('..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.props'))" />
     <Error Condition="!Exists('..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets'))" />
+    <Error Condition="!Exists('packages\Fody.6.8.2\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Fody.6.8.2\build\Fody.targets'))" />
   </Target>
   <Import Project="..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets" Condition="Exists('..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" />
+  <Import Project="packages\Fody.6.8.2\build\Fody.targets" Condition="Exists('packages\Fody.6.8.2\build\Fody.targets')" />
 </Project>
