@@ -49,10 +49,6 @@ namespace NIKA_CPS_V1
             _writer.WriteLine(new string('=', 50));
         }
 
-        /// <summary>
-        /// Добавляет запись в лог (с автоматическим переводом строки)
-        /// </summary>
-        /// <param name="message">Сообщение для записи</param>
         public void Add(string message)
         {
             if (_disposed)
