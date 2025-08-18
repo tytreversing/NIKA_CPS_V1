@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\OpenGD77CPS\packages\Costura.Fody.6.0.0\build\Costura.Fody.props" Condition="Exists('..\OpenGD77CPS\packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" />
   <Import Project="..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.props" Condition="Exists('..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -13,7 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <AssemblyVersion>2025.8.17.33</AssemblyVersion>
+    <AssemblyVersion>2025.8.18.63</AssemblyVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -84,10 +85,11 @@
     <Reference Include="AGauge, Version=2025.5.19.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\OpenGD77 Repo\NIKA_CPS_V1\AGauge.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Costura, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
-      <HintPath>..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\lib\netstandard2.0\Costura.dll</HintPath>
+      <HintPath>..\OpenGD77CPS\packages\Costura.Fody.6.0.0\lib\netstandard2.0\Costura.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\NIKA_CPS_V1\packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
@@ -156,15 +158,15 @@
     <Compile Include="FirmwareUploader.Designer.cs">
       <DependentUpon>FirmwareUploader.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\COMPortsData.cs" />
     <Compile Include="Interfaces\DataTransfer.cs" />
     <Compile Include="Interfaces\FirmwareUpdateMessageEventArgs.cs" />
     <Compile Include="Interfaces\FirmwareUpdateProgressEventArgs.cs" />
     <Compile Include="Interfaces\FirmwareUpdateProgressEventHandler.cs" />
     <Compile Include="Interfaces\Logger.cs" />
     <Compile Include="Interfaces\STM32_DFU.cs" />
-    <Compile Include="Interfaces\USBChecker.cs" />
     <Compile Include="PowerSettingData.cs" />
-    <Compile Include="RegistryOperations.cs" />
+    <Compile Include="Interfaces\RegistryOperations.cs" />
     <Compile Include="NIKA_CPS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -343,16 +345,14 @@
     </ItemGroup>
     <Delete Files="@(UnwantedXmls)" />
   </Target>
-  <Import Project="..\NIKA_CPS_V1\packages\Fody.6.8.2\build\Fody.targets" Condition="Exists('..\NIKA_CPS_V1\packages\Fody.6.8.2\build\Fody.targets')" />
+  <Import Project="..\OpenGD77CPS\packages\Fody.6.9.2\build\Fody.targets" Condition="Exists('..\OpenGD77CPS\packages\Fody.6.9.2\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\NIKA_CPS_V1\packages\Fody.6.8.2\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\NIKA_CPS_V1\packages\Fody.6.8.2\build\Fody.targets'))" />
-    <Error Condition="!Exists('..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.props'))" />
-    <Error Condition="!Exists('..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets'))" />
-    <Error Condition="!Exists('packages\Fody.6.8.2\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Fody.6.8.2\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\OpenGD77CPS\packages\Fody.6.9.2\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\OpenGD77CPS\packages\Fody.6.9.2\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\OpenGD77CPS\packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\OpenGD77CPS\packages\Costura.Fody.6.0.0\build\Costura.Fody.props'))" />
+    <Error Condition="!Exists('..\OpenGD77CPS\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\OpenGD77CPS\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets'))" />
   </Target>
-  <Import Project="..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets" Condition="Exists('..\NIKA_CPS_V1\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" />
-  <Import Project="packages\Fody.6.8.2\build\Fody.targets" Condition="Exists('packages\Fody.6.8.2\build\Fody.targets')" />
+  <Import Project="..\OpenGD77CPS\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets" Condition="Exists('..\OpenGD77CPS\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" />
 </Project>

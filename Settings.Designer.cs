@@ -31,9 +31,6 @@
             this.cbShowSplashScreen = new System.Windows.Forms.CheckBox();
             this.cbUseVoiceHelp = new System.Windows.Forms.CheckBox();
             this.bSaveAppSettings = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.rbFastPolling = new System.Windows.Forms.RadioButton();
-            this.rbSlowPolling = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tbRadioVID = new System.Windows.Forms.TextBox();
@@ -82,39 +79,6 @@
             this.bSaveAppSettings.Click += new System.EventHandler(this.bSaveAppSettings_Click);
             this.bSaveAppSettings.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 67);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Таймер поллинга";
-            // 
-            // rbFastPolling
-            // 
-            this.rbFastPolling.AutoSize = true;
-            this.rbFastPolling.Location = new System.Drawing.Point(127, 65);
-            this.rbFastPolling.Name = "rbFastPolling";
-            this.rbFastPolling.Size = new System.Drawing.Size(80, 19);
-            this.rbFastPolling.TabIndex = 4;
-            this.rbFastPolling.TabStop = true;
-            this.rbFastPolling.Text = "быстрый";
-            this.rbFastPolling.UseVisualStyleBackColor = true;
-            this.rbFastPolling.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
-            // 
-            // rbSlowPolling
-            // 
-            this.rbSlowPolling.AutoSize = true;
-            this.rbSlowPolling.Location = new System.Drawing.Point(127, 91);
-            this.rbSlowPolling.Name = "rbSlowPolling";
-            this.rbSlowPolling.Size = new System.Drawing.Size(95, 19);
-            this.rbSlowPolling.TabIndex = 5;
-            this.rbSlowPolling.TabStop = true;
-            this.rbSlowPolling.Text = "медленный";
-            this.rbSlowPolling.UseVisualStyleBackColor = true;
-            this.rbSlowPolling.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -150,7 +114,7 @@
             // cbPorts
             // 
             this.cbPorts.FormattingEnabled = true;
-            this.cbPorts.Location = new System.Drawing.Point(440, 67);
+            this.cbPorts.Location = new System.Drawing.Point(131, 67);
             this.cbPorts.Name = "cbPorts";
             this.cbPorts.Size = new System.Drawing.Size(155, 23);
             this.cbPorts.Sorted = true;
@@ -159,7 +123,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(286, 67);
+            this.label4.Location = new System.Drawing.Point(14, 70);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(111, 15);
             this.label4.TabIndex = 11;
@@ -177,9 +141,6 @@
             this.Controls.Add(this.tbRadioVID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.rbSlowPolling);
-            this.Controls.Add(this.rbFastPolling);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.bSaveAppSettings);
             this.Controls.Add(this.cbUseVoiceHelp);
             this.Controls.Add(this.cbShowSplashScreen);
@@ -205,9 +166,6 @@
         private System.Windows.Forms.CheckBox cbShowSplashScreen;
         private System.Windows.Forms.CheckBox cbUseVoiceHelp;
         private System.Windows.Forms.Button bSaveAppSettings;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton rbFastPolling;
-        private System.Windows.Forms.RadioButton rbSlowPolling;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbRadioVID;

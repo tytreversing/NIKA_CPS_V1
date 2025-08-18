@@ -1,5 +1,4 @@
 ﻿using NAudio.Wave;
-using NIKA_CPS_V1.Interfaces;
 using NIKA_CPS_V1.Properties;
 using System;
 using System.Collections.Generic;
@@ -38,10 +37,12 @@ namespace NIKA_CPS_V1
         public string radioVID = "";
         public string radioPID = "";
 
-        public List<string> availablePorts;
-        public List<string> availablePortsWithVIDPID;
+        public List<COMPortsData.DeviceInfo> availablePorts;
+
 
         public Logger log = new Logger("NIKA_CPS_V1.log");
+
+        public string COMPort = "";
 
         public bool isValidHex(string input)
         {
@@ -52,123 +53,18 @@ namespace NIKA_CPS_V1
             return Regex.IsMatch(input.Trim(), @"^[0-9a-fA-F]{4}$");
         }
 
-        private string ExtractVidPid(string pnpDeviceId, string prefix)
-        {
-            if (string.IsNullOrEmpty(pnpDeviceId)) return null;
-
-            int startIndex = pnpDeviceId.IndexOf(prefix);
-            if (startIndex < 0) return null;
-
-            startIndex += prefix.Length;
-            int endIndex = pnpDeviceId.IndexOf('&', startIndex);
-            if (endIndex < 0) endIndex = pnpDeviceId.Length;
-
-            return pnpDeviceId.Substring(startIndex, endIndex - startIndex);
-        }
-
-
-        public List<string> GetAvailableComPorts()
-        {
-            List<string> comPorts = new List<string>();
-
-            try
-            {
-                string[] ports = SerialPort.GetPortNames();
-                comPorts.AddRange(ports);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при получении списка COM-портов: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return comPorts;
-        }
-
-        public List<string> GetComPortsWithVidPid()
-        {
-            List<string> comPortInfoList = new List<string>();
-
-            try
-            {
-                // Получаем все доступные COM-порты
-                string[] portNames = SerialPort.GetPortNames();
-
-                if (portNames.Length == 0)
-                {
-                    comPortInfoList.Add("COM-порты не обнаружены");
-                    return comPortInfoList;
-                }
-
-                // Запрос WMI для получения информации о последовательных портах
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher(
-                    "SELECT * FROM Win32_PnPEntity WHERE Caption LIKE '%(COM%'");
-
-                foreach (ManagementObject queryObj in searcher.Get())
-                {
-                    string caption = queryObj["Caption"]?.ToString() ?? string.Empty;
-                    string pnpDeviceId = queryObj["PNPDeviceID"]?.ToString() ?? string.Empty;
-
-                    // Извлекаем VID и PID с обработкой обратных слешей
-                    string vid = ExtractHardwareId(pnpDeviceId, "VID_");
-                    string pid = ExtractHardwareId(pnpDeviceId, "PID_");
-
-                    // Извлекаем номер COM-порта
-                    string comPort = ExtractComPort(caption);
-
-                    if (!string.IsNullOrEmpty(comPort))
-                    {
-                        comPortInfoList.Add($"Порт: {comPort.PadRight(6)} VID: {vid?.PadRight(6) ?? "N/A".PadRight(6)} PID: {pid ?? "N/A"}");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                comPortInfoList.Add($"Ошибка при получении информации о COM-портах: {ex.Message}");
-            }
-
-            return comPortInfoList;
-        }
-
-        private static string ExtractHardwareId(string pnpDeviceId, string prefix)
-        {
-            if (string.IsNullOrEmpty(pnpDeviceId)) return null;
-
-            // Ищем начало идентификатора (VID_ или PID_)
-            int startIndex = pnpDeviceId.IndexOf(prefix, StringComparison.OrdinalIgnoreCase);
-            if (startIndex < 0) return null;
-
-            startIndex += prefix.Length;
-
-            // Ищем конец идентификатора (до следующего разделителя)
-            int endIndex = pnpDeviceId.IndexOfAny(new[] { '\\', '&', '|', '#' }, startIndex);
-            if (endIndex < 0) endIndex = pnpDeviceId.Length;
-
-            // Извлекаем подстроку и удаляем возможные лишние символы
-            string result = pnpDeviceId.Substring(startIndex, endIndex - startIndex);
-
-            // Удаляем все не шестнадцатеричные символы (на всякий случай)
-            return Regex.Replace(result, "[^0-9A-Fa-f]", "");
-        }
-
-        private static string ExtractComPort(string caption)
-        {
-            if (string.IsNullOrEmpty(caption)) return null;
-
-            // Используем регулярное выражение для более надежного извлечения
-            var match = Regex.Match(caption, @"\(COM\d+\)");
-            return match.Success ? match.Value.Trim('(', ')') : null;
-        }
 
         public MainForm()
         {
             PRODUCT_VERSION = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             InitializeComponent();
-            if (RegistryOperations.getProfileIntWithDefault("Setup", "ShowSplashScreen", 1) != 0)
+            if (RegistryOperations.getProfileIntWithDefault("ShowSplashScreen", 1) != 0)
             {
                 new SplashScreen().ShowDialog();
             }
-            playAudio = (RegistryOperations.getProfileIntWithDefault("Setup", "AccessibilityOptions", 0) != 0);
-            radioVID = RegistryOperations.getProfileStringWithDefault("Setup", "DeviceVID", "1FC9");
-            radioPID = RegistryOperations.getProfileStringWithDefault("Setup", "DevicePID", "0094");
+            playAudio = (RegistryOperations.getProfileIntWithDefault("AccessibilityOptions", 0) != 0);
+            radioVID = RegistryOperations.getProfileStringWithDefault("DeviceVID", "1FC9");
+            radioPID = RegistryOperations.getProfileStringWithDefault("DevicePID", "0094");
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -184,12 +80,12 @@ namespace NIKA_CPS_V1
                 MessageBox.Show("Программа установлена в папку " + thisFilePath + ", но не запущена от имени администратора. Часть функций программы может быть недоступной из-за ограничений Windows. Удалите программу и переустановите ее в другую папку, либо установите для исполняемого файла программы галочку запуска от имени администратора.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]";
-            Width = RegistryOperations.getProfileIntWithDefault("Setup", "LastWindowWidth", 1000);
-            Height = RegistryOperations.getProfileIntWithDefault("Setup", "LastWindowHeight", 800);
-            msMain.Visible = (RegistryOperations.getProfileIntWithDefault("Setup", "MenuStringVisible", 0) != 0);
+            Width = RegistryOperations.getProfileIntWithDefault("LastWindowWidth", 1000);
+            Height = RegistryOperations.getProfileIntWithDefault("LastWindowHeight", 800);
+            msMain.Visible = (RegistryOperations.getProfileIntWithDefault("MenuStringVisible", 0) != 0);
             tsbReadFromRadio.Enabled = false;
             tsbWriteToRadio.Enabled = false;
-            if (RegistryOperations.getProfileStringWithDefault("Setup", "AgreementConfirmed", "NO") == "NO")
+            if (RegistryOperations.getProfileStringWithDefault("AgreementConfirmed", "NO") == "NO")
             {
                 if (MessageBox.Show("Программное обеспечение НИКА предоставляется бесплатно на условиях «КАК ЕСТЬ». Все действия, производимые с оборудованием и программным обеспечением, находятся исключительно на ответственности конечного пользователя. Разработчик не несет ответственности за возможный ущерб, причиненный действиями конечного пользователя программного обеспечения.\r\nСовместимость программного обеспечения с радиостанциями гарантируется в объеме, обеспеченном тестированием на момент публикации данной версии.\r\nЕсли Вы согласны с условиями предоставления программного обеспечения, нажмите «ДА».", "Пользовательское соглашение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 {
@@ -204,43 +100,37 @@ namespace NIKA_CPS_V1
                 }
                 else
                 {
-                    RegistryOperations.WriteProfileString("Setup", "AgreementConfirmed", "YES");
+                    RegistryOperations.WriteProfileString("AgreementConfirmed", "YES");
                 }
             }
             tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
-            pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("Setup", "UsingFastPolling", 1) == 1) ? 500 : 1000;
-
-            availablePorts = GetAvailableComPorts();
-            if (availablePorts.Count > 0)
+            COMPort = RegistryOperations.getProfileStringWithDefault("COMPort", "");
+            if (COMPort != "")
+                tbConsole.AppendText("Заданный порт соединения: " + COMPort + "\r\n");
+            tbConsole.AppendText("Подключенные устройства:\r\n");
+            availablePorts = COMPortsData.GetAllCOMPorts();
+            foreach (COMPortsData.DeviceInfo v in availablePorts)
             {
-                tbConsole.AppendText("Доступные COM-порты:\r\n");
-                foreach (string port in availablePorts)
+                tbConsole.AppendText(v.Name + ": VID " + v.VID + " PID " + v.PID + " " + v.BusDescription + "\r\n");
+                log.Add(v.Name + ": VID " + v.VID + " PID " + v.PID + " " + v.BusDescription);
+                if (v.BusDescription == "NIKA Firmware")
                 {
-                    tbConsole.AppendText(port + "\r\n");
+                    tbConsole.AppendText("Подключена рация с корректной прошивкой\r\n");
+                    tsbReadFromRadio.Enabled = true;
+                    tsbWriteToRadio.Enabled = true;
+                }
+                if (v.VID == "1FC9" && v.PID == "0094")
+                {
+                    tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с ними не поддерживается!\r\n");
+                    tsbReadFromRadio.Enabled = false;
+                    tsbWriteToRadio.Enabled = false;
                 }
             }
-            else
-            {
-                tbConsole.AppendText("Активные COM-порты не обнаружены!\r\n");
-            }
-            availablePortsWithVIDPID = GetComPortsWithVidPid();
-            if (availablePortsWithVIDPID.Count > 0)
-            {
-                tbConsole.AppendText("Данные о портах:\r\n");
-                foreach (string port in availablePortsWithVIDPID)
-                {
-                    tbConsole.AppendText(port + "\r\n");
-                    log.Add(port);
-                }
-            }
-            pollingTimer.Start();
         }
 
         private void tsbFirmware_Click(object sender, EventArgs e)
         {
-            pollingTimer.Stop();
             new FirmwareUploader(this).ShowDialog();
-            pollingTimer.Start();
         }
 
         private void tsbMenuToggle_Click(object sender, EventArgs e)
@@ -248,18 +138,18 @@ namespace NIKA_CPS_V1
             msMain.Visible = !msMain.Visible;
             if (msMain.Visible)
             {
-                RegistryOperations.WriteProfileInt("Setup", "MenuStringVisible", 1);
+                RegistryOperations.WriteProfileInt("MenuStringVisible", 1);
             }
             else
             {
-                RegistryOperations.WriteProfileInt("Setup", "MenuStringVisible", 0);
+                RegistryOperations.WriteProfileInt("MenuStringVisible", 0);
             }
         }
 
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
-            RegistryOperations.WriteProfileInt("Setup", "LastWindowWidth", this.Width);
-            RegistryOperations.WriteProfileInt("Setup", "LastWindowHeight", this.Height);
+            RegistryOperations.WriteProfileInt("LastWindowWidth", this.Width);
+            RegistryOperations.WriteProfileInt("LastWindowHeight", this.Height);
         }
 
         private void playMessage(string message)
@@ -370,47 +260,11 @@ namespace NIKA_CPS_V1
             {
                 playMessage("settingsSaved");
                 tbConsole.AppendText("Настройки программы сохранены\r\n");
-                pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("Setup", "UsingFastPolling", 1) == 1) ? 500 : 1000;
             }
                 
         }
 
-        private void pollingTimer_Tick(object sender, EventArgs e)
-        {
-            if (USBChecker.IsUsbDeviceConnected("0483", "DF11"))
-            {
-                if (!foundDFUDevice)
-                {
-                    tbConsole.AppendText("Обнаружен подключенный STM32-совместимый процессор в режиме DFU.\r\nИмя устройства: ");
-                    log.Add("Обнаружен подключенный STM32-совместимый процессор в режиме DFU.\r\nИмя устройства: " + USBChecker.DeviceDescription());
-                    tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
-                    System.Media.SystemSounds.Asterisk.Play();
-                    foundDFUDevice = true;
-                }
-            }
-            else
-                foundDFUDevice = false;
-            if (USBChecker.IsUsbDeviceConnected(radioVID, radioPID))
-            {
-                if (!foundFlashedRadio)
-                {
-                    tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с этими прошивками не поддерживается!\r\nИмя устройства: ");
-                    tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
-                    log.Add("Подключена рация с прошивкой OpenGD77");
-                    System.Media.SystemSounds.Hand.Play();
-                    foundFlashedRadio = true;
-                    tsbReadFromRadio.Enabled = true;
-                    tsbWriteToRadio.Enabled = true;
-                }
-            }
-            else
-            {
-                foundFlashedRadio = false;
-                tsbReadFromRadio.Enabled = false;
-                tsbWriteToRadio.Enabled = false;
-            }
-
-        }
+ 
 
         private void msiCalibration_Click(object sender, EventArgs e)
         {
