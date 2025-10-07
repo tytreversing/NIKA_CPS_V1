@@ -1,69 +1,187 @@
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbAbout.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbCSV.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbEngineering.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbFirmware.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbOpenFile.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbReadFromRadio.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbSaveFile.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbSettings.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbWriteToRadio.mp3
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Help\About.txt
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\bSaveAppSettings.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\cbShowSplashScreen.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\cbUseVoiceHelp.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\firmwareError.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\firmwareReadingError.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\nowYouCanUpload.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\rbFastPolling.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\rbSlowPolling.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\settingsSaved.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbHelp.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbMenuToggle.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbNewFile.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbOpenFirmware.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbUpdate.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\uploadCompleted.mp3
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\STDFU.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\STTubeDevice30.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Help\Firmware.chm
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NIKA_CPS_V1.exe.config
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NIKA_CPS_V1.exe
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Microsoft.Win32.Registry.xml
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.xml
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.Asio.xml
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.Core.xml
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.Midi.xml
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.Wasapi.xml
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.WinForms.xml
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.WinMM.xml
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\System.CodeDom.xml
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\System.Security.AccessControl.xml
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\System.Security.Principal.Windows.xml
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NIKA_CPS_V1.pdb
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.AssemblyReference.cache
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.AboutForm.resources
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.CalibrationForm.resources
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.FirmwareUploader.resources
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.MainForm.resources
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.Properties.Resources.resources
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.Settings.resources
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.SingleContact.resources
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.SplashScreen.resources
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.GenerateResource.cache
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.CoreCompileInputs.cache
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS.64BC111C.Up2Date
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Costura.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Microsoft.Win32.Registry.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.Asio.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.Core.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.Midi.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.Wasapi.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.WinForms.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\NAudio.WinMM.dll
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.pdb
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Help\Firmware.chm
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Sounds\tsbAbout.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Sounds\tsbCSV.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Sounds\tsbEngineering.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Sounds\tsbFirmware.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Sounds\tsbOpenFile.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Sounds\tsbReadFromRadio.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Sounds\tsbSaveFile.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Sounds\tsbSettings.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Sounds\tsbWriteToRadio.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Sounds\tsbMenuToggle.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Sounds\tsbNewFile.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Microsoft.Win32.Registry.dll
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.Asio.dll
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.Core.dll
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.dll
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.Midi.dll
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.Wasapi.dll
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.WinForms.dll
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.WinMM.dll
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\System.Security.AccessControl.dll
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\System.Security.Principal.Windows.dll
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\Microsoft.Win32.Registry.xml
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.xml
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.Asio.xml
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.Core.xml
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.Midi.xml
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.Wasapi.xml
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.WinForms.xml
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\NAudio.WinMM.xml
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\System.Security.AccessControl.xml
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\bin\Release\System.Security.Principal.Windows.xml
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\obj\Release\NIKA_CPS.64BC111C.Up2Date
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\firmwareError.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\firmwareReadingError.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\nowYouCanUpload.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbHelp.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbOpenFirmware.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\tsbUpdate.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\AGauge.dll
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\bSaveAppSettings.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\cbShowSplashScreen.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\cbUseVoiceHelp.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\rbFastPolling.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\rbSlowPolling.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\settingsSaved.mp3
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\STDFU.dll
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\STTubeDevice30.dll
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\System.CodeDom.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\System.Security.AccessControl.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\System.Security.Principal.Windows.dll
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Costura.pdb
-C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Costura.xml
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\System.CodeDom.xml
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.Settings.resources
 C:\Users\maste\Documents\Github\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe.config
+C:\Users\maste\Documents\Github\NIKA_CPS_V1\bin\Release\Sounds\uploadCompleted.mp3
+C:\Users\maste\Documents\GitHub\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.CalibrationForm.resources
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbAbout.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbCSV.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbEngineering.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbFirmware.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbOpenFile.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbReadFromRadio.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbSaveFile.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbSettings.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbWriteToRadio.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Help\About.txt
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\AGauge.dll
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\bSaveAppSettings.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\cbShowSplashScreen.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\cbUseVoiceHelp.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\firmwareError.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\firmwareReadingError.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\nowYouCanUpload.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\rbFastPolling.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\rbSlowPolling.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\settingsSaved.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbHelp.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbMenuToggle.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbNewFile.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbOpenFirmware.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\tsbUpdate.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Sounds\uploadCompleted.mp3
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\STDFU.dll
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\STTubeDevice30.dll
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Help\Firmware.chm
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\NIKA_CPS_V1.exe.config
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\NIKA_CPS_V1.exe
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\NIKA_CPS_V1.pdb
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\Microsoft.Win32.Registry.dll
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\System.Security.Principal.Windows.dll
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\NAudio.xml
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\NAudio.Asio.xml
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\NAudio.Core.xml
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\NAudio.Midi.xml
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\NAudio.Wasapi.xml
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\NAudio.WinForms.xml
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\NAudio.WinMM.xml
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\System.CodeDom.xml
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\bin\Release\System.Security.AccessControl.xml
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.csproj.AssemblyReference.cache
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.exe.config
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.AboutForm.resources
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.CalibrationForm.resources
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.FirmwareUploader.resources
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.MainForm.resources
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.Properties.Resources.resources
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.Settings.resources
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.SingleContact.resources
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.SplashScreen.resources
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.csproj.GenerateResource.cache
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.csproj.CoreCompileInputs.cache
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS.64BC111C.Up2Date
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.exe
+C:\Users\maste\Desktop\NIKA_CPS_V1-bcba48830837dff6a87b17151cd209a4fd844d5b\obj\Release\NIKA_CPS_V1.pdb
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbAbout.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbCSV.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbEngineering.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbFirmware.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbOpenFile.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbReadFromRadio.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbSaveFile.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbSettings.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbWriteToRadio.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Help\About.txt
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\bSaveAppSettings.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\cbShowSplashScreen.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\cbUseVoiceHelp.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\firmwareError.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\firmwareReadingError.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\nowYouCanUpload.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\rbFastPolling.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\rbSlowPolling.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\settingsSaved.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbHelp.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbMenuToggle.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbNewFile.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbOpenFirmware.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\tsbUpdate.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\uploadCompleted.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\STDFU.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\STTubeDevice30.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Help\Firmware.chm
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NIKA_CPS_V1.exe.config
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NIKA_CPS_V1.exe
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\AGauge.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.Asio.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.Core.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.Midi.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.Wasapi.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.WinForms.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.WinMM.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\System.CodeDom.dll
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.Asio.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.Core.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.Midi.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.Wasapi.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.WinForms.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.WinMM.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\System.CodeDom.xml
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.AssemblyReference.cache
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.AboutForm.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.CalibrationForm.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.FirmwareUploader.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.MainForm.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.Properties.Resources.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.Settings.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.SingleContact.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.SplashScreen.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.GenerateResource.cache
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.CoreCompileInputs.cache
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS.64BC111C.Up2Date
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe

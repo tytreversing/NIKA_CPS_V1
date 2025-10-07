@@ -1,15 +1,13 @@
 ﻿using NAudio.Wave;
+using NIKA_CPS_V1.Interfaces;
 using NIKA_CPS_V1.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.IO;
-using System.IO.Ports;
 using System.Linq;
-using System.Management;
 using System.Media;
 using System.Reflection;
 using System.Security.Principal;
@@ -17,7 +15,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 
 
 namespace NIKA_CPS_V1
@@ -37,13 +34,6 @@ namespace NIKA_CPS_V1
         public string radioVID = "";
         public string radioPID = "";
 
-        public List<COMPortsData.DeviceInfo> availablePorts;
-
-
-        public Logger log = new Logger("NIKA_CPS_V1.log");
-
-        public string COMPort = "";
-
         public bool isValidHex(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
@@ -53,18 +43,17 @@ namespace NIKA_CPS_V1
             return Regex.IsMatch(input.Trim(), @"^[0-9a-fA-F]{4}$");
         }
 
-
         public MainForm()
         {
             PRODUCT_VERSION = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             InitializeComponent();
-            if (RegistryOperations.getProfileIntWithDefault("ShowSplashScreen", 1) != 0)
+            if (RegistryOperations.getProfileIntWithDefault("Setup", "ShowSplashScreen", 1) != 0)
             {
                 new SplashScreen().ShowDialog();
             }
-            playAudio = (RegistryOperations.getProfileIntWithDefault("AccessibilityOptions", 0) != 0);
-            radioVID = RegistryOperations.getProfileStringWithDefault("DeviceVID", "1FC9");
-            radioPID = RegistryOperations.getProfileStringWithDefault("DevicePID", "0094");
+            playAudio = (RegistryOperations.getProfileIntWithDefault("Setup", "AccessibilityOptions", 0) != 0);
+            radioVID = RegistryOperations.getProfileStringWithDefault("Setup", "DeviceVID", "1FC9");
+            radioPID = RegistryOperations.getProfileStringWithDefault("Setup", "DevicePID", "0094");
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -80,12 +69,12 @@ namespace NIKA_CPS_V1
                 MessageBox.Show("Программа установлена в папку " + thisFilePath + ", но не запущена от имени администратора. Часть функций программы может быть недоступной из-за ограничений Windows. Удалите программу и переустановите ее в другую папку, либо установите для исполняемого файла программы галочку запуска от имени администратора.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]";
-            Width = RegistryOperations.getProfileIntWithDefault("LastWindowWidth", 1000);
-            Height = RegistryOperations.getProfileIntWithDefault("LastWindowHeight", 800);
-            msMain.Visible = (RegistryOperations.getProfileIntWithDefault("MenuStringVisible", 0) != 0);
+            Width = RegistryOperations.getProfileIntWithDefault("Setup", "LastWindowWidth", 1000);
+            Height = RegistryOperations.getProfileIntWithDefault("Setup", "LastWindowHeight", 800);
+            msMain.Visible = (RegistryOperations.getProfileIntWithDefault("Setup", "MenuStringVisible", 0) != 0);
             tsbReadFromRadio.Enabled = false;
             tsbWriteToRadio.Enabled = false;
-            if (RegistryOperations.getProfileStringWithDefault("AgreementConfirmed", "NO") == "NO")
+            if (RegistryOperations.getProfileStringWithDefault("Setup", "AgreementConfirmed", "NO") == "NO")
             {
                 if (MessageBox.Show("Программное обеспечение НИКА предоставляется бесплатно на условиях «КАК ЕСТЬ». Все действия, производимые с оборудованием и программным обеспечением, находятся исключительно на ответственности конечного пользователя. Разработчик не несет ответственности за возможный ущерб, причиненный действиями конечного пользователя программного обеспечения.\r\nСовместимость программного обеспечения с радиостанциями гарантируется в объеме, обеспеченном тестированием на момент публикации данной версии.\r\nЕсли Вы согласны с условиями предоставления программного обеспечения, нажмите «ДА».", "Пользовательское соглашение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 {
@@ -100,37 +89,19 @@ namespace NIKA_CPS_V1
                 }
                 else
                 {
-                    RegistryOperations.WriteProfileString("AgreementConfirmed", "YES");
+                    RegistryOperations.WriteProfileString("Setup", "AgreementConfirmed", "YES");
                 }
             }
             tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
-            COMPort = RegistryOperations.getProfileStringWithDefault("COMPort", "");
-            if (COMPort != "")
-                tbConsole.AppendText("Заданный порт соединения: " + COMPort + "\r\n");
-            tbConsole.AppendText("Подключенные устройства:\r\n");
-            availablePorts = COMPortsData.GetAllCOMPorts();
-            foreach (COMPortsData.DeviceInfo v in availablePorts)
-            {
-                tbConsole.AppendText(v.Name + ": VID " + v.VID + " PID " + v.PID + " " + v.BusDescription + "\r\n");
-                log.Add(v.Name + ": VID " + v.VID + " PID " + v.PID + " " + v.BusDescription);
-                if (v.BusDescription == "NIKA Firmware")
-                {
-                    tbConsole.AppendText("Подключена рация с корректной прошивкой\r\n");
-                    tsbReadFromRadio.Enabled = true;
-                    tsbWriteToRadio.Enabled = true;
-                }
-                if (v.VID == "1FC9" && v.PID == "0094")
-                {
-                    tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с ними не поддерживается!\r\n");
-                    tsbReadFromRadio.Enabled = false;
-                    tsbWriteToRadio.Enabled = false;
-                }
-            }
+            pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("Setup", "UsingFastPolling", 1) == 1) ? 500 : 1000;
+            pollingTimer.Start();
         }
 
         private void tsbFirmware_Click(object sender, EventArgs e)
         {
+            pollingTimer.Stop();
             new FirmwareUploader(this).ShowDialog();
+            pollingTimer.Start();
         }
 
         private void tsbMenuToggle_Click(object sender, EventArgs e)
@@ -138,18 +109,18 @@ namespace NIKA_CPS_V1
             msMain.Visible = !msMain.Visible;
             if (msMain.Visible)
             {
-                RegistryOperations.WriteProfileInt("MenuStringVisible", 1);
+                RegistryOperations.WriteProfileInt("Setup", "MenuStringVisible", 1);
             }
             else
             {
-                RegistryOperations.WriteProfileInt("MenuStringVisible", 0);
+                RegistryOperations.WriteProfileInt("Setup", "MenuStringVisible", 0);
             }
         }
 
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
-            RegistryOperations.WriteProfileInt("LastWindowWidth", this.Width);
-            RegistryOperations.WriteProfileInt("LastWindowHeight", this.Height);
+            RegistryOperations.WriteProfileInt("Setup", "LastWindowWidth", this.Width);
+            RegistryOperations.WriteProfileInt("Setup", "LastWindowHeight", this.Height);
         }
 
         private void playMessage(string message)
@@ -239,7 +210,6 @@ namespace NIKA_CPS_V1
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             CleanupAudio();
-            log.Close();
             base.OnFormClosing(e);
         }
 
@@ -260,11 +230,45 @@ namespace NIKA_CPS_V1
             {
                 playMessage("settingsSaved");
                 tbConsole.AppendText("Настройки программы сохранены\r\n");
+                pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("Setup", "UsingFastPolling", 1) == 1) ? 500 : 1000;
             }
                 
         }
 
- 
+        private void pollingTimer_Tick(object sender, EventArgs e)
+        {
+            if (USBChecker.IsUsbDeviceConnected("0483", "DF11"))
+            {
+                if (!foundDFUDevice)
+                {
+                    tbConsole.AppendText("Обнаружен подключенный STM32-совместимый процессор в режиме DFU.\r\nИмя устройства: ");
+                    tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
+                    System.Media.SystemSounds.Asterisk.Play();
+                    foundDFUDevice = true;
+                }
+            }
+            else
+                foundDFUDevice = false;
+            if (USBChecker.IsUsbDeviceConnected(radioVID, radioPID))
+            {
+                if (!foundFlashedRadio)
+                {
+                    tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с этими прошивками не поддерживается!\r\nИмя устройства: ");
+                    tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
+                    System.Media.SystemSounds.Hand.Play();
+                    foundFlashedRadio = true;
+                    tsbReadFromRadio.Enabled = true;
+                    tsbWriteToRadio.Enabled = true;
+                }
+            }
+            else
+            {
+                foundFlashedRadio = false;
+                tsbReadFromRadio.Enabled = false;
+                tsbWriteToRadio.Enabled = false;
+            }
+
+        }
 
         private void msiCalibration_Click(object sender, EventArgs e)
         {
