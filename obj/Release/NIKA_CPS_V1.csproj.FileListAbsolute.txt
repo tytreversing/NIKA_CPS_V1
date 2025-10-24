@@ -185,3 +185,4 @@ D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.GenerateResource.cac
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.CoreCompileInputs.cache
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS.64BC111C.Up2Date
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe.config

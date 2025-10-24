@@ -40,7 +40,7 @@ namespace NIKA_CPS_V1
         {
             InitializeComponent();
             _parent = parent;
-            string lastRadioType = RegistryOperations.getProfileStringWithDefault("Setup", "LastFlashedRadio", null);
+            string lastRadioType = RegistryOperations.getProfileStringWithDefault("LastFlashedRadio", null);
             if (lastRadioType != "")
             {
                 foreach (RadioButton control in gbRadioType.Controls)
@@ -267,21 +267,21 @@ namespace NIKA_CPS_V1
             tbConsole.Text = "";
             if (rbMD9600.Checked)
             {
-                RegistryOperations.WriteProfileString("Setup", "LastFlashedRadio", rbMD9600.Text);
+                RegistryOperations.WriteProfileString("LastFlashedRadio", rbMD9600.Text);
                 outputType = OutputType.OutputType_MD9600;
             }
             else if (rbMDUV380.Checked)
             {
-                RegistryOperations.WriteProfileString("Setup", "LastFlashedRadio", rbMDUV380.Text);
+                RegistryOperations.WriteProfileString("LastFlashedRadio", rbMDUV380.Text);
                 outputType = OutputType.OutputType_MDUV380;
             }
             agProgress.Value = 0;
-            ofdOpenFirmware.InitialDirectory = RegistryOperations.getProfileStringWithDefault("Setup", "FirmwareLocation", null);
+            ofdOpenFirmware.InitialDirectory = RegistryOperations.getProfileStringWithDefault("FirmwareLocation", null);
             if (ofdOpenFirmware.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
-            RegistryOperations.WriteProfileString("Setup", "FirmwareLocation", Path.GetDirectoryName(ofdOpenFirmware.FileName));
+            RegistryOperations.WriteProfileString("FirmwareLocation", Path.GetDirectoryName(ofdOpenFirmware.FileName));
             byte[] openFirmwareBuf = null;
             try
             {
@@ -308,7 +308,7 @@ namespace NIKA_CPS_V1
                     {
                         rbMD9600.Checked = true;
                         tbConsole.AppendText("Целевая рация сменена\r\n");
-                        RegistryOperations.WriteProfileString("Setup", "LastFlashedRadio", rbMD9600.Text);
+                        RegistryOperations.WriteProfileString("LastFlashedRadio", rbMD9600.Text);
                     }
             }
             else if (containsStringSequence(decryptedFirmware, "TYT MD-UV3xx"))
@@ -319,7 +319,7 @@ namespace NIKA_CPS_V1
                     {
                         rbMDUV380.Checked = true;
                         tbConsole.AppendText("Целевая рация сменена\r\n");
-                        RegistryOperations.WriteProfileString("Setup", "LastFlashedRadio", rbMDUV380.Text);
+                        RegistryOperations.WriteProfileString("LastFlashedRadio", rbMDUV380.Text);
                     }
             }
             else

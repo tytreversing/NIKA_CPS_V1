@@ -30,9 +30,9 @@ namespace NIKA_CPS_V1
 
         private void Settings_Load(object sender, EventArgs e)
         {
-            cbShowSplashScreen.Checked = (RegistryOperations.getProfileIntWithDefault("Setup", "ShowSplashScreen", 1) != 0);
-            cbUseVoiceHelp.Checked = (RegistryOperations.getProfileIntWithDefault("Setup", "AccessibilityOptions", 0) != 0);
-            rbFastPolling.Checked = (RegistryOperations.getProfileIntWithDefault("Setup", "UsingFastPolling", 1) != 0);
+            cbShowSplashScreen.Checked = (RegistryOperations.getProfileIntWithDefault("ShowSplashScreen", 1) != 0);
+            cbUseVoiceHelp.Checked = (RegistryOperations.getProfileIntWithDefault("AccessibilityOptions", 0) != 0);
+            rbFastPolling.Checked = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) != 0);
             rbSlowPolling.Checked = !rbFastPolling.Checked;
             tbRadioVID.Text = _parent.radioVID;
             tbRadioPID.Text = _parent.radioPID;
@@ -40,18 +40,18 @@ namespace NIKA_CPS_V1
 
         private void bSaveAppSettings_Click(object sender, EventArgs e)
         {
-            RegistryOperations.WriteProfileInt("Setup", "ShowSplashScreen", (cbShowSplashScreen.Checked ? 1 : 0));
-            RegistryOperations.WriteProfileInt("Setup", "AccessibilityOptions", (cbUseVoiceHelp.Checked ? 1 : 0));
-            RegistryOperations.WriteProfileInt("Setup", "UsingFastPolling", (rbFastPolling.Checked ? 1 : 0));
+            RegistryOperations.WriteProfileInt("ShowSplashScreen", (cbShowSplashScreen.Checked ? 1 : 0));
+            RegistryOperations.WriteProfileInt("AccessibilityOptions", (cbUseVoiceHelp.Checked ? 1 : 0));
+            RegistryOperations.WriteProfileInt("UsingFastPolling", (rbFastPolling.Checked ? 1 : 0));
             _parent.playAudio = cbUseVoiceHelp.Checked;
             if (_parent.isValidHex(tbRadioVID.Text))
             {
-                RegistryOperations.WriteProfileString("Setup", "DeviceVID", tbRadioVID.Text);
+                RegistryOperations.WriteProfileString("DeviceVID", tbRadioVID.Text);
                 _parent.radioVID = tbRadioVID.Text.ToUpper();
             }
             if (_parent.isValidHex(tbRadioPID.Text))
             {
-                RegistryOperations.WriteProfileString("Setup", "DevicePID", tbRadioPID.Text);
+                RegistryOperations.WriteProfileString("DevicePID", tbRadioPID.Text);
                 _parent.radioPID = tbRadioPID.Text.ToUpper();
             }
             Close();

@@ -38,8 +38,6 @@ namespace NIKA_CPS_V1
 
         private SerialPort commPort;
 
-        public static Dictionary<string, string> StringsDict = new Dictionary<string, string>();
-
         public static byte[] calibrationDataSTM32;
 
         private IContainer components;
@@ -136,9 +134,22 @@ namespace NIKA_CPS_V1
             base.Icon = Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
             calibrationDataSTM32 = new byte[CALIBRATION_DATA_SIZE_STM32];
             _parent = parent;
+            SetDoubleBuffered(tlpVHF);
+            SetDoubleBuffered(tlpUHF);
             prepareTables();
         }
 
+        private void SetDoubleBuffered(Control control)
+        {
+            if (SystemInformation.TerminalServerSession) return;
+
+            System.Reflection.PropertyInfo prop = typeof(Control).GetProperty(
+                "DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance);
+
+            prop?.SetValue(control, true, null);
+        }
 
         private RadioBandlimits radioBandlimits = new();
 
@@ -194,7 +205,7 @@ namespace NIKA_CPS_V1
             if (!setupCommPort())
             {
                 SystemSounds.Hand.Play();
-                MessageBox.Show(StringsDict["No_com_port"]);
+                MessageBox.Show("Нет соединения с портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -370,15 +381,15 @@ namespace NIKA_CPS_V1
             if (!setupCommPort())
             {
                 SystemSounds.Hand.Play();
-                MessageBox.Show(StringsDict["No_com_port"]);
+                MessageBox.Show("Отсутствует заданный COM-порт");
                 return false;
             }
             DataTransfer openGD77CommsTransferData = new DataTransfer();
             sendCommand(commPort, 0);
             sendCommand(commPort, 1);
             sendCommand(commPort, 2, 0, 0, 3, 1, 0, "CPS");
-            sendCommand(commPort, 2, 0, 16, 3, 1, 0, StringsDict["RADIO_DISPLAY_Reading"]);
-            sendCommand(commPort, 2, 0, 32, 3, 1, 0, StringsDict["RADIO_DISPLAY_Calibrations"]);
+            sendCommand(commPort, 2, 0, 16, 3, 1, 0, "Чтение");
+            sendCommand(commPort, 2, 0, 32, 3, 1, 0, "калибровок");
             sendCommand(commPort, 3);
             sendCommand(commPort, 6, 3);
             openGD77CommsTransferData.mode = DataTransfer.CommsDataMode.DataModeReadFlash;
@@ -424,34 +435,24 @@ namespace NIKA_CPS_V1
             }
             try
             {
-                string text = null;
-            /*    text = SetupDiWrap.ComPortNameFromFriendlyNamePrefix("OpenGD77");
+                string text = RegistryOperations.getProfileStringWithDefault("COMPort", "");
+
                 if (text == null)
                 {
-                    CommPortSelector commPortSelector = new CommPortSelector();
-                    if (DialogResult.OK != commPortSelector.ShowDialog())
-                    {
-                        return false;
-                    }
-                    text = SetupDiWrap.ComPortNameFromFriendlyNamePrefix(commPortSelector.SelectedPort);
-                    IniFileUtils.WriteProfileString("Setup", "LastCommPort", text);
-                }
-                if (text == null)
-                {
-                    MessageBox.Show(StringsDict["Please_connect_the_radio,_and_try_again."], StringsDict["Radio_not_detected."]);
+                    MessageBox.Show("COM-порт не выбран!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     commPort = new SerialPort(text, 115200, Parity.None, 8, StopBits.One);
                     commPort.ReadTimeout = 1000;
-                }*/
+                }
             }
             catch (Exception)
             {
                 commPort = null;
                 SystemSounds.Hand.Play();
-                MessageBox.Show(StringsDict["Failed_to_open_comm_port"], StringsDict["Error"]);
-                //IniFileUtils.WriteProfileString("Setup", "LastCommPort", "");
+                MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                RegistryOperations.WriteProfileString("LastCommPort", "");
                 return false;
             }
             try
@@ -461,7 +462,7 @@ namespace NIKA_CPS_V1
             catch (Exception)
             {
                 SystemSounds.Hand.Play();
-                MessageBox.Show(StringsDict["Comm_port_not_available"]);
+                MessageBox.Show("COM-порт недоступен. Проверьте правильность соединения и корректность работы драйвера.", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 commPort = null;
                 return false;
             }
@@ -489,8 +490,8 @@ namespace NIKA_CPS_V1
             sendCommand(commPort, 0);
             sendCommand(commPort, 1);
             sendCommand(commPort, 2, 0, 0, 3, 1, 0, "CPS");
-            sendCommand(commPort, 2, 0, 16, 3, 1, 0, StringsDict["RADIO_DISPLAY_Writing"]);
-            sendCommand(commPort, 2, 0, 32, 3, 1, 0, StringsDict["RADIO_DISPLAY_Calibrations"]);
+            sendCommand(commPort, 2, 0, 16, 3, 1, 0, "Запись");
+            sendCommand(commPort, 2, 0, 32, 3, 1, 0, "калибровок");
             sendCommand(commPort, 3);
             sendCommand(commPort, 6, 4);
             openGD77CommsTransferData.mode = DataTransfer.CommsDataMode.DataModeWriteFlash;
@@ -745,7 +746,7 @@ namespace NIKA_CPS_V1
             if (!setupCommPort())
             {
                 SystemSounds.Hand.Play();
-                MessageBox.Show(StringsDict["No_com_port"]);
+                MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             for (int i = 0; i < 4; i++)
@@ -759,8 +760,8 @@ namespace NIKA_CPS_V1
             sendCommand(commPort, 0);
             sendCommand(commPort, 1);
             sendCommand(commPort, 2, 0, 0, 3, 1, 0, "CPS");
-            sendCommand(commPort, 2, 0, 16, 3, 1, 0, StringsDict["RADIO_DISPLAY_Restoring"]);
-            sendCommand(commPort, 2, 0, 32, 3, 1, 0, StringsDict["RADIO_DISPLAY_Calibrations"]);
+            sendCommand(commPort, 2, 0, 16, 3, 1, 0, "Восстановление");
+            sendCommand(commPort, 2, 0, 32, 3, 1, 0, "калибровок");
             sendCommand(commPort, 3);
             sendCommand(commPort, 6, 4);
             openGD77CommsTransferData.mode = DataTransfer.CommsDataMode.DataModeWriteFlash;
@@ -875,6 +876,9 @@ namespace NIKA_CPS_V1
         private Font selectionFont = null;
         private void prepareTables()
         {
+            this.SuspendLayout();
+            tlpVHF.SuspendLayout();
+            tlpUHF.SuspendLayout();
             Padding margin = new Padding(0);
 
             for (int i = 0; i < 5; i++)
@@ -1285,6 +1289,9 @@ namespace NIKA_CPS_V1
 
             commonFont = new Font(maxPowersUHF[0].Font.Name, maxPowersUHF[0].Font.Size, FontStyle.Regular);
             selectionFont = new Font(maxPowersUHF[0].Font.Name, maxPowersUHF[0].Font.Size, FontStyle.Bold);
+            tlpVHF.ResumeLayout(false);
+            tlpUHF.ResumeLayout(false);
+            this.ResumeLayout(true);
         }
 
         private bool isReading = false;

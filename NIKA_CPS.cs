@@ -47,13 +47,13 @@ namespace NIKA_CPS_V1
         {
             PRODUCT_VERSION = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             InitializeComponent();
-            if (RegistryOperations.getProfileIntWithDefault("Setup", "ShowSplashScreen", 1) != 0)
+            if (RegistryOperations.getProfileIntWithDefault("ShowSplashScreen", 1) != 0)
             {
                 new SplashScreen().ShowDialog();
             }
-            playAudio = (RegistryOperations.getProfileIntWithDefault("Setup", "AccessibilityOptions", 0) != 0);
-            radioVID = RegistryOperations.getProfileStringWithDefault("Setup", "DeviceVID", "1FC9");
-            radioPID = RegistryOperations.getProfileStringWithDefault("Setup", "DevicePID", "0094");
+            playAudio = (RegistryOperations.getProfileIntWithDefault("AccessibilityOptions", 0) != 0);
+            radioVID = RegistryOperations.getProfileStringWithDefault("DeviceVID", "05D0");
+            radioPID = RegistryOperations.getProfileStringWithDefault("DevicePID", "0094");
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -69,12 +69,12 @@ namespace NIKA_CPS_V1
                 MessageBox.Show("Программа установлена в папку " + thisFilePath + ", но не запущена от имени администратора. Часть функций программы может быть недоступной из-за ограничений Windows. Удалите программу и переустановите ее в другую папку, либо установите для исполняемого файла программы галочку запуска от имени администратора.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]";
-            Width = RegistryOperations.getProfileIntWithDefault("Setup", "LastWindowWidth", 1000);
-            Height = RegistryOperations.getProfileIntWithDefault("Setup", "LastWindowHeight", 800);
-            msMain.Visible = (RegistryOperations.getProfileIntWithDefault("Setup", "MenuStringVisible", 0) != 0);
+            Width = RegistryOperations.getProfileIntWithDefault("LastWindowWidth", 1000);
+            Height = RegistryOperations.getProfileIntWithDefault("LastWindowHeight", 800);
+            msMain.Visible = (RegistryOperations.getProfileIntWithDefault("MenuStringVisible", 0) != 0);
             tsbReadFromRadio.Enabled = false;
             tsbWriteToRadio.Enabled = false;
-            if (RegistryOperations.getProfileStringWithDefault("Setup", "AgreementConfirmed", "NO") == "NO")
+            if (RegistryOperations.getProfileStringWithDefault("AgreementConfirmed", "NO") == "NO")
             {
                 if (MessageBox.Show("Программное обеспечение НИКА предоставляется бесплатно на условиях «КАК ЕСТЬ». Все действия, производимые с оборудованием и программным обеспечением, находятся исключительно на ответственности конечного пользователя. Разработчик не несет ответственности за возможный ущерб, причиненный действиями конечного пользователя программного обеспечения.\r\nСовместимость программного обеспечения с радиостанциями гарантируется в объеме, обеспеченном тестированием на момент публикации данной версии.\r\nЕсли Вы согласны с условиями предоставления программного обеспечения, нажмите «ДА».", "Пользовательское соглашение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 {
@@ -89,11 +89,11 @@ namespace NIKA_CPS_V1
                 }
                 else
                 {
-                    RegistryOperations.WriteProfileString("Setup", "AgreementConfirmed", "YES");
+                    RegistryOperations.WriteProfileString("AgreementConfirmed", "YES");
                 }
             }
             tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
-            pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("Setup", "UsingFastPolling", 1) == 1) ? 500 : 1000;
+            pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
             pollingTimer.Start();
         }
 
@@ -109,18 +109,18 @@ namespace NIKA_CPS_V1
             msMain.Visible = !msMain.Visible;
             if (msMain.Visible)
             {
-                RegistryOperations.WriteProfileInt("Setup", "MenuStringVisible", 1);
+                RegistryOperations.WriteProfileInt("MenuStringVisible", 1);
             }
             else
             {
-                RegistryOperations.WriteProfileInt("Setup", "MenuStringVisible", 0);
+                RegistryOperations.WriteProfileInt("MenuStringVisible", 0);
             }
         }
 
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
-            RegistryOperations.WriteProfileInt("Setup", "LastWindowWidth", this.Width);
-            RegistryOperations.WriteProfileInt("Setup", "LastWindowHeight", this.Height);
+            RegistryOperations.WriteProfileInt("LastWindowWidth", this.Width);
+            RegistryOperations.WriteProfileInt("LastWindowHeight", this.Height);
         }
 
         private void playMessage(string message)
@@ -230,7 +230,7 @@ namespace NIKA_CPS_V1
             {
                 playMessage("settingsSaved");
                 tbConsole.AppendText("Настройки программы сохранены\r\n");
-                pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("Setup", "UsingFastPolling", 1) == 1) ? 500 : 1000;
+                pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
             }
                 
         }

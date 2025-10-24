@@ -26,6 +26,8 @@ internal class RegistryOperations
 	[DllImport("kernel32.DLL ", CharSet = CharSet.Auto)]
 	private static extern int GetPrivateProfileSection(string string_0, byte[] byte_0, int int_0, string string_1);
 
+	private const string _SETUP = "Setup";
+
 	public static string getIniFilePath()
 	{
 		return iniPath;
@@ -41,12 +43,12 @@ internal class RegistryOperations
 		setIniFilePath(string_0);
 	}
 
-	public static string getProfileStringWithDefault(string string_0, string string_1, string string_2)
+	public static string getProfileStringWithDefault(string string_1, string string_2)
 	{
 		if (iniPath != null)
 		{
 			StringBuilder stringBuilder = new StringBuilder(1024);
-			GetPrivateProfileString(string_0, string_1, string_2, stringBuilder, 1024, iniPath);
+			GetPrivateProfileString(_SETUP, string_1, string_2, stringBuilder, 1024, iniPath);
 			return stringBuilder.ToString();
 		}
 		object value = Registry.GetValue(keyName, string_1, string_2);
@@ -57,12 +59,12 @@ internal class RegistryOperations
 		return string_2;
 	}
 
-	public static int getProfileIntWithDefault(string string_0, string string_1, int int_1)
+	public static int getProfileIntWithDefault(string string_1, int int_1)
 	{
 		if (iniPath != null)
 		{
 			StringBuilder stringBuilder = new StringBuilder(1024);
-			GetPrivateProfileString(string_0, string_1, int_1.ToString(), stringBuilder, 1024, iniPath);
+			GetPrivateProfileString(_SETUP, string_1, int_1.ToString(), stringBuilder, 1024, iniPath);
 			try
 			{
 				return int.Parse(stringBuilder.ToString());
@@ -80,11 +82,11 @@ internal class RegistryOperations
 		return int_1;
 	}
 
-	public static void WriteProfileString(string string_0, string string_1, string string_2)
+	public static void WriteProfileString(string string_1, string string_2)
 	{
 		if (iniPath != null)
 		{
-			WritePrivateProfileString(string_0, string_1, string_2, iniPath);
+			WritePrivateProfileString(_SETUP, string_1, string_2, iniPath);
 		}
 		else
 		{
@@ -92,11 +94,11 @@ internal class RegistryOperations
 		}
 	}
 
-	public static void WriteProfileInt(string string_0, string string_1, int int_1)
+	public static void WriteProfileInt(string string_1, int int_1)
 	{
 		if (iniPath != null)
 		{
-			WritePrivateProfileString(string_0, string_1, int_1.ToString(), iniPath);
+			WritePrivateProfileString(_SETUP, string_1, int_1.ToString(), iniPath);
 		}
 		else
 		{
