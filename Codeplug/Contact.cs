@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NIKA_CPS_V1.Codeplug
 {
-    internal class Contact
+    public class Contact
     {
 
         private ushort _number;
@@ -42,9 +42,10 @@ namespace NIKA_CPS_V1.Codeplug
 
         public Contact()
         {
-            _alias = string.Empty;
-            _dmrId = 0;
-            _userData = string.Empty;
+            _number = 0;
+            _alias = "Вызов всех";
+            _dmrId = 16777215;
+            _userData = "";
         }
 
 

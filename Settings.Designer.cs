@@ -38,6 +38,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbRadioVID = new System.Windows.Forms.TextBox();
             this.tbRadioPID = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbExpandContacts = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // cbShowSplashScreen
@@ -145,12 +147,33 @@
             this.tbRadioPID.Size = new System.Drawing.Size(117, 23);
             this.tbRadioPID.TabIndex = 9;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(271, 14);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(178, 15);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Разворачивать при запуске:";
+            // 
+            // cbExpandContacts
+            // 
+            this.cbExpandContacts.AutoSize = true;
+            this.cbExpandContacts.Location = new System.Drawing.Point(274, 39);
+            this.cbExpandContacts.Name = "cbExpandContacts";
+            this.cbExpandContacts.Size = new System.Drawing.Size(137, 19);
+            this.cbExpandContacts.TabIndex = 11;
+            this.cbExpandContacts.Text = "Дерево контактов";
+            this.cbExpandContacts.UseVisualStyleBackColor = true;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(933, 519);
+            this.ClientSize = new System.Drawing.Size(852, 519);
+            this.Controls.Add(this.cbExpandContacts);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.tbRadioPID);
             this.Controls.Add(this.tbRadioVID);
             this.Controls.Add(this.label3);
@@ -190,5 +213,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbRadioVID;
         private System.Windows.Forms.TextBox tbRadioPID;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox cbExpandContacts;
     }
 }

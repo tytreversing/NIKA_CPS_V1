@@ -37,6 +37,8 @@ namespace NIKA_CPS_V1
 
         public static CodeplugData CodeplugInternal;
 
+        private string codeplugFileName;
+
         public bool isValidHex(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
@@ -59,30 +61,76 @@ namespace NIKA_CPS_V1
             radioPID = RegistryOperations.getProfileStringWithDefault("DevicePID", "0094");
         }
 
+        //поиск в аргументах командной строки имени файла кодплага
+        private string ValidCodeplugFilePath(string[] args)
+        {
+            if (args == null) return null;
+
+            foreach (string arg in args)
+            {
+                if (string.IsNullOrWhiteSpace(arg)) continue;
+
+                try
+                {
+                    // Проверяем расширение
+                    if (!Path.GetExtension(arg).Equals(".ncf", StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    // Проверяем, что это файл, а не папка
+                    string fileName = Path.GetFileName(arg);
+                    if (string.IsNullOrEmpty(fileName) || fileName == "." || fileName == "..")
+                        continue;
+
+                    // Получаем полный путь
+                    string fullPath = Path.GetFullPath(arg);
+
+                    // Возвращаем полный путь к файлу
+                    return fullPath;
+                }
+                catch
+                {
+                    // Если возникла ошибка, переходим к следующему аргументу
+                    continue;
+                }
+            }
+
+            return null;
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             bool isElevated;
             string thisFilePath = Application.StartupPath;
+
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);
             isElevated = principal.IsInRole(WindowsBuiltInRole.Administrator);
-
             if (isElevated == false && thisFilePath.Contains("Program Files"))
             {
                 MessageBox.Show("Программа установлена в папку " + thisFilePath + ", но не запущена от имени администратора. Часть функций программы может быть недоступной из-за ограничений Windows. Удалите программу и переустановите ее в другую папку, либо установите для исполняемого файла программы галочку запуска от имени администратора.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            //пытаемся открыть последний файл кодплага, если сохранен, иначе болванку в папке с программой
-            string codeplugFileName = RegistryOperations.getProfileStringWithDefault("LastCodeplugFile", thisFilePath + "\\Nika_CPS_V1.ncf");
-            Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + codeplugFileName;
+            //проверяем, нет ли в командной строке имени файла с кодплагом
+            codeplugFileName = ValidCodeplugFilePath(Environment.GetCommandLineArgs().Skip(1).ToArray());
+            if (codeplugFileName == null) //запуск без передачи параметров
+            {
+                //получаем из реестра последний файл кодплага, если сохранен, иначе болванку в папке с программой
+                codeplugFileName = RegistryOperations.getProfileStringWithDefault("LastCodeplugFile", thisFilePath + "\\Nika_CPS_V1.ncf");
+
+            }
+            else //запуск с параметрами
+            {
+                tbConsole.AppendText("Загружен кодплаг из файла " + codeplugFileName + "\r\n");
+            }
+            // пытаемся открыть файл
             if (!File.Exists(codeplugFileName))
             {
                 playMessage("file_not_found_error");
                 MessageBox.Show("Файл " + codeplugFileName + " не найден по указанному адресу. Будет сгенерирован шаблонный кодплаг.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //создаем пустой объект и сериализуем его
-                CodeplugData blankCodeplug = new CodeplugData();
+                CodeplugInternal = new CodeplugData();
                 try
                 {
-                    CodeplugSerialization serializer = new CodeplugSerialization(blankCodeplug, thisFilePath + "\\Nika_CPS_V1.ncf");
+                    CodeplugSerialization serializer = new CodeplugSerialization(CodeplugInternal, thisFilePath + "\\Nika_CPS_V1.ncf");
                 }
                 catch
                 {
@@ -92,10 +140,10 @@ namespace NIKA_CPS_V1
             }
             else
             {
-                CodeplugDeserialization deSerializer = new CodeplugDeserialization(codeplugFileName);
+                CodeplugDeserialization deSerializer = new CodeplugDeserialization();
                 try
                 {
-                    CodeplugInternal = deSerializer.Deserialize();
+                    CodeplugInternal = deSerializer.Deserialize(codeplugFileName);
                 }
                 catch
                 {
@@ -104,6 +152,7 @@ namespace NIKA_CPS_V1
                     CodeplugInternal = new CodeplugData();
                 }
             }
+            Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + codeplugFileName;
             Width = RegistryOperations.getProfileIntWithDefault("LastWindowWidth", 1000);
             Height = RegistryOperations.getProfileIntWithDefault("LastWindowHeight", 800);
             msMain.Visible = (RegistryOperations.getProfileIntWithDefault("MenuStringVisible", 0) != 0);
@@ -128,9 +177,53 @@ namespace NIKA_CPS_V1
                 }
             }
             tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
+
+            //генерация дерева
+            GenerateTree();
+
             pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
             pollingTimer.Start();
             
+        }
+
+        public void GenerateTree()
+        {
+            // Генерация узлов из контактов
+            // Находим узел ContactsNode 
+            TreeNode contactsNode = tvMain.Nodes.Find("ContactsNode", true).FirstOrDefault();
+
+            // Проверяем, найден ли узел
+            if (contactsNode != null && CodeplugInternal != null && CodeplugInternal.Contacts != null)
+            {
+                // Очищаем существующие дочерние узлы (если нужно)
+                contactsNode.Nodes.Clear();
+
+                // Добавляем узлы для каждого контакта
+                foreach (Codeplug.Contact contact in CodeplugInternal.Contacts)
+                {
+                    // Проверяем, что Alias не null или пустой
+                    string alias = contact.Alias ?? "Без имени";
+                    contactsNode.Nodes.Add(alias);
+                    // добавляем события кликов по узлам
+                    tvMain.NodeMouseClick += tvMain_NodeMouseClick;
+                }
+
+                // Разворачиваем узел для отображения дочерних элементов, если настроено
+                if (RegistryOperations.getProfileIntWithDefault("ExpandContacts", 0) != 0)
+                    contactsNode.Expand();
+            }
+            
+        }
+
+        private void tvMain_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            // Проверяем, что клик был по узлу контакта
+            if (e.Node.Parent != null && e.Node.Parent.Name == "ContactsNode")
+            {
+                // Получаем текст узла (который является Alias)
+                string alias = e.Node.Text;
+                MessageBox.Show($"Кликнут контакт: {alias}");
+            }
         }
 
         private void tsbFirmware_Click(object sender, EventArgs e)
@@ -308,6 +401,11 @@ namespace NIKA_CPS_V1
         private void msiCalibration_Click(object sender, EventArgs e)
         {
             new CalibrationForm(this).ShowDialog();
+        }
+
+        private void tvMain_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
         }
     }
 }

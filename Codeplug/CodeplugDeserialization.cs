@@ -8,11 +8,11 @@ namespace NIKA_CPS_V1.Codeplug
 {
     internal class CodeplugDeserialization
     {
-        public CodeplugDeserialization(string fileName)
+        public CodeplugDeserialization()
         {
         }    
 
-        public CodeplugData Deserialize()
+        public CodeplugData Deserialize(string fileName)
         {
             CodeplugData cData = new CodeplugData();
             return cData;
