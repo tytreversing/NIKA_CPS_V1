@@ -458,7 +458,7 @@
             treeNode5.Text = "Узел21";
             treeNode6.Name = "Узел22";
             treeNode6.Text = "Узел22";
-            treeNode7.Name = "Узел19";
+            treeNode7.Name = "GroupListsNode";
             treeNode7.Text = "Списки групп";
             treeNode8.Name = "Узел9";
             treeNode8.Text = "Узел9";

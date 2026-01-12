@@ -188,6 +188,7 @@ namespace NIKA_CPS_V1
 
         public void GenerateTree()
         {
+            tvMain.NodeMouseClick += tvMain_NodeMouseClick;
             // Генерация узлов из контактов
             // Находим узел ContactsNode 
             TreeNode contactsNode = tvMain.Nodes.Find("ContactsNode", true).FirstOrDefault();
@@ -201,11 +202,11 @@ namespace NIKA_CPS_V1
                 // Добавляем узлы для каждого контакта
                 foreach (Codeplug.Contact contact in CodeplugInternal.Contacts)
                 {
-                    // Проверяем, что Alias не null или пустой
                     string alias = contact.Alias ?? "Без имени";
-                    contactsNode.Nodes.Add(alias);
-                    // добавляем события кликов по узлам
-                    tvMain.NodeMouseClick += tvMain_NodeMouseClick;
+                    TreeNode newNode = new TreeNode(alias);
+                    newNode.Tag = contact;
+                    contactsNode.Nodes.Add(newNode);
+
                 }
 
                 // Разворачиваем узел для отображения дочерних элементов, если настроено
@@ -222,7 +223,20 @@ namespace NIKA_CPS_V1
             {
                 // Получаем текст узла (который является Alias)
                 string alias = e.Node.Text;
-                MessageBox.Show($"Кликнут контакт: {alias}");
+                string dmrid = ((Codeplug.Contact)e.Node.Tag).DMR_ID.ToString();
+                if (e.Button == MouseButtons.Left)
+                {
+                    Contact contactForm = new Contact((Codeplug.Contact)e.Node.Tag);
+                    contactForm.ShowDialog();
+                }
+                else if (e.Button == MouseButtons.Right)
+                {
+                    MessageBox.Show($"Кликнут правой контакт: {alias}");
+                }
+            }
+            else if (e.Node.Parent != null && e.Node.Parent.Name == "GroupListsNode")
+            {
+                                                                                                                  
             }
         }
 

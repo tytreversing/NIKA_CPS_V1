@@ -20,7 +20,8 @@ namespace NIKA_CPS_V1.Codeplug
         public CodeplugData()
         {
             _contacts = new List<Contact>();
-            AddContact(new Contact()); 
+            AddContact(new Contact(GetFirstFreeNumber(), "Вызов всех", 16777215, ""));
+            AddContact(new Contact(GetFirstFreeNumber(), "Россия", 2501, ""));
         }
 
         public bool AddContact(Contact contact)
@@ -65,6 +66,38 @@ namespace NIKA_CPS_V1.Codeplug
                 .OrderBy(contact => contact?.Alias, StringComparer.OrdinalIgnoreCase)
                 .ThenBy(contact => contact?.Alias)
                 .ToList();
+        }
+
+        public void DeleteByDMRID(ushort dmrid)
+        {
+            _contacts.RemoveAll(c => c != null && c.DMR_ID == dmrid);
+        }
+
+        //поиск первого свободного номера контакта
+        public ushort GetFirstFreeNumber()
+        {
+            if (_contacts.Count == 0)
+            {
+                return 0; //контактов нет
+            }
+            HashSet<ushort> usedNumbers = new HashSet<ushort>();
+            foreach (var contact in _contacts)
+            {
+                if (contact != null)
+                {
+                    usedNumbers.Add(contact.Number);
+                }
+            }
+            // Ищем первое свободное число, начиная с 0
+            for (ushort i = 0; i < MAX_CONTACTS_COUNT; i++)
+            {
+                if (!usedNumbers.Contains(i))
+                {
+                    return i;
+                }
+            }
+            // Если все числа от 0 до 65534 заняты, возвращаем 65535
+            return ushort.MaxValue;
         }
     }
 }

@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <AssemblyVersion>2026.1.12.50</AssemblyVersion>
+    <AssemblyVersion>2026.1.12.68</AssemblyVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -167,6 +167,7 @@
     <Compile Include="Codeplug\Codeplug.cs" />
     <Compile Include="Codeplug\CodeplugCHsAndVFOs.cs" />
     <Compile Include="Codeplug\CodeplugDeserialization.cs" />
+    <Compile Include="Codeplug\CodeplugGroupList.cs" />
     <Compile Include="Codeplug\CodeplugSerialization.cs" />
     <Compile Include="Codeplug\CodeplugSettings.cs" />
     <Compile Include="Codeplug\Contact.cs" />

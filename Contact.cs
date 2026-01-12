@@ -12,9 +12,13 @@ namespace NIKA_CPS_V1
 {
     public partial class Contact : Form
     {
-        public Contact()
+        public Contact(Codeplug.Contact contact)
         {
             InitializeComponent();
+            Text = "Контакт #" + contact.Number.ToString();
+            tbAlias.Text = contact.Alias;
+            tbData.Text = contact.UserData;
+            tbDMRID.Text = contact.DMR_ID.ToString();
         }
     }
 }
