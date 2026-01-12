@@ -1,4 +1,5 @@
 ﻿using NAudio.Wave;
+using NIKA_CPS_V1.Codeplug;
 using NIKA_CPS_V1.Interfaces;
 using NIKA_CPS_V1.Properties;
 using System;
@@ -34,6 +35,8 @@ namespace NIKA_CPS_V1
         public string radioVID = "";
         public string radioPID = "";
 
+        public static CodeplugData CodeplugInternal;
+
         public bool isValidHex(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
@@ -68,7 +71,39 @@ namespace NIKA_CPS_V1
             {
                 MessageBox.Show("Программа установлена в папку " + thisFilePath + ", но не запущена от имени администратора. Часть функций программы может быть недоступной из-за ограничений Windows. Удалите программу и переустановите ее в другую папку, либо установите для исполняемого файла программы галочку запуска от имени администратора.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]";
+            //пытаемся открыть последний файл кодплага, если сохранен, иначе болванку в папке с программой
+            string codeplugFileName = RegistryOperations.getProfileStringWithDefault("LastCodeplugFile", thisFilePath + "\\Nika_CPS_V1.ncf");
+            Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + codeplugFileName;
+            if (!File.Exists(codeplugFileName))
+            {
+                playMessage("file_not_found_error");
+                MessageBox.Show("Файл " + codeplugFileName + " не найден по указанному адресу. Будет сгенерирован шаблонный кодплаг.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //создаем пустой объект и сериализуем его
+                CodeplugData blankCodeplug = new CodeplugData();
+                try
+                {
+                    CodeplugSerialization serializer = new CodeplugSerialization(blankCodeplug, thisFilePath + "\\Nika_CPS_V1.ncf");
+                }
+                catch
+                {
+                    playMessage("error_saving_template");
+                    MessageBox.Show("Ошибка при попытке сохранения файла шаблона! Проверьте права доступа!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                CodeplugDeserialization deSerializer = new CodeplugDeserialization(codeplugFileName);
+                try
+                {
+                    CodeplugInternal = deSerializer.Deserialize();
+                }
+                catch
+                {
+                    playMessage("error_reading_codeplug");
+                    MessageBox.Show("Ошибка при чтении файла кодплага. Будет сгенерирован шаблонный кодплаг.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CodeplugInternal = new CodeplugData();
+                }
+            }
             Width = RegistryOperations.getProfileIntWithDefault("LastWindowWidth", 1000);
             Height = RegistryOperations.getProfileIntWithDefault("LastWindowHeight", 800);
             msMain.Visible = (RegistryOperations.getProfileIntWithDefault("MenuStringVisible", 0) != 0);
@@ -95,12 +130,13 @@ namespace NIKA_CPS_V1
             tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
             pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
             pollingTimer.Start();
+            
         }
 
         private void tsbFirmware_Click(object sender, EventArgs e)
         {
             pollingTimer.Stop();
-            new FirmwareUploader(this).ShowDialog();
+            new FirmwareUploader(this).Show();
             pollingTimer.Start();
         }
 
@@ -139,7 +175,6 @@ namespace NIKA_CPS_V1
                     Application.StartupPath,
                     "Sounds",
                     $"{message}.mp3");
-
                 // Проверка существования файла
                 if (!File.Exists(soundPath)) return;
 
@@ -198,7 +233,7 @@ namespace NIKA_CPS_V1
             }
         }
 
-        private void CleanupAudio()
+        public void CleanupAudio()
         {
             waveOut?.Stop();
             waveOut?.Dispose();

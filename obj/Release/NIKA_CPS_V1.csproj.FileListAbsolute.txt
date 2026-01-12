@@ -186,3 +186,7 @@ D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.CoreCompileInputs.ca
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS.64BC111C.Up2Date
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe.config
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.Contact.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\error_saving_template.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\file_not_found_error.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\error_reading_codeplug.mp3

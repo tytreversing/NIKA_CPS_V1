@@ -36,8 +36,6 @@ namespace NIKA_CPS_V1
 
         private char writeCommandCharacter = 'W';
 
-        private SerialPort commPort;
-
         public static byte[] calibrationDataSTM32;
 
         private IContainer components;
@@ -202,7 +200,7 @@ namespace NIKA_CPS_V1
         }
         private bool readBandlimits()
         {
-            if (!setupCommPort())
+            if (!COMPort.setupCommPort())
             {
                 SystemSounds.Hand.Play();
                 MessageBox.Show("Нет соединения с портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -215,13 +213,13 @@ namespace NIKA_CPS_V1
             openGD77CommsTransferData.transferLength = 0;
             openGD77CommsTransferData.dataBuff = new byte[128];
             radioBandlimits = default(RadioBandlimits);
-            if (ReadRadioBandlimits(commPort, openGD77CommsTransferData))
+            if (ReadRadioBandlimits(COMPort.Port, openGD77CommsTransferData))
             {
                 radioBandlimits = ByteArrayToRadioBandlimits(openGD77CommsTransferData.dataBuff);
             
             }
-            commPort.Close();
-            commPort = null;
+            COMPort.Port.Close();
+            COMPort.Port = null;
         
             return true;
 
@@ -289,12 +287,12 @@ namespace NIKA_CPS_V1
                     array[2] = (byte)x_or_command_option_number;
                     break;
             }
-            commPort.Write(array, 0, 32);
-            while (commPort.BytesToRead == 0)
+            COMPort.Port.Write(array, 0, 32);
+            while (COMPort.Port.BytesToRead == 0)
             {
                 Thread.Sleep(0);
             }
-            commPort.Read(array, 0, 64);
+            COMPort.Port.Read(array, 0, 64);
             return array[1] == commandNumber;
         }
 
@@ -378,26 +376,26 @@ namespace NIKA_CPS_V1
             {
                 return false;
             }
-            if (!setupCommPort())
+            if (!COMPort.setupCommPort())
             {
                 SystemSounds.Hand.Play();
                 MessageBox.Show("Отсутствует заданный COM-порт");
                 return false;
             }
             DataTransfer openGD77CommsTransferData = new DataTransfer();
-            sendCommand(commPort, 0);
-            sendCommand(commPort, 1);
-            sendCommand(commPort, 2, 0, 0, 3, 1, 0, "CPS");
-            sendCommand(commPort, 2, 0, 16, 3, 1, 0, "Чтение");
-            sendCommand(commPort, 2, 0, 32, 3, 1, 0, "калибровок");
-            sendCommand(commPort, 3);
-            sendCommand(commPort, 6, 3);
+            sendCommand(COMPort.Port, 0);
+            sendCommand(COMPort.Port, 1);
+            sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
+            sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Чтение");
+            sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
+            sendCommand(COMPort.Port, 3);
+            sendCommand(COMPort.Port, 6, 3);
             openGD77CommsTransferData.mode = DataTransfer.CommsDataMode.DataModeReadFlash;
             openGD77CommsTransferData.dataBuff = new byte[CALIBRATION_DATA_SIZE_STM32];
             openGD77CommsTransferData.localDataBufferStartPosition = 0;
             openGD77CommsTransferData.startDataAddressInTheRadio = MEMORY_LOCATION_STM32;
             openGD77CommsTransferData.transferLength = CALIBRATION_DATA_SIZE_STM32;
-            if (!ReadFlashOrEEPROM(commPort, openGD77CommsTransferData))
+            if (!ReadFlashOrEEPROM(COMPort.Port, openGD77CommsTransferData))
             {
                 result = false;
                 openGD77CommsTransferData.responseCode = 1;
@@ -408,66 +406,16 @@ namespace NIKA_CPS_V1
             }
 
 
-            sendCommand(commPort, 5);
-            sendCommand(commPort, 7);
-            commPort.Close();
-            commPort = null;
+            sendCommand(COMPort.Port, 5);
+            sendCommand(COMPort.Port, 7);
+            COMPort.Port.Close();
+            COMPort.Port = null;
             CalData = ByteArrayToCalData(openGD77CommsTransferData.dataBuff);
             buildVariablesFromCalData(CalData);
             return result;
         }
 
-        private bool setupCommPort()
-        {
-            if (commPort != null)
-            {
-                try
-                {
-                    if (commPort.IsOpen)
-                    {
-                        commPort.Close();
-                    }
-                }
-                catch (Exception)
-                {
-                }
-                commPort = null;
-            }
-            try
-            {
-                string text = RegistryOperations.getProfileStringWithDefault("COMPort", "");
 
-                if (text == null)
-                {
-                    MessageBox.Show("COM-порт не выбран!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    commPort = new SerialPort(text, 115200, Parity.None, 8, StopBits.One);
-                    commPort.ReadTimeout = 1000;
-                }
-            }
-            catch (Exception)
-            {
-                commPort = null;
-                SystemSounds.Hand.Play();
-                MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                RegistryOperations.WriteProfileString("LastCommPort", "");
-                return false;
-            }
-            try
-            {
-                commPort.Open();
-            }
-            catch (Exception)
-            {
-                SystemSounds.Hand.Play();
-                MessageBox.Show("COM-порт недоступен. Проверьте правильность соединения и корректность работы драйвера.", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                commPort = null;
-                return false;
-            }
-            return true;
-        }
 
         private void btnWrite_Click(object sender, EventArgs e)
         {
@@ -487,26 +435,26 @@ namespace NIKA_CPS_V1
             openGD77CommsTransferData.dataBuff = new byte[CALIBRATION_DATA_SIZE_STM32];
             calibrationDataSTM32 = DataToByte(CalData);
             Array.Copy(calibrationDataSTM32, 0, openGD77CommsTransferData.dataBuff, 0, CALIBRATION_DATA_SIZE_STM32);
-            sendCommand(commPort, 0);
-            sendCommand(commPort, 1);
-            sendCommand(commPort, 2, 0, 0, 3, 1, 0, "CPS");
-            sendCommand(commPort, 2, 0, 16, 3, 1, 0, "Запись");
-            sendCommand(commPort, 2, 0, 32, 3, 1, 0, "калибровок");
-            sendCommand(commPort, 3);
-            sendCommand(commPort, 6, 4);
+            sendCommand(COMPort.Port, 0);
+            sendCommand(COMPort.Port, 1);
+            sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
+            sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Запись");
+            sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
+            sendCommand(COMPort.Port, 3);
+            sendCommand(COMPort.Port, 6, 4);
             openGD77CommsTransferData.mode = DataTransfer.CommsDataMode.DataModeWriteFlash;
             openGD77CommsTransferData.localDataBufferStartPosition = 0;
             openGD77CommsTransferData.startDataAddressInTheRadio = MEMORY_LOCATION_STM32 ;
             openGD77CommsTransferData.transferLength = CALIBRATION_DATA_SIZE_STM32;
-            if (!WriteFlash(commPort, openGD77CommsTransferData))
+            if (!WriteFlash(COMPort.Port, openGD77CommsTransferData))
             {
                 MessageBox.Show("Ошибка при записи!");
                 openGD77CommsTransferData.responseCode = 1;
             }
-            sendCommand(commPort, 6, 2);
-            sendCommand(commPort, 6, 1);
-            commPort.Close();
-            commPort = null;
+            sendCommand(COMPort.Port, 6, 2);
+            sendCommand(COMPort.Port, 6, 1);
+            COMPort.Port.Close();
+            COMPort.Port = null;
         }
 
         private bool flashWriteSector(SerialPort port, char writeCharacter, ref byte[] sendbuffer, ref byte[] readbuffer, DataTransfer dataObj)
@@ -743,7 +691,7 @@ namespace NIKA_CPS_V1
             {
                 return;
             }*/
-            if (!setupCommPort())
+            if (!COMPort.setupCommPort())
             {
                 SystemSounds.Hand.Play();
                 MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -757,26 +705,26 @@ namespace NIKA_CPS_V1
             openGD77CommsTransferData.dataBuff = new byte[CALIBRATION_DATA_SIZE_STM32];
             calibrationDataSTM32 = DataToByte(CalData);
             Array.Copy(calibrationDataSTM32, 0, openGD77CommsTransferData.dataBuff, 0, CALIBRATION_DATA_SIZE_STM32);
-            sendCommand(commPort, 0);
-            sendCommand(commPort, 1);
-            sendCommand(commPort, 2, 0, 0, 3, 1, 0, "CPS");
-            sendCommand(commPort, 2, 0, 16, 3, 1, 0, "Восстановление");
-            sendCommand(commPort, 2, 0, 32, 3, 1, 0, "калибровок");
-            sendCommand(commPort, 3);
-            sendCommand(commPort, 6, 4);
+            sendCommand(COMPort.Port, 0);
+            sendCommand(COMPort.Port, 1);
+            sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
+            sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Восстановление");
+            sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
+            sendCommand(COMPort.Port, 3);
+            sendCommand(COMPort.Port, 6, 4);
             openGD77CommsTransferData.mode = DataTransfer.CommsDataMode.DataModeWriteFlash;
             openGD77CommsTransferData.localDataBufferStartPosition = 0;
             openGD77CommsTransferData.startDataAddressInTheRadio = MEMORY_LOCATION_STM32;
             openGD77CommsTransferData.transferLength = CALIBRATION_DATA_SIZE_STM32;
-            if (!WriteFlash(commPort, openGD77CommsTransferData))
+            if (!WriteFlash(COMPort.Port, openGD77CommsTransferData))
             {
                 MessageBox.Show("Ошибка при восстановлении!");
                 openGD77CommsTransferData.responseCode = 1;
             }
-            sendCommand(commPort, 6, 2);
-            sendCommand(commPort, 6, 1);
-            commPort.Close();
-            commPort = null;
+            sendCommand(COMPort.Port, 6, 2);
+            sendCommand(COMPort.Port, 6, 1);
+            COMPort.Port.Close();
+            COMPort.Port = null;
             MessageBox.Show("После перезагрузки рация перестроит таблицы, исходя из заводских калибровок, сохраненных в защищенной памяти.", "Сброс калибровок", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

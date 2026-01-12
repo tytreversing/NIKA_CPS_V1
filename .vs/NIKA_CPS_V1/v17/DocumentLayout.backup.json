@@ -7,28 +7,76 @@
       "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:nika_cps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|d:\\opengd77 repo\\nika_cps_v1\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|d:\\opengd77 repo\\nika_cps_v1\\firmwareuploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\firmwareuploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:firmwareuploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|d:\\opengd77 repo\\nika_cps_v1\\calibrationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:calibrationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\nika_cps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:nika_cps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|d:\\opengd77 repo\\nika_cps_v1\\registryoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:registryoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|d:\\opengd77 repo\\nika_cps_v1\\firmwareuploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\firmwareuploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:firmwareuploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\codeplug\\codeplug.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:codeplug\\codeplug.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\codeplug\\codeplugdeserialization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:codeplug\\codeplugdeserialization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\codeplug\\codeplugserialization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:codeplug\\codeplugserialization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\codeplug\\codeplugsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:codeplug\\codeplugsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\codeplug\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:codeplug\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\codeplug\\codeplugchsandvfos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:codeplug\\codeplugchsandvfos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\codeplug\\satellitekeps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:codeplug\\satellitekeps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\codeplug\\scanlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:codeplug\\scanlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\codeplug\\zone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:codeplug\\zone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\calibrationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:calibrationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\interfaces\\comport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:interfaces\\comport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\interfaces\\datatransfer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:interfaces\\datatransfer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|D:\\OpenGD77 Repo\\NIKA_CPS_V1\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8C619BC-DE17-4B7E-998A-242C2C59888A}|NIKA_CPS_V1.csproj|solutionrelative:settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +86,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 19,
           "Children": [
             {
               "$type": "Bookmark",
@@ -55,15 +103,194 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "FirmwareUploader.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\FirmwareUploader.cs",
+              "RelativeDocumentMoniker": "FirmwareUploader.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\FirmwareUploader.cs*",
+              "RelativeToolTip": "FirmwareUploader.cs*",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAkwHUAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-12T10:02:47.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Codeplug.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\Codeplug.cs",
+              "RelativeDocumentMoniker": "Codeplug\\Codeplug.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\Codeplug.cs",
+              "RelativeToolTip": "Codeplug\\Codeplug.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-12T09:25:55.576Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CodeplugSettings.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\CodeplugSettings.cs",
+              "RelativeDocumentMoniker": "Codeplug\\CodeplugSettings.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\CodeplugSettings.cs",
+              "RelativeToolTip": "Codeplug\\CodeplugSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T10:26:20.748Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CodeplugCHsAndVFOs.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\CodeplugCHsAndVFOs.cs",
+              "RelativeDocumentMoniker": "Codeplug\\CodeplugCHsAndVFOs.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\CodeplugCHsAndVFOs.cs",
+              "RelativeToolTip": "Codeplug\\CodeplugCHsAndVFOs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T10:25:48.507Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CodeplugDeserialization.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\CodeplugDeserialization.cs",
+              "RelativeDocumentMoniker": "Codeplug\\CodeplugDeserialization.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\CodeplugDeserialization.cs",
+              "RelativeToolTip": "Codeplug\\CodeplugDeserialization.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T10:24:56.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CodeplugSerialization.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\CodeplugSerialization.cs",
+              "RelativeDocumentMoniker": "Codeplug\\CodeplugSerialization.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\CodeplugSerialization.cs",
+              "RelativeToolTip": "Codeplug\\CodeplugSerialization.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T10:24:39.662Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SatelliteKeps.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\SatelliteKeps.cs",
+              "RelativeDocumentMoniker": "Codeplug\\SatelliteKeps.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\SatelliteKeps.cs",
+              "RelativeToolTip": "Codeplug\\SatelliteKeps.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T09:56:11.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Scanlist.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\Scanlist.cs",
+              "RelativeDocumentMoniker": "Codeplug\\Scanlist.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\Scanlist.cs",
+              "RelativeToolTip": "Codeplug\\Scanlist.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T09:55:42.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Zone.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\Zone.cs",
+              "RelativeDocumentMoniker": "Codeplug\\Zone.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\Zone.cs",
+              "RelativeToolTip": "Codeplug\\Zone.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T09:55:25.947Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Contact.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\Contact.cs",
+              "RelativeDocumentMoniker": "Codeplug\\Contact.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Codeplug\\Contact.cs",
+              "RelativeToolTip": "Codeplug\\Contact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T09:22:56.615Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NIKA_CPS.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\NIKA_CPS.cs",
+              "RelativeDocumentMoniker": "NIKA_CPS.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\NIKA_CPS.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
+              "RelativeToolTip": "NIKA_CPS.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T06:47:00.956Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Contact.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Contact.cs",
+              "RelativeDocumentMoniker": "Contact.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Contact.cs",
+              "RelativeToolTip": "Contact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T06:43:04.396Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Contact.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Contact.cs",
+              "RelativeDocumentMoniker": "Contact.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Contact.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "Contact.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T06:42:17.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "COMPort.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Interfaces\\COMPort.cs",
+              "RelativeDocumentMoniker": "Interfaces\\COMPort.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Interfaces\\COMPort.cs",
+              "RelativeToolTip": "Interfaces\\COMPort.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwDsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T09:38:56.333Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "DataTransfer.cs",
+              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Interfaces\\DataTransfer.cs",
+              "RelativeDocumentMoniker": "Interfaces\\DataTransfer.cs",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Interfaces\\DataTransfer.cs",
+              "RelativeToolTip": "Interfaces\\DataTransfer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T09:38:07.243Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
               "Title": "Settings.cs",
               "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Settings.cs",
               "RelativeDocumentMoniker": "Settings.cs",
-              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Settings.cs*",
-              "RelativeToolTip": "Settings.cs*",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\Settings.cs",
+              "RelativeToolTip": "Settings.cs",
               "ViewState": "AgIAADoAAAAAAAAAAAAcwDUAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T05:44:57.147Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-24T05:44:57.147Z"
             },
             {
               "$type": "Document",
@@ -73,73 +300,33 @@
               "RelativeDocumentMoniker": "NIKA_CPS.cs",
               "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\NIKA_CPS.cs*",
               "RelativeToolTip": "NIKA_CPS.cs*",
-              "ViewState": "AgIAADEAAAAAAAAAAAAQwDYAAABYAAAAAAAAAA==",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAwwKoAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-24T05:43:42.882Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "RegistryOperations.cs",
-              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\RegistryOperations.cs",
-              "RelativeDocumentMoniker": "RegistryOperations.cs",
-              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\RegistryOperations.cs",
-              "RelativeToolTip": "RegistryOperations.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAkwGQAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T05:39:40.132Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FirmwareUploader.cs",
-              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\FirmwareUploader.cs",
-              "RelativeDocumentMoniker": "FirmwareUploader.cs",
-              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\FirmwareUploader.cs",
-              "RelativeToolTip": "FirmwareUploader.cs",
-              "ViewState": "AgIAAGMBAAAAAAAAAAAuwEEBAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T05:35:55.58Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "FirmwareUploader.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\FirmwareUploader.cs",
               "RelativeDocumentMoniker": "FirmwareUploader.cs",
-              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\FirmwareUploader.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "FirmwareUploader.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\FirmwareUploader.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
+              "RelativeToolTip": "FirmwareUploader.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-24T05:35:53.19Z",
               "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CalibrationForm.cs",
-              "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\CalibrationForm.cs",
-              "RelativeDocumentMoniker": "CalibrationForm.cs",
-              "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\CalibrationForm.cs",
-              "RelativeToolTip": "CalibrationForm.cs",
-              "ViewState": "AgIAAGECAAAAAAAAAAAAAMYBAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T05:16:31.598Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "CalibrationForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\CalibrationForm.cs",
               "RelativeDocumentMoniker": "CalibrationForm.cs",
               "ToolTip": "D:\\OpenGD77 Repo\\NIKA_CPS_V1\\CalibrationForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "RelativeToolTip": "CalibrationForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T05:15:44.849Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+              "WhenOpened": "2025-10-24T05:15:44.849Z"
             }
           ]
         }

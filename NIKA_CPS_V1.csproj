@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <AssemblyVersion>2025.10.24.12</AssemblyVersion>
+    <AssemblyVersion>2026.1.12.25</AssemblyVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -162,12 +162,29 @@
     <Compile Include="CalibrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Codeplug\Codeplug.cs" />
+    <Compile Include="Codeplug\CodeplugCHsAndVFOs.cs" />
+    <Compile Include="Codeplug\CodeplugDeserialization.cs" />
+    <Compile Include="Codeplug\CodeplugSerialization.cs" />
+    <Compile Include="Codeplug\CodeplugSettings.cs" />
+    <Compile Include="Codeplug\CodeplugVFO.cs" />
+    <Compile Include="Codeplug\Contact.cs" />
+    <Compile Include="Codeplug\SatelliteKeps.cs" />
+    <Compile Include="Codeplug\Scanlist.cs" />
+    <Compile Include="Codeplug\Zone.cs" />
+    <Compile Include="Contact.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contact.Designer.cs">
+      <DependentUpon>Contact.cs</DependentUpon>
+    </Compile>
     <Compile Include="FirmwareUploader.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FirmwareUploader.Designer.cs">
       <DependentUpon>FirmwareUploader.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\COMPort.cs" />
     <Compile Include="Interfaces\DataTransfer.cs" />
     <Compile Include="Interfaces\FirmwareUpdateMessageEventArgs.cs" />
     <Compile Include="Interfaces\FirmwareUpdateProgressEventArgs.cs" />
@@ -207,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CalibrationForm.resx">
       <DependentUpon>CalibrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contact.resx">
+      <DependentUpon>Contact.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FirmwareUploader.resx">
       <DependentUpon>FirmwareUploader.cs</DependentUpon>
@@ -258,6 +278,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Sounds\cbUseVoiceHelp.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\error_reading_codeplug.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\error_saving_template.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\file_not_found_error.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Sounds\firmwareError.mp3">

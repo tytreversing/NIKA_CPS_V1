@@ -116,7 +116,6 @@ namespace NIKA_CPS_V1
 
                 // Проверка существования файла
                 if (!File.Exists(soundPath)) return;
-
                 try
                 {
                     // Инициализация аудиопотока
