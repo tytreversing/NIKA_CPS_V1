@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace NIKA_CPS_V1.Codeplug
 {
@@ -11,7 +12,7 @@ namespace NIKA_CPS_V1.Codeplug
         private List<Contact> _contacts;
 
         //константы
-        private const int MAX_CONTACTS_COUNT = 256; //максимальное число контактов
+        public const int MAX_CONTACTS_COUNT = 256; //максимальное число контактов
         public List<Contact> Contacts
         {
             get => _contacts;
@@ -68,7 +69,7 @@ namespace NIKA_CPS_V1.Codeplug
                 .ToList();
         }
 
-        public void DeleteByDMRID(ushort dmrid)
+        public void DeleteContactByDMRID(ushort dmrid)
         {
             _contacts.RemoveAll(c => c != null && c.DMR_ID == dmrid);
         }
@@ -98,6 +99,34 @@ namespace NIKA_CPS_V1.Codeplug
             }
             // Если все числа от 0 до 65534 заняты, возвращаем 65535
             return ushort.MaxValue;
+        }
+
+        public void UpdateContactByID(ushort id, string alias, uint dmrid, string userdata)
+        {
+            if (_contacts == null) return;
+
+            Contact contact = _contacts.FirstOrDefault(c => c.Number == id);
+
+            if (contact != null)
+            {
+                contact.Alias = alias;
+                contact.DMR_ID = dmrid;
+                contact.UserData = userdata;
+            }
+        }
+
+        public void DeleteContactByAlias(string alias)
+        {
+            if (_contacts == null) return;
+
+            Contact contact = _contacts.FirstOrDefault(c => c.Alias == alias);
+
+            if (contact != null)
+            {
+                _contacts.Remove(contact);
+            }
+            else
+                MessageBox.Show("Контакт с алиасом " + alias + " не найден");
         }
     }
 }

@@ -16,6 +16,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace NIKA_CPS_V1
@@ -38,6 +39,12 @@ namespace NIKA_CPS_V1
         public static CodeplugData CodeplugInternal;
 
         private string codeplugFileName;
+
+        public enum TreeRefreshType
+        {
+            ALL,
+            CONTACTS
+        }
 
         public bool isValidHex(string input)
         {
@@ -186,32 +193,36 @@ namespace NIKA_CPS_V1
             
         }
 
-        public void GenerateTree()
+        public void GenerateTree(TreeRefreshType mode = TreeRefreshType.ALL)
         {
             tvMain.NodeMouseClick += tvMain_NodeMouseClick;
-            // Генерация узлов из контактов
-            // Находим узел ContactsNode 
-            TreeNode contactsNode = tvMain.Nodes.Find("ContactsNode", true).FirstOrDefault();
-
-            // Проверяем, найден ли узел
-            if (contactsNode != null && CodeplugInternal != null && CodeplugInternal.Contacts != null)
+            if (mode == TreeRefreshType.ALL || mode == TreeRefreshType.CONTACTS)
             {
-                // Очищаем существующие дочерние узлы (если нужно)
-                contactsNode.Nodes.Clear();
+                // Генерация узлов из контактов
+                // Находим узел ContactsNode 
+                TreeNode contactsNode = tvMain.Nodes.Find("ContactsNode", true).FirstOrDefault();
 
-                // Добавляем узлы для каждого контакта
-                foreach (Codeplug.Contact contact in CodeplugInternal.Contacts)
+                // Проверяем, найден ли узел
+                if (contactsNode != null && CodeplugInternal != null && CodeplugInternal.Contacts != null)
                 {
-                    string alias = contact.Alias ?? "Без имени";
-                    TreeNode newNode = new TreeNode(alias);
-                    newNode.Tag = contact;
-                    contactsNode.Nodes.Add(newNode);
+                    // Очищаем существующие дочерние узлы
+                    contactsNode.Nodes.Clear();
 
+                    // Добавляем узлы для каждого контакта
+                    foreach (Codeplug.Contact contact in CodeplugInternal.Contacts)
+                    {
+                        string alias = contact.Alias ?? "Без имени";
+                        TreeNode newNode = new TreeNode(alias);
+                        newNode.Tag = contact;
+                        newNode.ToolTipText = contact.DMR_ID.ToString() + " " + contact.Alias;
+                        contactsNode.Nodes.Add(newNode);
+
+                    }
+
+                    // Разворачиваем узел для отображения дочерних элементов, если настроено
+                    if (RegistryOperations.getProfileIntWithDefault("ExpandContacts", 0) != 0)
+                        contactsNode.Expand();
                 }
-
-                // Разворачиваем узел для отображения дочерних элементов, если настроено
-                if (RegistryOperations.getProfileIntWithDefault("ExpandContacts", 0) != 0)
-                    contactsNode.Expand();
             }
             
         }
@@ -228,16 +239,50 @@ namespace NIKA_CPS_V1
                 {
                     Contact contactForm = new Contact((Codeplug.Contact)e.Node.Tag);
                     contactForm.ShowDialog();
+                    GenerateTree(TreeRefreshType.CONTACTS);
                 }
                 else if (e.Button == MouseButtons.Right)
                 {
-                    MessageBox.Show($"Кликнут правой контакт: {alias}");
+                    tvMain.SelectedNode = e.Node;
+                    cmsSingleContact.Show(tvMain, e.Location);
                 }
             }
             else if (e.Node.Parent != null && e.Node.Parent.Name == "GroupListsNode")
             {
                                                                                                                   
             }
+        }
+
+        private void tsmiDeleteContact_Click(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = tvMain.SelectedNode;
+            if (selectedNode != null)
+            {
+                CodeplugInternal.DeleteContactByAlias(selectedNode.Text);
+                GenerateTree(TreeRefreshType.CONTACTS);
+            }
+        }
+
+        private void tsmiArrange_Click(object sender, EventArgs e)
+        {
+            CodeplugInternal.SortContactsByAlias();
+            GenerateTree(TreeRefreshType.CONTACTS);
+        }
+
+        private void tsmiNewContact_Click(object sender, EventArgs e)
+        {
+            ushort freeNumber = CodeplugInternal.GetFirstFreeNumber();
+            if (freeNumber < CodeplugData.MAX_CONTACTS_COUNT)
+            {
+                Codeplug.Contact newContact = new Codeplug.Contact(freeNumber, "Контакт # " + freeNumber.ToString(), 0, "");
+                CodeplugInternal.AddContact(newContact);
+                GenerateTree(TreeRefreshType.CONTACTS);
+                Contact contactForm = new Contact(newContact);
+                contactForm.ShowDialog();
+            }
+            else
+                MessageBox.Show("Память контактов полностью заполнена, добавить новый невозможно.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
         private void tsbFirmware_Click(object sender, EventArgs e)
@@ -421,5 +466,9 @@ namespace NIKA_CPS_V1
         {
 
         }
+
+
+
+
     }
 }

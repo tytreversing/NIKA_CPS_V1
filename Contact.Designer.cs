@@ -35,7 +35,7 @@
             this.tbData = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbDMRID = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.bOK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -86,14 +86,15 @@
             this.tbDMRID.Size = new System.Drawing.Size(214, 20);
             this.tbDMRID.TabIndex = 5;
             // 
-            // button1
+            // bOK
             // 
-            this.button1.Location = new System.Drawing.Point(80, 104);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 22);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "ОК";
-            this.button1.UseVisualStyleBackColor = true;
+            this.bOK.Location = new System.Drawing.Point(80, 104);
+            this.bOK.Name = "bOK";
+            this.bOK.Size = new System.Drawing.Size(144, 22);
+            this.bOK.TabIndex = 6;
+            this.bOK.Text = "ОК";
+            this.bOK.UseVisualStyleBackColor = true;
+            this.bOK.Click += new System.EventHandler(this.bOK_Click);
             // 
             // Contact
             // 
@@ -101,7 +102,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(299, 137);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.bOK);
             this.Controls.Add(this.tbDMRID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbData);
@@ -129,6 +130,6 @@
         private System.Windows.Forms.TextBox tbData;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbDMRID;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bOK;
     }
 }

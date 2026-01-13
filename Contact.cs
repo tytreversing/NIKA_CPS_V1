@@ -12,13 +12,21 @@ namespace NIKA_CPS_V1
 {
     public partial class Contact : Form
     {
+        private ushort _number;
         public Contact(Codeplug.Contact contact)
         {
             InitializeComponent();
-            Text = "Контакт #" + contact.Number.ToString();
+            _number = contact.Number;
+            Text = "Контакт #" + _number.ToString();
             tbAlias.Text = contact.Alias;
             tbData.Text = contact.UserData;
             tbDMRID.Text = contact.DMR_ID.ToString();
+        }
+
+        private void bOK_Click(object sender, EventArgs e)
+        {
+            MainForm.CodeplugInternal.UpdateContactByID(_number, tbAlias.Text, uint.Parse(tbDMRID.Text), tbData.Text);
+            Close();
         }
     }
 }

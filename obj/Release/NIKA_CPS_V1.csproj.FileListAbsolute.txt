@@ -138,6 +138,9 @@ D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Help\About.txt
 D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\bSaveAppSettings.mp3
 D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\cbShowSplashScreen.mp3
 D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\cbUseVoiceHelp.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\error_reading_codeplug.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\error_saving_template.mp3
+D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\file_not_found_error.mp3
 D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\firmwareError.mp3
 D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\firmwareReadingError.mp3
 D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\nowYouCanUpload.mp3
@@ -173,6 +176,7 @@ D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\NAudio.WinMM.xml
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.AssemblyReference.cache
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.AboutForm.resources
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.CalibrationForm.resources
+D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.Contact.resources
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.FirmwareUploader.resources
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.MainForm.resources
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.Properties.Resources.resources
@@ -184,7 +188,3 @@ D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.csproj.CoreCompileInputs.ca
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS.64BC111C.Up2Date
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe
 D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.exe.config
-D:\OpenGD77 Repo\NIKA_CPS_V1\obj\Release\NIKA_CPS_V1.Contact.resources
-D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\error_saving_template.mp3
-D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\file_not_found_error.mp3
-D:\OpenGD77 Repo\NIKA_CPS_V1\bin\Release\Sounds\error_reading_codeplug.mp3

@@ -44,7 +44,7 @@ namespace NIKA_CPS_V1
             RegistryOperations.WriteProfileInt("ShowSplashScreen", (cbShowSplashScreen.Checked ? 1 : 0));
             RegistryOperations.WriteProfileInt("AccessibilityOptions", (cbUseVoiceHelp.Checked ? 1 : 0));
             RegistryOperations.WriteProfileInt("UsingFastPolling", (rbFastPolling.Checked ? 1 : 0));
-            RegistryOperations.WriteProfileInt("ExpandContacts", (rbFastPolling.Checked ? 1 : 0));
+            RegistryOperations.WriteProfileInt("ExpandContacts", (cbExpandContacts.Checked ? 1 : 0));
             _parent.playAudio = cbUseVoiceHelp.Checked;
             if (_parent.isValidHex(tbRadioVID.Text))
             {
