@@ -215,6 +215,21 @@ namespace NIKA_CPS_V1
                         TreeNode newNode = new TreeNode(alias);
                         newNode.Tag = contact;
                         newNode.ToolTipText = contact.DMR_ID.ToString() + " " + contact.Alias;
+                        int iconSelection;
+                        switch (contact.Type)
+                        {
+                            case Codeplug.Contact.ContactType.PRIVATE:
+                                iconSelection = 3; //иконка user
+                                break;
+                            case Codeplug.Contact.ContactType.GROUP:
+                                iconSelection = 4; //иконка group
+                                break;
+                            default:
+                                iconSelection = 5; //worldwide
+                                break;
+                        }
+                        newNode.ImageIndex = iconSelection;
+                        newNode.SelectedImageIndex = iconSelection;
                         contactsNode.Nodes.Add(newNode);
 
                     }
@@ -232,16 +247,7 @@ namespace NIKA_CPS_V1
             // Проверяем, что клик был по узлу контакта
             if (e.Node.Parent != null && e.Node.Parent.Name == "ContactsNode")
             {
-                // Получаем текст узла (который является Alias)
-                string alias = e.Node.Text;
-                string dmrid = ((Codeplug.Contact)e.Node.Tag).DMR_ID.ToString();
-                if (e.Button == MouseButtons.Left)
-                {
-                    Contact contactForm = new Contact((Codeplug.Contact)e.Node.Tag);
-                    contactForm.ShowDialog();
-                    GenerateTree(TreeRefreshType.CONTACTS);
-                }
-                else if (e.Button == MouseButtons.Right)
+                if (e.Button == MouseButtons.Right)
                 {
                     tvMain.SelectedNode = e.Node;
                     cmsSingleContact.Show(tvMain, e.Location);
@@ -250,6 +256,26 @@ namespace NIKA_CPS_V1
             else if (e.Node.Parent != null && e.Node.Parent.Name == "GroupListsNode")
             {
                                                                                                                   
+            }
+        }
+
+        private void tvMain_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            // Проверяем, что клик был по узлу контакта
+            if (e.Node.Parent != null && e.Node.Parent.Name == "ContactsNode")
+            {
+                // Получаем текст узла (который является Alias)
+                string alias = e.Node.Text;
+                if (e.Button == MouseButtons.Left)
+                {
+                    Contact contactForm = new Contact((Codeplug.Contact)e.Node.Tag);
+                    contactForm.ShowDialog();
+                    GenerateTree(TreeRefreshType.CONTACTS);
+                }
+            }
+            else if (e.Node.Parent != null && e.Node.Parent.Name == "GroupListsNode")
+            {
+
             }
         }
 

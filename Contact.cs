@@ -15,9 +15,11 @@ namespace NIKA_CPS_V1
     {
         private ushort _number;
         private uint _id;
+        private Codeplug.Contact backup;
         public Contact(Codeplug.Contact contact)
         {
             InitializeComponent();
+            backup = contact;
             _number = contact.Number;
             Text = "Контакт #" + _number.ToString() + ": " + contact.Alias;
             tbAlias.Text = contact.Alias;
@@ -102,6 +104,11 @@ namespace NIKA_CPS_V1
         private void tbAlias_TextChanged(object sender, EventArgs e)
         {
             Text = "Контакт #" + _number.ToString() + ": " + tbAlias.Text;
+        }
+
+        private void bCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

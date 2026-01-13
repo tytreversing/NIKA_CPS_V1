@@ -42,6 +42,7 @@
             this.rbAllCall = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
             this.cbTimeslot = new System.Windows.Forms.ComboBox();
+            this.bCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -174,12 +175,23 @@
             this.cbTimeslot.Size = new System.Drawing.Size(107, 21);
             this.cbTimeslot.TabIndex = 12;
             // 
+            // bCancel
+            // 
+            this.bCancel.Location = new System.Drawing.Point(82, 287);
+            this.bCancel.Name = "bCancel";
+            this.bCancel.Size = new System.Drawing.Size(144, 22);
+            this.bCancel.TabIndex = 13;
+            this.bCancel.Text = "Отмена";
+            this.bCancel.UseVisualStyleBackColor = true;
+            this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
+            // 
             // Contact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(299, 291);
+            this.ClientSize = new System.Drawing.Size(300, 330);
+            this.Controls.Add(this.bCancel);
             this.Controls.Add(this.cbTimeslot);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.rbAllCall);
@@ -221,5 +233,6 @@
         private System.Windows.Forms.RadioButton rbAllCall;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbTimeslot;
+        private System.Windows.Forms.Button bCancel;
     }
 }
