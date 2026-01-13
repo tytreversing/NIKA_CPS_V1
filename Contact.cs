@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NIKA_CPS_V1.Codeplug;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,20 +14,94 @@ namespace NIKA_CPS_V1
     public partial class Contact : Form
     {
         private ushort _number;
+        private uint _id;
         public Contact(Codeplug.Contact contact)
         {
             InitializeComponent();
             _number = contact.Number;
-            Text = "Контакт #" + _number.ToString();
+            Text = "Контакт #" + _number.ToString() + ": " + contact.Alias;
             tbAlias.Text = contact.Alias;
             tbData.Text = contact.UserData;
             tbDMRID.Text = contact.DMR_ID.ToString();
+            _id = contact.DMR_ID;
+            switch (contact.Type)
+            {
+                case Codeplug.Contact.ContactType.PRIVATE:
+                    rbPrivateCall.Checked = true;
+                    break;
+                case Codeplug.Contact.ContactType.GROUP:
+                    rbGroupCall.Checked = true;
+                    break;
+                case Codeplug.Contact.ContactType.ALL_CALL:
+                    rbAllCall.Checked = true;
+                    break;
+            }
+            if (contact.TimeSlot == Codeplug.Contact.Timeslot.TS1)
+                cbTimeslot.SelectedItem = "TS1";
+            else
+                cbTimeslot.SelectedItem = "TS2";
         }
 
         private void bOK_Click(object sender, EventArgs e)
         {
-            MainForm.CodeplugInternal.UpdateContactByID(_number, tbAlias.Text, uint.Parse(tbDMRID.Text), tbData.Text);
+            Codeplug.Contact.ContactType type;
+            Codeplug.Contact.Timeslot timeslot;
+            if (tbDMRID.Text == "")
+                tbDMRID.Text = "0";
+            if (rbPrivateCall.Checked)
+                type = Codeplug.Contact.ContactType.PRIVATE;
+            else if (rbGroupCall.Checked)
+                type = Codeplug.Contact.ContactType.GROUP;
+            else type = Codeplug.Contact.ContactType.ALL_CALL;
+            if ((string)cbTimeslot.SelectedItem == "TS1")
+                timeslot = Codeplug.Contact.Timeslot.TS1;
+            else
+                timeslot = Codeplug.Contact.Timeslot.TS2;
+            MainForm.CodeplugInternal.UpdateContactByID(_number, tbAlias.Text, uint.Parse(tbDMRID.Text), tbData.Text, type, timeslot);
             Close();
+        }
+
+        private void rbAllCall_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbAllCall.Checked)
+                tbDMRID.Text = "16777215";
+            else
+                tbDMRID.Text = _id.ToString();
+        }
+
+        private void tbDMRID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Разрешаем только цифры, Backspace и Delete
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Игнорируем ввод
+            }
+
+            // Дополнительная проверка длины (если уже 7 символов и не управляющий символ)
+            if (((TextBox)sender).Text.Length >= 7 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbDMRID_TextChanged(object sender, EventArgs e)
+        {
+            var textBox = (TextBox)sender;
+
+            if (uint.TryParse(textBox.Text, out uint result) && textBox.Text.Length <= 7)
+            {
+                _id = result;
+            }
+            else if (string.IsNullOrEmpty(textBox.Text))
+            {
+                _id = 0;
+                tbDMRID.Text = "";
+            }
+        }
+
+        private void tbAlias_TextChanged(object sender, EventArgs e)
+        {
+            Text = "Контакт #" + _number.ToString() + ": " + tbAlias.Text;
         }
     }
 }

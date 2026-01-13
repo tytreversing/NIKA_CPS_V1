@@ -36,6 +36,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbDMRID = new System.Windows.Forms.TextBox();
             this.bOK = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.rbPrivateCall = new System.Windows.Forms.RadioButton();
+            this.rbGroupCall = new System.Windows.Forms.RadioButton();
+            this.rbAllCall = new System.Windows.Forms.RadioButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cbTimeslot = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -50,9 +56,11 @@
             // tbAlias
             // 
             this.tbAlias.Location = new System.Drawing.Point(73, 15);
+            this.tbAlias.MaxLength = 16;
             this.tbAlias.Name = "tbAlias";
             this.tbAlias.Size = new System.Drawing.Size(214, 20);
             this.tbAlias.TabIndex = 1;
+            this.tbAlias.TextChanged += new System.EventHandler(this.tbAlias_TextChanged);
             // 
             // label2
             // 
@@ -66,6 +74,7 @@
             // tbData
             // 
             this.tbData.Location = new System.Drawing.Point(73, 44);
+            this.tbData.MaxLength = 32;
             this.tbData.Name = "tbData";
             this.tbData.Size = new System.Drawing.Size(214, 20);
             this.tbData.TabIndex = 3;
@@ -82,13 +91,17 @@
             // tbDMRID
             // 
             this.tbDMRID.Location = new System.Drawing.Point(73, 73);
+            this.tbDMRID.MaxLength = 7;
             this.tbDMRID.Name = "tbDMRID";
             this.tbDMRID.Size = new System.Drawing.Size(214, 20);
             this.tbDMRID.TabIndex = 5;
+            this.tbDMRID.WordWrap = false;
+            this.tbDMRID.TextChanged += new System.EventHandler(this.tbDMRID_TextChanged);
+            this.tbDMRID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDMRID_KeyPress);
             // 
             // bOK
             // 
-            this.bOK.Location = new System.Drawing.Point(80, 104);
+            this.bOK.Location = new System.Drawing.Point(82, 257);
             this.bOK.Name = "bOK";
             this.bOK.Size = new System.Drawing.Size(144, 22);
             this.bOK.TabIndex = 6;
@@ -96,12 +109,83 @@
             this.bOK.UseVisualStyleBackColor = true;
             this.bOK.Click += new System.EventHandler(this.bOK_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 110);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Тип:";
+            // 
+            // rbPrivateCall
+            // 
+            this.rbPrivateCall.AutoSize = true;
+            this.rbPrivateCall.Checked = true;
+            this.rbPrivateCall.Location = new System.Drawing.Point(76, 110);
+            this.rbPrivateCall.Name = "rbPrivateCall";
+            this.rbPrivateCall.Size = new System.Drawing.Size(105, 17);
+            this.rbPrivateCall.TabIndex = 8;
+            this.rbPrivateCall.TabStop = true;
+            this.rbPrivateCall.Text = "Частный вызов";
+            this.rbPrivateCall.UseVisualStyleBackColor = true;
+            // 
+            // rbGroupCall
+            // 
+            this.rbGroupCall.AutoSize = true;
+            this.rbGroupCall.Location = new System.Drawing.Point(76, 133);
+            this.rbGroupCall.Name = "rbGroupCall";
+            this.rbGroupCall.Size = new System.Drawing.Size(113, 17);
+            this.rbGroupCall.TabIndex = 9;
+            this.rbGroupCall.TabStop = true;
+            this.rbGroupCall.Text = "Групповой вызов";
+            this.rbGroupCall.UseVisualStyleBackColor = true;
+            // 
+            // rbAllCall
+            // 
+            this.rbAllCall.AutoSize = true;
+            this.rbAllCall.Location = new System.Drawing.Point(76, 157);
+            this.rbAllCall.Name = "rbAllCall";
+            this.rbAllCall.Size = new System.Drawing.Size(84, 17);
+            this.rbAllCall.TabIndex = 10;
+            this.rbAllCall.TabStop = true;
+            this.rbAllCall.Text = "Вызов всех";
+            this.rbAllCall.UseVisualStyleBackColor = true;
+            this.rbAllCall.CheckedChanged += new System.EventHandler(this.rbAllCall_CheckedChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 200);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Таймслот:";
+            // 
+            // cbTimeslot
+            // 
+            this.cbTimeslot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTimeslot.FormattingEnabled = true;
+            this.cbTimeslot.Items.AddRange(new object[] {
+            "TS1",
+            "TS2"});
+            this.cbTimeslot.Location = new System.Drawing.Point(73, 197);
+            this.cbTimeslot.Name = "cbTimeslot";
+            this.cbTimeslot.Size = new System.Drawing.Size(107, 21);
+            this.cbTimeslot.TabIndex = 12;
+            // 
             // Contact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(299, 137);
+            this.ClientSize = new System.Drawing.Size(299, 291);
+            this.Controls.Add(this.cbTimeslot);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.rbAllCall);
+            this.Controls.Add(this.rbGroupCall);
+            this.Controls.Add(this.rbPrivateCall);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.bOK);
             this.Controls.Add(this.tbDMRID);
             this.Controls.Add(this.label3);
@@ -131,5 +215,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbDMRID;
         private System.Windows.Forms.Button bOK;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RadioButton rbPrivateCall;
+        private System.Windows.Forms.RadioButton rbGroupCall;
+        private System.Windows.Forms.RadioButton rbAllCall;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cbTimeslot;
     }
 }

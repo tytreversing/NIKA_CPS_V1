@@ -274,7 +274,7 @@ namespace NIKA_CPS_V1
             ushort freeNumber = CodeplugInternal.GetFirstFreeNumber();
             if (freeNumber < CodeplugData.MAX_CONTACTS_COUNT)
             {
-                Codeplug.Contact newContact = new Codeplug.Contact(freeNumber, "Контакт # " + freeNumber.ToString(), 0, "");
+                Codeplug.Contact newContact = new Codeplug.Contact(freeNumber, "Контакт #" + freeNumber.ToString(), 0, "", Codeplug.Contact.ContactType.PRIVATE, Codeplug.Contact.Timeslot.TS1);
                 CodeplugInternal.AddContact(newContact);
                 GenerateTree(TreeRefreshType.CONTACTS);
                 Contact contactForm = new Contact(newContact);
@@ -283,6 +283,12 @@ namespace NIKA_CPS_V1
             else
                 MessageBox.Show("Память контактов полностью заполнена, добавить новый невозможно.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+        }
+
+        private void tsmiDeleteSimilar_Click(object sender, EventArgs e)
+        {
+            CodeplugInternal.DeleteDuplicateContacts();
+            GenerateTree(TreeRefreshType.CONTACTS);
         }
 
         private void tsbFirmware_Click(object sender, EventArgs e)
@@ -466,8 +472,6 @@ namespace NIKA_CPS_V1
         {
 
         }
-
-
 
 
     }

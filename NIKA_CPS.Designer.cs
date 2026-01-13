@@ -246,6 +246,10 @@
             System.Windows.Forms.TreeNode treeNode111 = new System.Windows.Forms.TreeNode("VFO", new System.Windows.Forms.TreeNode[] {
             treeNode109,
             treeNode110});
+            this.cmsAllContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiNewContact = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDeleteSimilar = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMainControls = new System.Windows.Forms.ToolStrip();
             this.tsbMenuToggle = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -273,17 +277,44 @@
             this.msiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tbConsole = new System.Windows.Forms.TextBox();
             this.pollingTimer = new System.Windows.Forms.Timer(this.components);
-            this.cmsAllContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiNewContact = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDeleteSimilar = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsSingleContact = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDeleteContact = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAllContacts.SuspendLayout();
             this.tsMainControls.SuspendLayout();
             this.msMain.SuspendLayout();
-            this.cmsAllContacts.SuspendLayout();
             this.cmsSingleContact.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // cmsAllContacts
+            // 
+            this.cmsAllContacts.BackColor = System.Drawing.Color.White;
+            this.cmsAllContacts.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewContact,
+            this.tsmiArrange,
+            this.tsmiDeleteSimilar});
+            this.cmsAllContacts.Name = "cmsAllContacts";
+            this.cmsAllContacts.Size = new System.Drawing.Size(275, 98);
+            // 
+            // tsmiNewContact
+            // 
+            this.tsmiNewContact.Name = "tsmiNewContact";
+            this.tsmiNewContact.Size = new System.Drawing.Size(274, 24);
+            this.tsmiNewContact.Text = "Новый";
+            this.tsmiNewContact.Click += new System.EventHandler(this.tsmiNewContact_Click);
+            // 
+            // tsmiArrange
+            // 
+            this.tsmiArrange.Name = "tsmiArrange";
+            this.tsmiArrange.Size = new System.Drawing.Size(274, 24);
+            this.tsmiArrange.Text = "Упорядочить по алфавиту";
+            this.tsmiArrange.Click += new System.EventHandler(this.tsmiArrange_Click);
+            // 
+            // tsmiDeleteSimilar
+            // 
+            this.tsmiDeleteSimilar.Name = "tsmiDeleteSimilar";
+            this.tsmiDeleteSimilar.Size = new System.Drawing.Size(274, 24);
+            this.tsmiDeleteSimilar.Text = "Удалить дубликаты по DMR ID";
+            this.tsmiDeleteSimilar.Click += new System.EventHandler(this.tsmiDeleteSimilar_Click);
             // 
             // tsMainControls
             // 
@@ -772,36 +803,6 @@
             this.pollingTimer.Interval = 500;
             this.pollingTimer.Tick += new System.EventHandler(this.pollingTimer_Tick);
             // 
-            // cmsAllContacts
-            // 
-            this.cmsAllContacts.BackColor = System.Drawing.Color.White;
-            this.cmsAllContacts.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewContact,
-            this.tsmiArrange,
-            this.tsmiDeleteSimilar});
-            this.cmsAllContacts.Name = "cmsAllContacts";
-            this.cmsAllContacts.Size = new System.Drawing.Size(275, 98);
-            // 
-            // tsmiNewContact
-            // 
-            this.tsmiNewContact.Name = "tsmiNewContact";
-            this.tsmiNewContact.Size = new System.Drawing.Size(274, 24);
-            this.tsmiNewContact.Text = "Новый";
-            this.tsmiNewContact.Click += new System.EventHandler(this.tsmiNewContact_Click);
-            // 
-            // tsmiArrange
-            // 
-            this.tsmiArrange.Name = "tsmiArrange";
-            this.tsmiArrange.Size = new System.Drawing.Size(274, 24);
-            this.tsmiArrange.Text = "Упорядочить по алфавиту";
-            this.tsmiArrange.Click += new System.EventHandler(this.tsmiArrange_Click);
-            // 
-            // tsmiDeleteSimilar
-            // 
-            this.tsmiDeleteSimilar.Name = "tsmiDeleteSimilar";
-            this.tsmiDeleteSimilar.Size = new System.Drawing.Size(274, 24);
-            this.tsmiDeleteSimilar.Text = "Удалить дубликаты по DMR ID";
-            // 
             // cmsSingleContact
             // 
             this.cmsSingleContact.BackColor = System.Drawing.Color.White;
@@ -835,11 +836,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
+            this.cmsAllContacts.ResumeLayout(false);
             this.tsMainControls.ResumeLayout(false);
             this.tsMainControls.PerformLayout();
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
-            this.cmsAllContacts.ResumeLayout(false);
             this.cmsSingleContact.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

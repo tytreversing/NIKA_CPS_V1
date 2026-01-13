@@ -21,8 +21,8 @@ namespace NIKA_CPS_V1.Codeplug
         public CodeplugData()
         {
             _contacts = new List<Contact>();
-            AddContact(new Contact(GetFirstFreeNumber(), "Вызов всех", 16777215, ""));
-            AddContact(new Contact(GetFirstFreeNumber(), "Россия", 2501, ""));
+            AddContact(new Contact(GetFirstFreeNumber(), "Вызов всех", 16777215, "", Contact.ContactType.ALL_CALL, Contact.Timeslot.TS1));
+            AddContact(new Contact(GetFirstFreeNumber(), "Россия", 2501, "", Contact.ContactType.GROUP, Contact.Timeslot.TS1));
         }
 
         public bool AddContact(Contact contact)
@@ -44,12 +44,12 @@ namespace NIKA_CPS_V1.Codeplug
         //удаление контактов с одинаковыми DMR ID
         public void DeleteDuplicateContacts()
         {
-            HashSet<ushort> uniqueNumbers = new HashSet<ushort>();
+            HashSet<uint> uniqueIDs = new HashSet<uint>();
             List<Contact> uniqueContacts = new List<Contact>();
 
             foreach (var contact in _contacts)
             {
-                if (contact != null && uniqueNumbers.Add(contact.Number))
+                if (contact != null && uniqueIDs.Add(contact.DMR_ID))
                 {
                     // Если номер был успешно добавлен в HashSet (т.е. он уникальный),
                     // добавляем контакт в результат
@@ -101,7 +101,7 @@ namespace NIKA_CPS_V1.Codeplug
             return ushort.MaxValue;
         }
 
-        public void UpdateContactByID(ushort id, string alias, uint dmrid, string userdata)
+        public void UpdateContactByID(ushort id, string alias, uint dmrid, string userdata, Contact.ContactType type, Contact.Timeslot slot)
         {
             if (_contacts == null) return;
 
@@ -112,6 +112,8 @@ namespace NIKA_CPS_V1.Codeplug
                 contact.Alias = alias;
                 contact.DMR_ID = dmrid;
                 contact.UserData = userdata;
+                contact.Type = type;    
+                contact.TimeSlot = slot;
             }
         }
 
