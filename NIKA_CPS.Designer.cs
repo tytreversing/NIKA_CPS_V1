@@ -30,29 +30,43 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Настройки", 1, 1);
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Узел0");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Контакты", 2, 2, new System.Windows.Forms.TreeNode[] {
-            treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Узел20");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Списки групп", 6, 6, new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Узел9");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Зоны", 7, 7, new System.Windows.Forms.TreeNode[] {
-            treeNode6});
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Узел13");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Каналы", 8, 8, new System.Windows.Forms.TreeNode[] {
-            treeNode8});
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("VFO A", 9, 9);
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("VFO B", 9, 9);
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("VFO", 9, 9, new System.Windows.Forms.TreeNode[] {
-            treeNode10,
-            treeNode11});
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10);
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Узел0");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Контакты", 2, 2, new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Узел20");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Списки групп", 6, 6, new System.Windows.Forms.TreeNode[] {
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Узел9");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Зоны", 7, 7, new System.Windows.Forms.TreeNode[] {
+            treeNode5});
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Узел13");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Каналы", 8, 8, new System.Windows.Forms.TreeNode[] {
+            treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("VFO A", 9, 9);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("VFO B", 9, 9);
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("VFO", 9, 9, new System.Windows.Forms.TreeNode[] {
+            treeNode9,
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Настройки", 1, 1);
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Узел5");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Узел6");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Узел7");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Узел8");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Узел9");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10, new System.Windows.Forms.TreeNode[] {
+            treeNode13,
+            treeNode14,
+            treeNode15,
+            treeNode16,
+            treeNode17});
             this.cmsAllContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewContact = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteSimilar = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAllSatellites = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiReloadLocalSatellites = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiReloadFromNetwork = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiClearSatellites = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMainControls = new System.Windows.Forms.ToolStrip();
             this.tsbMenuToggle = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -83,17 +97,14 @@
             this.pollingTimer = new System.Windows.Forms.Timer(this.components);
             this.cmsSingleContact = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDeleteContact = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsAllSatellites = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiReloadLocalSatellites = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiReloadFromNetwork = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiClearSatellites = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsSingleSatellite = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDeleteSatellite = new System.Windows.Forms.ToolStripMenuItem();
+            this.tvSecondary = new System.Windows.Forms.TreeView();
             this.cmsAllContacts.SuspendLayout();
+            this.cmsAllSatellites.SuspendLayout();
             this.tsMainControls.SuspendLayout();
             this.msMain.SuspendLayout();
             this.cmsSingleContact.SuspendLayout();
-            this.cmsAllSatellites.SuspendLayout();
             this.cmsSingleSatellite.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,6 +138,34 @@
             this.tsmiDeleteSimilar.Size = new System.Drawing.Size(274, 24);
             this.tsmiDeleteSimilar.Text = "Удалить дубликаты по DMR ID";
             this.tsmiDeleteSimilar.Click += new System.EventHandler(this.tsmiDeleteSimilar_Click);
+            // 
+            // cmsAllSatellites
+            // 
+            this.cmsAllSatellites.BackColor = System.Drawing.Color.White;
+            this.cmsAllSatellites.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiReloadLocalSatellites,
+            this.tsmiReloadFromNetwork,
+            this.tsmiClearSatellites});
+            this.cmsAllSatellites.Name = "cmsAllSatellites";
+            this.cmsAllSatellites.Size = new System.Drawing.Size(260, 76);
+            // 
+            // tsmiReloadLocalSatellites
+            // 
+            this.tsmiReloadLocalSatellites.Name = "tsmiReloadLocalSatellites";
+            this.tsmiReloadLocalSatellites.Size = new System.Drawing.Size(259, 24);
+            this.tsmiReloadLocalSatellites.Text = "Перезагрузить локально";
+            // 
+            // tsmiReloadFromNetwork
+            // 
+            this.tsmiReloadFromNetwork.Name = "tsmiReloadFromNetwork";
+            this.tsmiReloadFromNetwork.Size = new System.Drawing.Size(259, 24);
+            this.tsmiReloadFromNetwork.Text = "Перезагрузить из Интернета";
+            // 
+            // tsmiClearSatellites
+            // 
+            this.tsmiClearSatellites.Name = "tsmiClearSatellites";
+            this.tsmiClearSatellites.Size = new System.Drawing.Size(259, 24);
+            this.tsmiClearSatellites.Text = "Очистить";
             // 
             // tsMainControls
             // 
@@ -294,70 +333,59 @@
             // 
             this.tvMain.BackColor = System.Drawing.SystemColors.Window;
             this.tvMain.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tvMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvMain.Dock = System.Windows.Forms.DockStyle.Left;
             this.tvMain.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tvMain.ImageIndex = 0;
             this.tvMain.ImageList = this.ilTreeItems;
             this.tvMain.Location = new System.Drawing.Point(59, 6);
             this.tvMain.Margin = new System.Windows.Forms.Padding(8, 8, 4, 3);
             this.tvMain.Name = "tvMain";
-            treeNode1.ImageIndex = 1;
-            treeNode1.Name = "SettingsNode";
-            treeNode1.SelectedImageIndex = 1;
-            treeNode1.Text = "Настройки";
-            treeNode2.Name = "Узел0";
-            treeNode2.Text = "Узел0";
-            treeNode3.ContextMenuStrip = this.cmsAllContacts;
-            treeNode3.ImageIndex = 2;
-            treeNode3.Name = "ContactsNode";
-            treeNode3.SelectedImageIndex = 2;
-            treeNode3.Text = "Контакты";
-            treeNode4.Name = "Узел20";
-            treeNode4.Text = "Узел20";
-            treeNode5.ImageIndex = 6;
-            treeNode5.Name = "GroupListsNode";
-            treeNode5.SelectedImageIndex = 6;
-            treeNode5.Text = "Списки групп";
-            treeNode6.Name = "Узел9";
-            treeNode6.Text = "Узел9";
-            treeNode7.ImageIndex = 7;
-            treeNode7.Name = "ZonesNode";
-            treeNode7.SelectedImageIndex = 7;
-            treeNode7.Text = "Зоны";
-            treeNode8.Name = "Узел13";
-            treeNode8.Text = "Узел13";
-            treeNode9.ImageIndex = 8;
-            treeNode9.Name = "ChannelsNode";
-            treeNode9.SelectedImageIndex = 8;
-            treeNode9.Text = "Каналы";
+            treeNode1.Name = "Узел0";
+            treeNode1.Text = "Узел0";
+            treeNode2.ContextMenuStrip = this.cmsAllContacts;
+            treeNode2.ImageIndex = 2;
+            treeNode2.Name = "ContactsNode";
+            treeNode2.SelectedImageIndex = 2;
+            treeNode2.Text = "Контакты";
+            treeNode3.Name = "Узел20";
+            treeNode3.Text = "Узел20";
+            treeNode4.ImageIndex = 6;
+            treeNode4.Name = "GroupListsNode";
+            treeNode4.SelectedImageIndex = 6;
+            treeNode4.Text = "Списки групп";
+            treeNode5.Name = "Узел9";
+            treeNode5.Text = "Узел9";
+            treeNode6.ImageIndex = 7;
+            treeNode6.Name = "ZonesNode";
+            treeNode6.SelectedImageIndex = 7;
+            treeNode6.Text = "Зоны";
+            treeNode7.Name = "Узел13";
+            treeNode7.Text = "Узел13";
+            treeNode8.ImageIndex = 8;
+            treeNode8.Name = "ChannelsNode";
+            treeNode8.SelectedImageIndex = 8;
+            treeNode8.Text = "Каналы";
+            treeNode9.ImageIndex = 9;
+            treeNode9.Name = "tnVFOA";
+            treeNode9.SelectedImageIndex = 9;
+            treeNode9.Text = "VFO A";
             treeNode10.ImageIndex = 9;
-            treeNode10.Name = "tnVFOA";
+            treeNode10.Name = "tnVFOB";
             treeNode10.SelectedImageIndex = 9;
-            treeNode10.Text = "VFO A";
+            treeNode10.Text = "VFO B";
             treeNode11.ImageIndex = 9;
-            treeNode11.Name = "tnVFOB";
+            treeNode11.Name = "VFONode";
             treeNode11.SelectedImageIndex = 9;
-            treeNode11.Text = "VFO B";
-            treeNode12.ImageIndex = 9;
-            treeNode12.Name = "VFONode";
-            treeNode12.SelectedImageIndex = 9;
-            treeNode12.Text = "VFO";
-            treeNode13.ContextMenuStrip = this.cmsAllSatellites;
-            treeNode13.ImageIndex = 10;
-            treeNode13.Name = "SatellitesNode";
-            treeNode13.SelectedImageIndex = 10;
-            treeNode13.Text = "Радиолюбительские спутники";
+            treeNode11.Text = "VFO";
             this.tvMain.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode3,
-            treeNode5,
-            treeNode7,
-            treeNode9,
-            treeNode12,
-            treeNode13});
+            treeNode2,
+            treeNode4,
+            treeNode6,
+            treeNode8,
+            treeNode11});
             this.tvMain.SelectedImageIndex = 0;
             this.tvMain.ShowNodeToolTips = true;
-            this.tvMain.Size = new System.Drawing.Size(1103, 605);
+            this.tvMain.Size = new System.Drawing.Size(337, 605);
             this.tvMain.TabIndex = 1;
             this.tvMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvMain_AfterSelect);
             this.tvMain.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvMain_NodeMouseDoubleClick);
@@ -474,47 +502,55 @@
             this.tsmiDeleteContact.Text = "Удалить";
             this.tsmiDeleteContact.Click += new System.EventHandler(this.tsmiDeleteContact_Click);
             // 
-            // cmsAllSatellites
-            // 
-            this.cmsAllSatellites.BackColor = System.Drawing.Color.White;
-            this.cmsAllSatellites.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiReloadLocalSatellites,
-            this.tsmiReloadFromNetwork,
-            this.tsmiClearSatellites});
-            this.cmsAllSatellites.Name = "cmsAllSatellites";
-            this.cmsAllSatellites.Size = new System.Drawing.Size(260, 76);
-            // 
-            // tsmiReloadLocalSatellites
-            // 
-            this.tsmiReloadLocalSatellites.Name = "tsmiReloadLocalSatellites";
-            this.tsmiReloadLocalSatellites.Size = new System.Drawing.Size(259, 24);
-            this.tsmiReloadLocalSatellites.Text = "Перезагрузить локально";
-            // 
-            // tsmiReloadFromNetwork
-            // 
-            this.tsmiReloadFromNetwork.Name = "tsmiReloadFromNetwork";
-            this.tsmiReloadFromNetwork.Size = new System.Drawing.Size(259, 24);
-            this.tsmiReloadFromNetwork.Text = "Перезагрузить из Интернета";
-            // 
-            // tsmiClearSatellites
-            // 
-            this.tsmiClearSatellites.Name = "tsmiClearSatellites";
-            this.tsmiClearSatellites.Size = new System.Drawing.Size(259, 24);
-            this.tsmiClearSatellites.Text = "Очистить";
-            // 
             // cmsSingleSatellite
             // 
             this.cmsSingleSatellite.BackColor = System.Drawing.Color.White;
             this.cmsSingleSatellite.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiDeleteSatellite});
             this.cmsSingleSatellite.Name = "cmsSingleSatellite";
-            this.cmsSingleSatellite.Size = new System.Drawing.Size(181, 50);
+            this.cmsSingleSatellite.Size = new System.Drawing.Size(130, 28);
             // 
             // tsmiDeleteSatellite
             // 
             this.tsmiDeleteSatellite.Name = "tsmiDeleteSatellite";
-            this.tsmiDeleteSatellite.Size = new System.Drawing.Size(180, 24);
+            this.tsmiDeleteSatellite.Size = new System.Drawing.Size(129, 24);
             this.tsmiDeleteSatellite.Text = "Удалить";
+            // 
+            // tvSecondary
+            // 
+            this.tvSecondary.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tvSecondary.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tvSecondary.ImageIndex = 0;
+            this.tvSecondary.ImageList = this.ilTreeItems;
+            this.tvSecondary.Location = new System.Drawing.Point(396, 6);
+            this.tvSecondary.Name = "tvSecondary";
+            treeNode12.ImageIndex = 1;
+            treeNode12.Name = "SettingsNode";
+            treeNode12.SelectedImageIndex = 1;
+            treeNode12.Text = "Настройки";
+            treeNode13.Name = "Узел5";
+            treeNode13.Text = "Узел5";
+            treeNode14.Name = "Узел6";
+            treeNode14.Text = "Узел6";
+            treeNode15.Name = "Узел7";
+            treeNode15.Text = "Узел7";
+            treeNode16.Name = "Узел8";
+            treeNode16.Text = "Узел8";
+            treeNode17.Name = "Узел9";
+            treeNode17.Text = "Узел9";
+            treeNode18.ImageIndex = 10;
+            treeNode18.Name = "SatellitesNode";
+            treeNode18.SelectedImageIndex = 10;
+            treeNode18.Text = "Радиолюбительские спутники";
+            this.tvSecondary.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode12,
+            treeNode18});
+            this.tvSecondary.SelectedImageIndex = 0;
+            this.tvSecondary.Size = new System.Drawing.Size(347, 605);
+            this.tvSecondary.TabIndex = 4;
+            this.tvSecondary.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvSecondary_AfterSelect);
+            this.tvSecondary.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSecondary_NodeMouseClick);
+            this.tvSecondary.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSecondary_NodeMouseDoubleClick);
             // 
             // MainForm
             // 
@@ -522,10 +558,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1168, 687);
+            this.Controls.Add(this.tvSecondary);
             this.Controls.Add(this.tvMain);
             this.Controls.Add(this.tbConsole);
-            this.Controls.Add(this.msMain);
             this.Controls.Add(this.tsMainControls);
+            this.Controls.Add(this.msMain);
             this.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -535,12 +572,12 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.cmsAllContacts.ResumeLayout(false);
+            this.cmsAllSatellites.ResumeLayout(false);
             this.tsMainControls.ResumeLayout(false);
             this.tsMainControls.PerformLayout();
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
             this.cmsSingleContact.ResumeLayout(false);
-            this.cmsAllSatellites.ResumeLayout(false);
             this.cmsSingleSatellite.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -589,6 +626,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiClearSatellites;
         private System.Windows.Forms.ContextMenuStrip cmsSingleSatellite;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteSatellite;
+        private System.Windows.Forms.TreeView tvSecondary;
     }
 }
 

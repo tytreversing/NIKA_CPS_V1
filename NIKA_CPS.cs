@@ -258,7 +258,7 @@ namespace NIKA_CPS_V1
             }
             if (mode == TreeRefreshType.ALL || mode == TreeRefreshType.SATELLITES)
             {
-                TreeNode satellitesNode = tvMain.Nodes.Find("SatellitesNode", true).FirstOrDefault();
+                TreeNode satellitesNode = tvSecondary.Nodes.Find("SatellitesNode", true).FirstOrDefault();
                 if (satellitesNode != null && CodeplugInternal != null && CodeplugInternal.SatelliteKeps != null)
                 {
                     satellitesNode.Nodes.Clear();
@@ -282,9 +282,9 @@ namespace NIKA_CPS_V1
                             if (node.Tag == null) continue;
                             if (((Codeplug.SatelliteKeps)node.Tag).CatalogueNumber == lastSelectedSatellite)
                             {
-                                tvMain.SelectedNode = node;
+                                tvSecondary.SelectedNode = node;
                                 node.EnsureVisible();
-                                tvMain.Focus();
+                                tvSecondary.Focus();
                             }
                         }
                     }
@@ -307,14 +307,7 @@ namespace NIKA_CPS_V1
             {
                                                                                                                   
             }
-            else if (e.Node.Parent != null && e.Node.Parent.Name == "SatellitesNode")
-            {
-                if (e.Button == MouseButtons.Right)
-                {
-                    tvMain.SelectedNode = e.Node;
-                    cmsSingleContact.Show(tvMain, e.Location);
-                }
-            }
+            
         }
 
         private void tvMain_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -335,6 +328,42 @@ namespace NIKA_CPS_V1
             {
 
             }
+        }
+
+        private void tvMain_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode selectedNode = e.Node;
+
+            if (selectedNode == null)
+                return;
+
+            // Проверяем, что узел находится под узлом ContactsNode
+            if (selectedNode.Parent?.Name == "ContactsNode" && selectedNode.Tag is Codeplug.Contact contact)
+            {
+                lastSelectedChannel = contact.Number;
+            }
+        }
+
+        private void tvSecondary_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Parent != null && e.Node.Parent.Name == "SatellitesNode")
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    tvSecondary.SelectedNode = e.Node;
+                    cmsSingleContact.Show(tvSecondary, e.Location);
+                }
+            }
+        }
+
+        private void tvSecondary_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+
+        }
+
+        private void tvSecondary_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
         }
 
         private void tsmiDeleteContact_Click(object sender, EventArgs e)
@@ -557,20 +586,6 @@ namespace NIKA_CPS_V1
             // У TreeNode нет свойства Enabled, проверяем через родительский контроль
             // или другие доступные свойства
             return "информация недоступна (свойство отсутствует)";
-        }
-
-        private void tvMain_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            TreeNode selectedNode = e.Node;
-
-            if (selectedNode == null)
-                return;
-
-            // Проверяем, что узел находится под узлом ContactsNode
-            if (selectedNode.Parent?.Name == "ContactsNode" && selectedNode.Tag is Codeplug.Contact contact)
-            {
-                   lastSelectedChannel = contact.Number;
-            }
         }
 
 
