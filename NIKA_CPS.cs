@@ -41,11 +41,13 @@ namespace NIKA_CPS_V1
         private string codeplugFileName;
 
         private uint lastSelectedChannel = 0;
+        private string lastSelectedSatellite = "";
 
         public enum TreeRefreshType
         {
             ALL,
-            CONTACTS
+            CONTACTS,
+            SATELLITES
         }
 
         public bool isValidHex(string input)
@@ -254,7 +256,40 @@ namespace NIKA_CPS_V1
                     }
                 }
             }
-            
+            if (mode == TreeRefreshType.ALL || mode == TreeRefreshType.SATELLITES)
+            {
+                TreeNode satellitesNode = tvMain.Nodes.Find("SatellitesNode", true).FirstOrDefault();
+                if (satellitesNode != null && CodeplugInternal != null && CodeplugInternal.SatelliteKeps != null)
+                {
+                    satellitesNode.Nodes.Clear();
+                    foreach (Codeplug.SatelliteKeps satellite in CodeplugInternal.SatelliteKeps)
+                    {
+                        string name = satellite.DisplayName ?? "Безымянный";
+                        TreeNode newNode = new TreeNode(name);
+                        newNode.Tag = satellite;
+                        newNode.ToolTipText = satellite.Callsign + " " + (satellite.Rx1/1000000f).ToString("F3") + " " + (satellite.Tx1/1000000f).ToString("F3");
+                        newNode.ImageIndex = 10;
+                        newNode.SelectedImageIndex = 10;
+                        satellitesNode.Nodes.Add(newNode);
+
+                    }
+                    if (RegistryOperations.getProfileIntWithDefault("ExpandSatellites", 0) != 0)
+                        satellitesNode.Expand();
+                    if (mode != TreeRefreshType.ALL)
+                    {
+                        foreach (TreeNode node in satellitesNode.Nodes)
+                        {
+                            if (node.Tag == null) continue;
+                            if (((Codeplug.SatelliteKeps)node.Tag).CatalogueNumber == lastSelectedSatellite)
+                            {
+                                tvMain.SelectedNode = node;
+                                node.EnsureVisible();
+                                tvMain.Focus();
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void tvMain_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -271,6 +306,14 @@ namespace NIKA_CPS_V1
             else if (e.Node.Parent != null && e.Node.Parent.Name == "GroupListsNode")
             {
                                                                                                                   
+            }
+            else if (e.Node.Parent != null && e.Node.Parent.Name == "SatellitesNode")
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    tvMain.SelectedNode = e.Node;
+                    cmsSingleContact.Show(tvMain, e.Location);
+                }
             }
         }
 

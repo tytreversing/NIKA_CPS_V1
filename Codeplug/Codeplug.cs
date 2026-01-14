@@ -10,19 +10,29 @@ namespace NIKA_CPS_V1.Codeplug
     public class CodeplugData
     {
         private List<Contact> _contacts;
+        private List<SatelliteKeps> _satelliteKeps;
 
         //константы
         public const int MAX_CONTACTS_COUNT = 256; //максимальное число контактов
+        public const int MAX_SATELLITES_COUNT = 20; //максимальное число спутников
         public List<Contact> Contacts
         {
             get => _contacts;
             set => _contacts = value;
+        }
+
+        public List<SatelliteKeps> SatelliteKeps
+        {
+            get => _satelliteKeps;
+            set => _satelliteKeps = value;
         }
         public CodeplugData()
         {
             _contacts = new List<Contact>();
             AddContact(new Contact(GetFirstFreeNumber(), "Вызов всех", 16777215, "", Contact.ContactType.ALL_CALL, Contact.Timeslot.TS1));
             AddContact(new Contact(GetFirstFreeNumber(), "Россия", 2501, "", Contact.ContactType.GROUP, Contact.Timeslot.TS1));
+            _satelliteKeps = new List<SatelliteKeps>();
+            AddSatellite(new Codeplug.SatelliteKeps());
         }
 
         public bool AddContact(Contact contact)
@@ -129,6 +139,22 @@ namespace NIKA_CPS_V1.Codeplug
             }
             else
                 MessageBox.Show("Контакт с алиасом " + alias + " не найден");
+        }
+
+        public bool AddSatellite(SatelliteKeps satellite)
+        {
+            if (_satelliteKeps.Count <= MAX_SATELLITES_COUNT)
+            {
+                _satelliteKeps.Add(satellite);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public void ClearSatellites()
+        {
+            _satelliteKeps.Clear();
         }
     }
 }

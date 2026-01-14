@@ -48,6 +48,7 @@
             System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("VFO", 9, 9, new System.Windows.Forms.TreeNode[] {
             treeNode10,
             treeNode11});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10);
             this.cmsAllContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewContact = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,10 +83,18 @@
             this.pollingTimer = new System.Windows.Forms.Timer(this.components);
             this.cmsSingleContact = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDeleteContact = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAllSatellites = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiReloadLocalSatellites = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiReloadFromNetwork = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiClearSatellites = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsSingleSatellite = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiDeleteSatellite = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllContacts.SuspendLayout();
             this.tsMainControls.SuspendLayout();
             this.msMain.SuspendLayout();
             this.cmsSingleContact.SuspendLayout();
+            this.cmsAllSatellites.SuspendLayout();
+            this.cmsSingleSatellite.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsAllContacts
@@ -333,13 +342,19 @@
             treeNode12.Name = "VFONode";
             treeNode12.SelectedImageIndex = 9;
             treeNode12.Text = "VFO";
+            treeNode13.ContextMenuStrip = this.cmsAllSatellites;
+            treeNode13.ImageIndex = 10;
+            treeNode13.Name = "SatellitesNode";
+            treeNode13.SelectedImageIndex = 10;
+            treeNode13.Text = "Радиолюбительские спутники";
             this.tvMain.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode3,
             treeNode5,
             treeNode7,
             treeNode9,
-            treeNode12});
+            treeNode12,
+            treeNode13});
             this.tvMain.SelectedImageIndex = 0;
             this.tvMain.ShowNodeToolTips = true;
             this.tvMain.Size = new System.Drawing.Size(1103, 605);
@@ -361,6 +376,7 @@
             this.ilTreeItems.Images.SetKeyName(7, "zone.png");
             this.ilTreeItems.Images.SetKeyName(8, "channels.png");
             this.ilTreeItems.Images.SetKeyName(9, "vfo.png");
+            this.ilTreeItems.Images.SetKeyName(10, "satellite.png");
             // 
             // msMain
             // 
@@ -458,6 +474,48 @@
             this.tsmiDeleteContact.Text = "Удалить";
             this.tsmiDeleteContact.Click += new System.EventHandler(this.tsmiDeleteContact_Click);
             // 
+            // cmsAllSatellites
+            // 
+            this.cmsAllSatellites.BackColor = System.Drawing.Color.White;
+            this.cmsAllSatellites.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiReloadLocalSatellites,
+            this.tsmiReloadFromNetwork,
+            this.tsmiClearSatellites});
+            this.cmsAllSatellites.Name = "cmsAllSatellites";
+            this.cmsAllSatellites.Size = new System.Drawing.Size(260, 76);
+            // 
+            // tsmiReloadLocalSatellites
+            // 
+            this.tsmiReloadLocalSatellites.Name = "tsmiReloadLocalSatellites";
+            this.tsmiReloadLocalSatellites.Size = new System.Drawing.Size(259, 24);
+            this.tsmiReloadLocalSatellites.Text = "Перезагрузить локально";
+            // 
+            // tsmiReloadFromNetwork
+            // 
+            this.tsmiReloadFromNetwork.Name = "tsmiReloadFromNetwork";
+            this.tsmiReloadFromNetwork.Size = new System.Drawing.Size(259, 24);
+            this.tsmiReloadFromNetwork.Text = "Перезагрузить из Интернета";
+            // 
+            // tsmiClearSatellites
+            // 
+            this.tsmiClearSatellites.Name = "tsmiClearSatellites";
+            this.tsmiClearSatellites.Size = new System.Drawing.Size(259, 24);
+            this.tsmiClearSatellites.Text = "Очистить";
+            // 
+            // cmsSingleSatellite
+            // 
+            this.cmsSingleSatellite.BackColor = System.Drawing.Color.White;
+            this.cmsSingleSatellite.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDeleteSatellite});
+            this.cmsSingleSatellite.Name = "cmsSingleSatellite";
+            this.cmsSingleSatellite.Size = new System.Drawing.Size(181, 50);
+            // 
+            // tsmiDeleteSatellite
+            // 
+            this.tsmiDeleteSatellite.Name = "tsmiDeleteSatellite";
+            this.tsmiDeleteSatellite.Size = new System.Drawing.Size(180, 24);
+            this.tsmiDeleteSatellite.Text = "Удалить";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -482,6 +540,8 @@
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
             this.cmsSingleContact.ResumeLayout(false);
+            this.cmsAllSatellites.ResumeLayout(false);
+            this.cmsSingleSatellite.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -523,6 +583,12 @@
         private System.Windows.Forms.ContextMenuStrip cmsSingleContact;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteContact;
         private System.Windows.Forms.ImageList ilTreeItems;
+        private System.Windows.Forms.ContextMenuStrip cmsAllSatellites;
+        private System.Windows.Forms.ToolStripMenuItem tsmiReloadLocalSatellites;
+        private System.Windows.Forms.ToolStripMenuItem tsmiReloadFromNetwork;
+        private System.Windows.Forms.ToolStripMenuItem tsmiClearSatellites;
+        private System.Windows.Forms.ContextMenuStrip cmsSingleSatellite;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteSatellite;
     }
 }
 
