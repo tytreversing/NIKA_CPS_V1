@@ -211,7 +211,7 @@ namespace NIKA_CPS_V1
                     // Добавляем узлы для каждого контакта
                     foreach (Codeplug.Contact contact in CodeplugInternal.Contacts)
                     {
-                        string alias = contact.Alias ?? "Без имени";
+                        string alias = contact.Alias ?? "Безымянный";
                         TreeNode newNode = new TreeNode(alias);
                         newNode.Tag = contact;
                         newNode.ToolTipText = contact.DMR_ID.ToString() + " " + contact.Alias;
