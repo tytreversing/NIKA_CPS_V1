@@ -69,6 +69,7 @@
             this.tsbSettings = new System.Windows.Forms.ToolStripButton();
             this.tsbAbout = new System.Windows.Forms.ToolStripButton();
             this.tvMain = new System.Windows.Forms.TreeView();
+            this.ilTreeItems = new System.Windows.Forms.ImageList(this.components);
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.msiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.msiCodeplug = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,7 +82,6 @@
             this.pollingTimer = new System.Windows.Forms.Timer(this.components);
             this.cmsSingleContact = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDeleteContact = new System.Windows.Forms.ToolStripMenuItem();
-            this.ilTreeItems = new System.Windows.Forms.ImageList(this.components);
             this.cmsAllContacts.SuspendLayout();
             this.tsMainControls.SuspendLayout();
             this.msMain.SuspendLayout();
@@ -347,6 +347,21 @@
             this.tvMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvMain_AfterSelect);
             this.tvMain.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvMain_NodeMouseDoubleClick);
             // 
+            // ilTreeItems
+            // 
+            this.ilTreeItems.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilTreeItems.ImageStream")));
+            this.ilTreeItems.TransparentColor = System.Drawing.Color.White;
+            this.ilTreeItems.Images.SetKeyName(0, "empty.png");
+            this.ilTreeItems.Images.SetKeyName(1, "settings_tree.png");
+            this.ilTreeItems.Images.SetKeyName(2, "address-book.png");
+            this.ilTreeItems.Images.SetKeyName(3, "user.png");
+            this.ilTreeItems.Images.SetKeyName(4, "group.png");
+            this.ilTreeItems.Images.SetKeyName(5, "worldwide.png");
+            this.ilTreeItems.Images.SetKeyName(6, "grouplist.png");
+            this.ilTreeItems.Images.SetKeyName(7, "zone.png");
+            this.ilTreeItems.Images.SetKeyName(8, "channels.png");
+            this.ilTreeItems.Images.SetKeyName(9, "vfo.png");
+            // 
             // msMain
             // 
             this.msMain.BackColor = System.Drawing.Color.White;
@@ -442,21 +457,6 @@
             this.tsmiDeleteContact.Size = new System.Drawing.Size(129, 24);
             this.tsmiDeleteContact.Text = "Удалить";
             this.tsmiDeleteContact.Click += new System.EventHandler(this.tsmiDeleteContact_Click);
-            // 
-            // ilTreeItems
-            // 
-            this.ilTreeItems.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilTreeItems.ImageStream")));
-            this.ilTreeItems.TransparentColor = System.Drawing.Color.White;
-            this.ilTreeItems.Images.SetKeyName(0, "empty.png");
-            this.ilTreeItems.Images.SetKeyName(1, "settings_tree.png");
-            this.ilTreeItems.Images.SetKeyName(2, "address-book.png");
-            this.ilTreeItems.Images.SetKeyName(3, "user.png");
-            this.ilTreeItems.Images.SetKeyName(4, "group.png");
-            this.ilTreeItems.Images.SetKeyName(5, "worldwide.png");
-            this.ilTreeItems.Images.SetKeyName(6, "grouplist.png");
-            this.ilTreeItems.Images.SetKeyName(7, "zone.png");
-            this.ilTreeItems.Images.SetKeyName(8, "channels.png");
-            this.ilTreeItems.Images.SetKeyName(9, "vfo.png");
             // 
             // MainForm
             // 

@@ -40,6 +40,8 @@ namespace NIKA_CPS_V1
 
         private string codeplugFileName;
 
+        private uint lastSelectedChannel = 0;
+
         public enum TreeRefreshType
         {
             ALL,
@@ -237,6 +239,19 @@ namespace NIKA_CPS_V1
                     // Разворачиваем узел для отображения дочерних элементов, если настроено
                     if (RegistryOperations.getProfileIntWithDefault("ExpandContacts", 0) != 0)
                         contactsNode.Expand();
+                    if (mode != TreeRefreshType.ALL) //обновляли только контакты - выделить повторно lastSelectedChannel
+                    {
+                        foreach (TreeNode node in contactsNode.Nodes)
+                        {
+                            if (node.Tag == null) continue;
+                            if (((Codeplug.Contact)node.Tag).Number == lastSelectedChannel)
+                            {
+                                tvMain.SelectedNode = node;
+                                node.EnsureVisible(); // Прокручиваем к узлу если нужно
+                                tvMain.Focus();
+                            }
+                        }
+                    }
                 }
             }
             
@@ -494,9 +509,25 @@ namespace NIKA_CPS_V1
             new CalibrationForm(this).ShowDialog();
         }
 
+        private string GetNodeEnabledState(TreeNode node)
+        {
+            // У TreeNode нет свойства Enabled, проверяем через родительский контроль
+            // или другие доступные свойства
+            return "информация недоступна (свойство отсутствует)";
+        }
+
         private void tvMain_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            TreeNode selectedNode = e.Node;
 
+            if (selectedNode == null)
+                return;
+
+            // Проверяем, что узел находится под узлом ContactsNode
+            if (selectedNode.Parent?.Name == "ContactsNode" && selectedNode.Tag is Codeplug.Contact contact)
+            {
+                   lastSelectedChannel = contact.Number;
+            }
         }
 
 
