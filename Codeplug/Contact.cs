@@ -18,6 +18,7 @@ namespace NIKA_CPS_V1.Codeplug
 
         public enum Timeslot
         {
+            NONE = 0,
             TS1,
             TS2
         }
@@ -72,7 +73,7 @@ namespace NIKA_CPS_V1.Codeplug
             _dmrId = 16777215;
             _userData = "";
             _contactType = ContactType.ALL_CALL;
-            _slot = Timeslot.TS1;
+            _slot = Timeslot.NONE;
         }
 
 

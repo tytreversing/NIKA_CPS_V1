@@ -16,11 +16,6 @@ namespace NIKA_CPS_V1
 {
     public partial class FirmwareUploader: Form
     {
-        private IWavePlayer waveOut;
-        private AudioFileReader audioFileReader;
-
-        private MainForm _parent;
-
         private STM_DFU_FwUpdate fwUpdate;
 
         private bool firmwareVerified = false;
@@ -39,7 +34,6 @@ namespace NIKA_CPS_V1
         public FirmwareUploader(MainForm parent)
         {
             InitializeComponent();
-            _parent = parent;
             string lastRadioType = RegistryOperations.getProfileStringWithDefault("LastFlashedRadio", null);
             if (lastRadioType != "")
             {
@@ -57,94 +51,23 @@ namespace NIKA_CPS_V1
 
         }
 
-        private void playMessage(string message)
-        {
-            if (_parent.playAudio)
-            {
-                // Остановить предыдущее воспроизведение
-                waveOut?.Stop();
-                waveOut?.Dispose();
-                audioFileReader?.Dispose();
 
-                if (string.IsNullOrEmpty(message)) return;
-
-                // Путь к файлу
-                string soundPath = Path.Combine(
-                    Application.StartupPath,
-                    "Sounds",
-                    $"{message}.mp3");
-
-                // Проверка существования файла
-                if (!File.Exists(soundPath)) return;
-
-                try
-                {
-                    // Инициализация аудиопотока
-                    audioFileReader = new AudioFileReader(soundPath);
-                    waveOut = new WaveOutEvent();
-                    waveOut.Init(audioFileReader);
-                    waveOut.Play();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка воспроизведения: {ex.Message}");
-                    CleanupAudio();
-                }
-            }
-
-        }
 
 
         private void Control_MouseEnter(object sender, EventArgs e)
         {
-            if (_parent.playAudio)
-            {
-                // Остановить предыдущее воспроизведение
-                waveOut?.Stop();
-                waveOut?.Dispose();
-                audioFileReader?.Dispose();
 
-                // Получить имя элемента
-                string controlName = (sender as dynamic)?.Name;
-                if (string.IsNullOrEmpty(controlName)) return;
-
-                // Путь к файлу
-                string soundPath = Path.Combine(
-                    Application.StartupPath,
-                    "Sounds",
-                    $"{controlName}.mp3");
-
-                // Проверка существования файла
-                if (!File.Exists(soundPath)) return;
-                try
-                {
-                    // Инициализация аудиопотока
-                    audioFileReader = new AudioFileReader(soundPath);
-                    waveOut = new WaveOutEvent();
-                    waveOut.Init(audioFileReader);
-                    waveOut.Play();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка воспроизведения: {ex.Message}");
-                    CleanupAudio();
-                }
-            }
-
+            // Получить имя элемента
+            string controlName = (sender as dynamic)?.Name;
+            if (string.IsNullOrEmpty(controlName)) return;
+            MainForm.playMessage(controlName);  
+                
         }
 
-        private void CleanupAudio()
-        {
-            waveOut?.Stop();
-            waveOut?.Dispose();
-            audioFileReader?.Dispose();
-            waveOut = null;
-            audioFileReader = null;
-        }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            CleanupAudio();
+            MainForm.CleanupAudio();
             base.OnFormClosing(e);
         }
 
@@ -227,7 +150,7 @@ namespace NIKA_CPS_V1
                 return;
             }
             needleTimer.Start();
-            playMessage("uploadCompleted");
+            MainForm.playMessage("uploadCompleted");
         }
 
         private bool containsStringSequence(byte[] data, string marker)
@@ -290,7 +213,7 @@ namespace NIKA_CPS_V1
             catch
             {
                 tbConsole.AppendText("Ошибка при открытии файла!\r\n");
-                playMessage("firmwareReadingError");
+                MainForm.playMessage("firmwareReadingError");
                 return;
             }
             finally
@@ -325,14 +248,14 @@ namespace NIKA_CPS_V1
             {
                 tbConsole.AppendText("ОШИБКА: Файл поврежден или не является файлом прошивки НИКА!\r\n");
                 System.Media.SystemSounds.Hand.Play();
-                playMessage("firmwareError");
+                MainForm.playMessage("firmwareError");
                 tsbUpdate.Enabled = false;
                 return;
             }
             tbConsole.AppendText("Контрольная сумма файла прошивки: 0x" + CalculateChecksum(openFirmwareBuf) + "\r\n");
             tbConsole.AppendText("Контрольная сумма дешифрованной прошивки: 0x" + CalculateChecksum(decryptedFirmware) + "\r\n");
             tbConsole.AppendText("Теперь запишите прошивку в радиостанцию\r\n");
-            playMessage("nowYouCanUpload");
+            MainForm.playMessage("nowYouCanUpload");
             System.Media.SystemSounds.Asterisk.Play();
             flashTimer.Start();
             firmwareVerified = true;

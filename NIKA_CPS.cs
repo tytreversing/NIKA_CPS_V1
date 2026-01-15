@@ -26,31 +26,32 @@ namespace NIKA_CPS_V1
 
         public static string PRODUCT_VERSION;
 
-        public IWavePlayer waveOut;
-        public AudioFileReader audioFileReader;
+        public static IWavePlayer waveOut;
+        public static AudioFileReader audioFileReader;
 
-        public bool playAudio = false;
+        public static bool playAudio = false;
         public bool foundDFUDevice = false;
         public bool foundFlashedRadio = false;
 
-        public string radioVID = "";
-        public string radioPID = "";
+        public static string radioVID = "";
+        public static string radioPID = "";
 
         public static CodeplugData CodeplugInternal;
 
         private string codeplugFileName;
 
-        private uint lastSelectedChannel = 0;
+        private uint lastSelectedContact = 0;
         private string lastSelectedSatellite = "";
 
         public enum TreeRefreshType
         {
             ALL,
             CONTACTS,
+            CHANNELS,
             SATELLITES
         }
 
-        public bool isValidHex(string input)
+        public static bool isValidHex(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
                 return false;
@@ -188,7 +189,6 @@ namespace NIKA_CPS_V1
                 }
             }
             tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
-
             //генерация дерева
             GenerateTree();
 
@@ -199,7 +199,6 @@ namespace NIKA_CPS_V1
 
         public void GenerateTree(TreeRefreshType mode = TreeRefreshType.ALL)
         {
-            tvMain.NodeMouseClick += tvMain_NodeMouseClick;
             if (mode == TreeRefreshType.ALL || mode == TreeRefreshType.CONTACTS)
             {
                 // Генерация узлов из контактов
@@ -246,12 +245,46 @@ namespace NIKA_CPS_V1
                         foreach (TreeNode node in contactsNode.Nodes)
                         {
                             if (node.Tag == null) continue;
-                            if (((Codeplug.Contact)node.Tag).Number == lastSelectedChannel)
+                            if (((Codeplug.Contact)node.Tag).Number == lastSelectedContact)
                             {
                                 tvMain.SelectedNode = node;
                                 node.EnsureVisible(); // Прокручиваем к узлу если нужно
                                 tvMain.Focus();
                             }
+                        }
+                    }
+                }
+            }
+            if (mode == TreeRefreshType.ALL || mode == TreeRefreshType.CHANNELS)
+            {
+                TreeNode channelsNode = tvMain.Nodes.Find("ChannelsNode", true).FirstOrDefault();
+                if (channelsNode != null && CodeplugInternal != null && CodeplugInternal.Channels != null)
+                {
+                    channelsNode.Nodes.Clear();
+                    foreach (Codeplug.Channel channel in CodeplugInternal.Channels)
+                    {
+                        string name = channel.Name ?? "Безымянный";
+                        TreeNode newNode = new TreeNode(name);
+                        newNode.Tag = channel;
+                        newNode.ToolTipText = channel.Name + " " + (channel.RxFrequency / 1000000f).ToString("F4");
+                        newNode.ImageIndex = 8;
+                        newNode.SelectedImageIndex = 8;
+                        channelsNode.Nodes.Add(newNode);
+
+                    }
+                    if (RegistryOperations.getProfileIntWithDefault("ExpandChannels", 0) != 0)
+                        channelsNode.Expand();
+                    if (mode != TreeRefreshType.ALL)
+                    {
+                        foreach (TreeNode node in channelsNode.Nodes)
+                        {
+                            if (node.Tag == null) continue;
+                         /*   if (((Codeplug.Channel)node.Tag).Number == lastSelectedChannel)
+                            {
+                                tvMain.SelectedNode = node;
+                                node.EnsureVisible();
+                                tvMain.Focus();
+                            }*/
                         }
                     }
                 }
@@ -340,7 +373,7 @@ namespace NIKA_CPS_V1
             // Проверяем, что узел находится под узлом ContactsNode
             if (selectedNode.Parent?.Name == "ContactsNode" && selectedNode.Tag is Codeplug.Contact contact)
             {
-                lastSelectedChannel = contact.Number;
+                lastSelectedContact = contact.Number;
             }
         }
 
@@ -387,11 +420,11 @@ namespace NIKA_CPS_V1
             ushort freeNumber = CodeplugInternal.GetFirstFreeNumber();
             if (freeNumber < CodeplugData.MAX_CONTACTS_COUNT)
             {
-                Codeplug.Contact newContact = new Codeplug.Contact(freeNumber, "Контакт #" + freeNumber.ToString(), 0, "", Codeplug.Contact.ContactType.PRIVATE, Codeplug.Contact.Timeslot.TS1);
+                Codeplug.Contact newContact = new Codeplug.Contact(freeNumber, "Контакт #" + freeNumber.ToString(), 0, "", Codeplug.Contact.ContactType.PRIVATE, Codeplug.Contact.Timeslot.NONE);
                 CodeplugInternal.AddContact(newContact);
-                GenerateTree(TreeRefreshType.CONTACTS);
                 Contact contactForm = new Contact(newContact);
                 contactForm.ShowDialog();
+                GenerateTree(TreeRefreshType.CONTACTS);
             }
             else
                 MessageBox.Show("Память контактов полностью заполнена, добавить новый невозможно.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -430,7 +463,7 @@ namespace NIKA_CPS_V1
             RegistryOperations.WriteProfileInt("LastWindowHeight", this.Height);
         }
 
-        private void playMessage(string message)
+        public static void playMessage(string message)
         {
             if (playAudio)
             {
@@ -504,7 +537,7 @@ namespace NIKA_CPS_V1
             }
         }
 
-        public void CleanupAudio()
+        public static void CleanupAudio()
         {
             waveOut?.Stop();
             waveOut?.Dispose();
@@ -531,7 +564,7 @@ namespace NIKA_CPS_V1
 
         private void tsbSettings_Click(object sender, EventArgs e)
         {
-            Settings settingsForm = new Settings(this);
+            Settings settingsForm = new Settings();
             if (settingsForm.ShowDialog() == DialogResult.OK)
             {
                 playMessage("settingsSaved");
@@ -581,13 +614,26 @@ namespace NIKA_CPS_V1
             new CalibrationForm(this).ShowDialog();
         }
 
-        private string GetNodeEnabledState(TreeNode node)
+
+        private void tsbNewFile_Click(object sender, EventArgs e)
         {
-            // У TreeNode нет свойства Enabled, проверяем через родительский контроль
-            // или другие доступные свойства
-            return "информация недоступна (свойство отсутствует)";
+            if (MessageBox.Show("Открытый кодплаг будет сброшен к состоянию шаблона с демонстрационными данными, все его текущее содержимое будет потеряно. Продолжить?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                CodeplugInternal = new Codeplug.CodeplugData();
+                GenerateTree();
+            }
         }
 
+        private void msiStdChannelsGenerator_Click(object sender, EventArgs e)
+        {
+            new ChannelsGenerator().ShowDialog();
+            GenerateTree(TreeRefreshType.CHANNELS);
+        }
 
+        private void tsmiSortChannels_Click(object sender, EventArgs e)
+        {
+            CodeplugInternal.SortChannelsByName();
+            GenerateTree(TreeRefreshType.CHANNELS);
+        }
     }
 }

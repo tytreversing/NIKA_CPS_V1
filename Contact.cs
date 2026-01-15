@@ -38,10 +38,7 @@ namespace NIKA_CPS_V1
                     rbAllCall.Checked = true;
                     break;
             }
-            if (contact.TimeSlot == Codeplug.Contact.Timeslot.TS1)
-                cbTimeslot.SelectedItem = "TS1";
-            else
-                cbTimeslot.SelectedItem = "TS2";
+            cbTimeslot.SelectedIndex = (int)contact.TimeSlot;
         }
 
         private void bOK_Click(object sender, EventArgs e)

@@ -40,6 +40,7 @@
             this.tbRadioPID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cbExpandContacts = new System.Windows.Forms.CheckBox();
+            this.cbExpandChannels = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // cbShowSplashScreen
@@ -166,12 +167,23 @@
             this.cbExpandContacts.Text = "Дерево контактов";
             this.cbExpandContacts.UseVisualStyleBackColor = true;
             // 
+            // cbExpandChannels
+            // 
+            this.cbExpandChannels.AutoSize = true;
+            this.cbExpandChannels.Location = new System.Drawing.Point(274, 63);
+            this.cbExpandChannels.Name = "cbExpandChannels";
+            this.cbExpandChannels.Size = new System.Drawing.Size(123, 19);
+            this.cbExpandChannels.TabIndex = 12;
+            this.cbExpandChannels.Text = "Дерево каналов";
+            this.cbExpandChannels.UseVisualStyleBackColor = true;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(852, 519);
+            this.Controls.Add(this.cbExpandChannels);
             this.Controls.Add(this.cbExpandContacts);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbRadioPID);
@@ -215,5 +227,6 @@
         private System.Windows.Forms.TextBox tbRadioPID;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox cbExpandContacts;
+        private System.Windows.Forms.CheckBox cbExpandChannels;
     }
 }

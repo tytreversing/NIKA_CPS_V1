@@ -10,15 +10,23 @@ namespace NIKA_CPS_V1.Codeplug
     public class CodeplugData
     {
         private List<Contact> _contacts;
+        private List<Channel> _channels;
         private List<SatelliteKeps> _satelliteKeps;
 
         //константы
         public const int MAX_CONTACTS_COUNT = 256; //максимальное число контактов
+        public const int MAX_CHANNELS_COUNT = 256; //максимальное число каналов
         public const int MAX_SATELLITES_COUNT = 20; //максимальное число спутников
         public List<Contact> Contacts
         {
             get => _contacts;
             set => _contacts = value;
+        }
+
+        public List<Channel> Channels
+        {
+            get => _channels;
+            set => _channels = value;
         }
 
         public List<SatelliteKeps> SatelliteKeps
@@ -29,8 +37,10 @@ namespace NIKA_CPS_V1.Codeplug
         public CodeplugData()
         {
             _contacts = new List<Contact>();
-            AddContact(new Contact(GetFirstFreeNumber(), "Вызов всех", 16777215, "", Contact.ContactType.ALL_CALL, Contact.Timeslot.TS1));
-            AddContact(new Contact(GetFirstFreeNumber(), "Россия", 2501, "", Contact.ContactType.GROUP, Contact.Timeslot.TS1));
+            AddContact(new Contact(GetFirstFreeNumber(), "Вызов всех", 16777215, "", Contact.ContactType.ALL_CALL, Contact.Timeslot.NONE));
+            AddContact(new Contact(GetFirstFreeNumber(), "Россия", 2501, "", Contact.ContactType.GROUP, Contact.Timeslot.NONE));
+            _channels = new List<Channel>();    
+            AddChannel(new Channel());
             _satelliteKeps = new List<SatelliteKeps>();
             AddSatellite(new Codeplug.SatelliteKeps());
         }
@@ -139,6 +149,31 @@ namespace NIKA_CPS_V1.Codeplug
             }
             else
                 MessageBox.Show("Контакт с алиасом " + alias + " не найден");
+        }
+
+        public bool AddChannel(Channel channel) 
+        {
+            if (_channels.Count <= MAX_CHANNELS_COUNT)
+            {
+                _channels.Add(channel);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        // Сортировка по алфавиту по полю Nmae
+        public void SortChannelsByName()
+        {
+            _channels = _channels
+                .OrderBy(channel => channel?.Name, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(channel => channel?.Name)
+                .ToList();
+        }
+
+        public void ClearChannels()
+        {
+            _channels.Clear();
         }
 
         public bool AddSatellite(SatelliteKeps satellite)

@@ -176,6 +176,13 @@
     <Compile Include="CalibrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ChannelsGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChannelsGenerator.Designer.cs">
+      <DependentUpon>ChannelsGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Codeplug\Channel.cs" />
     <Compile Include="Codeplug\Codeplug.cs" />
     <Compile Include="Codeplug\CodeplugCHsAndVFOs.cs" />
     <Compile Include="Codeplug\CodeplugDeserialization.cs" />
@@ -232,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CalibrationForm.resx">
       <DependentUpon>CalibrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChannelsGenerator.resx">
+      <DependentUpon>ChannelsGenerator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Contact.resx">
       <DependentUpon>Contact.cs</DependentUpon>

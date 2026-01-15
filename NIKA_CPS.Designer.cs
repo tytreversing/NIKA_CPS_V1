@@ -88,7 +88,10 @@
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.msiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.msiCodeplug = new System.Windows.Forms.ToolStripMenuItem();
+            this.msiStdChannelsGenerator = new System.Windows.Forms.ToolStripMenuItem();
             this.msiReadWrite = new System.Windows.Forms.ToolStripMenuItem();
+            this.msiReadFromRadio = new System.Windows.Forms.ToolStripMenuItem();
+            this.msiWriteToRadio = new System.Windows.Forms.ToolStripMenuItem();
             this.msiTools = new System.Windows.Forms.ToolStripMenuItem();
             this.msiDMRMon = new System.Windows.Forms.ToolStripMenuItem();
             this.msiCalibration = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,12 +103,15 @@
             this.cmsSingleSatellite = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDeleteSatellite = new System.Windows.Forms.ToolStripMenuItem();
             this.tvSecondary = new System.Windows.Forms.TreeView();
+            this.cmsAllChannels = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiSortChannels = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllContacts.SuspendLayout();
             this.cmsAllSatellites.SuspendLayout();
             this.tsMainControls.SuspendLayout();
             this.msMain.SuspendLayout();
             this.cmsSingleContact.SuspendLayout();
             this.cmsSingleSatellite.SuspendLayout();
+            this.cmsAllChannels.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsAllContacts
@@ -219,6 +225,7 @@
             this.tsbNewFile.Size = new System.Drawing.Size(50, 52);
             this.tsbNewFile.Text = "Новый кодплаг";
             this.tsbNewFile.ToolTipText = "Новый кодплаг";
+            this.tsbNewFile.Click += new System.EventHandler(this.tsbNewFile_Click);
             this.tsbNewFile.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // tsbOpenFile
@@ -361,6 +368,7 @@
             treeNode6.Text = "Зоны";
             treeNode7.Name = "Узел13";
             treeNode7.Text = "Узел13";
+            treeNode8.ContextMenuStrip = this.cmsAllChannels;
             treeNode8.ImageIndex = 8;
             treeNode8.Name = "ChannelsNode";
             treeNode8.SelectedImageIndex = 8;
@@ -388,6 +396,7 @@
             this.tvMain.Size = new System.Drawing.Size(337, 605);
             this.tvMain.TabIndex = 1;
             this.tvMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvMain_AfterSelect);
+            this.tvMain.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvMain_NodeMouseClick);
             this.tvMain.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvMain_NodeMouseDoubleClick);
             // 
             // ilTreeItems
@@ -416,9 +425,9 @@
             this.msiReadWrite,
             this.msiTools,
             this.msiAbout});
-            this.msMain.Location = new System.Drawing.Point(59, 6);
+            this.msMain.Location = new System.Drawing.Point(6, 6);
             this.msMain.Name = "msMain";
-            this.msMain.Size = new System.Drawing.Size(1103, 27);
+            this.msMain.Size = new System.Drawing.Size(1156, 27);
             this.msMain.TabIndex = 2;
             this.msMain.Text = "menuStrip1";
             this.msMain.Visible = false;
@@ -431,15 +440,45 @@
             // 
             // msiCodeplug
             // 
+            this.msiCodeplug.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.msiStdChannelsGenerator});
             this.msiCodeplug.Name = "msiCodeplug";
             this.msiCodeplug.Size = new System.Drawing.Size(84, 23);
             this.msiCodeplug.Text = "Кодплаг";
             // 
+            // msiStdChannelsGenerator
+            // 
+            this.msiStdChannelsGenerator.BackColor = System.Drawing.Color.White;
+            this.msiStdChannelsGenerator.Name = "msiStdChannelsGenerator";
+            this.msiStdChannelsGenerator.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.msiStdChannelsGenerator.Size = new System.Drawing.Size(395, 24);
+            this.msiStdChannelsGenerator.Text = "Генератор стандартных каналов";
+            this.msiStdChannelsGenerator.Click += new System.EventHandler(this.msiStdChannelsGenerator_Click);
+            // 
             // msiReadWrite
             // 
+            this.msiReadWrite.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.msiReadFromRadio,
+            this.msiWriteToRadio});
             this.msiReadWrite.Name = "msiReadWrite";
             this.msiReadWrite.Size = new System.Drawing.Size(170, 23);
             this.msiReadWrite.Text = "Программирование";
+            // 
+            // msiReadFromRadio
+            // 
+            this.msiReadFromRadio.BackColor = System.Drawing.Color.White;
+            this.msiReadFromRadio.Name = "msiReadFromRadio";
+            this.msiReadFromRadio.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.msiReadFromRadio.Size = new System.Drawing.Size(244, 24);
+            this.msiReadFromRadio.Text = "Считать из рации";
+            // 
+            // msiWriteToRadio
+            // 
+            this.msiWriteToRadio.BackColor = System.Drawing.Color.White;
+            this.msiWriteToRadio.Name = "msiWriteToRadio";
+            this.msiWriteToRadio.ShortcutKeys = System.Windows.Forms.Keys.F6;
+            this.msiWriteToRadio.Size = new System.Drawing.Size(244, 24);
+            this.msiWriteToRadio.Text = "Записать в рацию";
             // 
             // msiTools
             // 
@@ -552,6 +591,21 @@
             this.tvSecondary.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSecondary_NodeMouseClick);
             this.tvSecondary.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSecondary_NodeMouseDoubleClick);
             // 
+            // cmsAllChannels
+            // 
+            this.cmsAllChannels.BackColor = System.Drawing.Color.White;
+            this.cmsAllChannels.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSortChannels});
+            this.cmsAllChannels.Name = "cmsAllChannels";
+            this.cmsAllChannels.Size = new System.Drawing.Size(246, 28);
+            // 
+            // tsmiSortChannels
+            // 
+            this.tsmiSortChannels.Name = "tsmiSortChannels";
+            this.tsmiSortChannels.Size = new System.Drawing.Size(245, 24);
+            this.tsmiSortChannels.Text = "Упорядочить по алфавиту";
+            this.tsmiSortChannels.Click += new System.EventHandler(this.tsmiSortChannels_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -579,6 +633,7 @@
             this.msMain.PerformLayout();
             this.cmsSingleContact.ResumeLayout(false);
             this.cmsSingleSatellite.ResumeLayout(false);
+            this.cmsAllChannels.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -627,6 +682,11 @@
         private System.Windows.Forms.ContextMenuStrip cmsSingleSatellite;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteSatellite;
         private System.Windows.Forms.TreeView tvSecondary;
+        private System.Windows.Forms.ToolStripMenuItem msiStdChannelsGenerator;
+        private System.Windows.Forms.ToolStripMenuItem msiReadFromRadio;
+        private System.Windows.Forms.ToolStripMenuItem msiWriteToRadio;
+        private System.Windows.Forms.ContextMenuStrip cmsAllChannels;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSortChannels;
     }
 }
 

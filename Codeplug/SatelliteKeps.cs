@@ -93,12 +93,12 @@ namespace NIKA_CPS_V1.Codeplug
         public SatelliteKeps(string data)
         {
             if (string.IsNullOrWhiteSpace(data))
-                throw new ArgumentException("Ошибка в формате файла данных спутников - пустая строка!");
+                return;
 
             string[] parts = data.Split(',');
 
             if (parts.Length != 11)
-                throw new ArgumentException("Ошибка в формате файла данных спутников!");
+                return;
 
             try
             {

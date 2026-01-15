@@ -48,53 +48,59 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(11, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.Size = new System.Drawing.Size(71, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Позывной:";
             // 
             // tbAlias
             // 
-            this.tbAlias.Location = new System.Drawing.Point(73, 15);
+            this.tbAlias.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbAlias.Location = new System.Drawing.Point(87, 15);
             this.tbAlias.MaxLength = 16;
             this.tbAlias.Name = "tbAlias";
-            this.tbAlias.Size = new System.Drawing.Size(214, 20);
+            this.tbAlias.Size = new System.Drawing.Size(200, 23);
             this.tbAlias.TabIndex = 1;
             this.tbAlias.TextChanged += new System.EventHandler(this.tbAlias_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(11, 48);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.Size = new System.Drawing.Size(58, 15);
             this.label2.TabIndex = 2;
             this.label2.Text = "Данные:";
             // 
             // tbData
             // 
-            this.tbData.Location = new System.Drawing.Point(73, 44);
+            this.tbData.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbData.Location = new System.Drawing.Point(87, 44);
             this.tbData.MaxLength = 32;
             this.tbData.Name = "tbData";
-            this.tbData.Size = new System.Drawing.Size(214, 20);
+            this.tbData.Size = new System.Drawing.Size(200, 23);
             this.tbData.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(12, 77);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.Size = new System.Drawing.Size(54, 15);
             this.label3.TabIndex = 4;
             this.label3.Text = "DMR ID:";
             // 
             // tbDMRID
             // 
-            this.tbDMRID.Location = new System.Drawing.Point(73, 73);
+            this.tbDMRID.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbDMRID.Location = new System.Drawing.Point(87, 73);
             this.tbDMRID.MaxLength = 7;
             this.tbDMRID.Name = "tbDMRID";
-            this.tbDMRID.Size = new System.Drawing.Size(214, 20);
+            this.tbDMRID.Size = new System.Drawing.Size(200, 23);
             this.tbDMRID.TabIndex = 5;
             this.tbDMRID.WordWrap = false;
             this.tbDMRID.TextChanged += new System.EventHandler(this.tbDMRID_TextChanged);
@@ -102,6 +108,7 @@
             // 
             // bOK
             // 
+            this.bOK.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bOK.Location = new System.Drawing.Point(82, 257);
             this.bOK.Name = "bOK";
             this.bOK.Size = new System.Drawing.Size(144, 22);
@@ -113,9 +120,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.Location = new System.Drawing.Point(11, 110);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.Size = new System.Drawing.Size(32, 15);
             this.label4.TabIndex = 7;
             this.label4.Text = "Тип:";
             // 
@@ -123,9 +131,10 @@
             // 
             this.rbPrivateCall.AutoSize = true;
             this.rbPrivateCall.Checked = true;
+            this.rbPrivateCall.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rbPrivateCall.Location = new System.Drawing.Point(76, 110);
             this.rbPrivateCall.Name = "rbPrivateCall";
-            this.rbPrivateCall.Size = new System.Drawing.Size(105, 17);
+            this.rbPrivateCall.Size = new System.Drawing.Size(120, 19);
             this.rbPrivateCall.TabIndex = 8;
             this.rbPrivateCall.TabStop = true;
             this.rbPrivateCall.Text = "Частный вызов";
@@ -134,9 +143,10 @@
             // rbGroupCall
             // 
             this.rbGroupCall.AutoSize = true;
+            this.rbGroupCall.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rbGroupCall.Location = new System.Drawing.Point(76, 133);
             this.rbGroupCall.Name = "rbGroupCall";
-            this.rbGroupCall.Size = new System.Drawing.Size(113, 17);
+            this.rbGroupCall.Size = new System.Drawing.Size(129, 19);
             this.rbGroupCall.TabIndex = 9;
             this.rbGroupCall.TabStop = true;
             this.rbGroupCall.Text = "Групповой вызов";
@@ -145,9 +155,10 @@
             // rbAllCall
             // 
             this.rbAllCall.AutoSize = true;
+            this.rbAllCall.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rbAllCall.Location = new System.Drawing.Point(76, 157);
             this.rbAllCall.Name = "rbAllCall";
-            this.rbAllCall.Size = new System.Drawing.Size(84, 17);
+            this.rbAllCall.Size = new System.Drawing.Size(95, 19);
             this.rbAllCall.TabIndex = 10;
             this.rbAllCall.TabStop = true;
             this.rbAllCall.Text = "Вызов всех";
@@ -157,26 +168,30 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(11, 200);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 13);
+            this.label5.Size = new System.Drawing.Size(70, 15);
             this.label5.TabIndex = 11;
             this.label5.Text = "Таймслот:";
             // 
             // cbTimeslot
             // 
             this.cbTimeslot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTimeslot.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbTimeslot.FormattingEnabled = true;
             this.cbTimeslot.Items.AddRange(new object[] {
+            "По умолчанию",
             "TS1",
             "TS2"});
-            this.cbTimeslot.Location = new System.Drawing.Point(73, 197);
+            this.cbTimeslot.Location = new System.Drawing.Point(82, 198);
             this.cbTimeslot.Name = "cbTimeslot";
-            this.cbTimeslot.Size = new System.Drawing.Size(107, 21);
+            this.cbTimeslot.Size = new System.Drawing.Size(112, 23);
             this.cbTimeslot.TabIndex = 12;
             // 
             // bCancel
             // 
+            this.bCancel.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.Location = new System.Drawing.Point(82, 287);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(144, 22);
@@ -190,7 +205,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(300, 330);
+            this.ClientSize = new System.Drawing.Size(302, 330);
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.cbTimeslot);
             this.Controls.Add(this.label5);
