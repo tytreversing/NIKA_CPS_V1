@@ -266,7 +266,7 @@ namespace NIKA_CPS_V1
                         string name = channel.Name ?? "Безымянный";
                         TreeNode newNode = new TreeNode(name);
                         newNode.Tag = channel;
-                        newNode.ToolTipText = channel.Name + " " + (channel.RxFrequency / 1000000f).ToString("F4");
+                        newNode.ToolTipText = channel.Name + " Rx: " + (channel.RxFrequency / 1000000f).ToString("F4");
                         newNode.ImageIndex = 8;
                         newNode.SelectedImageIndex = 8;
                         channelsNode.Nodes.Add(newNode);
@@ -417,7 +417,7 @@ namespace NIKA_CPS_V1
 
         private void tsmiNewContact_Click(object sender, EventArgs e)
         {
-            ushort freeNumber = CodeplugInternal.GetFirstFreeNumber();
+            ushort freeNumber = CodeplugInternal.GetFirstContactFreeNumber();
             if (freeNumber < CodeplugData.MAX_CONTACTS_COUNT)
             {
                 Codeplug.Contact newContact = new Codeplug.Contact(freeNumber, "Контакт #" + freeNumber.ToString(), 0, "", Codeplug.Contact.ContactType.PRIVATE, Codeplug.Contact.Timeslot.NONE);
@@ -617,7 +617,7 @@ namespace NIKA_CPS_V1
 
         private void tsbNewFile_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Открытый кодплаг будет сброшен к состоянию шаблона с демонстрационными данными, все его текущее содержимое будет потеряно. Продолжить?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (MessageBox.Show("Открытый кодплаг будет сброшен к состоянию шаблона с демонстрационными данными, все его текущее содержимое будет потеряно. Продолжить?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 CodeplugInternal = new Codeplug.CodeplugData();
                 GenerateTree();
@@ -634,6 +634,15 @@ namespace NIKA_CPS_V1
         {
             CodeplugInternal.SortChannelsByName();
             GenerateTree(TreeRefreshType.CHANNELS);
+        }
+
+        private void tsmiClearChannels_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("ВНИМАНИЕ! Из кодплага будут удалены ВСЕ записанные в нем контакты! Продолжить?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                CodeplugInternal.ClearChannels();
+                GenerateTree(TreeRefreshType.CHANNELS);
+            }
         }
     }
 }

@@ -267,6 +267,9 @@
     <EmbeddedResource Include="SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Help\About.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Help\Firmware.chm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -373,9 +376,6 @@
     <Content Include="STTubeDevice30.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Help\About.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <Content Include="MainIcon.ico" />
   </ItemGroup>
   <ItemGroup />

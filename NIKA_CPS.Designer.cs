@@ -63,6 +63,8 @@
             this.tsmiNewContact = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteSimilar = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAllChannels = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiSortChannels = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllSatellites = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiReloadLocalSatellites = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiReloadFromNetwork = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,15 +105,16 @@
             this.cmsSingleSatellite = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDeleteSatellite = new System.Windows.Forms.ToolStripMenuItem();
             this.tvSecondary = new System.Windows.Forms.TreeView();
-            this.cmsAllChannels = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiSortChannels = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewChannel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiClearChannels = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllContacts.SuspendLayout();
+            this.cmsAllChannels.SuspendLayout();
             this.cmsAllSatellites.SuspendLayout();
             this.tsMainControls.SuspendLayout();
             this.msMain.SuspendLayout();
             this.cmsSingleContact.SuspendLayout();
             this.cmsSingleSatellite.SuspendLayout();
-            this.cmsAllChannels.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsAllContacts
@@ -144,6 +147,24 @@
             this.tsmiDeleteSimilar.Size = new System.Drawing.Size(274, 24);
             this.tsmiDeleteSimilar.Text = "Удалить дубликаты по DMR ID";
             this.tsmiDeleteSimilar.Click += new System.EventHandler(this.tsmiDeleteSimilar_Click);
+            // 
+            // cmsAllChannels
+            // 
+            this.cmsAllChannels.BackColor = System.Drawing.Color.White;
+            this.cmsAllChannels.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewChannel,
+            this.tsmiSortChannels,
+            this.toolStripSeparator5,
+            this.tsmiClearChannels});
+            this.cmsAllChannels.Name = "cmsAllChannels";
+            this.cmsAllChannels.Size = new System.Drawing.Size(246, 104);
+            // 
+            // tsmiSortChannels
+            // 
+            this.tsmiSortChannels.Name = "tsmiSortChannels";
+            this.tsmiSortChannels.Size = new System.Drawing.Size(245, 24);
+            this.tsmiSortChannels.Text = "Упорядочить по алфавиту";
+            this.tsmiSortChannels.Click += new System.EventHandler(this.tsmiSortChannels_Click);
             // 
             // cmsAllSatellites
             // 
@@ -591,20 +612,23 @@
             this.tvSecondary.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSecondary_NodeMouseClick);
             this.tvSecondary.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSecondary_NodeMouseDoubleClick);
             // 
-            // cmsAllChannels
+            // tsmiNewChannel
             // 
-            this.cmsAllChannels.BackColor = System.Drawing.Color.White;
-            this.cmsAllChannels.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiSortChannels});
-            this.cmsAllChannels.Name = "cmsAllChannels";
-            this.cmsAllChannels.Size = new System.Drawing.Size(246, 28);
+            this.tsmiNewChannel.Name = "tsmiNewChannel";
+            this.tsmiNewChannel.Size = new System.Drawing.Size(245, 24);
+            this.tsmiNewChannel.Text = "Новый";
             // 
-            // tsmiSortChannels
+            // toolStripSeparator5
             // 
-            this.tsmiSortChannels.Name = "tsmiSortChannels";
-            this.tsmiSortChannels.Size = new System.Drawing.Size(245, 24);
-            this.tsmiSortChannels.Text = "Упорядочить по алфавиту";
-            this.tsmiSortChannels.Click += new System.EventHandler(this.tsmiSortChannels_Click);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(242, 6);
+            // 
+            // tsmiClearChannels
+            // 
+            this.tsmiClearChannels.Name = "tsmiClearChannels";
+            this.tsmiClearChannels.Size = new System.Drawing.Size(245, 24);
+            this.tsmiClearChannels.Text = "Очистить";
+            this.tsmiClearChannels.Click += new System.EventHandler(this.tsmiClearChannels_Click);
             // 
             // MainForm
             // 
@@ -626,6 +650,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.cmsAllContacts.ResumeLayout(false);
+            this.cmsAllChannels.ResumeLayout(false);
             this.cmsAllSatellites.ResumeLayout(false);
             this.tsMainControls.ResumeLayout(false);
             this.tsMainControls.PerformLayout();
@@ -633,7 +658,6 @@
             this.msMain.PerformLayout();
             this.cmsSingleContact.ResumeLayout(false);
             this.cmsSingleSatellite.ResumeLayout(false);
-            this.cmsAllChannels.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -687,6 +711,9 @@
         private System.Windows.Forms.ToolStripMenuItem msiWriteToRadio;
         private System.Windows.Forms.ContextMenuStrip cmsAllChannels;
         private System.Windows.Forms.ToolStripMenuItem tsmiSortChannels;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNewChannel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem tsmiClearChannels;
     }
 }
 

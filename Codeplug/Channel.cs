@@ -8,13 +8,20 @@ namespace NIKA_CPS_V1.Codeplug
 {
     public class Channel
     {
+        private ushort _number;
         private string _name;
         private uint _rxFrequency;
+
+        public ushort Number
+        {
+            get => _number;
+            set => _number = value;
+        }
 
         public string Name
         {
             get => _name;
-            set => _name = value;
+            set => _name = ValidateLength(value);
         }
 
         public uint RxFrequency
@@ -24,14 +31,31 @@ namespace NIKA_CPS_V1.Codeplug
         }
         public Channel()
         {
+            _number = 0;
             _name = "Вызывной 2 м";
             _rxFrequency = 145500000;
         }
 
-        public Channel (string name, uint rxFrequency)
+        public Channel (ushort number, string name, uint rxFrequency)
         {
+            _number = number;   
             _name = name;
             _rxFrequency = rxFrequency;
+        }
+
+        private string ValidateLength(string value)
+        {
+            if (value == null)
+            {
+                return string.Empty;
+            }
+
+            if (value.Length > 16)
+            {
+                return value.Substring(0, 16);
+            }
+
+            return value;
         }
     }
 }

@@ -28,31 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbAbout = new System.Windows.Forms.TextBox();
+            this.bOK = new System.Windows.Forms.Button();
+            this.rbAbout = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // tbAbout
+            // bOK
             // 
-            this.tbAbout.BackColor = System.Drawing.Color.White;
-            this.tbAbout.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbAbout.Enabled = false;
-            this.tbAbout.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbAbout.ForeColor = System.Drawing.Color.Black;
-            this.tbAbout.Location = new System.Drawing.Point(43, 12);
-            this.tbAbout.Margin = new System.Windows.Forms.Padding(6);
-            this.tbAbout.Multiline = true;
-            this.tbAbout.Name = "tbAbout";
-            this.tbAbout.ReadOnly = true;
-            this.tbAbout.Size = new System.Drawing.Size(377, 426);
-            this.tbAbout.TabIndex = 0;
+            this.bOK.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bOK.Location = new System.Drawing.Point(83, 624);
+            this.bOK.Name = "bOK";
+            this.bOK.Size = new System.Drawing.Size(292, 30);
+            this.bOK.TabIndex = 1;
+            this.bOK.Text = "OK";
+            this.bOK.UseVisualStyleBackColor = true;
+            this.bOK.Click += new System.EventHandler(this.bOK_Click);
+            // 
+            // rbAbout
+            // 
+            this.rbAbout.BackColor = System.Drawing.Color.White;
+            this.rbAbout.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rbAbout.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.rbAbout.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rbAbout.Location = new System.Drawing.Point(9, 9);
+            this.rbAbout.Name = "rbAbout";
+            this.rbAbout.ReadOnly = true;
+            this.rbAbout.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.rbAbout.Size = new System.Drawing.Size(448, 609);
+            this.rbAbout.TabIndex = 2;
+            this.rbAbout.Text = "";
             // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(466, 450);
-            this.Controls.Add(this.tbAbout);
+            this.ClientSize = new System.Drawing.Size(466, 660);
+            this.Controls.Add(this.rbAbout);
+            this.Controls.Add(this.bOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -63,12 +75,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "О программе";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox tbAbout;
+        private System.Windows.Forms.Button bOK;
+        private System.Windows.Forms.RichTextBox rbAbout;
     }
 }

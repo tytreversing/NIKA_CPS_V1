@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,7 +16,7 @@ namespace NIKA_CPS_V1.Codeplug
 
         //константы
         public const int MAX_CONTACTS_COUNT = 256; //максимальное число контактов
-        public const int MAX_CHANNELS_COUNT = 256; //максимальное число каналов
+        public const int MAX_CHANNELS_COUNT = 1024; //максимальное число каналов
         public const int MAX_SATELLITES_COUNT = 20; //максимальное число спутников
         public List<Contact> Contacts
         {
@@ -37,8 +38,8 @@ namespace NIKA_CPS_V1.Codeplug
         public CodeplugData()
         {
             _contacts = new List<Contact>();
-            AddContact(new Contact(GetFirstFreeNumber(), "Вызов всех", 16777215, "", Contact.ContactType.ALL_CALL, Contact.Timeslot.NONE));
-            AddContact(new Contact(GetFirstFreeNumber(), "Россия", 2501, "", Contact.ContactType.GROUP, Contact.Timeslot.NONE));
+            AddContact(new Contact(GetFirstContactFreeNumber(), "Вызов всех", 16777215, "", Contact.ContactType.ALL_CALL, Contact.Timeslot.NONE));
+            AddContact(new Contact(GetFirstContactFreeNumber(), "Россия", 2501, "", Contact.ContactType.GROUP, Contact.Timeslot.NONE));
             _channels = new List<Channel>();    
             AddChannel(new Channel());
             _satelliteKeps = new List<SatelliteKeps>();
@@ -95,7 +96,7 @@ namespace NIKA_CPS_V1.Codeplug
         }
 
         //поиск первого свободного номера контакта
-        public ushort GetFirstFreeNumber()
+        public ushort GetFirstContactFreeNumber()
         {
             if (_contacts.Count == 0)
             {
@@ -169,6 +170,33 @@ namespace NIKA_CPS_V1.Codeplug
                 .OrderBy(channel => channel?.Name, StringComparer.OrdinalIgnoreCase)
                 .ThenBy(channel => channel?.Name)
                 .ToList();
+        }
+
+        //поиск первого свободного номера канала
+        public ushort GetFirstChannelFreeNumber()
+        {
+            if (_channels.Count == 0)
+            {
+                return 0; //контактов нет
+            }
+            HashSet<ushort> usedNumbers = new HashSet<ushort>();
+            foreach (var channel in _channels)
+            {
+                if (channel != null)
+                {
+                    usedNumbers.Add(channel.Number);
+                }
+            }
+            // Ищем первое свободное число, начиная с 0
+            for (ushort i = 0; i < MAX_CHANNELS_COUNT; i++)
+            {
+                if (!usedNumbers.Contains(i))
+                {
+                    return i;
+                }
+            }
+            // Если все числа от 0 до 65534 заняты, возвращаем 65535
+            return ushort.MaxValue;
         }
 
         public void ClearChannels()

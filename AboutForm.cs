@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 namespace NIKA_CPS_V1
 {
     public partial class AboutForm: Form
     {
 
-        private const string FILE_PATH = "Help\\About.txt";
+        private const string FILE_PATH = "Help\\About.rtf";
 
         public AboutForm()
         {
@@ -28,18 +22,35 @@ namespace NIKA_CPS_V1
             {
                 if (File.Exists(FILE_PATH))
                 {
-                    tbAbout.Text = File.ReadAllText(FILE_PATH);
+                    rbAbout.LoadFile(FILE_PATH, RichTextBoxStreamType.RichText);
+                    rbAbout.SelectionStart = 0;
+                    rbAbout.SelectionLength = 0;
+                    rbAbout.GotFocus += (sender, e) =>
+                    {
+                        // При получении фокуса сбрасываем выделение
+                        rbAbout.SelectionStart = 0;
+                        rbAbout.SelectionLength = 0;
+                        this.ActiveControl = null;
+                    };
                 }
                 else
                 {
-                    tbAbout.Text = "Файл " + FILE_PATH + " не найден!";
+                    rbAbout.Text = "Файл " + FILE_PATH + " не найден!";
                 }
                 
             }
             catch
             {
+                MessageBox.Show("Ошибка при чтении файла " + FILE_PATH + ". Возможно, он поврежден или не соответствует формату RTF.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
         }
+
+        private void bOK_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        
     }
 }

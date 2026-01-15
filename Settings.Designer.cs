@@ -74,7 +74,7 @@
             this.bSaveAppSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
             this.bSaveAppSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.bSaveAppSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bSaveAppSettings.Location = new System.Drawing.Point(314, 478);
+            this.bSaveAppSettings.Location = new System.Drawing.Point(127, 204);
             this.bSaveAppSettings.Name = "bSaveAppSettings";
             this.bSaveAppSettings.Size = new System.Drawing.Size(204, 28);
             this.bSaveAppSettings.TabIndex = 2;
@@ -182,7 +182,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(852, 519);
+            this.ClientSize = new System.Drawing.Size(470, 256);
             this.Controls.Add(this.cbExpandChannels);
             this.Controls.Add(this.cbExpandContacts);
             this.Controls.Add(this.label4);
