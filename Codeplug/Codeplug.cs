@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Channels;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace NIKA_CPS_V1.Codeplug
 {
+    [Serializable]
+    [XmlRoot("Codeplug")]
     public class CodeplugData
     {
         private List<Contact> _contacts;
@@ -18,32 +21,75 @@ namespace NIKA_CPS_V1.Codeplug
         public const int MAX_CONTACTS_COUNT = 256; //максимальное число контактов
         public const int MAX_CHANNELS_COUNT = 1024; //максимальное число каналов
         public const int MAX_SATELLITES_COUNT = 20; //максимальное число спутников
+        [XmlArray("Contacts")]
+        [XmlArrayItem("Contact")]
         public List<Contact> Contacts
         {
             get => _contacts;
             set => _contacts = value;
         }
-
+        [XmlArray("Channels")]
+        [XmlArrayItem("Channel")]
         public List<Channel> Channels
         {
             get => _channels;
             set => _channels = value;
         }
-
+        [XmlArray("Satellites")]
+        [XmlArrayItem("Satellite")]
         public List<SatelliteKeps> SatelliteKeps
         {
             get => _satelliteKeps;
             set => _satelliteKeps = value;
         }
+
+
         public CodeplugData()
         {
             _contacts = new List<Contact>();
-            AddContact(new Contact(GetFirstContactFreeNumber(), "Вызов всех", 16777215, "", Contact.ContactType.ALL_CALL, Contact.Timeslot.NONE));
-            AddContact(new Contact(GetFirstContactFreeNumber(), "Россия", 2501, "", Contact.ContactType.GROUP, Contact.Timeslot.NONE));
-            _channels = new List<Channel>();    
-            AddChannel(new Channel());
+            _channels = new List<Channel>();
             _satelliteKeps = new List<SatelliteKeps>();
-            AddSatellite(new Codeplug.SatelliteKeps());
+        }
+
+        // XML-сериализация
+        public void Serialize(string filePath)
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(CodeplugData));
+                using (TextWriter writer = new StreamWriter(filePath, false, Encoding.UTF8))
+                {
+                    serializer.Serialize(writer, this);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка сериализации: {ex.Message}");
+            }
+        }
+
+        // XML-десериализация
+        public CodeplugData Deserialize(string filePath)
+        {
+            try
+            {
+                if (!File.Exists(filePath))
+                {
+                    MessageBox.Show($"Файл не найден: {filePath}");
+                    return new CodeplugData();
+                }
+
+                XmlSerializer serializer = new XmlSerializer(typeof(CodeplugData));
+                using (TextReader reader = new StreamReader(filePath, Encoding.UTF8))
+                {
+                    return (CodeplugData)serializer.Deserialize(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка десериализации: {ex.Message}");
+                return new CodeplugData();
+            }
         }
 
         public bool AddContact(Contact contact)

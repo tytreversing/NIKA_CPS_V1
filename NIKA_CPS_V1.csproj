@@ -185,9 +185,7 @@
     <Compile Include="Codeplug\Channel.cs" />
     <Compile Include="Codeplug\Codeplug.cs" />
     <Compile Include="Codeplug\CodeplugCHsAndVFOs.cs" />
-    <Compile Include="Codeplug\CodeplugDeserialization.cs" />
     <Compile Include="Codeplug\CodeplugGroupList.cs" />
-    <Compile Include="Codeplug\CodeplugSerialization.cs" />
     <Compile Include="Codeplug\CodeplugSettings.cs" />
     <Compile Include="Codeplug\Contact.cs" />
     <Compile Include="Codeplug\SatelliteKeps.cs" />

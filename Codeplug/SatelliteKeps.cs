@@ -4,9 +4,11 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace NIKA_CPS_V1.Codeplug
 {
+    [Serializable]
     public class SatelliteKeps
     {
         private static readonly NumberFormatInfo NumberFormat = CultureInfo.GetCultureInfo("en-US").NumberFormat;
@@ -23,67 +25,67 @@ namespace NIKA_CPS_V1.Codeplug
         private uint _rx3;
         private uint _tx3;
         private string _callsign;
-
+        [XmlAttribute("CatNumber")]
         public string CatalogueNumber
         {
             get => _catalogueNumber;
             set => _catalogueNumber = value;
         }
-
+        [XmlAttribute("Name")]
         public string DisplayName
         {
             get => _displayName;
             set => _displayName = value;
         }
-
+        [XmlAttribute("Rx1")]
         public uint Rx1
         {
             get => _rx1;
             set => _rx1 = value;
         }
-
+        [XmlAttribute("Tx1")]
         public uint Tx1
         {
             get => _tx1;
             set => _tx1 = value;
         }
-
+        [XmlAttribute("TxCTCSS1")]
         public ushort TxCTCSS1
         {
             get => _txCTCSS1;
             set => _txCTCSS1 = value;
         }
-
+        [XmlAttribute("RxCTCSS1")]
         public ushort RxCTCSS1
         {
             get => _rxCTCSS1;
             set => _rxCTCSS1 = value;
         }
-
+        [XmlAttribute("Rx2")]
         public uint Rx2
         {
             get => _rx2;
             set => _rx2 = value;
         }
-
+        [XmlAttribute("Tx2")]
         public uint Tx2
         {
             get => _tx2;
             set => _tx2 = value;
         }
-
+        [XmlAttribute("Rx3")]
         public uint Rx3
         {
             get => _rx3;
             set => _rx3 = value;
         }
-
+        [XmlAttribute("Tx3")]
         public uint Tx3
         {
             get => _tx3;
             set => _tx3 = value;
         }
-
+        [XmlAttribute("Callsign")]
         public string Callsign
         {
             get => _callsign;

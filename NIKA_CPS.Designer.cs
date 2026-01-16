@@ -64,7 +64,10 @@
             this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteSimilar = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllChannels = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiNewChannel = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSortChannels = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiClearChannels = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllSatellites = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiReloadLocalSatellites = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiReloadFromNetwork = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,9 +108,13 @@
             this.cmsSingleSatellite = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDeleteSatellite = new System.Windows.Forms.ToolStripMenuItem();
             this.tvSecondary = new System.Windows.Forms.TreeView();
-            this.tsmiNewChannel = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiClearChannels = new System.Windows.Forms.ToolStripMenuItem();
+            this.sfdCodeplug = new System.Windows.Forms.SaveFileDialog();
+            this.tsmiNewFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpenFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSaveFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsAllContacts.SuspendLayout();
             this.cmsAllChannels.SuspendLayout();
             this.cmsAllSatellites.SuspendLayout();
@@ -157,7 +164,13 @@
             this.toolStripSeparator5,
             this.tsmiClearChannels});
             this.cmsAllChannels.Name = "cmsAllChannels";
-            this.cmsAllChannels.Size = new System.Drawing.Size(246, 104);
+            this.cmsAllChannels.Size = new System.Drawing.Size(246, 82);
+            // 
+            // tsmiNewChannel
+            // 
+            this.tsmiNewChannel.Name = "tsmiNewChannel";
+            this.tsmiNewChannel.Size = new System.Drawing.Size(245, 24);
+            this.tsmiNewChannel.Text = "Новый";
             // 
             // tsmiSortChannels
             // 
@@ -165,6 +178,18 @@
             this.tsmiSortChannels.Size = new System.Drawing.Size(245, 24);
             this.tsmiSortChannels.Text = "Упорядочить по алфавиту";
             this.tsmiSortChannels.Click += new System.EventHandler(this.tsmiSortChannels_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(242, 6);
+            // 
+            // tsmiClearChannels
+            // 
+            this.tsmiClearChannels.Name = "tsmiClearChannels";
+            this.tsmiClearChannels.Size = new System.Drawing.Size(245, 24);
+            this.tsmiClearChannels.Text = "Очистить";
+            this.tsmiClearChannels.Click += new System.EventHandler(this.tsmiClearChannels_Click);
             // 
             // cmsAllSatellites
             // 
@@ -216,9 +241,9 @@
             this.tsbSettings,
             this.tsbAbout});
             this.tsMainControls.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.tsMainControls.Location = new System.Drawing.Point(6, 6);
+            this.tsMainControls.Location = new System.Drawing.Point(6, 33);
             this.tsMainControls.Name = "tsMainControls";
-            this.tsMainControls.Size = new System.Drawing.Size(53, 675);
+            this.tsMainControls.Size = new System.Drawing.Size(53, 648);
             this.tsMainControls.TabIndex = 0;
             // 
             // tsbMenuToggle
@@ -267,6 +292,7 @@
             this.tsbSaveFile.Name = "tsbSaveFile";
             this.tsbSaveFile.Size = new System.Drawing.Size(50, 52);
             this.tsbSaveFile.Text = "Сохранить кодплаг";
+            this.tsbSaveFile.Click += new System.EventHandler(this.tsbSaveFile_Click);
             this.tsbSaveFile.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // tsbCSV
@@ -365,7 +391,7 @@
             this.tvMain.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tvMain.ImageIndex = 0;
             this.tvMain.ImageList = this.ilTreeItems;
-            this.tvMain.Location = new System.Drawing.Point(59, 6);
+            this.tvMain.Location = new System.Drawing.Point(59, 33);
             this.tvMain.Margin = new System.Windows.Forms.Padding(8, 8, 4, 3);
             this.tvMain.Name = "tvMain";
             treeNode1.Name = "Узел0";
@@ -414,7 +440,7 @@
             treeNode11});
             this.tvMain.SelectedImageIndex = 0;
             this.tvMain.ShowNodeToolTips = true;
-            this.tvMain.Size = new System.Drawing.Size(337, 605);
+            this.tvMain.Size = new System.Drawing.Size(337, 578);
             this.tvMain.TabIndex = 1;
             this.tvMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvMain_AfterSelect);
             this.tvMain.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvMain_NodeMouseClick);
@@ -455,6 +481,13 @@
             // 
             // msiFile
             // 
+            this.msiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewFile,
+            this.tsmiOpenFile,
+            this.tsmiSaveFile,
+            this.tsmiSaveAs,
+            this.toolStripSeparator6,
+            this.tsmiExit});
             this.msiFile.Name = "msiFile";
             this.msiFile.Size = new System.Drawing.Size(59, 23);
             this.msiFile.Text = "Файл";
@@ -582,7 +615,7 @@
             this.tvSecondary.Dock = System.Windows.Forms.DockStyle.Left;
             this.tvSecondary.ImageIndex = 0;
             this.tvSecondary.ImageList = this.ilTreeItems;
-            this.tvSecondary.Location = new System.Drawing.Point(396, 6);
+            this.tvSecondary.Location = new System.Drawing.Point(396, 33);
             this.tvSecondary.Name = "tvSecondary";
             treeNode12.ImageIndex = 1;
             treeNode12.Name = "SettingsNode";
@@ -606,29 +639,69 @@
             treeNode12,
             treeNode18});
             this.tvSecondary.SelectedImageIndex = 0;
-            this.tvSecondary.Size = new System.Drawing.Size(347, 605);
+            this.tvSecondary.Size = new System.Drawing.Size(347, 578);
             this.tvSecondary.TabIndex = 4;
             this.tvSecondary.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvSecondary_AfterSelect);
             this.tvSecondary.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSecondary_NodeMouseClick);
             this.tvSecondary.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSecondary_NodeMouseDoubleClick);
             // 
-            // tsmiNewChannel
+            // sfdCodeplug
             // 
-            this.tsmiNewChannel.Name = "tsmiNewChannel";
-            this.tsmiNewChannel.Size = new System.Drawing.Size(245, 24);
-            this.tsmiNewChannel.Text = "Новый";
+            this.sfdCodeplug.DefaultExt = "ncf";
+            this.sfdCodeplug.Filter = "Файлы кодплага (.ncf)|*.ncf";
+            this.sfdCodeplug.Title = "Сохранить кодплаг";
             // 
-            // toolStripSeparator5
+            // tsmiNewFile
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(242, 6);
+            this.tsmiNewFile.BackColor = System.Drawing.Color.White;
+            this.tsmiNewFile.Name = "tsmiNewFile";
+            this.tsmiNewFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.tsmiNewFile.Size = new System.Drawing.Size(322, 24);
+            this.tsmiNewFile.Text = "Новый";
             // 
-            // tsmiClearChannels
+            // tsmiOpenFile
             // 
-            this.tsmiClearChannels.Name = "tsmiClearChannels";
-            this.tsmiClearChannels.Size = new System.Drawing.Size(245, 24);
-            this.tsmiClearChannels.Text = "Очистить";
-            this.tsmiClearChannels.Click += new System.EventHandler(this.tsmiClearChannels_Click);
+            this.tsmiOpenFile.BackColor = System.Drawing.Color.White;
+            this.tsmiOpenFile.Name = "tsmiOpenFile";
+            this.tsmiOpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.tsmiOpenFile.Size = new System.Drawing.Size(322, 24);
+            this.tsmiOpenFile.Text = "Открыть";
+            // 
+            // tsmiSaveFile
+            // 
+            this.tsmiSaveFile.BackColor = System.Drawing.Color.White;
+            this.tsmiSaveFile.Name = "tsmiSaveFile";
+            this.tsmiSaveFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.tsmiSaveFile.Size = new System.Drawing.Size(322, 24);
+            this.tsmiSaveFile.Text = "Сохранить";
+            this.tsmiSaveFile.Click += new System.EventHandler(this.tsbSaveFile_Click);
+            // 
+            // tsmiSaveAs
+            // 
+            this.tsmiSaveAs.BackColor = System.Drawing.Color.White;
+            this.tsmiSaveAs.Name = "tsmiSaveAs";
+            this.tsmiSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.tsmiSaveAs.Size = new System.Drawing.Size(322, 24);
+            this.tsmiSaveAs.Tag = "SaveAs";
+            this.tsmiSaveAs.Text = "Сохранить как...";
+            this.tsmiSaveAs.Click += new System.EventHandler(this.tsbSaveFile_Click);
+            // 
+            // tsmiExit
+            // 
+            this.tsmiExit.BackColor = System.Drawing.Color.White;
+            this.tsmiExit.Name = "tsmiExit";
+            this.tsmiExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.tsmiExit.Size = new System.Drawing.Size(322, 24);
+            this.tsmiExit.Text = "Выход";
+            this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.BackColor = System.Drawing.Color.White;
+            this.toolStripSeparator6.ForeColor = System.Drawing.Color.Black;
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(319, 6);
             // 
             // MainForm
             // 
@@ -647,6 +720,7 @@
             this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(6);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.cmsAllContacts.ResumeLayout(false);
@@ -714,6 +788,13 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiNewChannel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem tsmiClearChannels;
+        private System.Windows.Forms.SaveFileDialog sfdCodeplug;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNewFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiOpenFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSaveFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSaveAs;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem tsmiExit;
     }
 }
 

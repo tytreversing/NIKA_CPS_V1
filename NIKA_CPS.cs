@@ -3,6 +3,7 @@ using NIKA_CPS_V1.Codeplug;
 using NIKA_CPS_V1.Interfaces;
 using NIKA_CPS_V1.Properties;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Reflection;
+using System.Runtime.Remoting.Channels;
 using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -126,42 +128,39 @@ namespace NIKA_CPS_V1
             if (codeplugFileName == null) //запуск без передачи параметров
             {
                 //получаем из реестра последний файл кодплага, если сохранен, иначе болванку в папке с программой
-                codeplugFileName = RegistryOperations.getProfileStringWithDefault("LastCodeplugFile", thisFilePath + "\\Nika_CPS_V1.ncf");
+                codeplugFileName = RegistryOperations.getProfileStringWithDefault("LastCodeplugFile", "");
 
             }
             else //запуск с параметрами
             {
                 tbConsole.AppendText("Загружен кодплаг из файла " + codeplugFileName + "\r\n");
             }
+
+            CodeplugInternal = new CodeplugData();
             // пытаемся открыть файл
-            if (!File.Exists(codeplugFileName))
+            // если файл из ключа или реестра не существует или ключ реестра пуст, генерируем болванку
+            if (!File.Exists(codeplugFileName) || codeplugFileName == "")
             {
-                playMessage("file_not_found_error");
-                MessageBox.Show("Файл " + codeplugFileName + " не найден по указанному адресу. Будет сгенерирован шаблонный кодплаг.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //создаем пустой объект и сериализуем его
-                CodeplugInternal = new CodeplugData();
-                try
+                if (codeplugFileName != "") //оповещение только в случае попытки открытия несуществующего файла
                 {
-                    CodeplugSerialization serializer = new CodeplugSerialization(CodeplugInternal, thisFilePath + "\\Nika_CPS_V1.ncf");
+                    playMessage("file_not_found_error");
+                    MessageBox.Show("Файл " + codeplugFileName + " не найден по указанному адресу. Будет сгенерирован шаблонный кодплаг.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    codeplugFileName = "";
+                    RegistryOperations.WriteProfileString("LastCodeplugFile", "");
+                   
                 }
-                catch
-                {
-                    playMessage("error_saving_template");
-                    MessageBox.Show("Ошибка при попытке сохранения файла шаблона! Проверьте права доступа!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                GenerateCodeplugTemplate();
             }
             else
             {
-                CodeplugDeserialization deSerializer = new CodeplugDeserialization();
                 try
                 {
-                    CodeplugInternal = deSerializer.Deserialize(codeplugFileName);
+                    CodeplugInternal = CodeplugInternal.Deserialize(codeplugFileName);
                 }
                 catch
                 {
                     playMessage("error_reading_codeplug");
                     MessageBox.Show("Ошибка при чтении файла кодплага. Будет сгенерирован шаблонный кодплаг.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    CodeplugInternal = new CodeplugData();
                 }
             }
             Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + codeplugFileName;
@@ -195,6 +194,14 @@ namespace NIKA_CPS_V1
             pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
             pollingTimer.Start();
             
+        }
+
+        private void GenerateCodeplugTemplate()
+        {
+            CodeplugInternal.AddContact(new Codeplug.Contact(CodeplugInternal.GetFirstContactFreeNumber(), "Вызов всех", 16777215, "", Codeplug.Contact.ContactType.ALL_CALL, Codeplug.Contact.Timeslot.NONE));
+            CodeplugInternal.AddContact(new Codeplug.Contact(CodeplugInternal.GetFirstContactFreeNumber(), "Россия", 2501, "", Codeplug.Contact.ContactType.GROUP, Codeplug.Contact.Timeslot.NONE));
+            CodeplugInternal.AddChannel(new Channel());
+            CodeplugInternal.AddSatellite(new Codeplug.SatelliteKeps());
         }
 
         public void GenerateTree(TreeRefreshType mode = TreeRefreshType.ALL)
@@ -620,6 +627,7 @@ namespace NIKA_CPS_V1
             if (MessageBox.Show("Открытый кодплаг будет сброшен к состоянию шаблона с демонстрационными данными, все его текущее содержимое будет потеряно. Продолжить?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 CodeplugInternal = new Codeplug.CodeplugData();
+                GenerateCodeplugTemplate();
                 GenerateTree();
             }
         }
@@ -643,6 +651,95 @@ namespace NIKA_CPS_V1
                 CodeplugInternal.ClearChannels();
                 GenerateTree(TreeRefreshType.CHANNELS);
             }
+        }
+
+        public string MenuItemName;
+        public string MenuItemText;
+        public object ItemTag;
+
+        public void MenuClickEventArgs(ToolStripMenuItem item)
+        {
+            MenuItemName = item.Name;
+            MenuItemText = item.Text;
+            ItemTag = item.Tag;
+        }
+
+        private void tsbSaveFile_Click(object sender, EventArgs e)
+        {
+            string _tag;
+            if (sender is ToolStripMenuItem menuItem) //если клик был по меню, а не по кнопке
+            {
+                _tag = menuItem.Tag as string;
+            }
+            else
+            {
+                _tag = "";
+            }
+            if (codeplugFileName == "" || _tag == "SaveAs") // если файл не открывался и работали с болванкой
+            // либо вызов по клику "Сохранить как" в меню - используем кнопку как Save As
+            {
+                if (sfdCodeplug.ShowDialog() == DialogResult.OK)
+                {
+                    codeplugFileName = sfdCodeplug.FileName;
+                }
+            }
+            //сериализуем
+            try
+            {
+                CodeplugInternal.Serialize(codeplugFileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при сохранении кодплага!\r\n" + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                RegistryOperations.WriteProfileString("LastCodeplugFile", codeplugFileName);
+                Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + codeplugFileName;
+            }
+
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Если пользователь пытается закрыть форму
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                // Запрашиваем подтверждение
+                DialogResult result = MessageBox.Show(
+                    "Все несохраненные изменения будут утеряны. Сохранить кодплаг перед выходом?",
+                    "Подтверждение выхода",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button3
+                );
+                switch (result)
+                {
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                    case DialogResult.Yes:
+                        if (codeplugFileName == "" && sfdCodeplug.ShowDialog() == DialogResult.OK) 
+                        {
+                            codeplugFileName = sfdCodeplug.FileName;
+                        }
+                        try
+                        {
+                            CodeplugInternal.Serialize(codeplugFileName);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Ошибка при сохранении кодплага!\r\n" + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        break;
+
+                }
+            }
+        }
+
+        private void tsmiExit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

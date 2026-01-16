@@ -3,27 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace NIKA_CPS_V1.Codeplug
 {
+    [Serializable]
     public class Channel
     {
         private ushort _number;
         private string _name;
         private uint _rxFrequency;
-
+        [XmlAttribute("Number")]
         public ushort Number
         {
             get => _number;
             set => _number = value;
         }
-
+        [XmlAttribute("Name")]
         public string Name
         {
             get => _name;
             set => _name = ValidateLength(value);
         }
-
+        [XmlAttribute("Rx")]
         public uint RxFrequency
         {
             get => _rxFrequency;

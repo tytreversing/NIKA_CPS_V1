@@ -3,23 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace NIKA_CPS_V1.Codeplug
 {
+    [Serializable]
     public class Contact
     {
 
         public enum ContactType
         {
+            [XmlEnum("PRIVATE")]
             PRIVATE,
+            [XmlEnum("GROUP")]
             GROUP,
+            [XmlEnum("ALLCALL")]
             ALL_CALL
         }
 
         public enum Timeslot
         {
+            [XmlEnum("NONE")]
             NONE = 0,
+            [XmlEnum("TS1")]
             TS1,
+            [XmlEnum("TS2")]
             TS2
         }
 
@@ -30,36 +38,37 @@ namespace NIKA_CPS_V1.Codeplug
         private ContactType _contactType;
         private Timeslot _slot;
 
-
+        [XmlAttribute("Number")]
         public ushort Number
         {
             get => _number;
             set => _number = value;
         }
+        [XmlAttribute("Alias")]
         public string Alias
         {
             get => _alias;
             set => _alias = ValidateLength(value, 16);
         }
-
+        [XmlAttribute("DMRID")]
         public uint DMR_ID
         {
             get => _dmrId;
             set => _dmrId = value;
         }
-
+        [XmlAttribute("UserData")]
         public string UserData
         {
             get => _userData;
             set => _userData = ValidateLength(value, 32);
         }
-
+        [XmlAttribute("Type")]
         public ContactType Type
         {
             get => _contactType;    
             set => _contactType = value;
         }
-
+        [XmlAttribute("Timeslot")]
         public Timeslot TimeSlot
         {
             get => _slot;
