@@ -64,7 +64,7 @@ namespace NIKA_CPS_V1.Codeplug
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка сериализации: {ex.Message}");
+                MessageBox.Show($"Ошибка сериализации кодплага: {ex.Message}", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -87,7 +87,7 @@ namespace NIKA_CPS_V1.Codeplug
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка десериализации: {ex.Message}");
+                MessageBox.Show($"Ошибка десериализации кодплага: {ex.Message}", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return new CodeplugData();
             }
         }

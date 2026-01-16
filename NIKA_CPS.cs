@@ -190,7 +190,10 @@ namespace NIKA_CPS_V1
             tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
             //генерация дерева
             GenerateTree();
-
+            if (CodeplugInternal.Contacts.Count == 0)
+            {
+                MessageBox.Show("В загруженном файле кодплага не обнаружены данные о контактах!\r\nИнформация о контактах в цифровых каналах и VFO будет обнулена для исключения ошибок.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
             pollingTimer.Start();
             
@@ -201,6 +204,7 @@ namespace NIKA_CPS_V1
             CodeplugInternal.AddContact(new Codeplug.Contact(CodeplugInternal.GetFirstContactFreeNumber(), "Вызов всех", 16777215, "", Codeplug.Contact.ContactType.ALL_CALL, Codeplug.Contact.Timeslot.NONE));
             CodeplugInternal.AddContact(new Codeplug.Contact(CodeplugInternal.GetFirstContactFreeNumber(), "Россия", 2501, "", Codeplug.Contact.ContactType.GROUP, Codeplug.Contact.Timeslot.NONE));
             CodeplugInternal.AddChannel(new Channel());
+            CodeplugInternal.AddChannel(new Channel(CodeplugInternal.GetFirstChannelFreeNumber(), "Точка DMR", Channel.ChannelType.DIGITAL, 438000000));
             CodeplugInternal.AddSatellite(new Codeplug.SatelliteKeps());
         }
 
@@ -262,6 +266,7 @@ namespace NIKA_CPS_V1
                     }
                 }
             }
+            // ДЕРЕВО КАНАЛОВ
             if (mode == TreeRefreshType.ALL || mode == TreeRefreshType.CHANNELS)
             {
                 TreeNode channelsNode = tvMain.Nodes.Find("ChannelsNode", true).FirstOrDefault();
@@ -274,8 +279,16 @@ namespace NIKA_CPS_V1
                         TreeNode newNode = new TreeNode(name);
                         newNode.Tag = channel;
                         newNode.ToolTipText = channel.Name + " Rx: " + (channel.RxFrequency / 1000000f).ToString("F4");
-                        newNode.ImageIndex = 8;
-                        newNode.SelectedImageIndex = 8;
+                        if (channel.Type == Channel.ChannelType.ANALOG)
+                        {
+                            newNode.ImageIndex = 11;
+                            newNode.SelectedImageIndex = 11;
+                        }
+                        else
+                        {
+                            newNode.ImageIndex = 12;
+                            newNode.SelectedImageIndex = 12;
+                        }
                         channelsNode.Nodes.Add(newNode);
 
                     }

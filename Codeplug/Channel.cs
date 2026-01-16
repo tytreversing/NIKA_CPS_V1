@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -10,9 +11,20 @@ namespace NIKA_CPS_V1.Codeplug
     [Serializable]
     public class Channel
     {
+
+        public enum ChannelType
+        {
+            [XmlEnum("ANALOG")]
+            ANALOG,
+            [XmlEnum("DIGITAL")]
+            DIGITAL
+        } 
         private ushort _number;
         private string _name;
+        private ChannelType _type;
         private uint _rxFrequency;
+
+
         [XmlAttribute("Number")]
         public ushort Number
         {
@@ -25,6 +37,12 @@ namespace NIKA_CPS_V1.Codeplug
             get => _name;
             set => _name = ValidateLength(value);
         }
+        [XmlAttribute("Type")]
+        public ChannelType Type
+        {
+            get => _type;
+            set => _type = value;
+        }
         [XmlAttribute("Rx")]
         public uint RxFrequency
         {
@@ -35,13 +53,15 @@ namespace NIKA_CPS_V1.Codeplug
         {
             _number = 0;
             _name = "Вызывной 2 м";
+            _type = ChannelType.ANALOG;
             _rxFrequency = 145500000;
         }
 
-        public Channel (ushort number, string name, uint rxFrequency)
+        public Channel (ushort number, string name, ChannelType type, uint rxFrequency)
         {
             _number = number;   
             _name = name;
+            _type = type;
             _rxFrequency = rxFrequency;
         }
 
