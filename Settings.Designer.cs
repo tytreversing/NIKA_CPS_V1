@@ -41,6 +41,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cbExpandContacts = new System.Windows.Forms.CheckBox();
             this.cbExpandChannels = new System.Windows.Forms.CheckBox();
+            this.cbConfirmExit = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // cbShowSplashScreen
@@ -74,7 +75,7 @@
             this.bSaveAppSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
             this.bSaveAppSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.bSaveAppSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bSaveAppSettings.Location = new System.Drawing.Point(127, 204);
+            this.bSaveAppSettings.Location = new System.Drawing.Point(127, 240);
             this.bSaveAppSettings.Name = "bSaveAppSettings";
             this.bSaveAppSettings.Size = new System.Drawing.Size(204, 28);
             this.bSaveAppSettings.TabIndex = 2;
@@ -177,12 +178,23 @@
             this.cbExpandChannels.Text = "Дерево каналов";
             this.cbExpandChannels.UseVisualStyleBackColor = true;
             // 
+            // cbConfirmExit
+            // 
+            this.cbConfirmExit.AutoSize = true;
+            this.cbConfirmExit.Location = new System.Drawing.Point(13, 193);
+            this.cbConfirmExit.Name = "cbConfirmExit";
+            this.cbConfirmExit.Size = new System.Drawing.Size(279, 19);
+            this.cbConfirmExit.TabIndex = 13;
+            this.cbConfirmExit.Text = "Запрашивать подтверждение при выходе";
+            this.cbConfirmExit.UseVisualStyleBackColor = true;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(470, 256);
+            this.ClientSize = new System.Drawing.Size(470, 278);
+            this.Controls.Add(this.cbConfirmExit);
             this.Controls.Add(this.cbExpandChannels);
             this.Controls.Add(this.cbExpandContacts);
             this.Controls.Add(this.label4);
@@ -228,5 +240,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox cbExpandContacts;
         private System.Windows.Forms.CheckBox cbExpandChannels;
+        private System.Windows.Forms.CheckBox cbConfirmExit;
     }
 }

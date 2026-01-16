@@ -190,12 +190,21 @@
     <Compile Include="Codeplug\Contact.cs" />
     <Compile Include="Codeplug\SatelliteKeps.cs" />
     <Compile Include="Codeplug\Scanlist.cs" />
+    <Compile Include="Codeplug\UserData.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Codeplug\Zone.cs" />
     <Compile Include="Contact.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Contact.Designer.cs">
       <DependentUpon>Contact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DMRID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DMRID.Designer.cs">
+      <DependentUpon>DMRID.cs</DependentUpon>
     </Compile>
     <Compile Include="FirmwareUploader.cs">
       <SubType>Form</SubType>
@@ -243,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Contact.resx">
       <DependentUpon>Contact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DMRID.resx">
+      <DependentUpon>DMRID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FirmwareUploader.resx">
       <DependentUpon>FirmwareUploader.cs</DependentUpon>

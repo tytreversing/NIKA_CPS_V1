@@ -190,17 +190,32 @@ namespace NIKA_CPS_V1
             tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
             //генерация дерева
             GenerateTree();
-            if (CodeplugInternal.Contacts.Count == 0)
-            {
-                MessageBox.Show("В загруженном файле кодплага не обнаружены данные о контактах!\r\nИнформация о контактах в цифровых каналах и VFO будет обнулена для исключения ошибок.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            CheckLoadedCodeplug();
+            
             pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
             pollingTimer.Start();
             
         }
 
+        private void CheckLoadedCodeplug()
+        {
+            if (CodeplugInternal.DMRID == null)
+            {
+                MessageBox.Show("В загруженном файле кодплага не установлены DMR ID и алиас пользователя!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            if (CodeplugInternal.Contacts.Count == 0)
+            {
+                MessageBox.Show("В загруженном файле кодплага не обнаружены данные о контактах!\r\nИнформация о контактах в цифровых каналах и VFO будет обнулена для исключения ошибок.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            if (CodeplugInternal.Channels.Count == 0)
+            {
+                MessageBox.Show("В загруженном файле кодплага не обнаружены данные о rfyfkf[!\r\nИнформация о каналах в зонах будет обнулена для исключения ошибок.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         private void GenerateCodeplugTemplate()
         {
+            CodeplugInternal.DMRID = new UserData();
             CodeplugInternal.AddContact(new Codeplug.Contact(CodeplugInternal.GetFirstContactFreeNumber(), "Вызов всех", 16777215, "", Codeplug.Contact.ContactType.ALL_CALL, Codeplug.Contact.Timeslot.NONE));
             CodeplugInternal.AddContact(new Codeplug.Contact(CodeplugInternal.GetFirstContactFreeNumber(), "Россия", 2501, "", Codeplug.Contact.ContactType.GROUP, Codeplug.Contact.Timeslot.NONE));
             CodeplugInternal.AddChannel(new Channel());
@@ -411,7 +426,11 @@ namespace NIKA_CPS_V1
 
         private void tvSecondary_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-
+            if (e.Node.Parent == null && e.Node.Name == "DMRIDNode")
+            {
+                DMRID idForm = new DMRID();
+                idForm.ShowDialog();
+            }
         }
 
         private void tvSecondary_AfterSelect(object sender, TreeViewEventArgs e)
@@ -637,7 +656,7 @@ namespace NIKA_CPS_V1
 
         private void tsbNewFile_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Открытый кодплаг будет сброшен к состоянию шаблона с демонстрационными данными, все его текущее содержимое будет потеряно. Продолжить?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Открытый кодплаг будет сброшен к состоянию шаблона с демонстрационными данными, все несохраненные данные будут потеряны. Продолжить?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 CodeplugInternal = new Codeplug.CodeplugData();
                 GenerateCodeplugTemplate();
@@ -666,15 +685,34 @@ namespace NIKA_CPS_V1
             }
         }
 
-        public string MenuItemName;
-        public string MenuItemText;
-        public object ItemTag;
 
-        public void MenuClickEventArgs(ToolStripMenuItem item)
+        private void tsbOpenFile_Click(object sender, EventArgs e)
         {
-            MenuItemName = item.Name;
-            MenuItemText = item.Text;
-            ItemTag = item.Tag;
+            string fileName = "Кодплаг_" + DateTime.Now.ToString("yyyyMMdd_HHmm");
+            if (ofdCodeplug.ShowDialog() == DialogResult.OK)
+            {
+                CodeplugInternal = new CodeplugData();
+                fileName = ofdCodeplug.FileName;
+                try
+                {
+                    CodeplugInternal = CodeplugInternal.Deserialize(fileName);
+                }
+                catch
+                {
+                    playMessage("error_reading_codeplug");
+                    MessageBox.Show("Ошибка при чтении файла кодплага. Будет сгенерирован шаблонный кодплаг.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    GenerateCodeplugTemplate();
+                    return;
+                }
+                finally
+                {
+                    CheckLoadedCodeplug();
+                    GenerateTree();
+                    codeplugFileName = fileName;
+                    RegistryOperations.WriteProfileString("LastCodeplugFile", fileName);
+                    Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + fileName;
+                }
+            }
         }
 
         private void tsbSaveFile_Click(object sender, EventArgs e)
@@ -691,6 +729,7 @@ namespace NIKA_CPS_V1
             if (codeplugFileName == "" || _tag == "SaveAs") // если файл не открывался и работали с болванкой
             // либо вызов по клику "Сохранить как" в меню - используем кнопку как Save As
             {
+                sfdCodeplug.FileName = "Кодплаг_[" + CodeplugInternal.DMRID.Alias + "]_" + DateTime.Now.ToString("yyyyMMdd_HHmm");
                 if (sfdCodeplug.ShowDialog() == DialogResult.OK)
                 {
                     codeplugFileName = sfdCodeplug.FileName;
@@ -715,8 +754,9 @@ namespace NIKA_CPS_V1
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Если пользователь пытается закрыть форму
-            if (e.CloseReason == CloseReason.UserClosing)
+            bool confirmExit = (RegistryOperations.getProfileIntWithDefault("ConfirmExit", 1) == 1);
+            // Если пользователь пытается закрыть форму и установлен запрос подтверждения
+            if (e.CloseReason == CloseReason.UserClosing && confirmExit)
             {
                 // Запрашиваем подтверждение
                 DialogResult result = MessageBox.Show(
@@ -754,5 +794,7 @@ namespace NIKA_CPS_V1
         {
             Close();
         }
+
+
     }
 }

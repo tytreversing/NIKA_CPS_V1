@@ -29,6 +29,7 @@ namespace NIKA_CPS_V1
             rbSlowPolling.Checked = !rbFastPolling.Checked;
             tbRadioVID.Text = MainForm.radioVID;
             tbRadioPID.Text = MainForm.radioPID;
+            cbConfirmExit.Checked = (RegistryOperations.getProfileIntWithDefault("ConfirmExit", 1) != 0);
             cbExpandContacts.Checked = (RegistryOperations.getProfileIntWithDefault("ExpandContacts", 0) != 0);
             cbExpandChannels.Checked = (RegistryOperations.getProfileIntWithDefault("ExpandChannels", 0) != 0);
         }
@@ -37,6 +38,7 @@ namespace NIKA_CPS_V1
         {
             RegistryOperations.WriteProfileInt("ShowSplashScreen", (cbShowSplashScreen.Checked ? 1 : 0));
             RegistryOperations.WriteProfileInt("AccessibilityOptions", (cbUseVoiceHelp.Checked ? 1 : 0));
+            RegistryOperations.WriteProfileInt("ConfirmExit", (cbConfirmExit.Checked ? 1 : 0));
             RegistryOperations.WriteProfileInt("UsingFastPolling", (rbFastPolling.Checked ? 1 : 0));
             RegistryOperations.WriteProfileInt("ExpandContacts", (cbExpandContacts.Checked ? 1 : 0));
             RegistryOperations.WriteProfileInt("ExpandChannels", (cbExpandChannels.Checked ? 1 : 0));

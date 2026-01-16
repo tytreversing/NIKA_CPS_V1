@@ -13,6 +13,7 @@ namespace NIKA_CPS_V1.Codeplug
     [XmlRoot("Codeplug")]
     public class CodeplugData
     {
+        private UserData _userData;
         private List<Contact> _contacts;
         private List<Channel> _channels;
         private List<SatelliteKeps> _satelliteKeps;
@@ -21,6 +22,13 @@ namespace NIKA_CPS_V1.Codeplug
         public const int MAX_CONTACTS_COUNT = 256; //максимальное число контактов
         public const int MAX_CHANNELS_COUNT = 1024; //максимальное число каналов
         public const int MAX_SATELLITES_COUNT = 20; //максимальное число спутников
+        [XmlElement("User")]
+        public UserData DMRID
+        {
+            get => _userData;
+            set => _userData = value;
+        }
+
         [XmlArray("Contacts")]
         [XmlArrayItem("Contact")]
         public List<Contact> Contacts
@@ -46,6 +54,7 @@ namespace NIKA_CPS_V1.Codeplug
 
         public CodeplugData()
         {
+            _userData = new UserData();
             _contacts = new List<Contact>();
             _channels = new List<Channel>();
             _satelliteKeps = new List<SatelliteKeps>();

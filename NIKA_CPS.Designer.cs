@@ -48,17 +48,8 @@
             treeNode9,
             treeNode10});
             System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Настройки", 1, 1);
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Узел5");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Узел6");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Узел7");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Узел8");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Узел9");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10, new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode14,
-            treeNode15,
-            treeNode16,
-            treeNode17});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("DMR ID", 13, 13);
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10);
             this.cmsAllContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewContact = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,6 +83,12 @@
             this.ilTreeItems = new System.Windows.Forms.ImageList(this.components);
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.msiFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpenFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSaveFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.msiCodeplug = new System.Windows.Forms.ToolStripMenuItem();
             this.msiStdChannelsGenerator = new System.Windows.Forms.ToolStripMenuItem();
             this.msiReadWrite = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,12 +106,7 @@
             this.tsmiDeleteSatellite = new System.Windows.Forms.ToolStripMenuItem();
             this.tvSecondary = new System.Windows.Forms.TreeView();
             this.sfdCodeplug = new System.Windows.Forms.SaveFileDialog();
-            this.tsmiNewFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOpenFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSaveFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.ofdCodeplug = new System.Windows.Forms.OpenFileDialog();
             this.cmsAllContacts.SuspendLayout();
             this.cmsAllChannels.SuspendLayout();
             this.cmsAllSatellites.SuspendLayout();
@@ -282,6 +274,7 @@
             this.tsbOpenFile.Name = "tsbOpenFile";
             this.tsbOpenFile.Size = new System.Drawing.Size(50, 52);
             this.tsbOpenFile.Text = "Открыть кодплаг";
+            this.tsbOpenFile.Click += new System.EventHandler(this.tsbOpenFile_Click);
             this.tsbOpenFile.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // tsbSaveFile
@@ -463,6 +456,7 @@
             this.ilTreeItems.Images.SetKeyName(10, "satellite.png");
             this.ilTreeItems.Images.SetKeyName(11, "analog.png");
             this.ilTreeItems.Images.SetKeyName(12, "digital.png");
+            this.ilTreeItems.Images.SetKeyName(13, "id.png");
             // 
             // msMain
             // 
@@ -493,6 +487,60 @@
             this.msiFile.Name = "msiFile";
             this.msiFile.Size = new System.Drawing.Size(59, 23);
             this.msiFile.Text = "Файл";
+            // 
+            // tsmiNewFile
+            // 
+            this.tsmiNewFile.BackColor = System.Drawing.Color.White;
+            this.tsmiNewFile.Name = "tsmiNewFile";
+            this.tsmiNewFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.tsmiNewFile.Size = new System.Drawing.Size(322, 24);
+            this.tsmiNewFile.Text = "Новый";
+            this.tsmiNewFile.Click += new System.EventHandler(this.tsbNewFile_Click);
+            // 
+            // tsmiOpenFile
+            // 
+            this.tsmiOpenFile.BackColor = System.Drawing.Color.White;
+            this.tsmiOpenFile.Name = "tsmiOpenFile";
+            this.tsmiOpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.tsmiOpenFile.Size = new System.Drawing.Size(322, 24);
+            this.tsmiOpenFile.Text = "Открыть";
+            this.tsmiOpenFile.Click += new System.EventHandler(this.tsbOpenFile_Click);
+            // 
+            // tsmiSaveFile
+            // 
+            this.tsmiSaveFile.BackColor = System.Drawing.Color.White;
+            this.tsmiSaveFile.Name = "tsmiSaveFile";
+            this.tsmiSaveFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.tsmiSaveFile.Size = new System.Drawing.Size(322, 24);
+            this.tsmiSaveFile.Text = "Сохранить";
+            this.tsmiSaveFile.Click += new System.EventHandler(this.tsbSaveFile_Click);
+            // 
+            // tsmiSaveAs
+            // 
+            this.tsmiSaveAs.BackColor = System.Drawing.Color.White;
+            this.tsmiSaveAs.Name = "tsmiSaveAs";
+            this.tsmiSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.tsmiSaveAs.Size = new System.Drawing.Size(322, 24);
+            this.tsmiSaveAs.Tag = "SaveAs";
+            this.tsmiSaveAs.Text = "Сохранить как...";
+            this.tsmiSaveAs.Click += new System.EventHandler(this.tsbSaveFile_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.BackColor = System.Drawing.Color.White;
+            this.toolStripSeparator6.ForeColor = System.Drawing.Color.Black;
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(319, 6);
+            // 
+            // tsmiExit
+            // 
+            this.tsmiExit.BackColor = System.Drawing.Color.White;
+            this.tsmiExit.Name = "tsmiExit";
+            this.tsmiExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.tsmiExit.Size = new System.Drawing.Size(322, 24);
+            this.tsmiExit.Text = "Выход";
+            this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
             // msiCodeplug
             // 
@@ -623,23 +671,18 @@
             treeNode12.Name = "SettingsNode";
             treeNode12.SelectedImageIndex = 1;
             treeNode12.Text = "Настройки";
-            treeNode13.Name = "Узел5";
-            treeNode13.Text = "Узел5";
-            treeNode14.Name = "Узел6";
-            treeNode14.Text = "Узел6";
-            treeNode15.Name = "Узел7";
-            treeNode15.Text = "Узел7";
-            treeNode16.Name = "Узел8";
-            treeNode16.Text = "Узел8";
-            treeNode17.Name = "Узел9";
-            treeNode17.Text = "Узел9";
-            treeNode18.ImageIndex = 10;
-            treeNode18.Name = "SatellitesNode";
-            treeNode18.SelectedImageIndex = 10;
-            treeNode18.Text = "Радиолюбительские спутники";
+            treeNode13.ImageIndex = 13;
+            treeNode13.Name = "DMRIDNode";
+            treeNode13.SelectedImageIndex = 13;
+            treeNode13.Text = "DMR ID";
+            treeNode14.ImageIndex = 10;
+            treeNode14.Name = "SatellitesNode";
+            treeNode14.SelectedImageIndex = 10;
+            treeNode14.Text = "Радиолюбительские спутники";
             this.tvSecondary.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode12,
-            treeNode18});
+            treeNode13,
+            treeNode14});
             this.tvSecondary.SelectedImageIndex = 0;
             this.tvSecondary.Size = new System.Drawing.Size(347, 605);
             this.tvSecondary.TabIndex = 4;
@@ -653,62 +696,16 @@
             this.sfdCodeplug.Filter = "Файлы кодплага (.ncf)|*.ncf";
             this.sfdCodeplug.Title = "Сохранить кодплаг";
             // 
-            // tsmiNewFile
+            // ofdCodeplug
             // 
-            this.tsmiNewFile.BackColor = System.Drawing.Color.White;
-            this.tsmiNewFile.Name = "tsmiNewFile";
-            this.tsmiNewFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.tsmiNewFile.Size = new System.Drawing.Size(322, 24);
-            this.tsmiNewFile.Text = "Новый";
-            // 
-            // tsmiOpenFile
-            // 
-            this.tsmiOpenFile.BackColor = System.Drawing.Color.White;
-            this.tsmiOpenFile.Name = "tsmiOpenFile";
-            this.tsmiOpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.tsmiOpenFile.Size = new System.Drawing.Size(322, 24);
-            this.tsmiOpenFile.Text = "Открыть";
-            // 
-            // tsmiSaveFile
-            // 
-            this.tsmiSaveFile.BackColor = System.Drawing.Color.White;
-            this.tsmiSaveFile.Name = "tsmiSaveFile";
-            this.tsmiSaveFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.tsmiSaveFile.Size = new System.Drawing.Size(322, 24);
-            this.tsmiSaveFile.Text = "Сохранить";
-            this.tsmiSaveFile.Click += new System.EventHandler(this.tsbSaveFile_Click);
-            // 
-            // tsmiSaveAs
-            // 
-            this.tsmiSaveAs.BackColor = System.Drawing.Color.White;
-            this.tsmiSaveAs.Name = "tsmiSaveAs";
-            this.tsmiSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-            this.tsmiSaveAs.Size = new System.Drawing.Size(322, 24);
-            this.tsmiSaveAs.Tag = "SaveAs";
-            this.tsmiSaveAs.Text = "Сохранить как...";
-            this.tsmiSaveAs.Click += new System.EventHandler(this.tsbSaveFile_Click);
-            // 
-            // tsmiExit
-            // 
-            this.tsmiExit.BackColor = System.Drawing.Color.White;
-            this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.tsmiExit.Size = new System.Drawing.Size(322, 24);
-            this.tsmiExit.Text = "Выход";
-            this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.BackColor = System.Drawing.Color.White;
-            this.toolStripSeparator6.ForeColor = System.Drawing.Color.Black;
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(319, 6);
+            this.ofdCodeplug.DefaultExt = "ncf";
+            this.ofdCodeplug.Filter = "Файлы кодплага (.ncf)|*.ncf";
+            this.ofdCodeplug.Title = "Открыть файл кодплага";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1168, 687);
             this.Controls.Add(this.tvSecondary);
@@ -797,6 +794,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiSaveAs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
+        private System.Windows.Forms.OpenFileDialog ofdCodeplug;
     }
 }
 
