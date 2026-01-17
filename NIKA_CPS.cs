@@ -50,6 +50,7 @@ namespace NIKA_CPS_V1
             ALL,
             CONTACTS,
             CHANNELS,
+            ZONES,
             SATELLITES
         }
 
@@ -211,6 +212,10 @@ namespace NIKA_CPS_V1
             {
                 MessageBox.Show("В загруженном файле кодплага не обнаружены данные о каналах!\r\nИнформация о каналах в зонах будет обнулена для исключения ошибок.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            if (CodeplugInternal.Zones.Count == 0)
+            {
+                MessageBox.Show("В загруженном файле кодплага не обнаружены данные о зонах!\r\nСоздайте как минимум одну зону с как минимум одним каналом.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void GenerateCodeplugTemplate()
@@ -220,6 +225,11 @@ namespace NIKA_CPS_V1
             CodeplugInternal.AddContact(new Codeplug.Contact(CodeplugInternal.GetFirstContactFreeNumber(), "Россия", 2501, "", Codeplug.Contact.ContactType.GROUP, Codeplug.Contact.Timeslot.NONE));
             CodeplugInternal.AddChannel(new Channel());
             CodeplugInternal.AddChannel(new Channel(CodeplugInternal.GetFirstChannelFreeNumber(), "Точка DMR", Channel.ChannelType.DIGITAL, 438000000));
+            CodeplugInternal.AddZone(new Zone());
+            foreach (Channel channel in CodeplugInternal.Channels)
+            {
+                CodeplugInternal.Zones[0].Channels.Add(channel.Number);
+            }
             CodeplugInternal.AddSatellite(new Codeplug.SatelliteKeps());
         }
 
@@ -328,6 +338,42 @@ namespace NIKA_CPS_V1
                     tvMain.EndUpdate();
                 }
             }
+            //ДЕРЕВО ЗОН
+            if (mode == TreeRefreshType.ALL || mode == TreeRefreshType.ZONES)
+            {
+                TreeNode zonesNode = tvMain.Nodes.Find("ZonesNode", true).FirstOrDefault();
+                if (zonesNode != null && CodeplugInternal != null && CodeplugInternal.Zones != null)
+                {
+                    tvMain.BeginUpdate();
+                    zonesNode.Nodes.Clear();
+                    foreach (Codeplug.Zone zone in CodeplugInternal.Zones)
+                    {
+                        string name = zone.Name ?? "Безымянная";
+                        TreeNode newNode = new TreeNode(name);
+                        newNode.Tag = zone;
+                        newNode.ToolTipText = zone.Name + " Каналов: " + (zone.Channels.Count).ToString();
+                        newNode.ImageIndex = 7;
+                        newNode.SelectedImageIndex = 7;
+                        zonesNode.Nodes.Add(newNode);
+                    }
+                    if (RegistryOperations.getProfileIntWithDefault("ExpandZones", 0) != 0)
+                        zonesNode.Expand();
+                    if (mode != TreeRefreshType.ALL)
+                    {
+                        foreach (TreeNode node in zonesNode.Nodes)
+                        {
+                            if (node.Tag == null) continue;
+                            /*   if (((Codeplug.Zone)node.Tag).Number == lastSelectedZone)
+                               {
+                                   tvMain.SelectedNode = node;
+                                   node.EnsureVisible();
+                                   tvMain.Focus();
+                               }*/
+                        }
+                    }
+                    tvMain.EndUpdate();
+                }
+            }
             if (mode == TreeRefreshType.ALL || mode == TreeRefreshType.SATELLITES)
             {
                 TreeNode satellitesNode = tvSecondary.Nodes.Find("SatellitesNode", true).FirstOrDefault();
@@ -400,8 +446,8 @@ namespace NIKA_CPS_V1
                 {
                     DMRID idForm = new DMRID();
                     idForm.ShowDialog();
-                    return;
                 }
+                return;
             }
                  
             // Проверяем, что клик был по узлу контакта
@@ -850,6 +896,7 @@ namespace NIKA_CPS_V1
             {
                 CodeplugInternal.DeleteChannel((selectedNode.Tag as Codeplug.Channel).Number);
                 GenerateTree(TreeRefreshType.CHANNELS);
+                GenerateTree(TreeRefreshType.ZONES);
             }
         }
 

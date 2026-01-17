@@ -36,20 +36,18 @@
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Узел20");
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Списки групп", 6, 6, new System.Windows.Forms.TreeNode[] {
             treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Узел9");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Зоны", 7, 7, new System.Windows.Forms.TreeNode[] {
-            treeNode5});
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Узел13");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Каналы", 8, 8, new System.Windows.Forms.TreeNode[] {
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("VFO A", 9, 9);
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("VFO B", 9, 9);
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("VFO", 9, 9, new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Настройки", 1, 1);
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("DMR ID", 13, 13);
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10);
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Зоны", 7, 7);
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Узел13");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Каналы", 8, 8, new System.Windows.Forms.TreeNode[] {
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("VFO A", 9, 9);
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("VFO B", 9, 9);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("VFO", 9, 9, new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9});
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Настройки", 1, 1);
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("DMR ID", 13, 13);
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10);
             this.cmsAllContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewContact = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,6 +99,9 @@
             this.tbConsole = new System.Windows.Forms.TextBox();
             this.pollingTimer = new System.Windows.Forms.Timer(this.components);
             this.cmsSingleContact = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiContactUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiContactDown = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteContact = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsSingleSatellite = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDeleteSatellite = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,13 +109,10 @@
             this.sfdCodeplug = new System.Windows.Forms.SaveFileDialog();
             this.ofdCodeplug = new System.Windows.Forms.OpenFileDialog();
             this.cmsSingleChannel = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiDeleteChannel = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiChannelUp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiChannelDown = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiContactUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiContactDown = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiDeleteChannel = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllContacts.SuspendLayout();
             this.cmsAllChannels.SuspendLayout();
             this.cmsAllSatellites.SuspendLayout();
@@ -411,37 +409,35 @@
             treeNode4.Name = "GroupListsNode";
             treeNode4.SelectedImageIndex = 6;
             treeNode4.Text = "Списки групп";
-            treeNode5.Name = "Узел9";
-            treeNode5.Text = "Узел9";
-            treeNode6.ImageIndex = 7;
-            treeNode6.Name = "ZonesNode";
-            treeNode6.SelectedImageIndex = 7;
-            treeNode6.Text = "Зоны";
-            treeNode7.Name = "Узел13";
-            treeNode7.Text = "Узел13";
-            treeNode8.ContextMenuStrip = this.cmsAllChannels;
-            treeNode8.ImageIndex = 8;
-            treeNode8.Name = "ChannelsNode";
-            treeNode8.SelectedImageIndex = 8;
-            treeNode8.Text = "Каналы";
+            treeNode5.ImageIndex = 7;
+            treeNode5.Name = "ZonesNode";
+            treeNode5.SelectedImageIndex = 7;
+            treeNode5.Text = "Зоны";
+            treeNode6.Name = "Узел13";
+            treeNode6.Text = "Узел13";
+            treeNode7.ContextMenuStrip = this.cmsAllChannels;
+            treeNode7.ImageIndex = 8;
+            treeNode7.Name = "ChannelsNode";
+            treeNode7.SelectedImageIndex = 8;
+            treeNode7.Text = "Каналы";
+            treeNode8.ImageIndex = 9;
+            treeNode8.Name = "tnVFOA";
+            treeNode8.SelectedImageIndex = 9;
+            treeNode8.Text = "VFO A";
             treeNode9.ImageIndex = 9;
-            treeNode9.Name = "tnVFOA";
+            treeNode9.Name = "tnVFOB";
             treeNode9.SelectedImageIndex = 9;
-            treeNode9.Text = "VFO A";
+            treeNode9.Text = "VFO B";
             treeNode10.ImageIndex = 9;
-            treeNode10.Name = "tnVFOB";
+            treeNode10.Name = "VFONode";
             treeNode10.SelectedImageIndex = 9;
-            treeNode10.Text = "VFO B";
-            treeNode11.ImageIndex = 9;
-            treeNode11.Name = "VFONode";
-            treeNode11.SelectedImageIndex = 9;
-            treeNode11.Text = "VFO";
+            treeNode10.Text = "VFO";
             this.tvMain.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode2,
             treeNode4,
-            treeNode6,
-            treeNode8,
-            treeNode11});
+            treeNode5,
+            treeNode7,
+            treeNode10});
             this.tvMain.SelectedImageIndex = 0;
             this.tvMain.ShowNodeToolTips = true;
             this.tvMain.Size = new System.Drawing.Size(337, 605);
@@ -652,6 +648,27 @@
             this.cmsSingleContact.Name = "cmsSingleContact";
             this.cmsSingleContact.Size = new System.Drawing.Size(195, 82);
             // 
+            // tsmiContactUp
+            // 
+            this.tsmiContactUp.Name = "tsmiContactUp";
+            this.tsmiContactUp.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
+            this.tsmiContactUp.Size = new System.Drawing.Size(194, 24);
+            this.tsmiContactUp.Text = "Вверх";
+            this.tsmiContactUp.Click += new System.EventHandler(this.MoveNodeUpFromMenu);
+            // 
+            // tsmiContactDown
+            // 
+            this.tsmiContactDown.Name = "tsmiContactDown";
+            this.tsmiContactDown.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
+            this.tsmiContactDown.Size = new System.Drawing.Size(194, 24);
+            this.tsmiContactDown.Text = "Вниз";
+            this.tsmiContactDown.Click += new System.EventHandler(this.MoveNodeDownFromMenu);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(191, 6);
+            // 
             // tsmiDeleteContact
             // 
             this.tsmiDeleteContact.Name = "tsmiDeleteContact";
@@ -684,22 +701,22 @@
             this.tvSecondary.ImageList = this.ilTreeItems;
             this.tvSecondary.Location = new System.Drawing.Point(396, 6);
             this.tvSecondary.Name = "tvSecondary";
-            treeNode12.ImageIndex = 1;
-            treeNode12.Name = "SettingsNode";
-            treeNode12.SelectedImageIndex = 1;
-            treeNode12.Text = "Настройки";
-            treeNode13.ImageIndex = 13;
-            treeNode13.Name = "DMRIDNode";
-            treeNode13.SelectedImageIndex = 13;
-            treeNode13.Text = "DMR ID";
-            treeNode14.ImageIndex = 10;
-            treeNode14.Name = "SatellitesNode";
-            treeNode14.SelectedImageIndex = 10;
-            treeNode14.Text = "Радиолюбительские спутники";
+            treeNode11.ImageIndex = 1;
+            treeNode11.Name = "SettingsNode";
+            treeNode11.SelectedImageIndex = 1;
+            treeNode11.Text = "Настройки";
+            treeNode12.ImageIndex = 13;
+            treeNode12.Name = "DMRIDNode";
+            treeNode12.SelectedImageIndex = 13;
+            treeNode12.Text = "DMR ID";
+            treeNode13.ImageIndex = 10;
+            treeNode13.Name = "SatellitesNode";
+            treeNode13.SelectedImageIndex = 10;
+            treeNode13.Text = "Радиолюбительские спутники";
             this.tvSecondary.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode11,
             treeNode12,
-            treeNode13,
-            treeNode14});
+            treeNode13});
             this.tvSecondary.SelectedImageIndex = 0;
             this.tvSecondary.ShowNodeToolTips = true;
             this.tvSecondary.Size = new System.Drawing.Size(347, 605);
@@ -730,14 +747,6 @@
             this.cmsSingleChannel.Name = "cmsSingleChannel";
             this.cmsSingleChannel.Size = new System.Drawing.Size(195, 82);
             // 
-            // tsmiDeleteChannel
-            // 
-            this.tsmiDeleteChannel.Name = "tsmiDeleteChannel";
-            this.tsmiDeleteChannel.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.tsmiDeleteChannel.Size = new System.Drawing.Size(194, 24);
-            this.tsmiDeleteChannel.Text = "Удалить";
-            this.tsmiDeleteChannel.Click += new System.EventHandler(this.tsmiDeleteChannel_Click);
-            // 
             // tsmiChannelUp
             // 
             this.tsmiChannelUp.Name = "tsmiChannelUp";
@@ -759,26 +768,13 @@
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(191, 6);
             // 
-            // tsmiContactUp
+            // tsmiDeleteChannel
             // 
-            this.tsmiContactUp.Name = "tsmiContactUp";
-            this.tsmiContactUp.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
-            this.tsmiContactUp.Size = new System.Drawing.Size(194, 24);
-            this.tsmiContactUp.Text = "Вверх";
-            this.tsmiContactUp.Click += new System.EventHandler(this.MoveNodeUpFromMenu);
-            // 
-            // tsmiContactDown
-            // 
-            this.tsmiContactDown.Name = "tsmiContactDown";
-            this.tsmiContactDown.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
-            this.tsmiContactDown.Size = new System.Drawing.Size(194, 24);
-            this.tsmiContactDown.Text = "Вниз";
-            this.tsmiContactDown.Click += new System.EventHandler(this.MoveNodeDownFromMenu);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(191, 6);
+            this.tsmiDeleteChannel.Name = "tsmiDeleteChannel";
+            this.tsmiDeleteChannel.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.tsmiDeleteChannel.Size = new System.Drawing.Size(194, 24);
+            this.tsmiDeleteChannel.Text = "Удалить";
+            this.tsmiDeleteChannel.Click += new System.EventHandler(this.tsmiDeleteChannel_Click);
             // 
             // MainForm
             // 

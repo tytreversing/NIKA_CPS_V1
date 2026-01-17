@@ -1,5 +1,6 @@
 ﻿using NIKA_CPS_V1.Codeplug;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -105,6 +106,7 @@ namespace NIKA_CPS_V1
         private void RearrangeAll() //переупорядочиваем кодплаг согласно сделанному
         {
             RearrangeContacts();
+            RearrangeZones();
             RearrangeChannels();
         }
 
@@ -125,18 +127,47 @@ namespace NIKA_CPS_V1
             }
         }
 
+        private void RearrangeZones()
+        {
+            CodeplugInternal.ClearZones();
+            ushort number = 0;
+            TreeNode cNode = FindTreeNodeByName(tvMain, "ZonesNode");
+            foreach (TreeNode node in cNode.Nodes)
+            {
+                Codeplug.Zone zone = node.Tag as Codeplug.Zone; //список зон заполняем с заменой Number по порядку
+                zone.Number = (byte)number;
+                CodeplugInternal.AddZone(node.Tag as Codeplug.Zone);
+                number++;
+            }
+        }
+
         private void RearrangeChannels()
         {
+            Dictionary<ushort, ushort> mapping = new Dictionary<ushort, ushort>(); //сопоставитель старых номеров каналов новым
+
             CodeplugInternal.ClearChannels();
             ushort number = 0;
             TreeNode cNode = FindTreeNodeByName(tvMain, "ChannelsNode");
+            if (cNode == null) return;
             foreach (TreeNode node in cNode.Nodes)
             {
                 Codeplug.Channel channel = node.Tag as Codeplug.Channel; //список каналов заполняем с заменой Number по порядку
-                //ДОБАВИТЬ коррекцию зон!!!
+                mapping.Add(channel.Number, number); //старый номер канала - ключ, значение - новый номер
                 channel.Number = number;
                 CodeplugInternal.AddChannel(node.Tag as Codeplug.Channel);
                 number++;
+            }
+            foreach (Zone zone in CodeplugInternal.Zones)
+            {
+                for (int i = 0; i < zone.Channels.Count; i++)
+                {
+                    ushort newNum;
+                    if (mapping.ContainsKey(zone.Channels[i]) && mapping.TryGetValue(zone.Channels[i], out newNum)) //ключ найден и получено соответствующее значение
+                    { 
+                        zone.Channels[i] = newNum;
+                    }
+
+                }
             }
         }
     }

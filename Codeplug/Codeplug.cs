@@ -16,11 +16,13 @@ namespace NIKA_CPS_V1.Codeplug
         private UserData _userData;
         private List<Contact> _contacts;
         private List<Channel> _channels;
+        private List<Zone> _zones;
         private List<SatelliteKeps> _satelliteKeps;
 
         //константы
         public const int MAX_CONTACTS_COUNT = 256; //максимальное число контактов
         public const int MAX_CHANNELS_COUNT = 1024; //максимальное число каналов
+        public const int MAX_ZONES_COUNT = 16;      //максимальное количество зон
         public const int MAX_SATELLITES_COUNT = 20; //максимальное число спутников
         [XmlElement("User")]
         public UserData DMRID
@@ -43,6 +45,13 @@ namespace NIKA_CPS_V1.Codeplug
             get => _channels;
             set => _channels = value;
         }
+        [XmlArray("Zones")]
+        [XmlArrayItem("Zone")]
+        public List<Zone> Zones
+        {
+            get => _zones;
+            set => _zones = value;
+        }
         [XmlArray("Satellites")]
         [XmlArrayItem("Satellite")]
         public List<SatelliteKeps> SatelliteKeps
@@ -57,6 +66,7 @@ namespace NIKA_CPS_V1.Codeplug
             _userData = new UserData();
             _contacts = new List<Contact>();
             _channels = new List<Channel>();
+            _zones = new List<Zone>();
             _satelliteKeps = new List<SatelliteKeps>();
         }
 
@@ -103,7 +113,7 @@ namespace NIKA_CPS_V1.Codeplug
 
         public bool AddContact(Contact contact)
         {
-            if (_contacts.Count <= MAX_CONTACTS_COUNT)
+            if (_contacts.Count < MAX_CONTACTS_COUNT)
             {
                 _contacts.Add(contact);
                 return true;
@@ -209,7 +219,7 @@ namespace NIKA_CPS_V1.Codeplug
 
         public bool AddChannel(Channel channel) 
         {
-            if (_channels.Count <= MAX_CHANNELS_COUNT)
+            if (_channels.Count < MAX_CHANNELS_COUNT)
             {
                 _channels.Add(channel);
                 return true;
@@ -221,6 +231,11 @@ namespace NIKA_CPS_V1.Codeplug
         public void DeleteChannel(ushort n)
         {
             _channels.RemoveAll(c => c != null && c.Number == n);
+
+            foreach (Zone zone in _zones) //удаляем вхождения этого канала в зоны
+            {
+                zone.Channels.RemoveAll(Channel => Channel == n);
+            }
         }
         // Сортировка по алфавиту по полю Nmae
         public void SortChannelsByName()
@@ -261,6 +276,22 @@ namespace NIKA_CPS_V1.Codeplug
         public void ClearChannels()
         {
             _channels.Clear();
+        }
+
+        public bool AddZone(Zone zone)
+        {
+            if (_zones.Count < MAX_ZONES_COUNT)
+            {
+                _zones.Add(zone);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public void ClearZones()
+        {
+            _zones.Clear(); 
         }
 
         public bool AddSatellite(SatelliteKeps satellite)
