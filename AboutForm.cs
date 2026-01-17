@@ -13,8 +13,11 @@ namespace NIKA_CPS_V1
         public AboutForm()
         {
             InitializeComponent();
-            rbAbout.SelectionIndent = 20;
             LoadFileContent();
+            rbAbout.SelectAll();
+            rbAbout.SelectionIndent = 20;
+            rbAbout.SelectionRightIndent = 20;
+            rbAbout.DeselectAll();
         }
 
         private void LoadFileContent()

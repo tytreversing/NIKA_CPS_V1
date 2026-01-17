@@ -219,6 +219,9 @@
     <Compile Include="Interfaces\FirmwareUpdateProgressEventHandler.cs" />
     <Compile Include="Interfaces\STM32_DFU.cs" />
     <Compile Include="Interfaces\USBChecker.cs" />
+    <Compile Include="MainFormUtilities.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PowerSettingData.cs" />
     <Compile Include="RegistryOperations.cs" />
     <Compile Include="NIKA_CPS.cs">

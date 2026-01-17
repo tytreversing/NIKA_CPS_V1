@@ -234,6 +234,7 @@ namespace NIKA_CPS_V1
                 // Проверяем, найден ли узел
                 if (contactsNode != null && CodeplugInternal != null && CodeplugInternal.Contacts != null)
                 {
+                    tvMain.BeginUpdate();
                     // Очищаем существующие дочерние узлы
                     contactsNode.Nodes.Clear();
 
@@ -279,6 +280,7 @@ namespace NIKA_CPS_V1
                             }
                         }
                     }
+                    tvMain.EndUpdate();
                 }
             }
             // ДЕРЕВО КАНАЛОВ
@@ -287,6 +289,7 @@ namespace NIKA_CPS_V1
                 TreeNode channelsNode = tvMain.Nodes.Find("ChannelsNode", true).FirstOrDefault();
                 if (channelsNode != null && CodeplugInternal != null && CodeplugInternal.Channels != null)
                 {
+                    tvMain.BeginUpdate();
                     channelsNode.Nodes.Clear();
                     foreach (Codeplug.Channel channel in CodeplugInternal.Channels)
                     {
@@ -322,6 +325,7 @@ namespace NIKA_CPS_V1
                             }*/
                         }
                     }
+                    tvMain.EndUpdate();
                 }
             }
             if (mode == TreeRefreshType.ALL || mode == TreeRefreshType.SATELLITES)
@@ -329,6 +333,7 @@ namespace NIKA_CPS_V1
                 TreeNode satellitesNode = tvSecondary.Nodes.Find("SatellitesNode", true).FirstOrDefault();
                 if (satellitesNode != null && CodeplugInternal != null && CodeplugInternal.SatelliteKeps != null)
                 {
+                    tvSecondary.BeginUpdate();
                     satellitesNode.Nodes.Clear();
                     foreach (Codeplug.SatelliteKeps satellite in CodeplugInternal.SatelliteKeps)
                     {
@@ -356,32 +361,51 @@ namespace NIKA_CPS_V1
                             }
                         }
                     }
+                    tvSecondary.EndUpdate();
                 }
             }
         }
 
-        private void tvMain_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void tvNodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            // Проверяем, что клик был по узлу контакта
-            if (e.Node.Parent != null && e.Node.Parent.Name == "ContactsNode")
+            e.Node.TreeView.SelectedNode = e.Node;
+            if (e.Node.Parent == null) //клик по корню
             {
-                if (e.Button == MouseButtons.Right)
+                return;
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                //в зависимости от родительского узла вызов меню
+                switch (e.Node.Parent.Name)
                 {
-                    tvMain.SelectedNode = e.Node;
-                    cmsSingleContact.Show(tvMain, e.Location);
+                    case "ContactsNode":
+                        cmsSingleContact.Show(tvMain, e.Location);
+                        break;
+                    case "ChannelsNode":
+                        cmsSingleChannel.Show(tvMain, e.Location);
+                        break;
+                    case "SatellitesNode":
+                        cmsSingleSatellite.Show(tvSecondary, e.Location);
+                        break;
                 }
             }
-            else if (e.Node.Parent != null && e.Node.Parent.Name == "GroupListsNode")
-            {
-                                                                                                                  
-            }
-            
+
         }
 
-        private void tvMain_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void tvNodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            if (e.Node.Parent == null) //клики по корням
+            {
+                if (e.Node.Name == "DMRIDNode")
+                {
+                    DMRID idForm = new DMRID();
+                    idForm.ShowDialog();
+                    return;
+                }
+            }
+                 
             // Проверяем, что клик был по узлу контакта
-            if (e.Node.Parent != null && e.Node.Parent.Name == "ContactsNode")
+            if (e.Node.Parent.Name == "ContactsNode")
             {
                 // Получаем текст узла (который является Alias)
                 string alias = e.Node.Text;
@@ -392,11 +416,13 @@ namespace NIKA_CPS_V1
                     GenerateTree(TreeRefreshType.CONTACTS);
                 }
             }
-            else if (e.Node.Parent != null && e.Node.Parent.Name == "GroupListsNode")
+            else if (e.Node.Parent.Name == "GroupListsNode")
             {
 
             }
+
         }
+
 
         private void tvMain_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -410,32 +436,6 @@ namespace NIKA_CPS_V1
             {
                 lastSelectedContact = contact.Number;
             }
-        }
-
-        private void tvSecondary_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (e.Node.Parent != null && e.Node.Parent.Name == "SatellitesNode")
-            {
-                if (e.Button == MouseButtons.Right)
-                {
-                    tvSecondary.SelectedNode = e.Node;
-                    cmsSingleContact.Show(tvSecondary, e.Location);
-                }
-            }
-        }
-
-        private void tvSecondary_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (e.Node.Parent == null && e.Node.Name == "DMRIDNode")
-            {
-                DMRID idForm = new DMRID();
-                idForm.ShowDialog();
-            }
-        }
-
-        private void tvSecondary_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
         }
 
         private void tsmiDeleteContact_Click(object sender, EventArgs e)
@@ -718,6 +718,8 @@ namespace NIKA_CPS_V1
         private void tsbSaveFile_Click(object sender, EventArgs e)
         {
             RearrangeAll();
+
+
             string _tag;
             if (sender is ToolStripMenuItem menuItem) //если клик был по меню, а не по кнопке
             {
@@ -796,7 +798,7 @@ namespace NIKA_CPS_V1
             Close();
         }
 
-        private System.Windows.Forms.TreeView GetActiveTreeView()
+        private TreeView GetActiveTreeView()
         {
             // Определяем, какой TreeView активен (имеет фокус)
             if (tvMain.Focused) return tvMain;
@@ -820,43 +822,7 @@ namespace NIKA_CPS_V1
         }
 
 
-        private void RearrangeAll() //переупорядочиваем кодплаг согласно сделанному
-        {
-             RearrangeContacts();
-             RearrangeChannels();
-        }
 
-
-
-        private void RearrangeContacts()
-        {
-            CodeplugInternal.ClearContacts();
-            ushort number = 0;
-            TreeNode cNode = FindTreeNodeByName(tvMain, "ContactsNode");
-            foreach (TreeNode node in cNode.Nodes)
-            {
-                Codeplug.Contact contact = node.Tag as Codeplug.Contact; //список контактов заполняем с заменой Number по порядку
-                //ДОБАВИТЬ коррекцию каналов!!!
-                contact.Number = number;
-                CodeplugInternal.AddContact(node.Tag as Codeplug.Contact);
-                number++;
-            }
-        }
-
-        private void RearrangeChannels()
-        {
-            CodeplugInternal.ClearChannels();
-            ushort number = 0;
-            TreeNode cNode = FindTreeNodeByName(tvMain, "ChannelsNode");
-            foreach (TreeNode node in cNode.Nodes)
-            {
-                Codeplug.Channel channel = node.Tag as Codeplug.Channel; //список каналов заполняем с заменой Number по порядку
-                //ДОБАВИТЬ коррекцию зон!!!
-                channel.Number = number;
-                CodeplugInternal.AddChannel(node.Tag as Codeplug.Channel);
-                number++;
-            }
-        }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -867,93 +833,37 @@ namespace NIKA_CPS_V1
 
             if (e.KeyCode == Keys.Up && e.Control)
             {
-                MoveSelectedNode(activeTreeView, Direction.Up);
+                MoveSelectedNode(activeTreeView, Direction.UP);
                 e.Handled = true;
             }
             else if (e.KeyCode == Keys.Down && e.Control)
             {
-                MoveSelectedNode(activeTreeView, Direction.Down);
+                MoveSelectedNode(activeTreeView, Direction.DOWN);
                 e.Handled = true;
             }
-            else if (e.KeyCode == Keys.F2 && activeTreeView.SelectedNode != null) //для дебага
-            {
-                
-            }
         }
 
-        private enum Direction
+        private void tsmiDeleteChannel_Click(object sender, EventArgs e)
         {
-            Up,
-            Down
+            TreeNode selectedNode = tvMain.SelectedNode;
+            if (selectedNode != null)
+            {
+                CodeplugInternal.DeleteChannel((selectedNode.Tag as Codeplug.Channel).Number);
+                GenerateTree(TreeRefreshType.CHANNELS);
+            }
         }
 
-        private void MoveSelectedNode(TreeView treeView, Direction direction)
+        private void tsmiDeleteSatellite_Click(object sender, EventArgs e)
         {
-            if (treeView.SelectedNode == null)
+            TreeNode selectedNode = tvSecondary.SelectedNode;
+            if (selectedNode != null)
             {
-                MessageBox.Show("Please select a node first.", "No Node Selected",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            TreeNode selectedNode = treeView.SelectedNode;
-            TreeNodeCollection parentCollection = GetParentNodeCollection(selectedNode);
-
-            if (parentCollection == null) return;
-
-            int currentIndex = parentCollection.IndexOf(selectedNode);
-
-            try
-            {
-                treeView.BeginUpdate(); // Отключаем перерисовку для плавного перемещения
-
-                if (direction == Direction.Up)
-                {
-                    MoveNodeUp(parentCollection, currentIndex);
-                }
-                else if (direction == Direction.Down)
-                {
-                    MoveNodeDown(parentCollection, currentIndex);
-                }
-
-                // После перемещения обновляем UI
-                treeView.SelectedNode = selectedNode;
-                treeView.SelectedNode.EnsureVisible();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error moving node: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                treeView.EndUpdate(); // Включаем перерисовку обратно
+                CodeplugInternal.DeleteSatelliteByCatID((selectedNode.Tag as Codeplug.SatelliteKeps).CatalogueNumber);
+                GenerateTree(TreeRefreshType.SATELLITES);
             }
         }
 
-        private TreeNodeCollection GetParentNodeCollection(TreeNode node)
-        {
-            return node.Parent?.Nodes ?? node.TreeView?.Nodes;
-        }
 
-        private void MoveNodeUp(TreeNodeCollection collection, int currentIndex)
-        {
-            if (currentIndex > 0)
-            {
-                TreeNode node = collection[currentIndex];
-                collection.RemoveAt(currentIndex);
-                collection.Insert(currentIndex - 1, node);
-            }
-        }
 
-        private void MoveNodeDown(TreeNodeCollection collection, int currentIndex)
-        {
-            if (currentIndex < collection.Count - 1)
-            {
-                TreeNode node = collection[currentIndex];
-                collection.RemoveAt(currentIndex);
-                collection.Insert(currentIndex + 1, node);
-            }
-        }
     }
 }

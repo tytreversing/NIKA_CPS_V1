@@ -107,6 +107,14 @@
             this.tvSecondary = new System.Windows.Forms.TreeView();
             this.sfdCodeplug = new System.Windows.Forms.SaveFileDialog();
             this.ofdCodeplug = new System.Windows.Forms.OpenFileDialog();
+            this.cmsSingleChannel = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiDeleteChannel = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiChannelUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiChannelDown = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiContactUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiContactDown = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsAllContacts.SuspendLayout();
             this.cmsAllChannels.SuspendLayout();
             this.cmsAllSatellites.SuspendLayout();
@@ -114,6 +122,7 @@
             this.msMain.SuspendLayout();
             this.cmsSingleContact.SuspendLayout();
             this.cmsSingleSatellite.SuspendLayout();
+            this.cmsSingleChannel.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsAllContacts
@@ -179,6 +188,7 @@
             // tsmiClearChannels
             // 
             this.tsmiClearChannels.Name = "tsmiClearChannels";
+            this.tsmiClearChannels.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
             this.tsmiClearChannels.Size = new System.Drawing.Size(245, 24);
             this.tsmiClearChannels.Text = "Очистить";
             this.tsmiClearChannels.Click += new System.EventHandler(this.tsmiClearChannels_Click);
@@ -208,6 +218,7 @@
             // tsmiClearSatellites
             // 
             this.tsmiClearSatellites.Name = "tsmiClearSatellites";
+            this.tsmiClearSatellites.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
             this.tsmiClearSatellites.Size = new System.Drawing.Size(259, 24);
             this.tsmiClearSatellites.Text = "Очистить";
             // 
@@ -436,8 +447,8 @@
             this.tvMain.Size = new System.Drawing.Size(337, 605);
             this.tvMain.TabIndex = 1;
             this.tvMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvMain_AfterSelect);
-            this.tvMain.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvMain_NodeMouseClick);
-            this.tvMain.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvMain_NodeMouseDoubleClick);
+            this.tvMain.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
+            this.tvMain.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseDoubleClick);
             // 
             // ilTreeItems
             // 
@@ -634,14 +645,18 @@
             // 
             this.cmsSingleContact.BackColor = System.Drawing.Color.White;
             this.cmsSingleContact.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiContactUp,
+            this.tsmiContactDown,
+            this.toolStripSeparator8,
             this.tsmiDeleteContact});
             this.cmsSingleContact.Name = "cmsSingleContact";
-            this.cmsSingleContact.Size = new System.Drawing.Size(130, 28);
+            this.cmsSingleContact.Size = new System.Drawing.Size(195, 82);
             // 
             // tsmiDeleteContact
             // 
             this.tsmiDeleteContact.Name = "tsmiDeleteContact";
-            this.tsmiDeleteContact.Size = new System.Drawing.Size(129, 24);
+            this.tsmiDeleteContact.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.tsmiDeleteContact.Size = new System.Drawing.Size(194, 24);
             this.tsmiDeleteContact.Text = "Удалить";
             this.tsmiDeleteContact.Click += new System.EventHandler(this.tsmiDeleteContact_Click);
             // 
@@ -651,13 +666,15 @@
             this.cmsSingleSatellite.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiDeleteSatellite});
             this.cmsSingleSatellite.Name = "cmsSingleSatellite";
-            this.cmsSingleSatellite.Size = new System.Drawing.Size(130, 28);
+            this.cmsSingleSatellite.Size = new System.Drawing.Size(184, 28);
             // 
             // tsmiDeleteSatellite
             // 
             this.tsmiDeleteSatellite.Name = "tsmiDeleteSatellite";
-            this.tsmiDeleteSatellite.Size = new System.Drawing.Size(129, 24);
+            this.tsmiDeleteSatellite.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.tsmiDeleteSatellite.Size = new System.Drawing.Size(183, 24);
             this.tsmiDeleteSatellite.Text = "Удалить";
+            this.tsmiDeleteSatellite.Click += new System.EventHandler(this.tsmiDeleteSatellite_Click);
             // 
             // tvSecondary
             // 
@@ -687,9 +704,8 @@
             this.tvSecondary.ShowNodeToolTips = true;
             this.tvSecondary.Size = new System.Drawing.Size(347, 605);
             this.tvSecondary.TabIndex = 4;
-            this.tvSecondary.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvSecondary_AfterSelect);
-            this.tvSecondary.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSecondary_NodeMouseClick);
-            this.tvSecondary.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSecondary_NodeMouseDoubleClick);
+            this.tvSecondary.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
+            this.tvSecondary.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseDoubleClick);
             // 
             // sfdCodeplug
             // 
@@ -702,6 +718,67 @@
             this.ofdCodeplug.DefaultExt = "ncf";
             this.ofdCodeplug.Filter = "Файлы кодплага (.ncf)|*.ncf";
             this.ofdCodeplug.Title = "Открыть файл кодплага";
+            // 
+            // cmsSingleChannel
+            // 
+            this.cmsSingleChannel.BackColor = System.Drawing.Color.White;
+            this.cmsSingleChannel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiChannelUp,
+            this.tsmiChannelDown,
+            this.toolStripSeparator7,
+            this.tsmiDeleteChannel});
+            this.cmsSingleChannel.Name = "cmsSingleChannel";
+            this.cmsSingleChannel.Size = new System.Drawing.Size(195, 82);
+            // 
+            // tsmiDeleteChannel
+            // 
+            this.tsmiDeleteChannel.Name = "tsmiDeleteChannel";
+            this.tsmiDeleteChannel.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.tsmiDeleteChannel.Size = new System.Drawing.Size(194, 24);
+            this.tsmiDeleteChannel.Text = "Удалить";
+            this.tsmiDeleteChannel.Click += new System.EventHandler(this.tsmiDeleteChannel_Click);
+            // 
+            // tsmiChannelUp
+            // 
+            this.tsmiChannelUp.Name = "tsmiChannelUp";
+            this.tsmiChannelUp.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
+            this.tsmiChannelUp.Size = new System.Drawing.Size(194, 24);
+            this.tsmiChannelUp.Text = "Вверх";
+            this.tsmiChannelUp.Click += new System.EventHandler(this.MoveNodeUpFromMenu);
+            // 
+            // tsmiChannelDown
+            // 
+            this.tsmiChannelDown.Name = "tsmiChannelDown";
+            this.tsmiChannelDown.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
+            this.tsmiChannelDown.Size = new System.Drawing.Size(194, 24);
+            this.tsmiChannelDown.Text = "Вниз";
+            this.tsmiChannelDown.Click += new System.EventHandler(this.MoveNodeDownFromMenu);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(191, 6);
+            // 
+            // tsmiContactUp
+            // 
+            this.tsmiContactUp.Name = "tsmiContactUp";
+            this.tsmiContactUp.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
+            this.tsmiContactUp.Size = new System.Drawing.Size(194, 24);
+            this.tsmiContactUp.Text = "Вверх";
+            this.tsmiContactUp.Click += new System.EventHandler(this.MoveNodeUpFromMenu);
+            // 
+            // tsmiContactDown
+            // 
+            this.tsmiContactDown.Name = "tsmiContactDown";
+            this.tsmiContactDown.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
+            this.tsmiContactDown.Size = new System.Drawing.Size(194, 24);
+            this.tsmiContactDown.Text = "Вниз";
+            this.tsmiContactDown.Click += new System.EventHandler(this.MoveNodeDownFromMenu);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(191, 6);
             // 
             // MainForm
             // 
@@ -733,6 +810,7 @@
             this.msMain.PerformLayout();
             this.cmsSingleContact.ResumeLayout(false);
             this.cmsSingleSatellite.ResumeLayout(false);
+            this.cmsSingleChannel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -797,6 +875,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.OpenFileDialog ofdCodeplug;
+        private System.Windows.Forms.ContextMenuStrip cmsSingleChannel;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteChannel;
+        private System.Windows.Forms.ToolStripMenuItem tsmiChannelUp;
+        private System.Windows.Forms.ToolStripMenuItem tsmiChannelDown;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem tsmiContactUp;
+        private System.Windows.Forms.ToolStripMenuItem tsmiContactDown;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
     }
 }
 

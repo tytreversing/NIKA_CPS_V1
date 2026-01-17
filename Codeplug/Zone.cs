@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NIKA_CPS_V1.Codeplug
 {
-    internal class Zone
+    public class Zone
     {
     }
 }

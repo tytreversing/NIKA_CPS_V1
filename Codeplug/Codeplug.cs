@@ -218,6 +218,10 @@ namespace NIKA_CPS_V1.Codeplug
                 return false;
         }
 
+        public void DeleteChannel(ushort n)
+        {
+            _channels.RemoveAll(c => c != null && c.Number == n);
+        }
         // Сортировка по алфавиту по полю Nmae
         public void SortChannelsByName()
         {
@@ -268,6 +272,20 @@ namespace NIKA_CPS_V1.Codeplug
             }
             else
                 return false;
+        }
+
+        public void DeleteSatelliteByCatID(string catid)
+        {
+            if (_satelliteKeps == null) return;
+
+            SatelliteKeps sat = _satelliteKeps.FirstOrDefault(c => c.CatalogueNumber == catid);
+
+            if (sat != null)
+            {
+                _satelliteKeps.Remove(sat);
+            }
+            else
+                MessageBox.Show("Данные о спутнике с каталожным номером " + catid + " не найдены");
         }
 
         public void ClearSatellites()
