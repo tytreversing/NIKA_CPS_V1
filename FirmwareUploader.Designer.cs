@@ -101,6 +101,9 @@
             // 
             // gbRadioType
             // 
+            this.gbRadioType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbRadioType.Controls.Add(this.rbMDUV380);
             this.gbRadioType.Controls.Add(this.rbMD9600);
             this.gbRadioType.Location = new System.Drawing.Point(75, 21);
@@ -136,6 +139,10 @@
             // 
             // tbConsole
             // 
+            this.tbConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbConsole.BackColor = System.Drawing.Color.White;
             this.tbConsole.Location = new System.Drawing.Point(75, 110);
             this.tbConsole.Multiline = true;
             this.tbConsole.Name = "tbConsole";
@@ -146,6 +153,9 @@
             // 
             // lblText
             // 
+            this.lblText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblText.AutoSize = true;
             this.lblText.Location = new System.Drawing.Point(364, 26);
             this.lblText.Name = "lblText";
@@ -196,8 +206,7 @@
             // 
             // FirmwareUploader
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1087, 309);
             this.Controls.Add(this.agProgress);

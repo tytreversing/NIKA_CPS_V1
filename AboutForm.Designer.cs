@@ -35,7 +35,7 @@
             // bOK
             // 
             this.bOK.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bOK.Location = new System.Drawing.Point(83, 624);
+            this.bOK.Location = new System.Drawing.Point(153, 619);
             this.bOK.Name = "bOK";
             this.bOK.Size = new System.Drawing.Size(292, 30);
             this.bOK.TabIndex = 1;
@@ -50,19 +50,21 @@
             this.rbAbout.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.rbAbout.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rbAbout.Location = new System.Drawing.Point(9, 9);
+            this.rbAbout.Margin = new System.Windows.Forms.Padding(10);
             this.rbAbout.Name = "rbAbout";
             this.rbAbout.ReadOnly = true;
             this.rbAbout.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rbAbout.Size = new System.Drawing.Size(448, 609);
+            this.rbAbout.Size = new System.Drawing.Size(565, 600);
             this.rbAbout.TabIndex = 2;
             this.rbAbout.Text = "";
             // 
             // AboutForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(466, 660);
+            this.ClientSize = new System.Drawing.Size(580, 658);
             this.Controls.Add(this.rbAbout);
             this.Controls.Add(this.bOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;

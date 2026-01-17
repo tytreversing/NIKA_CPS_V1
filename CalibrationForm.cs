@@ -2507,7 +2507,7 @@ namespace NIKA_CPS_V1
             // 
             // CalibrationForm
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1156, 673);
             this.Controls.Add(this.btnChart);

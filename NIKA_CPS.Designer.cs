@@ -684,6 +684,7 @@
             treeNode13,
             treeNode14});
             this.tvSecondary.SelectedImageIndex = 0;
+            this.tvSecondary.ShowNodeToolTips = true;
             this.tvSecondary.Size = new System.Drawing.Size(347, 605);
             this.tvSecondary.TabIndex = 4;
             this.tvSecondary.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvSecondary_AfterSelect);
@@ -704,8 +705,7 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1168, 687);
             this.Controls.Add(this.tvSecondary);
@@ -715,6 +715,7 @@
             this.Controls.Add(this.msMain);
             this.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(6);
@@ -722,6 +723,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.cmsAllContacts.ResumeLayout(false);
             this.cmsAllChannels.ResumeLayout(false);
             this.cmsAllSatellites.ResumeLayout(false);

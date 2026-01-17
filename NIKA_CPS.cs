@@ -18,7 +18,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 
 namespace NIKA_CPS_V1
@@ -209,7 +209,7 @@ namespace NIKA_CPS_V1
             }
             if (CodeplugInternal.Channels.Count == 0)
             {
-                MessageBox.Show("В загруженном файле кодплага не обнаружены данные о rfyfkf[!\r\nИнформация о каналах в зонах будет обнулена для исключения ошибок.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("В загруженном файле кодплага не обнаружены данные о каналах!\r\nИнформация о каналах в зонах будет обнулена для исключения ошибок.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -678,7 +678,7 @@ namespace NIKA_CPS_V1
 
         private void tsmiClearChannels_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("ВНИМАНИЕ! Из кодплага будут удалены ВСЕ записанные в нем контакты! Продолжить?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("ВНИМАНИЕ! Из кодплага будут удалены ВСЕ записанные в нем каналы! Продолжить?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 CodeplugInternal.ClearChannels();
                 GenerateTree(TreeRefreshType.CHANNELS);
@@ -717,6 +717,7 @@ namespace NIKA_CPS_V1
 
         private void tsbSaveFile_Click(object sender, EventArgs e)
         {
+            RearrangeAll();
             string _tag;
             if (sender is ToolStripMenuItem menuItem) //если клик был по меню, а не по кнопке
             {
@@ -795,6 +796,164 @@ namespace NIKA_CPS_V1
             Close();
         }
 
+        private System.Windows.Forms.TreeView GetActiveTreeView()
+        {
+            // Определяем, какой TreeView активен (имеет фокус)
+            if (tvMain.Focused) return tvMain;
+            if (tvSecondary.Focused) return tvSecondary;
+            return null;
+        }
 
+        private TreeNode FindTreeNodeByName(TreeView treeView, string nodeName)
+        {
+            // Проверяем входные параметры
+            if (treeView == null || string.IsNullOrEmpty(nodeName))
+                return null;
+
+            // Ищем среди корневых узлов и их потомков
+            foreach (TreeNode rootNode in treeView.Nodes)
+            {
+                if (rootNode.Name == nodeName) return rootNode;
+            }
+
+            return null;
+        }
+
+
+        private void RearrangeAll() //переупорядочиваем кодплаг согласно сделанному
+        {
+             RearrangeContacts();
+             RearrangeChannels();
+        }
+
+
+
+        private void RearrangeContacts()
+        {
+            CodeplugInternal.ClearContacts();
+            ushort number = 0;
+            TreeNode cNode = FindTreeNodeByName(tvMain, "ContactsNode");
+            foreach (TreeNode node in cNode.Nodes)
+            {
+                Codeplug.Contact contact = node.Tag as Codeplug.Contact; //список контактов заполняем с заменой Number по порядку
+                //ДОБАВИТЬ коррекцию каналов!!!
+                contact.Number = number;
+                CodeplugInternal.AddContact(node.Tag as Codeplug.Contact);
+                number++;
+            }
+        }
+
+        private void RearrangeChannels()
+        {
+            CodeplugInternal.ClearChannels();
+            ushort number = 0;
+            TreeNode cNode = FindTreeNodeByName(tvMain, "ChannelsNode");
+            foreach (TreeNode node in cNode.Nodes)
+            {
+                Codeplug.Channel channel = node.Tag as Codeplug.Channel; //список каналов заполняем с заменой Number по порядку
+                //ДОБАВИТЬ коррекцию зон!!!
+                channel.Number = number;
+                CodeplugInternal.AddChannel(node.Tag as Codeplug.Channel);
+                number++;
+            }
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Обрабатываем клавиши на уровне формы
+            TreeView activeTreeView = GetActiveTreeView();
+
+            if (activeTreeView == null) return;
+
+            if (e.KeyCode == Keys.Up && e.Control)
+            {
+                MoveSelectedNode(activeTreeView, Direction.Up);
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Down && e.Control)
+            {
+                MoveSelectedNode(activeTreeView, Direction.Down);
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.F2 && activeTreeView.SelectedNode != null) //для дебага
+            {
+                
+            }
+        }
+
+        private enum Direction
+        {
+            Up,
+            Down
+        }
+
+        private void MoveSelectedNode(TreeView treeView, Direction direction)
+        {
+            if (treeView.SelectedNode == null)
+            {
+                MessageBox.Show("Please select a node first.", "No Node Selected",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            TreeNode selectedNode = treeView.SelectedNode;
+            TreeNodeCollection parentCollection = GetParentNodeCollection(selectedNode);
+
+            if (parentCollection == null) return;
+
+            int currentIndex = parentCollection.IndexOf(selectedNode);
+
+            try
+            {
+                treeView.BeginUpdate(); // Отключаем перерисовку для плавного перемещения
+
+                if (direction == Direction.Up)
+                {
+                    MoveNodeUp(parentCollection, currentIndex);
+                }
+                else if (direction == Direction.Down)
+                {
+                    MoveNodeDown(parentCollection, currentIndex);
+                }
+
+                // После перемещения обновляем UI
+                treeView.SelectedNode = selectedNode;
+                treeView.SelectedNode.EnsureVisible();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error moving node: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                treeView.EndUpdate(); // Включаем перерисовку обратно
+            }
+        }
+
+        private TreeNodeCollection GetParentNodeCollection(TreeNode node)
+        {
+            return node.Parent?.Nodes ?? node.TreeView?.Nodes;
+        }
+
+        private void MoveNodeUp(TreeNodeCollection collection, int currentIndex)
+        {
+            if (currentIndex > 0)
+            {
+                TreeNode node = collection[currentIndex];
+                collection.RemoveAt(currentIndex);
+                collection.Insert(currentIndex - 1, node);
+            }
+        }
+
+        private void MoveNodeDown(TreeNodeCollection collection, int currentIndex)
+        {
+            if (currentIndex < collection.Count - 1)
+            {
+                TreeNode node = collection[currentIndex];
+                collection.RemoveAt(currentIndex);
+                collection.Insert(currentIndex + 1, node);
+            }
+        }
     }
 }

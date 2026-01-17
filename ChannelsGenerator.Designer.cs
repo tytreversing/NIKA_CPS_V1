@@ -32,9 +32,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cbLPD = new System.Windows.Forms.CheckBox();
             this.gbLPD = new System.Windows.Forms.GroupBox();
-            this.rbLPD16 = new System.Windows.Forms.RadioButton();
-            this.rbLPD32 = new System.Windows.Forms.RadioButton();
             this.rbLPDFull = new System.Windows.Forms.RadioButton();
+            this.rbLPD32 = new System.Windows.Forms.RadioButton();
+            this.rbLPD16 = new System.Windows.Forms.RadioButton();
             this.cbPMR = new System.Windows.Forms.CheckBox();
             this.bOK = new System.Windows.Forms.Button();
             this.bCancel = new System.Windows.Forms.Button();
@@ -43,6 +43,9 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(14, 10);
             this.label1.Name = "label1";
@@ -64,6 +67,9 @@
             // 
             // gbLPD
             // 
+            this.gbLPD.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbLPD.Controls.Add(this.rbLPDFull);
             this.gbLPD.Controls.Add(this.rbLPD32);
             this.gbLPD.Controls.Add(this.rbLPD16);
@@ -74,6 +80,27 @@
             this.gbLPD.TabIndex = 2;
             this.gbLPD.TabStop = false;
             this.gbLPD.Text = "Каналы LPD";
+            // 
+            // rbLPDFull
+            // 
+            this.rbLPDFull.AutoSize = true;
+            this.rbLPDFull.Location = new System.Drawing.Point(40, 99);
+            this.rbLPDFull.Name = "rbLPDFull";
+            this.rbLPDFull.Size = new System.Drawing.Size(107, 19);
+            this.rbLPDFull.TabIndex = 4;
+            this.rbLPDFull.TabStop = true;
+            this.rbLPDFull.Text = "Полная сетка";
+            this.rbLPDFull.UseVisualStyleBackColor = true;
+            // 
+            // rbLPD32
+            // 
+            this.rbLPD32.AutoSize = true;
+            this.rbLPD32.Location = new System.Drawing.Point(40, 73);
+            this.rbLPD32.Name = "rbLPD32";
+            this.rbLPD32.Size = new System.Drawing.Size(91, 19);
+            this.rbLPD32.TabIndex = 3;
+            this.rbLPD32.Text = "Сетка 1-32";
+            this.rbLPD32.UseVisualStyleBackColor = true;
             // 
             // rbLPD16
             // 
@@ -87,29 +114,11 @@
             this.rbLPD16.Text = "Сетка 1-16";
             this.rbLPD16.UseVisualStyleBackColor = true;
             // 
-            // rbLPD32
-            // 
-            this.rbLPD32.AutoSize = true;
-            this.rbLPD32.Location = new System.Drawing.Point(40, 73);
-            this.rbLPD32.Name = "rbLPD32";
-            this.rbLPD32.Size = new System.Drawing.Size(91, 19);
-            this.rbLPD32.TabIndex = 3;
-            this.rbLPD32.Text = "Сетка 1-32";
-            this.rbLPD32.UseVisualStyleBackColor = true;
-            // 
-            // rbLPDFull
-            // 
-            this.rbLPDFull.AutoSize = true;
-            this.rbLPDFull.Location = new System.Drawing.Point(40, 99);
-            this.rbLPDFull.Name = "rbLPDFull";
-            this.rbLPDFull.Size = new System.Drawing.Size(107, 19);
-            this.rbLPDFull.TabIndex = 4;
-            this.rbLPDFull.TabStop = true;
-            this.rbLPDFull.Text = "Полная сетка";
-            this.rbLPDFull.UseVisualStyleBackColor = true;
-            // 
             // cbPMR
             // 
+            this.cbPMR.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbPMR.AutoSize = true;
             this.cbPMR.Location = new System.Drawing.Point(271, 81);
             this.cbPMR.Name = "cbPMR";
@@ -140,8 +149,7 @@
             // 
             // ChannelsGenerator
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(480, 302);
             this.Controls.Add(this.bCancel);
@@ -153,6 +161,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ChannelsGenerator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Генератор списков каналов";
