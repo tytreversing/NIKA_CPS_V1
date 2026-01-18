@@ -35,7 +35,7 @@ namespace NIKA_CPS_V1
                     {
                         if (c.Number == channel)
                         {
-                            lbUsedChannels.Items.Add(c.Name);
+                            lbUsedChannels.Items.Add(c);
                         }
                     }
                 }
@@ -47,11 +47,12 @@ namespace NIKA_CPS_V1
         private void RefreshAvailable()
         {
             lbAvailableChannels.BeginUpdate();
+            lbAvailableChannels.Items.Clear();
             foreach (Codeplug.Channel channel in MainForm.CodeplugInternal.Channels)
             {
-                if (!_zone.Channels.Contains(channel.Number))
+                if (!lbUsedChannels.Items.Contains(channel))
                 {
-                    lbAvailableChannels.Items.Add(channel.Name);
+                    lbAvailableChannels.Items.Add(channel);
                 }
             }
             lbAvailableChannels.EndUpdate();   
@@ -63,6 +64,7 @@ namespace NIKA_CPS_V1
             lbUsedChannels.Items.Clear();
             if (_zone != null)
             {
+                tbName.Text = _zone.Name;
                 Text = "Редактирование зоны #" + _zone.Number.ToString() + " (" + _zone.Name + ")";
                 RefreshUsed();
                 RefreshAvailable(); 
@@ -77,6 +79,11 @@ namespace NIKA_CPS_V1
             {
                 if (lbAvailableChannels.SelectedItems.Count <= CodeplugData.MAX_CHANNELS_IN_ZONE_COUNT - lbUsedChannels.Items.Count)
                 {
+                    foreach (Codeplug.Channel c in lbAvailableChannels.SelectedItems)
+                    {
+                        lbUsedChannels.Items.Add(c);
+                    }
+                    RefreshAvailable(); 
                 }
                 else
                     MessageBox.Show("Невозможно добавить выбранные каналы в эту зону. Их количество превышает число свободных ячеек в зоне!", "Зона заполнена", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -84,6 +91,35 @@ namespace NIKA_CPS_V1
             else
                 MessageBox.Show("Выберите как минимум один канал в правом списке для добавления в зону!", "Выберите канал", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             
+        }
+
+        private void bRemove_Click(object sender, EventArgs e)
+        {
+            if (lbUsedChannels.SelectedItems.Count > 0)
+            {
+                var itemsToRemove = lbUsedChannels.SelectedItems.Cast<Codeplug.Channel>().ToList();
+
+                // Удаляем элементы
+                foreach (var channel in itemsToRemove)
+                {
+                    lbUsedChannels.Items.Remove(channel);
+                }
+                RefreshAvailable();
+
+            }
+            else
+                MessageBox.Show("Выберите как минимум один канал для удаления!", "Выберите канал", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void bOK_Click(object sender, EventArgs e)
+        {
+            List<ushort> newChannels = new List<ushort>();
+            foreach (Codeplug.Channel channel in lbUsedChannels.Items)
+            {
+                newChannels.Add(channel.Number);
+            }
+            MainForm.CodeplugInternal.UpdateZoneByNumber(_zone.Number, tbName.Text, newChannels);
+            Close();
         }
     }
 }

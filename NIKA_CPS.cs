@@ -929,5 +929,10 @@ namespace NIKA_CPS_V1
             else
                 MessageBox.Show("Память зон полностью заполнена, добавить новую невозможно.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        private void tsmiSortZonesByName_Click(object sender, EventArgs e)
+        {
+            //TODO сортировка зон по алфавиту
+        }
     }
 }

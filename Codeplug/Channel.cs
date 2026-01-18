@@ -64,7 +64,10 @@ namespace NIKA_CPS_V1.Codeplug
             _type = type;
             _rxFrequency = rxFrequency;
         }
-
+        public override string ToString()
+        {
+            return _name ?? string.Empty;
+        }
         private string ValidateLength(string value)
         {
             if (value == null)

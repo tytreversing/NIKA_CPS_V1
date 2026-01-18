@@ -317,7 +317,19 @@ namespace NIKA_CPS_V1.Codeplug
             return byte.MaxValue;
         }
 
+        public void UpdateZoneByNumber(byte number, string name, List<ushort> channels)
+        {
+            if (_zones == null) return;
 
+            Zone zone = _zones.FirstOrDefault(c => c.Number == number);
+
+            if (zone != null)
+            {
+                zone.Number = number;
+                zone.Name = name;
+                zone.Channels = channels;
+            }
+        }
 
         public void ClearZones()
         {

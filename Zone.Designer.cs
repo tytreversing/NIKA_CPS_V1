@@ -36,6 +36,7 @@
             this.bAdd = new System.Windows.Forms.Button();
             this.bRemove = new System.Windows.Forms.Button();
             this.bOK = new System.Windows.Forms.Button();
+            this.tbName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lbUsedChannels
@@ -44,6 +45,7 @@
             this.lbUsedChannels.ItemHeight = 15;
             this.lbUsedChannels.Location = new System.Drawing.Point(24, 31);
             this.lbUsedChannels.Name = "lbUsedChannels";
+            this.lbUsedChannels.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbUsedChannels.Size = new System.Drawing.Size(307, 469);
             this.lbUsedChannels.TabIndex = 0;
             // 
@@ -55,7 +57,7 @@
             this.lbAvailableChannels.MultiColumn = true;
             this.lbAvailableChannels.Name = "lbAvailableChannels";
             this.lbAvailableChannels.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbAvailableChannels.Size = new System.Drawing.Size(307, 469);
+            this.lbAvailableChannels.Size = new System.Drawing.Size(471, 469);
             this.lbAvailableChannels.TabIndex = 1;
             // 
             // lCounter
@@ -96,6 +98,7 @@
             this.bRemove.TabIndex = 5;
             this.bRemove.Text = "-> Убрать";
             this.bRemove.UseVisualStyleBackColor = true;
+            this.bRemove.Click += new System.EventHandler(this.bRemove_Click);
             // 
             // bOK
             // 
@@ -105,12 +108,23 @@
             this.bOK.TabIndex = 6;
             this.bOK.Text = "OK";
             this.bOK.UseVisualStyleBackColor = true;
+            this.bOK.Click += new System.EventHandler(this.bOK_Click);
+            // 
+            // tbName
+            // 
+            this.tbName.Location = new System.Drawing.Point(355, 31);
+            this.tbName.MaxLength = 16;
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(214, 23);
+            this.tbName.TabIndex = 7;
+            this.tbName.WordWrap = false;
             // 
             // Zone
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(933, 519);
+            this.ClientSize = new System.Drawing.Size(1103, 519);
+            this.Controls.Add(this.tbName);
             this.Controls.Add(this.bOK);
             this.Controls.Add(this.bRemove);
             this.Controls.Add(this.bAdd);
@@ -141,5 +155,6 @@
         private System.Windows.Forms.Button bAdd;
         private System.Windows.Forms.Button bRemove;
         private System.Windows.Forms.Button bOK;
+        private System.Windows.Forms.TextBox tbName;
     }
 }
