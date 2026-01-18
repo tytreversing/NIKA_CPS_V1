@@ -15,8 +15,8 @@ namespace NIKA_CPS_V1
     {
         private ushort _number;
         private uint _id;
-        private Codeplug.Contact backup;
-        public Contact(Codeplug.Contact contact)
+        private CodeplugContact backup;
+        public Contact(CodeplugContact contact)
         {
             InitializeComponent();
             backup = contact;
@@ -28,13 +28,13 @@ namespace NIKA_CPS_V1
             _id = contact.DMR_ID;
             switch (contact.Type)
             {
-                case Codeplug.Contact.ContactType.PRIVATE:
+                case Codeplug.CodeplugContact.ContactType.PRIVATE:
                     rbPrivateCall.Checked = true;
                     break;
-                case Codeplug.Contact.ContactType.GROUP:
+                case Codeplug.CodeplugContact.ContactType.GROUP:
                     rbGroupCall.Checked = true;
                     break;
-                case Codeplug.Contact.ContactType.ALL_CALL:
+                case Codeplug.CodeplugContact.ContactType.ALL_CALL:
                     rbAllCall.Checked = true;
                     break;
             }
@@ -43,19 +43,19 @@ namespace NIKA_CPS_V1
 
         private void bOK_Click(object sender, EventArgs e)
         {
-            Codeplug.Contact.ContactType type;
-            Codeplug.Contact.Timeslot timeslot;
+            CodeplugContact.ContactType type;
+            CodeplugContact.Timeslot timeslot;
             if (tbDMRID.Text == "")
                 tbDMRID.Text = "0";
             if (rbPrivateCall.Checked)
-                type = Codeplug.Contact.ContactType.PRIVATE;
+                type = Codeplug.CodeplugContact.ContactType.PRIVATE;
             else if (rbGroupCall.Checked)
-                type = Codeplug.Contact.ContactType.GROUP;
-            else type = Codeplug.Contact.ContactType.ALL_CALL;
+                type = Codeplug.CodeplugContact.ContactType.GROUP;
+            else type = Codeplug.CodeplugContact.ContactType.ALL_CALL;
             if ((string)cbTimeslot.SelectedItem == "TS1")
-                timeslot = Codeplug.Contact.Timeslot.TS1;
+                timeslot = Codeplug.CodeplugContact.Timeslot.TS1;
             else
-                timeslot = Codeplug.Contact.Timeslot.TS2;
+                timeslot = Codeplug.CodeplugContact.Timeslot.TS2;
             MainForm.CodeplugInternal.UpdateContactByID(_number, tbAlias.Text, uint.Parse(tbDMRID.Text), tbData.Text, type, timeslot);
             Close();
         }

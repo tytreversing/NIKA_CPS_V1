@@ -220,17 +220,17 @@ namespace NIKA_CPS_V1
 
         private void GenerateCodeplugTemplate()
         {
-            CodeplugInternal.DMRID = new UserData();
-            CodeplugInternal.AddContact(new Codeplug.Contact(CodeplugInternal.GetFirstContactFreeNumber(), "Вызов всех", 16777215, "", Codeplug.Contact.ContactType.ALL_CALL, Codeplug.Contact.Timeslot.NONE));
-            CodeplugInternal.AddContact(new Codeplug.Contact(CodeplugInternal.GetFirstContactFreeNumber(), "Россия", 2501, "", Codeplug.Contact.ContactType.GROUP, Codeplug.Contact.Timeslot.NONE));
-            CodeplugInternal.AddChannel(new Channel());
-            CodeplugInternal.AddChannel(new Channel(CodeplugInternal.GetFirstChannelFreeNumber(), "Точка DMR", Channel.ChannelType.DIGITAL, 438000000));
-            CodeplugInternal.AddZone(new Codeplug.Zone(CodeplugInternal.GetFirstZoneFreeNumber(), "Тестовая зона"));
-            foreach (Channel channel in CodeplugInternal.Channels)
+            CodeplugInternal.DMRID = new CodeplugUserData();
+            CodeplugInternal.AddContact(new CodeplugContact(CodeplugInternal.GetFirstContactFreeNumber(), "Вызов всех", 16777215, "", Codeplug.CodeplugContact.ContactType.ALL_CALL, Codeplug.CodeplugContact.Timeslot.NONE));
+            CodeplugInternal.AddContact(new CodeplugContact(CodeplugInternal.GetFirstContactFreeNumber(), "Россия", 2501, "", Codeplug.CodeplugContact.ContactType.GROUP, Codeplug.CodeplugContact.Timeslot.NONE));
+            CodeplugInternal.AddChannel(new CodeplugChannel());
+            CodeplugInternal.AddChannel(new CodeplugChannel(CodeplugInternal.GetFirstChannelFreeNumber(), "Точка DMR", CodeplugChannel.ChannelType.DIGITAL, 438000000));
+            CodeplugInternal.AddZone(new CodeplugZone(CodeplugInternal.GetFirstZoneFreeNumber(), "Тестовая зона"));
+            foreach (CodeplugChannel channel in CodeplugInternal.Channels)
             {
                 CodeplugInternal.Zones[0].Channels.Add(channel.Number);
             }
-            CodeplugInternal.AddSatellite(new Codeplug.SatelliteKeps());
+            CodeplugInternal.AddSatellite(new CodeplugSatellite());
         }
 
         public void GenerateTree(TreeRefreshType mode = TreeRefreshType.ALL)
@@ -249,7 +249,7 @@ namespace NIKA_CPS_V1
                     contactsNode.Nodes.Clear();
 
                     // Добавляем узлы для каждого контакта
-                    foreach (Codeplug.Contact contact in CodeplugInternal.Contacts)
+                    foreach (CodeplugContact contact in CodeplugInternal.Contacts)
                     {
                         string alias = contact.Alias ?? "Безымянный";
                         TreeNode newNode = new TreeNode(alias);
@@ -258,10 +258,10 @@ namespace NIKA_CPS_V1
                         int iconSelection;
                         switch (contact.Type)
                         {
-                            case Codeplug.Contact.ContactType.PRIVATE:
+                            case Codeplug.CodeplugContact.ContactType.PRIVATE:
                                 iconSelection = 3; //иконка user
                                 break;
-                            case Codeplug.Contact.ContactType.GROUP:
+                            case Codeplug.CodeplugContact.ContactType.GROUP:
                                 iconSelection = 4; //иконка group
                                 break;
                             default:
@@ -282,7 +282,7 @@ namespace NIKA_CPS_V1
                         foreach (TreeNode node in contactsNode.Nodes)
                         {
                             if (node.Tag == null) continue;
-                            if (((Codeplug.Contact)node.Tag).Number == lastSelectedContact)
+                            if (((CodeplugContact)node.Tag).Number == lastSelectedContact)
                             {
                                 tvMain.SelectedNode = node;
                                 node.EnsureVisible(); // Прокручиваем к узлу если нужно
@@ -301,13 +301,13 @@ namespace NIKA_CPS_V1
                 {
                     tvMain.BeginUpdate();
                     channelsNode.Nodes.Clear();
-                    foreach (Codeplug.Channel channel in CodeplugInternal.Channels)
+                    foreach (CodeplugChannel channel in CodeplugInternal.Channels)
                     {
                         string name = channel.Name ?? "Безымянный";
                         TreeNode newNode = new TreeNode(name);
                         newNode.Tag = channel;
                         newNode.ToolTipText = channel.Name + " Rx: " + (channel.RxFrequency / 1000000f).ToString("F4");
-                        if (channel.Type == Channel.ChannelType.ANALOG)
+                        if (channel.Type == CodeplugChannel.ChannelType.ANALOG)
                         {
                             newNode.ImageIndex = 11;
                             newNode.SelectedImageIndex = 11;
@@ -346,7 +346,7 @@ namespace NIKA_CPS_V1
                 {
                     tvMain.BeginUpdate();
                     zonesNode.Nodes.Clear();
-                    foreach (Codeplug.Zone zone in CodeplugInternal.Zones)
+                    foreach (CodeplugZone zone in CodeplugInternal.Zones)
                     {
                         string name = zone.Name ?? "Безымянная";
                         TreeNode newNode = new TreeNode(name);
@@ -381,7 +381,7 @@ namespace NIKA_CPS_V1
                 {
                     tvSecondary.BeginUpdate();
                     satellitesNode.Nodes.Clear();
-                    foreach (Codeplug.SatelliteKeps satellite in CodeplugInternal.SatelliteKeps)
+                    foreach (CodeplugSatellite satellite in CodeplugInternal.SatelliteKeps)
                     {
                         string name = satellite.DisplayName ?? "Безымянный";
                         TreeNode newNode = new TreeNode(name);
@@ -399,7 +399,7 @@ namespace NIKA_CPS_V1
                         foreach (TreeNode node in satellitesNode.Nodes)
                         {
                             if (node.Tag == null) continue;
-                            if (((Codeplug.SatelliteKeps)node.Tag).CatalogueNumber == lastSelectedSatellite)
+                            if (((CodeplugSatellite)node.Tag).CatalogueNumber == lastSelectedSatellite)
                             {
                                 tvSecondary.SelectedNode = node;
                                 node.EnsureVisible();
@@ -456,7 +456,7 @@ namespace NIKA_CPS_V1
                     case "ContactsNode":
                         if (e.Button == MouseButtons.Left)
                         {
-                            Contact contactForm = new Contact((Codeplug.Contact)e.Node.Tag);
+                            Contact contactForm = new Contact((CodeplugContact)e.Node.Tag);
                             contactForm.ShowDialog();
                             GenerateTree(TreeRefreshType.CONTACTS);
                         }
@@ -464,7 +464,7 @@ namespace NIKA_CPS_V1
                     case "ZonesNode":
                         if (e.Button == MouseButtons.Left)
                         {
-                            Zone zoneForm = new Zone((Codeplug.Zone)e.Node.Tag);
+                            Zone zoneForm = new Zone((CodeplugZone)e.Node.Tag);
                             zoneForm.ShowDialog();
                             GenerateTree(TreeRefreshType.ZONES);
                         }
@@ -483,7 +483,7 @@ namespace NIKA_CPS_V1
                 return;
 
             // Проверяем, что узел находится под узлом ContactsNode
-            if (selectedNode.Parent?.Name == "ContactsNode" && selectedNode.Tag is Codeplug.Contact contact)
+            if (selectedNode.Parent?.Name == "ContactsNode" && selectedNode.Tag is CodeplugContact contact)
             {
                 lastSelectedContact = contact.Number;
             }
@@ -510,7 +510,7 @@ namespace NIKA_CPS_V1
             ushort freeNumber = CodeplugInternal.GetFirstContactFreeNumber();
             if (freeNumber < CodeplugData.MAX_CONTACTS_COUNT)
             {
-                Codeplug.Contact newContact = new Codeplug.Contact(freeNumber, "Контакт #" + freeNumber.ToString(), 0, "", Codeplug.Contact.ContactType.PRIVATE, Codeplug.Contact.Timeslot.NONE);
+                CodeplugContact newContact = new CodeplugContact(freeNumber, "Контакт #" + freeNumber.ToString(), 0, "", Codeplug.CodeplugContact.ContactType.PRIVATE, Codeplug.CodeplugContact.Timeslot.NONE);
                 CodeplugInternal.AddContact(newContact);
                 Contact contactForm = new Contact(newContact);
                 contactForm.ShowDialog();
@@ -709,7 +709,7 @@ namespace NIKA_CPS_V1
         {
             if (MessageBox.Show("Открытый кодплаг будет сброшен к состоянию шаблона с демонстрационными данными, все несохраненные данные будут потеряны. Продолжить?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                CodeplugInternal = new Codeplug.CodeplugData();
+                CodeplugInternal = new CodeplugData();
                 GenerateCodeplugTemplate();
                 GenerateTree();
             }
@@ -899,7 +899,7 @@ namespace NIKA_CPS_V1
             TreeNode selectedNode = tvMain.SelectedNode;
             if (selectedNode != null)
             {
-                CodeplugInternal.DeleteChannel((selectedNode.Tag as Codeplug.Channel).Number);
+                CodeplugInternal.DeleteChannel((selectedNode.Tag as CodeplugChannel).Number);
                 GenerateTree(TreeRefreshType.CHANNELS);
                 GenerateTree(TreeRefreshType.ZONES);
             }
@@ -910,7 +910,7 @@ namespace NIKA_CPS_V1
             TreeNode selectedNode = tvSecondary.SelectedNode;
             if (selectedNode != null)
             {
-                CodeplugInternal.DeleteSatelliteByCatID((selectedNode.Tag as Codeplug.SatelliteKeps).CatalogueNumber);
+                CodeplugInternal.DeleteSatelliteByCatID((selectedNode.Tag as CodeplugSatellite).CatalogueNumber);
                 GenerateTree(TreeRefreshType.SATELLITES);
             }
         }
@@ -920,7 +920,7 @@ namespace NIKA_CPS_V1
             byte freeNumber = CodeplugInternal.GetFirstZoneFreeNumber();
             if (freeNumber < CodeplugData.MAX_ZONES_COUNT)
             {
-                Codeplug.Zone newZone = new Codeplug.Zone(freeNumber, "Зона #" + freeNumber.ToString());
+                CodeplugZone newZone = new CodeplugZone(freeNumber, "Зона #" + freeNumber.ToString());
                 CodeplugInternal.AddZone(newZone);
                 Zone zoneForm = new Zone(newZone);
                 zoneForm.ShowDialog();

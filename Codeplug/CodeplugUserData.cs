@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace NIKA_CPS_V1.Codeplug
 {
     [Serializable]
-    public class UserData
+    public class CodeplugUserData
     {
 
         private string _alias;
@@ -29,13 +29,13 @@ namespace NIKA_CPS_V1.Codeplug
             set => _dmrid = value;
         }
 
-        public UserData()
+        public CodeplugUserData()
         {
             _dmrid = 12345678;
             _alias = "Нет алиаса";
         }
 
-        public UserData(uint dmrid, string alias)
+        public CodeplugUserData(uint dmrid, string alias)
         {
             _dmrid = dmrid;
             _alias = ValidateLength(alias);

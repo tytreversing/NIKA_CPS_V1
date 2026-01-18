@@ -29,7 +29,7 @@ namespace NIKA_CPS_V1
     }
 
     [Serializable]
-    [XmlRootAttribute("TransceiverCalibrations", Namespace = "https://opengd77rus.ru")]
+    [XmlRoot("TransceiverCalibrations", Namespace = "https://opengd77rus.ru")]
     [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 0x200)]
     public class CalibrationDataSTM32
     {
@@ -503,7 +503,7 @@ namespace NIKA_CPS_V1
     	}
     }
     [Serializable]
-    [XmlRootAttribute("TransceiverCalibrations", Namespace = "https://opengd77rus.ru")]
+    [XmlRoot("TransceiverCalibrations", Namespace = "https://opengd77rus.ru")]
     public class CalibrationStruct
     {
         //0x00

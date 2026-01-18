@@ -121,10 +121,10 @@ namespace NIKA_CPS_V1
             TreeNode cNode = FindTreeNodeByName(tvMain, "ContactsNode");
             foreach (TreeNode node in cNode.Nodes)
             {
-                Codeplug.Contact contact = node.Tag as Codeplug.Contact; //список контактов заполняем с заменой Number по порядку
+                CodeplugContact contact = node.Tag as CodeplugContact; //список контактов заполняем с заменой Number по порядку
                 //TODO ДОБАВИТЬ коррекцию каналов!!!
                 contact.Number = number;
-                CodeplugInternal.AddContact(node.Tag as Codeplug.Contact);
+                CodeplugInternal.AddContact(node.Tag as CodeplugContact);
                 number++;
             }
         }
@@ -136,9 +136,9 @@ namespace NIKA_CPS_V1
             TreeNode cNode = FindTreeNodeByName(tvMain, "ZonesNode");
             foreach (TreeNode node in cNode.Nodes)
             {
-                Codeplug.Zone zone = node.Tag as Codeplug.Zone; //список зон заполняем с заменой Number по порядку
+                CodeplugZone zone = node.Tag as CodeplugZone; //список зон заполняем с заменой Number по порядку
                 zone.Number = (byte)number;
-                CodeplugInternal.AddZone(node.Tag as Codeplug.Zone);
+                CodeplugInternal.AddZone(node.Tag as CodeplugZone);
                 number++;
             }
         }
@@ -153,13 +153,13 @@ namespace NIKA_CPS_V1
             if (cNode == null) return;
             foreach (TreeNode node in cNode.Nodes)
             {
-                Codeplug.Channel channel = node.Tag as Codeplug.Channel; //список каналов заполняем с заменой Number по порядку
+                CodeplugChannel channel = node.Tag as CodeplugChannel; //список каналов заполняем с заменой Number по порядку
                 mapping.Add(channel.Number, number); //старый номер канала - ключ, значение - новый номер
                 channel.Number = number;
-                CodeplugInternal.AddChannel(node.Tag as Codeplug.Channel);
+                CodeplugInternal.AddChannel(node.Tag as CodeplugChannel);
                 number++;
             }
-            foreach (Codeplug.Zone zone in CodeplugInternal.Zones)
+            foreach (CodeplugZone zone in CodeplugInternal.Zones)
             {
                 for (int i = 0; i < zone.Channels.Count; i++)
                 {

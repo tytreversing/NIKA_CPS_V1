@@ -36,14 +36,14 @@ namespace NIKA_CPS_V1
                     steps = 69;
                 for (int i = 0; i < steps; i++)
                 {
-                    MainForm.CodeplugInternal.AddChannel(new Codeplug.Channel(MainForm.CodeplugInternal.GetFirstChannelFreeNumber(), "LPD " + (i+1).ToString("00"), Codeplug.Channel.ChannelType.ANALOG, LPDChannel1 + (uint)(LPDStep * i)));
+                    MainForm.CodeplugInternal.AddChannel(new CodeplugChannel(MainForm.CodeplugInternal.GetFirstChannelFreeNumber(), "LPD " + (i+1).ToString("00"), Codeplug.CodeplugChannel.ChannelType.ANALOG, LPDChannel1 + (uint)(LPDStep * i)));
                 }
             }
             if (cbPMR.Checked)
             {
                 for (int i = 0; i < 8; i++)
                 {
-                    MainForm.CodeplugInternal.AddChannel(new Codeplug.Channel(MainForm.CodeplugInternal.GetFirstChannelFreeNumber(), "PMR " + (i + 1).ToString(), Codeplug.Channel.ChannelType.ANALOG, PMRChannel1 + (uint)(PMRStep * i)));
+                    MainForm.CodeplugInternal.AddChannel(new CodeplugChannel(MainForm.CodeplugInternal.GetFirstChannelFreeNumber(), "PMR " + (i + 1).ToString(), Codeplug.CodeplugChannel.ChannelType.ANALOG, PMRChannel1 + (uint)(PMRStep * i)));
                 }
             }
             Close();

@@ -1469,200 +1469,200 @@ namespace NIKA_CPS_V1
 
         private void InitializeComponent()
         {
-            this.btnWrite = new System.Windows.Forms.Button();
-            this.btnReadFile = new System.Windows.Forms.Button();
-            this.btnReadFromRadio = new System.Windows.Forms.Button();
-            this.btnSaveCalibration = new System.Windows.Forms.Button();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.tabs = new System.Windows.Forms.TabControl();
-            this.tabVHF = new System.Windows.Forms.TabPage();
-            this.nmVHFOscRef = new System.Windows.Forms.NumericUpDown();
-            this.label34 = new System.Windows.Forms.Label();
-            this.tlpVHF = new System.Windows.Forms.TableLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label49 = new System.Windows.Forms.Label();
-            this.tabUHF = new System.Windows.Forms.TabPage();
-            this.nmUHFOscRef = new System.Windows.Forms.NumericUpDown();
-            this.label35 = new System.Windows.Forms.Label();
-            this.tlpUHF = new System.Windows.Forms.TableLayoutPanel();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
-            this.label51 = new System.Windows.Forms.Label();
-            this.label52 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.gbCommons = new System.Windows.Forms.GroupBox();
-            this.nmRSSI70 = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.nmRSSI120 = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.nmRxHighLevel = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.nmRxLowLevel = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.nmVOXMaxLevel = new System.Windows.Forms.NumericUpDown();
-            this.nmVOXMinLevel = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnReadFactoryFromRadio = new System.Windows.Forms.Button();
-            this.lblRadioType = new System.Windows.Forms.Label();
-            this.btnClearColors = new System.Windows.Forms.Button();
-            this.btnChart = new System.Windows.Forms.Button();
+            this.btnWrite = new Button();
+            this.btnReadFile = new Button();
+            this.btnReadFromRadio = new Button();
+            this.btnSaveCalibration = new Button();
+            this.saveFileDialog = new SaveFileDialog();
+            this.openFileDialog = new OpenFileDialog();
+            this.tabs = new TabControl();
+            this.tabVHF = new TabPage();
+            this.nmVHFOscRef = new NumericUpDown();
+            this.label34 = new Label();
+            this.tlpVHF = new TableLayoutPanel();
+            this.label8 = new Label();
+            this.label9 = new Label();
+            this.label10 = new Label();
+            this.label11 = new Label();
+            this.label12 = new Label();
+            this.label16 = new Label();
+            this.label22 = new Label();
+            this.label23 = new Label();
+            this.label24 = new Label();
+            this.label25 = new Label();
+            this.label26 = new Label();
+            this.label27 = new Label();
+            this.label28 = new Label();
+            this.label29 = new Label();
+            this.label30 = new Label();
+            this.label31 = new Label();
+            this.label32 = new Label();
+            this.label33 = new Label();
+            this.label45 = new Label();
+            this.label46 = new Label();
+            this.label47 = new Label();
+            this.label48 = new Label();
+            this.label49 = new Label();
+            this.tabUHF = new TabPage();
+            this.nmUHFOscRef = new NumericUpDown();
+            this.label35 = new Label();
+            this.tlpUHF = new TableLayoutPanel();
+            this.label21 = new Label();
+            this.label40 = new Label();
+            this.label41 = new Label();
+            this.label42 = new Label();
+            this.label43 = new Label();
+            this.label44 = new Label();
+            this.label7 = new Label();
+            this.label13 = new Label();
+            this.label14 = new Label();
+            this.label15 = new Label();
+            this.label17 = new Label();
+            this.label18 = new Label();
+            this.label19 = new Label();
+            this.label20 = new Label();
+            this.label36 = new Label();
+            this.label37 = new Label();
+            this.label38 = new Label();
+            this.label39 = new Label();
+            this.label50 = new Label();
+            this.label51 = new Label();
+            this.label52 = new Label();
+            this.label53 = new Label();
+            this.label54 = new Label();
+            this.gbCommons = new GroupBox();
+            this.nmRSSI70 = new NumericUpDown();
+            this.label6 = new Label();
+            this.nmRSSI120 = new NumericUpDown();
+            this.label5 = new Label();
+            this.nmRxHighLevel = new NumericUpDown();
+            this.label4 = new Label();
+            this.nmRxLowLevel = new NumericUpDown();
+            this.label3 = new Label();
+            this.nmVOXMaxLevel = new NumericUpDown();
+            this.nmVOXMinLevel = new NumericUpDown();
+            this.label2 = new Label();
+            this.label1 = new Label();
+            this.btnReadFactoryFromRadio = new Button();
+            this.lblRadioType = new Label();
+            this.btnClearColors = new Button();
+            this.btnChart = new Button();
             this.tabs.SuspendLayout();
             this.tabVHF.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmVHFOscRef)).BeginInit();
+            ((ISupportInitialize)(this.nmVHFOscRef)).BeginInit();
             this.tlpVHF.SuspendLayout();
             this.tabUHF.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmUHFOscRef)).BeginInit();
+            ((ISupportInitialize)(this.nmUHFOscRef)).BeginInit();
             this.tlpUHF.SuspendLayout();
             this.gbCommons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmRSSI70)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmRSSI120)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmRxHighLevel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmRxLowLevel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmVOXMaxLevel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmVOXMinLevel)).BeginInit();
+            ((ISupportInitialize)(this.nmRSSI70)).BeginInit();
+            ((ISupportInitialize)(this.nmRSSI120)).BeginInit();
+            ((ISupportInitialize)(this.nmRxHighLevel)).BeginInit();
+            ((ISupportInitialize)(this.nmRxLowLevel)).BeginInit();
+            ((ISupportInitialize)(this.nmVOXMaxLevel)).BeginInit();
+            ((ISupportInitialize)(this.nmVOXMinLevel)).BeginInit();
             this.SuspendLayout();
             // 
             // btnWrite
             // 
-            this.btnWrite.BackColor = System.Drawing.SystemColors.Control;
-            this.btnWrite.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnWrite.Location = new System.Drawing.Point(877, 342);
+            this.btnWrite.BackColor = System.Drawing.Color.White;
+            this.btnWrite.Font = new Font("Arial", 8F);
+            this.btnWrite.Location = new Point(877, 342);
             this.btnWrite.Name = "btnWrite";
-            this.btnWrite.Size = new System.Drawing.Size(268, 23);
+            this.btnWrite.Size = new Size(268, 23);
             this.btnWrite.TabIndex = 1;
             this.btnWrite.Text = "Записать в рацию";
             this.btnWrite.UseVisualStyleBackColor = false;
             this.btnWrite.Visible = false;
-            this.btnWrite.Click += new System.EventHandler(this.btnWrite_Click);
+            this.btnWrite.Click += new EventHandler(this.btnWrite_Click);
             // 
             // btnReadFile
             // 
-            this.btnReadFile.BackColor = System.Drawing.SystemColors.Control;
-            this.btnReadFile.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnReadFile.Location = new System.Drawing.Point(877, 313);
+            this.btnReadFile.BackColor = System.Drawing.Color.White;
+            this.btnReadFile.Font = new Font("Arial", 8F);
+            this.btnReadFile.Location = new Point(877, 313);
             this.btnReadFile.Name = "btnReadFile";
-            this.btnReadFile.Size = new System.Drawing.Size(268, 23);
+            this.btnReadFile.Size = new Size(268, 23);
             this.btnReadFile.TabIndex = 1;
             this.btnReadFile.Text = "Открыть файл калибровок";
             this.btnReadFile.UseVisualStyleBackColor = false;
-            this.btnReadFile.Click += new System.EventHandler(this.btnReadFile_Click);
+            this.btnReadFile.Click += new EventHandler(this.btnReadFile_Click);
             // 
             // btnReadFromRadio
             // 
-            this.btnReadFromRadio.BackColor = System.Drawing.SystemColors.Control;
-            this.btnReadFromRadio.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnReadFromRadio.Location = new System.Drawing.Point(877, 284);
+            this.btnReadFromRadio.BackColor = System.Drawing.Color.White;
+            this.btnReadFromRadio.Font = new Font("Arial", 8F);
+            this.btnReadFromRadio.Location = new Point(877, 284);
             this.btnReadFromRadio.Name = "btnReadFromRadio";
-            this.btnReadFromRadio.Size = new System.Drawing.Size(268, 23);
+            this.btnReadFromRadio.Size = new Size(268, 23);
             this.btnReadFromRadio.TabIndex = 1;
             this.btnReadFromRadio.Text = "Считать калибровки из рации";
             this.btnReadFromRadio.UseVisualStyleBackColor = false;
-            this.btnReadFromRadio.Click += new System.EventHandler(this.btnReadFromRadio_Click);
+            this.btnReadFromRadio.Click += new EventHandler(this.btnReadFromRadio_Click);
             // 
             // btnSaveCalibration
             // 
-            this.btnSaveCalibration.BackColor = System.Drawing.SystemColors.Control;
-            this.btnSaveCalibration.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnSaveCalibration.Location = new System.Drawing.Point(877, 371);
+            this.btnSaveCalibration.BackColor = System.Drawing.Color.White;
+            this.btnSaveCalibration.Font = new Font("Arial", 8F);
+            this.btnSaveCalibration.Location = new Point(877, 371);
             this.btnSaveCalibration.Name = "btnSaveCalibration";
-            this.btnSaveCalibration.Size = new System.Drawing.Size(268, 23);
+            this.btnSaveCalibration.Size = new Size(268, 23);
             this.btnSaveCalibration.TabIndex = 1;
             this.btnSaveCalibration.Text = "Сохранить файл калибровок";
             this.btnSaveCalibration.UseVisualStyleBackColor = false;
             this.btnSaveCalibration.Visible = false;
-            this.btnSaveCalibration.Click += new System.EventHandler(this.btnSaveCalibration_Click);
+            this.btnSaveCalibration.Click += new EventHandler(this.btnSaveCalibration_Click);
             // 
             // saveFileDialog
             // 
-            this.saveFileDialog.Filter = "Файлы калибровок|*.ogdc";
+            this.saveFileDialog.Filter = "Файлы калибровок|*.ncal";
             // 
             // openFileDialog
             // 
-            this.openFileDialog.Filter = "Файлы калибровки|*.ogdc";
+            this.openFileDialog.Filter = "Файлы калибровки|*.ncal";
             // 
             // tabs
             // 
             this.tabs.Controls.Add(this.tabVHF);
             this.tabs.Controls.Add(this.tabUHF);
-            this.tabs.Location = new System.Drawing.Point(14, 12);
+            this.tabs.Location = new Point(14, 12);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
-            this.tabs.Size = new System.Drawing.Size(857, 628);
+            this.tabs.Size = new Size(857, 628);
             this.tabs.TabIndex = 2;
             // 
             // tabVHF
             // 
+            this.tabVHF.BackColor = System.Drawing.Color.White;
             this.tabVHF.Controls.Add(this.nmVHFOscRef);
             this.tabVHF.Controls.Add(this.label34);
             this.tabVHF.Controls.Add(this.tlpVHF);
-            this.tabVHF.Location = new System.Drawing.Point(4, 22);
+            this.tabVHF.Location = new Point(4, 22);
             this.tabVHF.Name = "tabVHF";
-            this.tabVHF.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVHF.Size = new System.Drawing.Size(849, 602);
+            this.tabVHF.Padding = new Padding(3);
+            this.tabVHF.Size = new Size(849, 602);
             this.tabVHF.TabIndex = 0;
             this.tabVHF.Text = "Диапазон 2 м";
-            this.tabVHF.UseVisualStyleBackColor = true;
             // 
             // nmVHFOscRef
             // 
-            this.nmVHFOscRef.Location = new System.Drawing.Point(285, 528);
+            this.nmVHFOscRef.Location = new Point(285, 528);
             this.nmVHFOscRef.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.nmVHFOscRef.Name = "nmVHFOscRef";
-            this.nmVHFOscRef.Size = new System.Drawing.Size(89, 20);
+            this.nmVHFOscRef.Size = new Size(89, 20);
             this.nmVHFOscRef.TabIndex = 9;
-            this.nmVHFOscRef.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            this.nmVHFOscRef.ValueChanged += new EventHandler(this.nmValueChanged);
             // 
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(161, 532);
+            this.label34.Location = new Point(161, 532);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(112, 13);
+            this.label34.Size = new Size(112, 13);
             this.label34.TabIndex = 8;
             this.label34.Text = "Подстройка частоты";
             // 
@@ -1671,12 +1671,12 @@ namespace NIKA_CPS_V1
             this.tlpVHF.BackColor = System.Drawing.SystemColors.Window;
             this.tlpVHF.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tlpVHF.ColumnCount = 6;
-            this.tlpVHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tlpVHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpVHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpVHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpVHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpVHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
+            this.tlpVHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tlpVHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpVHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpVHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpVHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpVHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.tlpVHF.Controls.Add(this.label8, 0, 0);
             this.tlpVHF.Controls.Add(this.label9, 0, 1);
             this.tlpVHF.Controls.Add(this.label10, 0, 2);
@@ -1700,44 +1700,44 @@ namespace NIKA_CPS_V1
             this.tlpVHF.Controls.Add(this.label47, 0, 7);
             this.tlpVHF.Controls.Add(this.label48, 0, 8);
             this.tlpVHF.Controls.Add(this.label49, 0, 9);
-            this.tlpVHF.Location = new System.Drawing.Point(157, 29);
-            this.tlpVHF.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpVHF.Location = new Point(157, 29);
+            this.tlpVHF.Margin = new Padding(0);
             this.tlpVHF.Name = "tlpVHF";
             this.tlpVHF.RowCount = 24;
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpVHF.Size = new System.Drawing.Size(526, 484);
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpVHF.Size = new Size(526, 484);
             this.tlpVHF.TabIndex = 0;
             // 
             // label8
             // 
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(1, 1);
-            this.label8.Margin = new System.Windows.Forms.Padding(0);
+            this.label8.Location = new Point(1, 1);
+            this.label8.Margin = new Padding(0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(150, 20);
+            this.label8.Size = new Size(150, 20);
             this.label8.TabIndex = 1;
             this.label8.Text = "Частота Tx";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1745,9 +1745,9 @@ namespace NIKA_CPS_V1
             // label9
             // 
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(4, 22);
+            this.label9.Location = new Point(4, 22);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(144, 20);
+            this.label9.Size = new Size(144, 20);
             this.label9.TabIndex = 2;
             this.label9.Text = "Уровень мощности 9";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1755,9 +1755,9 @@ namespace NIKA_CPS_V1
             // label10
             // 
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(4, 43);
+            this.label10.Location = new Point(4, 43);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(144, 20);
+            this.label10.Size = new Size(144, 20);
             this.label10.TabIndex = 3;
             this.label10.Text = "Уровень мощности 8";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1765,9 +1765,9 @@ namespace NIKA_CPS_V1
             // label11
             // 
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(4, 64);
+            this.label11.Location = new Point(4, 64);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(144, 20);
+            this.label11.Size = new Size(144, 20);
             this.label11.TabIndex = 4;
             this.label11.Text = "Уровень мощности 7";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1775,9 +1775,9 @@ namespace NIKA_CPS_V1
             // label12
             // 
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(4, 85);
+            this.label12.Location = new Point(4, 85);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(144, 20);
+            this.label12.Size = new Size(144, 20);
             this.label12.TabIndex = 5;
             this.label12.Text = "Уровень мощности 6";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1785,9 +1785,9 @@ namespace NIKA_CPS_V1
             // label16
             // 
             this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label16.Location = new System.Drawing.Point(4, 211);
+            this.label16.Location = new Point(4, 211);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(144, 20);
+            this.label16.Size = new Size(144, 20);
             this.label16.TabIndex = 6;
             this.label16.Text = "Настройка Rx";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1795,9 +1795,9 @@ namespace NIKA_CPS_V1
             // label22
             // 
             this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label22.Location = new System.Drawing.Point(4, 232);
+            this.label22.Location = new Point(4, 232);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(144, 20);
+            this.label22.Size = new Size(144, 20);
             this.label22.TabIndex = 7;
             this.label22.Text = "Открытие SQL 9";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1805,9 +1805,9 @@ namespace NIKA_CPS_V1
             // label23
             // 
             this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label23.Location = new System.Drawing.Point(4, 253);
+            this.label23.Location = new Point(4, 253);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(144, 20);
+            this.label23.Size = new Size(144, 20);
             this.label23.TabIndex = 8;
             this.label23.Text = "Закрытие SQL 9";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1815,9 +1815,9 @@ namespace NIKA_CPS_V1
             // label24
             // 
             this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label24.Location = new System.Drawing.Point(4, 274);
+            this.label24.Location = new Point(4, 274);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(144, 20);
+            this.label24.Size = new Size(144, 20);
             this.label24.TabIndex = 9;
             this.label24.Text = "Открытие SQL 1";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1825,9 +1825,9 @@ namespace NIKA_CPS_V1
             // label25
             // 
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label25.Location = new System.Drawing.Point(4, 295);
+            this.label25.Location = new Point(4, 295);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(144, 20);
+            this.label25.Size = new Size(144, 20);
             this.label25.TabIndex = 10;
             this.label25.Text = "Закрытие SQL 1";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1835,9 +1835,9 @@ namespace NIKA_CPS_V1
             // label26
             // 
             this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label26.Location = new System.Drawing.Point(4, 316);
+            this.label26.Location = new Point(4, 316);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(144, 20);
+            this.label26.Size = new Size(144, 20);
             this.label26.TabIndex = 11;
             this.label26.Text = "Девиация CTCSS 67";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1845,9 +1845,9 @@ namespace NIKA_CPS_V1
             // label27
             // 
             this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label27.Location = new System.Drawing.Point(4, 337);
+            this.label27.Location = new Point(4, 337);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(144, 20);
+            this.label27.Size = new Size(144, 20);
             this.label27.TabIndex = 12;
             this.label27.Text = "Девиация CTCSS 151";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1855,9 +1855,9 @@ namespace NIKA_CPS_V1
             // label28
             // 
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label28.Location = new System.Drawing.Point(4, 358);
+            this.label28.Location = new Point(4, 358);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(144, 20);
+            this.label28.Size = new Size(144, 20);
             this.label28.TabIndex = 13;
             this.label28.Text = "Девиация CTCSS 254";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1865,9 +1865,9 @@ namespace NIKA_CPS_V1
             // label29
             // 
             this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label29.Location = new System.Drawing.Point(4, 379);
+            this.label29.Location = new Point(4, 379);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(144, 20);
+            this.label29.Size = new Size(144, 20);
             this.label29.TabIndex = 14;
             this.label29.Text = "Девиация DCS";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1875,9 +1875,9 @@ namespace NIKA_CPS_V1
             // label30
             // 
             this.label30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label30.Location = new System.Drawing.Point(4, 400);
+            this.label30.Location = new Point(4, 400);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(144, 20);
+            this.label30.Size = new Size(144, 20);
             this.label30.TabIndex = 15;
             this.label30.Text = "Усиление I (DMR)";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1885,9 +1885,9 @@ namespace NIKA_CPS_V1
             // label31
             // 
             this.label31.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label31.Location = new System.Drawing.Point(4, 421);
+            this.label31.Location = new Point(4, 421);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(144, 20);
+            this.label31.Size = new Size(144, 20);
             this.label31.TabIndex = 16;
             this.label31.Text = "Усиление Q (DMR)";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1895,9 +1895,9 @@ namespace NIKA_CPS_V1
             // label32
             // 
             this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label32.Location = new System.Drawing.Point(4, 442);
+            this.label32.Location = new Point(4, 442);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(144, 20);
+            this.label32.Size = new Size(144, 20);
             this.label32.TabIndex = 17;
             this.label32.Text = "Усиление I (FM)";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1905,9 +1905,9 @@ namespace NIKA_CPS_V1
             // label33
             // 
             this.label33.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label33.Location = new System.Drawing.Point(4, 463);
+            this.label33.Location = new Point(4, 463);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(144, 20);
+            this.label33.Size = new Size(144, 20);
             this.label33.TabIndex = 18;
             this.label33.Text = "Усиление Q (FM)";
             this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1916,9 +1916,9 @@ namespace NIKA_CPS_V1
             // 
             this.label45.AutoSize = true;
             this.label45.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label45.Location = new System.Drawing.Point(4, 106);
+            this.label45.Location = new Point(4, 106);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(144, 20);
+            this.label45.Size = new Size(144, 20);
             this.label45.TabIndex = 19;
             this.label45.Text = "Уровень мощности 5";
             this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1927,9 +1927,9 @@ namespace NIKA_CPS_V1
             // 
             this.label46.AutoSize = true;
             this.label46.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label46.Location = new System.Drawing.Point(4, 127);
+            this.label46.Location = new Point(4, 127);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(144, 20);
+            this.label46.Size = new Size(144, 20);
             this.label46.TabIndex = 20;
             this.label46.Text = "Уровень мощности 4";
             this.label46.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1938,9 +1938,9 @@ namespace NIKA_CPS_V1
             // 
             this.label47.AutoSize = true;
             this.label47.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label47.Location = new System.Drawing.Point(4, 148);
+            this.label47.Location = new Point(4, 148);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(144, 20);
+            this.label47.Size = new Size(144, 20);
             this.label47.TabIndex = 21;
             this.label47.Text = "Уровень мощности 3";
             this.label47.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1949,9 +1949,9 @@ namespace NIKA_CPS_V1
             // 
             this.label48.AutoSize = true;
             this.label48.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label48.Location = new System.Drawing.Point(4, 169);
+            this.label48.Location = new Point(4, 169);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(144, 20);
+            this.label48.Size = new Size(144, 20);
             this.label48.TabIndex = 22;
             this.label48.Text = "Уровень мощности 2";
             this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1960,45 +1960,45 @@ namespace NIKA_CPS_V1
             // 
             this.label49.AutoSize = true;
             this.label49.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label49.Location = new System.Drawing.Point(4, 190);
+            this.label49.Location = new Point(4, 190);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(144, 20);
+            this.label49.Size = new Size(144, 20);
             this.label49.TabIndex = 23;
             this.label49.Text = "Уровень мощности 1";
             this.label49.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tabUHF
             // 
+            this.tabUHF.BackColor = System.Drawing.Color.White;
             this.tabUHF.Controls.Add(this.nmUHFOscRef);
             this.tabUHF.Controls.Add(this.label35);
             this.tabUHF.Controls.Add(this.tlpUHF);
-            this.tabUHF.Location = new System.Drawing.Point(4, 22);
+            this.tabUHF.Location = new Point(4, 22);
             this.tabUHF.Name = "tabUHF";
-            this.tabUHF.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUHF.Size = new System.Drawing.Size(849, 602);
+            this.tabUHF.Padding = new Padding(3);
+            this.tabUHF.Size = new Size(849, 602);
             this.tabUHF.TabIndex = 1;
             this.tabUHF.Text = "Диапазон 70 см";
-            this.tabUHF.UseVisualStyleBackColor = true;
             // 
             // nmUHFOscRef
             // 
-            this.nmUHFOscRef.Location = new System.Drawing.Point(140, 536);
+            this.nmUHFOscRef.Location = new Point(140, 536);
             this.nmUHFOscRef.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.nmUHFOscRef.Name = "nmUHFOscRef";
-            this.nmUHFOscRef.Size = new System.Drawing.Size(89, 20);
+            this.nmUHFOscRef.Size = new Size(89, 20);
             this.nmUHFOscRef.TabIndex = 16;
-            this.nmUHFOscRef.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            this.nmUHFOscRef.ValueChanged += new EventHandler(this.nmValueChanged);
             // 
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(16, 540);
+            this.label35.Location = new Point(16, 540);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(112, 13);
+            this.label35.Size = new Size(112, 13);
             this.label35.TabIndex = 15;
             this.label35.Text = "Подстройка частоты";
             // 
@@ -2006,16 +2006,16 @@ namespace NIKA_CPS_V1
             // 
             this.tlpUHF.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tlpUHF.ColumnCount = 10;
-            this.tlpUHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tlpUHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpUHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpUHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpUHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpUHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpUHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpUHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpUHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tlpUHF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
+            this.tlpUHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tlpUHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpUHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpUHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpUHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpUHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpUHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpUHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpUHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
+            this.tlpUHF.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
             this.tlpUHF.Controls.Add(this.label21, 0, 18);
             this.tlpUHF.Controls.Add(this.label40, 0, 0);
             this.tlpUHF.Controls.Add(this.label41, 0, 1);
@@ -2039,42 +2039,42 @@ namespace NIKA_CPS_V1
             this.tlpUHF.Controls.Add(this.label52, 0, 7);
             this.tlpUHF.Controls.Add(this.label53, 0, 8);
             this.tlpUHF.Controls.Add(this.label54, 0, 9);
-            this.tlpUHF.Location = new System.Drawing.Point(12, 16);
+            this.tlpUHF.Location = new Point(12, 16);
             this.tlpUHF.Name = "tlpUHF";
             this.tlpUHF.RowCount = 24;
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUHF.Size = new System.Drawing.Size(827, 484);
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpUHF.Size = new Size(827, 484);
             this.tlpUHF.TabIndex = 0;
             // 
             // label21
             // 
             this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label21.Location = new System.Drawing.Point(4, 379);
+            this.label21.Location = new Point(4, 379);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(144, 20);
+            this.label21.Size = new Size(144, 20);
             this.label21.TabIndex = 17;
             this.label21.Text = "Девиация DCS";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2082,9 +2082,9 @@ namespace NIKA_CPS_V1
             // label40
             // 
             this.label40.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label40.Location = new System.Drawing.Point(4, 1);
+            this.label40.Location = new Point(4, 1);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(144, 20);
+            this.label40.Size = new Size(144, 20);
             this.label40.TabIndex = 1;
             this.label40.Text = "Частота Tx";
             this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2092,9 +2092,9 @@ namespace NIKA_CPS_V1
             // label41
             // 
             this.label41.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label41.Location = new System.Drawing.Point(4, 22);
+            this.label41.Location = new Point(4, 22);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(144, 20);
+            this.label41.Size = new Size(144, 20);
             this.label41.TabIndex = 2;
             this.label41.Text = "Уровень мощности 9";
             this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2102,9 +2102,9 @@ namespace NIKA_CPS_V1
             // label42
             // 
             this.label42.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label42.Location = new System.Drawing.Point(4, 43);
+            this.label42.Location = new Point(4, 43);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(144, 20);
+            this.label42.Size = new Size(144, 20);
             this.label42.TabIndex = 3;
             this.label42.Text = "Уровень мощности 8";
             this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2112,9 +2112,9 @@ namespace NIKA_CPS_V1
             // label43
             // 
             this.label43.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label43.Location = new System.Drawing.Point(4, 64);
+            this.label43.Location = new Point(4, 64);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(144, 20);
+            this.label43.Size = new Size(144, 20);
             this.label43.TabIndex = 4;
             this.label43.Text = "Уровень мощности 7";
             this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2122,9 +2122,9 @@ namespace NIKA_CPS_V1
             // label44
             // 
             this.label44.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label44.Location = new System.Drawing.Point(4, 85);
+            this.label44.Location = new Point(4, 85);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(144, 20);
+            this.label44.Size = new Size(144, 20);
             this.label44.TabIndex = 5;
             this.label44.Text = "Уровень мощности 6";
             this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2133,9 +2133,9 @@ namespace NIKA_CPS_V1
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(4, 211);
+            this.label7.Location = new Point(4, 211);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(144, 20);
+            this.label7.Size = new Size(144, 20);
             this.label7.TabIndex = 6;
             this.label7.Text = "Настройка Rx";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2144,9 +2144,9 @@ namespace NIKA_CPS_V1
             // 
             this.label13.AutoSize = true;
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Location = new System.Drawing.Point(4, 232);
+            this.label13.Location = new Point(4, 232);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(144, 20);
+            this.label13.Size = new Size(144, 20);
             this.label13.TabIndex = 7;
             this.label13.Text = "Открытие SQL 9";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2155,9 +2155,9 @@ namespace NIKA_CPS_V1
             // 
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(4, 253);
+            this.label14.Location = new Point(4, 253);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(144, 20);
+            this.label14.Size = new Size(144, 20);
             this.label14.TabIndex = 8;
             this.label14.Text = "Закрытие SQL 9";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2166,9 +2166,9 @@ namespace NIKA_CPS_V1
             // 
             this.label15.AutoSize = true;
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label15.Location = new System.Drawing.Point(4, 274);
+            this.label15.Location = new Point(4, 274);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(144, 20);
+            this.label15.Size = new Size(144, 20);
             this.label15.TabIndex = 9;
             this.label15.Text = "Открытие SQL 1";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2177,9 +2177,9 @@ namespace NIKA_CPS_V1
             // 
             this.label17.AutoSize = true;
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label17.Location = new System.Drawing.Point(4, 295);
+            this.label17.Location = new Point(4, 295);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(144, 20);
+            this.label17.Size = new Size(144, 20);
             this.label17.TabIndex = 10;
             this.label17.Text = "Закрытие SQL 1";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2187,9 +2187,9 @@ namespace NIKA_CPS_V1
             // label18
             // 
             this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label18.Location = new System.Drawing.Point(4, 316);
+            this.label18.Location = new Point(4, 316);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(144, 20);
+            this.label18.Size = new Size(144, 20);
             this.label18.TabIndex = 12;
             this.label18.Text = "Девиация CTCSS 67";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2197,9 +2197,9 @@ namespace NIKA_CPS_V1
             // label19
             // 
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label19.Location = new System.Drawing.Point(4, 337);
+            this.label19.Location = new Point(4, 337);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(144, 20);
+            this.label19.Size = new Size(144, 20);
             this.label19.TabIndex = 13;
             this.label19.Text = "Девиация CTCSS 151";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2207,9 +2207,9 @@ namespace NIKA_CPS_V1
             // label20
             // 
             this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label20.Location = new System.Drawing.Point(4, 358);
+            this.label20.Location = new Point(4, 358);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(144, 20);
+            this.label20.Size = new Size(144, 20);
             this.label20.TabIndex = 14;
             this.label20.Text = "Девиация CTCSS 254";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2217,9 +2217,9 @@ namespace NIKA_CPS_V1
             // label36
             // 
             this.label36.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label36.Location = new System.Drawing.Point(4, 400);
+            this.label36.Location = new Point(4, 400);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(144, 20);
+            this.label36.Size = new Size(144, 20);
             this.label36.TabIndex = 18;
             this.label36.Text = "Усиление I (DMR)";
             this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2227,9 +2227,9 @@ namespace NIKA_CPS_V1
             // label37
             // 
             this.label37.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label37.Location = new System.Drawing.Point(4, 421);
+            this.label37.Location = new Point(4, 421);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(144, 20);
+            this.label37.Size = new Size(144, 20);
             this.label37.TabIndex = 19;
             this.label37.Text = "Усиление Q (DMR)";
             this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2237,9 +2237,9 @@ namespace NIKA_CPS_V1
             // label38
             // 
             this.label38.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label38.Location = new System.Drawing.Point(4, 442);
+            this.label38.Location = new Point(4, 442);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(144, 20);
+            this.label38.Size = new Size(144, 20);
             this.label38.TabIndex = 20;
             this.label38.Text = "Усиление I (FM)";
             this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2247,9 +2247,9 @@ namespace NIKA_CPS_V1
             // label39
             // 
             this.label39.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label39.Location = new System.Drawing.Point(4, 463);
+            this.label39.Location = new Point(4, 463);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(144, 20);
+            this.label39.Size = new Size(144, 20);
             this.label39.TabIndex = 21;
             this.label39.Text = "Усиление Q (FM)";
             this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2258,9 +2258,9 @@ namespace NIKA_CPS_V1
             // 
             this.label50.AutoSize = true;
             this.label50.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label50.Location = new System.Drawing.Point(4, 106);
+            this.label50.Location = new Point(4, 106);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(144, 20);
+            this.label50.Size = new Size(144, 20);
             this.label50.TabIndex = 22;
             this.label50.Text = "Уровень мощности 5";
             this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2269,9 +2269,9 @@ namespace NIKA_CPS_V1
             // 
             this.label51.AutoSize = true;
             this.label51.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label51.Location = new System.Drawing.Point(4, 127);
+            this.label51.Location = new Point(4, 127);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(144, 20);
+            this.label51.Size = new Size(144, 20);
             this.label51.TabIndex = 23;
             this.label51.Text = "Уровень мощности 4";
             this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2280,9 +2280,9 @@ namespace NIKA_CPS_V1
             // 
             this.label52.AutoSize = true;
             this.label52.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label52.Location = new System.Drawing.Point(4, 148);
+            this.label52.Location = new Point(4, 148);
             this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(144, 20);
+            this.label52.Size = new Size(144, 20);
             this.label52.TabIndex = 24;
             this.label52.Text = "Уровень мощности 3";
             this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2291,9 +2291,9 @@ namespace NIKA_CPS_V1
             // 
             this.label53.AutoSize = true;
             this.label53.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label53.Location = new System.Drawing.Point(4, 169);
+            this.label53.Location = new Point(4, 169);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(144, 20);
+            this.label53.Size = new Size(144, 20);
             this.label53.TabIndex = 25;
             this.label53.Text = "Уровень мощности 2";
             this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2302,9 +2302,9 @@ namespace NIKA_CPS_V1
             // 
             this.label54.AutoSize = true;
             this.label54.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label54.Location = new System.Drawing.Point(4, 190);
+            this.label54.Location = new Point(4, 190);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(144, 20);
+            this.label54.Size = new Size(144, 20);
             this.label54.TabIndex = 26;
             this.label54.Text = "Уровень мощности 1";
             this.label54.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2323,193 +2323,193 @@ namespace NIKA_CPS_V1
             this.gbCommons.Controls.Add(this.nmVOXMinLevel);
             this.gbCommons.Controls.Add(this.label2);
             this.gbCommons.Controls.Add(this.label1);
-            this.gbCommons.Location = new System.Drawing.Point(877, 12);
+            this.gbCommons.Location = new Point(877, 12);
             this.gbCommons.Name = "gbCommons";
-            this.gbCommons.Size = new System.Drawing.Size(268, 201);
+            this.gbCommons.Size = new Size(268, 201);
             this.gbCommons.TabIndex = 3;
             this.gbCommons.TabStop = false;
             this.gbCommons.Text = "Общие настройки";
             // 
             // nmRSSI70
             // 
-            this.nmRSSI70.Location = new System.Drawing.Point(179, 162);
+            this.nmRSSI70.Location = new Point(179, 162);
             this.nmRSSI70.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.nmRSSI70.Name = "nmRSSI70";
-            this.nmRSSI70.Size = new System.Drawing.Size(66, 20);
+            this.nmRSSI70.Size = new Size(66, 20);
             this.nmRSSI70.TabIndex = 11;
-            this.nmRSSI70.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            this.nmRSSI70.ValueChanged += new EventHandler(this.nmValueChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 164);
+            this.label6.Location = new Point(14, 164);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(124, 13);
+            this.label6.Size = new Size(124, 13);
             this.label6.TabIndex = 10;
             this.label6.Text = "Уровень RSSI -70 дБм:";
             // 
             // nmRSSI120
             // 
-            this.nmRSSI120.Location = new System.Drawing.Point(179, 133);
+            this.nmRSSI120.Location = new Point(179, 133);
             this.nmRSSI120.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.nmRSSI120.Name = "nmRSSI120";
-            this.nmRSSI120.Size = new System.Drawing.Size(67, 20);
+            this.nmRSSI120.Size = new Size(67, 20);
             this.nmRSSI120.TabIndex = 9;
-            this.nmRSSI120.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            this.nmRSSI120.ValueChanged += new EventHandler(this.nmValueChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 135);
+            this.label5.Location = new Point(14, 135);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(130, 13);
+            this.label5.Size = new Size(130, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Уровень RSSI -120 дБм:";
             // 
             // nmRxHighLevel
             // 
-            this.nmRxHighLevel.Location = new System.Drawing.Point(179, 105);
+            this.nmRxHighLevel.Location = new Point(179, 105);
             this.nmRxHighLevel.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.nmRxHighLevel.Name = "nmRxHighLevel";
-            this.nmRxHighLevel.Size = new System.Drawing.Size(69, 20);
+            this.nmRxHighLevel.Size = new Size(69, 20);
             this.nmRxHighLevel.TabIndex = 7;
-            this.nmRxHighLevel.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            this.nmRxHighLevel.ValueChanged += new EventHandler(this.nmValueChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 107);
+            this.label4.Location = new Point(14, 107);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(165, 13);
+            this.label4.Size = new Size(165, 13);
             this.label4.TabIndex = 6;
             this.label4.Text = "Верхний порог напряжения Rx:";
             // 
             // nmRxLowLevel
             // 
-            this.nmRxLowLevel.Location = new System.Drawing.Point(179, 78);
+            this.nmRxLowLevel.Location = new Point(179, 78);
             this.nmRxLowLevel.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.nmRxLowLevel.Name = "nmRxLowLevel";
-            this.nmRxLowLevel.Size = new System.Drawing.Size(69, 20);
+            this.nmRxLowLevel.Size = new Size(69, 20);
             this.nmRxLowLevel.TabIndex = 5;
-            this.nmRxLowLevel.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            this.nmRxLowLevel.ValueChanged += new EventHandler(this.nmValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 80);
+            this.label3.Location = new Point(14, 80);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(163, 13);
+            this.label3.Size = new Size(163, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Нижний порог напряжения Rx:";
             // 
             // nmVOXMaxLevel
             // 
-            this.nmVOXMaxLevel.Location = new System.Drawing.Point(179, 51);
+            this.nmVOXMaxLevel.Location = new Point(179, 51);
             this.nmVOXMaxLevel.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.nmVOXMaxLevel.Name = "nmVOXMaxLevel";
-            this.nmVOXMaxLevel.Size = new System.Drawing.Size(68, 20);
+            this.nmVOXMaxLevel.Size = new Size(68, 20);
             this.nmVOXMaxLevel.TabIndex = 3;
-            this.nmVOXMaxLevel.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            this.nmVOXMaxLevel.ValueChanged += new EventHandler(this.nmValueChanged);
             // 
             // nmVOXMinLevel
             // 
-            this.nmVOXMinLevel.Location = new System.Drawing.Point(179, 25);
+            this.nmVOXMinLevel.Location = new Point(179, 25);
             this.nmVOXMinLevel.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.nmVOXMinLevel.Name = "nmVOXMinLevel";
-            this.nmVOXMinLevel.Size = new System.Drawing.Size(69, 20);
+            this.nmVOXMinLevel.Size = new Size(69, 20);
             this.nmVOXMinLevel.TabIndex = 2;
-            this.nmVOXMinLevel.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            this.nmVOXMinLevel.ValueChanged += new EventHandler(this.nmValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 53);
+            this.label2.Location = new Point(14, 53);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 13);
+            this.label2.Size = new Size(158, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Максимальный уровень VOX:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 28);
+            this.label1.Location = new Point(14, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(152, 13);
+            this.label1.Size = new Size(152, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Минимальный уровень VOX:";
             // 
             // btnReadFactoryFromRadio
             // 
-            this.btnReadFactoryFromRadio.BackColor = System.Drawing.SystemColors.Control;
-            this.btnReadFactoryFromRadio.Location = new System.Drawing.Point(877, 472);
+            this.btnReadFactoryFromRadio.BackColor = System.Drawing.Color.White;
+            this.btnReadFactoryFromRadio.Location = new Point(877, 472);
             this.btnReadFactoryFromRadio.Name = "btnReadFactoryFromRadio";
-            this.btnReadFactoryFromRadio.Size = new System.Drawing.Size(268, 23);
+            this.btnReadFactoryFromRadio.Size = new Size(268, 23);
             this.btnReadFactoryFromRadio.TabIndex = 5;
             this.btnReadFactoryFromRadio.Text = "Считать заводские калибровки рации";
             this.btnReadFactoryFromRadio.UseVisualStyleBackColor = false;
             this.btnReadFactoryFromRadio.Visible = false;
-            this.btnReadFactoryFromRadio.Click += new System.EventHandler(this.btnReadFactoryFromRadio_Click);
+            this.btnReadFactoryFromRadio.Click += new EventHandler(this.btnReadFactoryFromRadio_Click);
             // 
             // lblRadioType
             // 
-            this.lblRadioType.Location = new System.Drawing.Point(559, 5);
+            this.lblRadioType.Location = new Point(559, 5);
             this.lblRadioType.Name = "lblRadioType";
-            this.lblRadioType.Size = new System.Drawing.Size(308, 22);
+            this.lblRadioType.Size = new Size(308, 22);
             this.lblRadioType.TabIndex = 9;
             this.lblRadioType.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnClearColors
             // 
-            this.btnClearColors.BackColor = System.Drawing.SystemColors.Control;
-            this.btnClearColors.Location = new System.Drawing.Point(878, 523);
+            this.btnClearColors.BackColor = System.Drawing.Color.White;
+            this.btnClearColors.Location = new Point(878, 523);
             this.btnClearColors.Name = "btnClearColors";
-            this.btnClearColors.Size = new System.Drawing.Size(266, 23);
+            this.btnClearColors.Size = new Size(266, 23);
             this.btnClearColors.TabIndex = 10;
             this.btnClearColors.Text = "Сбросить маркеры";
             this.btnClearColors.UseVisualStyleBackColor = false;
-            this.btnClearColors.Click += new System.EventHandler(this.btnClearColors_Click);
+            this.btnClearColors.Click += new EventHandler(this.btnClearColors_Click);
             // 
             // btnChart
             // 
-            this.btnChart.BackColor = System.Drawing.SystemColors.Control;
-            this.btnChart.Location = new System.Drawing.Point(877, 228);
+            this.btnChart.BackColor = System.Drawing.Color.White;
+            this.btnChart.Location = new Point(877, 228);
             this.btnChart.Name = "btnChart";
-            this.btnChart.Size = new System.Drawing.Size(267, 23);
+            this.btnChart.Size = new Size(267, 23);
             this.btnChart.TabIndex = 11;
             this.btnChart.Text = "Калибровочные кривые";
             this.btnChart.UseVisualStyleBackColor = false;
             this.btnChart.Visible = false;
-            this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
+            this.btnChart.Click += new EventHandler(this.btnChart_Click);
             // 
             // CalibrationForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1156, 673);
+            this.ClientSize = new Size(1156, 673);
             this.Controls.Add(this.btnChart);
             this.Controls.Add(this.btnClearColors);
             this.Controls.Add(this.lblRadioType);
@@ -2527,26 +2527,26 @@ namespace NIKA_CPS_V1
             this.Name = "CalibrationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Редактор калибровок";
-            this.Load += new System.EventHandler(this.onFormLoad);
+            this.Load += new EventHandler(this.onFormLoad);
             this.tabs.ResumeLayout(false);
             this.tabVHF.ResumeLayout(false);
             this.tabVHF.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmVHFOscRef)).EndInit();
+            ((ISupportInitialize)(this.nmVHFOscRef)).EndInit();
             this.tlpVHF.ResumeLayout(false);
             this.tlpVHF.PerformLayout();
             this.tabUHF.ResumeLayout(false);
             this.tabUHF.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmUHFOscRef)).EndInit();
+            ((ISupportInitialize)(this.nmUHFOscRef)).EndInit();
             this.tlpUHF.ResumeLayout(false);
             this.tlpUHF.PerformLayout();
             this.gbCommons.ResumeLayout(false);
             this.gbCommons.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmRSSI70)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmRSSI120)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmRxHighLevel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmRxLowLevel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmVOXMaxLevel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmVOXMinLevel)).EndInit();
+            ((ISupportInitialize)(this.nmRSSI70)).EndInit();
+            ((ISupportInitialize)(this.nmRSSI120)).EndInit();
+            ((ISupportInitialize)(this.nmRxHighLevel)).EndInit();
+            ((ISupportInitialize)(this.nmRxLowLevel)).EndInit();
+            ((ISupportInitialize)(this.nmVOXMaxLevel)).EndInit();
+            ((ISupportInitialize)(this.nmVOXMinLevel)).EndInit();
             this.ResumeLayout(false);
 
         }

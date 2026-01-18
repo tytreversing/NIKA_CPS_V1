@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using static NIKA_CPS_V1.Codeplug.Channel;
+
 
 namespace NIKA_CPS_V1.Codeplug
 {
     [Serializable]
-    public class Zone
+    public class CodeplugZone
     {
 
         private byte _number;
@@ -37,14 +37,14 @@ namespace NIKA_CPS_V1.Codeplug
             set => _channels = value;
         }
 
-        public Zone()
+        public CodeplugZone()
         {
             _number = 0;
             _name = "Зона 1";
             _channels = new List<ushort>();
         }
 
-        public Zone(byte number, string name)
+        public CodeplugZone(byte number, string name)
         {
             _number = number;   
             _name = name;

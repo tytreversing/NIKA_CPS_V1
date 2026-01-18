@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace NIKA_CPS_V1.Codeplug
 {
     [Serializable]
-    public class Contact
+    public class CodeplugContact
     {
 
         public enum ContactType
@@ -75,7 +75,7 @@ namespace NIKA_CPS_V1.Codeplug
             set => _slot = value;
         }
 
-        public Contact()
+        public CodeplugContact()
         {
             _number = 0;
             _alias = "Вызов всех";
@@ -86,7 +86,7 @@ namespace NIKA_CPS_V1.Codeplug
         }
 
 
-        public Contact(ushort number, string alias, uint dmrId, string userData, ContactType type, Timeslot slot)
+        public CodeplugContact(ushort number, string alias, uint dmrId, string userData, ContactType type, Timeslot slot)
         {
             Number = number;
             Alias = alias;

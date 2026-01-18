@@ -16,8 +16,8 @@ namespace NIKA_CPS_V1
     public partial class Zone : Form
     {
 
-        private Codeplug.Zone _zone;
-        public Zone(Codeplug.Zone zone)
+        private CodeplugZone _zone;
+        public Zone(CodeplugZone zone)
         {
             InitializeComponent();
             _zone = zone;
@@ -31,7 +31,7 @@ namespace NIKA_CPS_V1
                 lbUsedChannels.BeginUpdate();
                 foreach (ushort channel in _zone.Channels)
                 {
-                    foreach (Codeplug.Channel c in MainForm.CodeplugInternal.Channels)
+                    foreach (CodeplugChannel c in MainForm.CodeplugInternal.Channels)
                     {
                         if (c.Number == channel)
                         {
@@ -48,7 +48,7 @@ namespace NIKA_CPS_V1
         {
             lbAvailableChannels.BeginUpdate();
             lbAvailableChannels.Items.Clear();
-            foreach (Codeplug.Channel channel in MainForm.CodeplugInternal.Channels)
+            foreach (CodeplugChannel channel in MainForm.CodeplugInternal.Channels)
             {
                 if (!lbUsedChannels.Items.Contains(channel))
                 {
@@ -79,7 +79,7 @@ namespace NIKA_CPS_V1
             {
                 if (lbAvailableChannels.SelectedItems.Count <= CodeplugData.MAX_CHANNELS_IN_ZONE_COUNT - lbUsedChannels.Items.Count)
                 {
-                    foreach (Codeplug.Channel c in lbAvailableChannels.SelectedItems)
+                    foreach (CodeplugChannel c in lbAvailableChannels.SelectedItems)
                     {
                         lbUsedChannels.Items.Add(c);
                     }
@@ -97,7 +97,7 @@ namespace NIKA_CPS_V1
         {
             if (lbUsedChannels.SelectedItems.Count > 0)
             {
-                var itemsToRemove = lbUsedChannels.SelectedItems.Cast<Codeplug.Channel>().ToList();
+                var itemsToRemove = lbUsedChannels.SelectedItems.Cast<CodeplugChannel>().ToList();
 
                 // Удаляем элементы
                 foreach (var channel in itemsToRemove)
@@ -128,7 +128,7 @@ namespace NIKA_CPS_V1
 
             if (newIndex < 0 || newIndex >= lbUsedChannels.Items.Count) return;
 
-            Codeplug.Channel selectedItem = (Codeplug.Channel)lbUsedChannels.SelectedItem;
+            CodeplugChannel selectedItem = (CodeplugChannel)lbUsedChannels.SelectedItem;
             lbUsedChannels.Items.RemoveAt(selectedIndex);
             lbUsedChannels.Items.Insert(newIndex, selectedItem);
             lbUsedChannels.SelectedIndex = newIndex;
@@ -137,7 +137,7 @@ namespace NIKA_CPS_V1
         private void bOK_Click(object sender, EventArgs e)
         {
             List<ushort> newChannels = new List<ushort>();
-            foreach (Codeplug.Channel channel in lbUsedChannels.Items)
+            foreach (CodeplugChannel channel in lbUsedChannels.Items)
             {
                 newChannels.Add(channel.Number);
             }

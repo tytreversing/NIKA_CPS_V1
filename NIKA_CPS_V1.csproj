@@ -181,18 +181,17 @@
     <Compile Include="ChannelsGenerator.Designer.cs">
       <DependentUpon>ChannelsGenerator.cs</DependentUpon>
     </Compile>
-    <Compile Include="Codeplug\Channel.cs" />
+    <Compile Include="Codeplug\CodeplugChannel.cs" />
     <Compile Include="Codeplug\Codeplug.cs" />
-    <Compile Include="Codeplug\CodeplugCHsAndVFOs.cs" />
+    <Compile Include="Codeplug\CodeplugVFO.cs" />
     <Compile Include="Codeplug\CodeplugGroupList.cs" />
     <Compile Include="Codeplug\CodeplugSettings.cs" />
-    <Compile Include="Codeplug\Contact.cs" />
-    <Compile Include="Codeplug\SatelliteKeps.cs" />
-    <Compile Include="Codeplug\Scanlist.cs" />
-    <Compile Include="Codeplug\UserData.cs">
+    <Compile Include="Codeplug\CodeplugContact.cs" />
+    <Compile Include="Codeplug\CodeplugSatellite.cs" />
+    <Compile Include="Codeplug\CodeplugUserData.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Codeplug\Zone.cs" />
+    <Compile Include="Codeplug\CodeplugZone.cs" />
     <Compile Include="Contact.cs">
       <SubType>Form</SubType>
     </Compile>

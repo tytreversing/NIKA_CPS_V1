@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace NIKA_CPS_V1.Codeplug
 {
     [Serializable]
-    public class SatelliteKeps
+    public class CodeplugSatellite
     {
         private static readonly NumberFormatInfo NumberFormat = CultureInfo.GetCultureInfo("en-US").NumberFormat;
 
@@ -92,7 +92,7 @@ namespace NIKA_CPS_V1.Codeplug
             set => _callsign = value;
         }
 
-        public SatelliteKeps(string data)
+        public CodeplugSatellite(string data)
         {
             if (string.IsNullOrWhiteSpace(data))
                 return;
@@ -122,7 +122,7 @@ namespace NIKA_CPS_V1.Codeplug
             }
         }
 
-        public SatelliteKeps()
+        public CodeplugSatellite()
         {
             _catalogueNumber = "25544U";
             _displayName = "ISS";

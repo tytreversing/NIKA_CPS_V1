@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace NIKA_CPS_V1.Codeplug
 {
     [Serializable]
-    public class Channel
+    public class CodeplugChannel
     {
 
         public enum ChannelType
@@ -49,7 +49,7 @@ namespace NIKA_CPS_V1.Codeplug
             get => _rxFrequency;
             set => _rxFrequency = value;
         }
-        public Channel()
+        public CodeplugChannel()
         {
             _number = 0;
             _name = "Вызывной 2 м";
@@ -57,7 +57,7 @@ namespace NIKA_CPS_V1.Codeplug
             _rxFrequency = 145500000;
         }
 
-        public Channel (ushort number, string name, ChannelType type, uint rxFrequency)
+        public CodeplugChannel (ushort number, string name, ChannelType type, uint rxFrequency)
         {
             _number = number;   
             _name = name;
