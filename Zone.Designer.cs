@@ -37,6 +37,8 @@
             this.bRemove = new System.Windows.Forms.Button();
             this.bOK = new System.Windows.Forms.Button();
             this.tbName = new System.Windows.Forms.TextBox();
+            this.bUp = new System.Windows.Forms.Button();
+            this.bDown = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbUsedChannels
@@ -119,11 +121,33 @@
             this.tbName.TabIndex = 7;
             this.tbName.WordWrap = false;
             // 
+            // bUp
+            // 
+            this.bUp.Location = new System.Drawing.Point(346, 219);
+            this.bUp.Name = "bUp";
+            this.bUp.Size = new System.Drawing.Size(152, 30);
+            this.bUp.TabIndex = 8;
+            this.bUp.Text = "Вверх";
+            this.bUp.UseVisualStyleBackColor = true;
+            this.bUp.Click += new System.EventHandler(this.bUp_Click);
+            // 
+            // bDown
+            // 
+            this.bDown.Location = new System.Drawing.Point(346, 267);
+            this.bDown.Name = "bDown";
+            this.bDown.Size = new System.Drawing.Size(152, 30);
+            this.bDown.TabIndex = 9;
+            this.bDown.Text = "Вниз";
+            this.bDown.UseVisualStyleBackColor = true;
+            this.bDown.Click += new System.EventHandler(this.bDown_Click);
+            // 
             // Zone
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1103, 519);
+            this.Controls.Add(this.bDown);
+            this.Controls.Add(this.bUp);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.bOK);
             this.Controls.Add(this.bRemove);
@@ -156,5 +180,7 @@
         private System.Windows.Forms.Button bRemove;
         private System.Windows.Forms.Button bOK;
         private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.Button bUp;
+        private System.Windows.Forms.Button bDown;
     }
 }

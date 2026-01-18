@@ -934,5 +934,15 @@ namespace NIKA_CPS_V1
         {
             //TODO сортировка зон по алфавиту
         }
+
+        private void tsmiReloadLocalSatellites_Click(object sender, EventArgs e)
+        {
+            //TODO перезагрузка сохраненного списка спутников
+        }
+
+        private void tsmiReloadFromNetwork_Click(object sender, EventArgs e)
+        {
+            //TODO перезагрузка списка спутников из интернета
+        }
     }
 }

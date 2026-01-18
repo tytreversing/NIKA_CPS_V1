@@ -111,6 +111,29 @@ namespace NIKA_CPS_V1
                 MessageBox.Show("Выберите как минимум один канал для удаления!", "Выберите канал", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
+        private void MoveSelectedItem(int direction) // direction: -1 = вверх, 1 = вниз
+        {
+            if (lbUsedChannels.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Выберите канал для перемещения его в списке!", "Выберите канал", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (lbUsedChannels.SelectedItems.Count > 1)
+            {
+                MessageBox.Show("Выберите только один канал для перемещения!", "Выберите канал", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            int selectedIndex = lbUsedChannels.SelectedIndex;
+            int newIndex = selectedIndex + direction;
+
+            if (newIndex < 0 || newIndex >= lbUsedChannels.Items.Count) return;
+
+            Codeplug.Channel selectedItem = (Codeplug.Channel)lbUsedChannels.SelectedItem;
+            lbUsedChannels.Items.RemoveAt(selectedIndex);
+            lbUsedChannels.Items.Insert(newIndex, selectedItem);
+            lbUsedChannels.SelectedIndex = newIndex;
+        }
+
         private void bOK_Click(object sender, EventArgs e)
         {
             List<ushort> newChannels = new List<ushort>();
@@ -121,5 +144,8 @@ namespace NIKA_CPS_V1
             MainForm.CodeplugInternal.UpdateZoneByNumber(_zone.Number, tbName.Text, newChannels);
             Close();
         }
+
+        private void bUp_Click(object sender, EventArgs e) => MoveSelectedItem(-1);
+        private void bDown_Click(object sender, EventArgs e) => MoveSelectedItem(1);
     }
 }

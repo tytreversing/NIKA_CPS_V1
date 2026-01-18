@@ -46,16 +46,16 @@
             this.tsmiNewContact = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteSimilar = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsAllZones = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiNewZone = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSortZonesByName = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiClearZones = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllChannels = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewChannel = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSortChannels = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiClearChannels = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAllZones = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiNewZone = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSortZonesByName = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiClearZones = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllSatellites = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiReloadLocalSatellites = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiReloadFromNetwork = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,8 +113,8 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteChannel = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllContacts.SuspendLayout();
-            this.cmsAllZones.SuspendLayout();
             this.cmsAllChannels.SuspendLayout();
+            this.cmsAllZones.SuspendLayout();
             this.cmsAllSatellites.SuspendLayout();
             this.tsMainControls.SuspendLayout();
             this.msMain.SuspendLayout();
@@ -154,43 +154,6 @@
             this.tsmiDeleteSimilar.Text = "Удалить дубликаты по DMR ID";
             this.tsmiDeleteSimilar.Click += new System.EventHandler(this.tsmiDeleteSimilar_Click);
             // 
-            // cmsAllZones
-            // 
-            this.cmsAllZones.BackColor = System.Drawing.Color.White;
-            this.cmsAllZones.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewZone,
-            this.tsmiSortZonesByName,
-            this.toolStripSeparator9,
-            this.tsmiClearZones});
-            this.cmsAllZones.Name = "cmsAllZones";
-            this.cmsAllZones.Size = new System.Drawing.Size(246, 104);
-            // 
-            // tsmiNewZone
-            // 
-            this.tsmiNewZone.Name = "tsmiNewZone";
-            this.tsmiNewZone.Size = new System.Drawing.Size(245, 24);
-            this.tsmiNewZone.Text = "Новая";
-            this.tsmiNewZone.Click += new System.EventHandler(this.tsmiNewZone_Click);
-            // 
-            // tsmiSortZonesByName
-            // 
-            this.tsmiSortZonesByName.Name = "tsmiSortZonesByName";
-            this.tsmiSortZonesByName.Size = new System.Drawing.Size(245, 24);
-            this.tsmiSortZonesByName.Text = "Упорядочить по алфавиту";
-            this.tsmiSortZonesByName.Click += new System.EventHandler(this.tsmiSortZonesByName_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(242, 6);
-            // 
-            // tsmiClearZones
-            // 
-            this.tsmiClearZones.Name = "tsmiClearZones";
-            this.tsmiClearZones.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
-            this.tsmiClearZones.Size = new System.Drawing.Size(245, 24);
-            this.tsmiClearZones.Text = "Очистить";
-            // 
             // cmsAllChannels
             // 
             this.cmsAllChannels.BackColor = System.Drawing.Color.White;
@@ -228,6 +191,43 @@
             this.tsmiClearChannels.Text = "Очистить";
             this.tsmiClearChannels.Click += new System.EventHandler(this.tsmiClearChannels_Click);
             // 
+            // cmsAllZones
+            // 
+            this.cmsAllZones.BackColor = System.Drawing.Color.White;
+            this.cmsAllZones.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewZone,
+            this.tsmiSortZonesByName,
+            this.toolStripSeparator9,
+            this.tsmiClearZones});
+            this.cmsAllZones.Name = "cmsAllZones";
+            this.cmsAllZones.Size = new System.Drawing.Size(246, 82);
+            // 
+            // tsmiNewZone
+            // 
+            this.tsmiNewZone.Name = "tsmiNewZone";
+            this.tsmiNewZone.Size = new System.Drawing.Size(245, 24);
+            this.tsmiNewZone.Text = "Новая";
+            this.tsmiNewZone.Click += new System.EventHandler(this.tsmiNewZone_Click);
+            // 
+            // tsmiSortZonesByName
+            // 
+            this.tsmiSortZonesByName.Name = "tsmiSortZonesByName";
+            this.tsmiSortZonesByName.Size = new System.Drawing.Size(245, 24);
+            this.tsmiSortZonesByName.Text = "Упорядочить по алфавиту";
+            this.tsmiSortZonesByName.Click += new System.EventHandler(this.tsmiSortZonesByName_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(242, 6);
+            // 
+            // tsmiClearZones
+            // 
+            this.tsmiClearZones.Name = "tsmiClearZones";
+            this.tsmiClearZones.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
+            this.tsmiClearZones.Size = new System.Drawing.Size(245, 24);
+            this.tsmiClearZones.Text = "Очистить";
+            // 
             // cmsAllSatellites
             // 
             this.cmsAllSatellites.BackColor = System.Drawing.Color.White;
@@ -243,12 +243,14 @@
             this.tsmiReloadLocalSatellites.Name = "tsmiReloadLocalSatellites";
             this.tsmiReloadLocalSatellites.Size = new System.Drawing.Size(259, 24);
             this.tsmiReloadLocalSatellites.Text = "Перезагрузить локально";
+            this.tsmiReloadLocalSatellites.Click += new System.EventHandler(this.tsmiReloadLocalSatellites_Click);
             // 
             // tsmiReloadFromNetwork
             // 
             this.tsmiReloadFromNetwork.Name = "tsmiReloadFromNetwork";
             this.tsmiReloadFromNetwork.Size = new System.Drawing.Size(259, 24);
             this.tsmiReloadFromNetwork.Text = "Перезагрузить из Интернета";
+            this.tsmiReloadFromNetwork.Click += new System.EventHandler(this.tsmiReloadFromNetwork_Click);
             // 
             // tsmiClearSatellites
             // 
@@ -831,8 +833,8 @@
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.cmsAllContacts.ResumeLayout(false);
-            this.cmsAllZones.ResumeLayout(false);
             this.cmsAllChannels.ResumeLayout(false);
+            this.cmsAllZones.ResumeLayout(false);
             this.cmsAllSatellites.ResumeLayout(false);
             this.tsMainControls.ResumeLayout(false);
             this.tsMainControls.PerformLayout();
