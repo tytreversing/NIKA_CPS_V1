@@ -225,7 +225,7 @@ namespace NIKA_CPS_V1
             CodeplugInternal.AddContact(new Codeplug.Contact(CodeplugInternal.GetFirstContactFreeNumber(), "Россия", 2501, "", Codeplug.Contact.ContactType.GROUP, Codeplug.Contact.Timeslot.NONE));
             CodeplugInternal.AddChannel(new Channel());
             CodeplugInternal.AddChannel(new Channel(CodeplugInternal.GetFirstChannelFreeNumber(), "Точка DMR", Channel.ChannelType.DIGITAL, 438000000));
-            CodeplugInternal.AddZone(new Zone());
+            CodeplugInternal.AddZone(new Codeplug.Zone(CodeplugInternal.GetFirstZoneFreeNumber(), "Тестовая зона"));
             foreach (Channel channel in CodeplugInternal.Channels)
             {
                 CodeplugInternal.Zones[0].Channels.Add(channel.Number);
@@ -449,24 +449,29 @@ namespace NIKA_CPS_V1
                 }
                 return;
             }
-                 
-            // Проверяем, что клик был по узлу контакта
-            if (e.Node.Parent.Name == "ContactsNode")
+            if (e.Button == MouseButtons.Left)
             {
-                // Получаем текст узла (который является Alias)
-                string alias = e.Node.Text;
-                if (e.Button == MouseButtons.Left)
+                switch (e.Node.Parent.Name)
                 {
-                    Contact contactForm = new Contact((Codeplug.Contact)e.Node.Tag);
-                    contactForm.ShowDialog();
-                    GenerateTree(TreeRefreshType.CONTACTS);
+                    case "ContactsNode":
+                        if (e.Button == MouseButtons.Left)
+                        {
+                            Contact contactForm = new Contact((Codeplug.Contact)e.Node.Tag);
+                            contactForm.ShowDialog();
+                            GenerateTree(TreeRefreshType.CONTACTS);
+                        }
+                        break;
+                    case "ZonesNode":
+                        if (e.Button == MouseButtons.Left)
+                        {
+                            Zone zoneForm = new Zone((Codeplug.Zone)e.Node.Tag);
+                            zoneForm.ShowDialog();
+                            GenerateTree(TreeRefreshType.ZONES);
+                        }
+                        break;
                 }
             }
-            else if (e.Node.Parent.Name == "GroupListsNode")
-            {
-
-            }
-
+            
         }
 
 
@@ -910,7 +915,19 @@ namespace NIKA_CPS_V1
             }
         }
 
-
-
+        private void tsmiNewZone_Click(object sender, EventArgs e)
+        {
+            byte freeNumber = CodeplugInternal.GetFirstZoneFreeNumber();
+            if (freeNumber < CodeplugData.MAX_ZONES_COUNT)
+            {
+                Codeplug.Zone newZone = new Codeplug.Zone(freeNumber, "Зона #" + freeNumber.ToString());
+                CodeplugInternal.AddZone(newZone);
+                Zone zoneForm = new Zone(newZone);
+                zoneForm.ShowDialog();
+                GenerateTree(TreeRefreshType.ZONES);
+            }
+            else
+                MessageBox.Show("Память зон полностью заполнена, добавить новую невозможно.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

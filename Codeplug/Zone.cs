@@ -29,7 +29,8 @@ namespace NIKA_CPS_V1.Codeplug
             get => _name;
             set => _name = ValidateLength(value);
         }
-        [XmlAttribute("Channels")]
+
+        [XmlElement("Channel")]
         public List<ushort> Channels
         {
             get => _channels;
@@ -43,11 +44,11 @@ namespace NIKA_CPS_V1.Codeplug
             _channels = new List<ushort>();
         }
 
-        public Zone(byte number, string name, List<ushort> channels)
+        public Zone(byte number, string name)
         {
             _number = number;   
             _name = name;
-            _channels = channels;
+            _channels = new List<ushort>();
         }
 
         private string ValidateLength(string value)

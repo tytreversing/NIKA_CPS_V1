@@ -24,7 +24,6 @@ namespace NIKA_CPS_V1
         {
             OutputType_MD9600,
             OutputType_MDUV380,
-            OutputType_MD2017
         }
 
         private OutputType outputType = OutputType.OutputType_MD9600;

@@ -339,7 +339,6 @@ namespace NIKA_CPS_V1
                             break;
                         }
                     case FirmwareUploader.OutputType.OutputType_MDUV380:
-                    case FirmwareUploader.OutputType.OutputType_MD2017:
                         {
                             for (int m = 0; m < openFirmwareData.Length; m++)
                             {

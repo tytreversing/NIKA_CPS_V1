@@ -70,6 +70,7 @@ namespace NIKA_CPS_V1
                 TreeNode node = collection[currentIndex];
                 collection.RemoveAt(currentIndex);
                 collection.Insert(currentIndex - 1, node);
+                RearrangeAll();
             }
         }
 
@@ -80,6 +81,7 @@ namespace NIKA_CPS_V1
                 TreeNode node = collection[currentIndex];
                 collection.RemoveAt(currentIndex);
                 collection.Insert(currentIndex + 1, node);
+                RearrangeAll();
             }
         }
 
@@ -90,8 +92,7 @@ namespace NIKA_CPS_V1
             if (activeTreeView == null) return;
 
             MoveSelectedNode(activeTreeView, Direction.UP);
-
-
+            RearrangeAll();
         }
 
         private void MoveNodeDownFromMenu(object sender, EventArgs e)
@@ -101,6 +102,7 @@ namespace NIKA_CPS_V1
             if (activeTreeView == null) return;
 
             MoveSelectedNode(activeTreeView, Direction.DOWN);
+            RearrangeAll();
         }
 
         private void RearrangeAll() //переупорядочиваем кодплаг согласно сделанному
@@ -120,7 +122,7 @@ namespace NIKA_CPS_V1
             foreach (TreeNode node in cNode.Nodes)
             {
                 Codeplug.Contact contact = node.Tag as Codeplug.Contact; //список контактов заполняем с заменой Number по порядку
-                //ДОБАВИТЬ коррекцию каналов!!!
+                //TODO ДОБАВИТЬ коррекцию каналов!!!
                 contact.Number = number;
                 CodeplugInternal.AddContact(node.Tag as Codeplug.Contact);
                 number++;
@@ -157,7 +159,7 @@ namespace NIKA_CPS_V1
                 CodeplugInternal.AddChannel(node.Tag as Codeplug.Channel);
                 number++;
             }
-            foreach (Zone zone in CodeplugInternal.Zones)
+            foreach (Codeplug.Zone zone in CodeplugInternal.Zones)
             {
                 for (int i = 0; i < zone.Channels.Count; i++)
                 {

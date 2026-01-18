@@ -20,10 +20,11 @@ namespace NIKA_CPS_V1.Codeplug
         private List<SatelliteKeps> _satelliteKeps;
 
         //константы
-        public const int MAX_CONTACTS_COUNT = 256; //максимальное число контактов
-        public const int MAX_CHANNELS_COUNT = 1024; //максимальное число каналов
-        public const int MAX_ZONES_COUNT = 16;      //максимальное количество зон
-        public const int MAX_SATELLITES_COUNT = 20; //максимальное число спутников
+        public const int MAX_CONTACTS_COUNT = 256;        //максимальное число контактов
+        public const int MAX_CHANNELS_COUNT = 1024;       //максимальное число каналов
+        public const int MAX_ZONES_COUNT = 16;            //максимальное количество зон
+        public const int MAX_CHANNELS_IN_ZONE_COUNT = 80; //максимальное количенство каналов в зоне
+        public const int MAX_SATELLITES_COUNT = 20;       //максимальное число спутников
         [XmlElement("User")]
         public UserData DMRID
         {
@@ -288,6 +289,35 @@ namespace NIKA_CPS_V1.Codeplug
             else
                 return false;
         }
+
+        //поиск первого свободного номера зоны
+        public byte GetFirstZoneFreeNumber()
+        {
+            if (_zones.Count == 0)
+            {
+                return 0; //зон нет
+            }
+            HashSet<byte> usedNumbers = new HashSet<byte>();
+            foreach (var zone in _zones)
+            {
+                if (zone != null)
+                {
+                    usedNumbers.Add(zone.Number);
+                }
+            }
+            // Ищем первое свободное число, начиная с 0
+            for (byte i = 0; i < MAX_ZONES_COUNT; i++)
+            {
+                if (!usedNumbers.Contains(i))
+                {
+                    return i;
+                }
+            }
+            // Если все числа заняты, возвращаем 255
+            return byte.MaxValue;
+        }
+
+
 
         public void ClearZones()
         {

@@ -113,6 +113,11 @@
             this.tsmiChannelDown = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteChannel = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAllZones = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiNewZone = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSortZonesByName = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiClearZones = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllContacts.SuspendLayout();
             this.cmsAllChannels.SuspendLayout();
             this.cmsAllSatellites.SuspendLayout();
@@ -121,6 +126,7 @@
             this.cmsSingleContact.SuspendLayout();
             this.cmsSingleSatellite.SuspendLayout();
             this.cmsSingleChannel.SuspendLayout();
+            this.cmsAllZones.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsAllContacts
@@ -409,6 +415,7 @@
             treeNode4.Name = "GroupListsNode";
             treeNode4.SelectedImageIndex = 6;
             treeNode4.Text = "Списки групп";
+            treeNode5.ContextMenuStrip = this.cmsAllZones;
             treeNode5.ImageIndex = 7;
             treeNode5.Name = "ZonesNode";
             treeNode5.SelectedImageIndex = 7;
@@ -776,6 +783,42 @@
             this.tsmiDeleteChannel.Text = "Удалить";
             this.tsmiDeleteChannel.Click += new System.EventHandler(this.tsmiDeleteChannel_Click);
             // 
+            // cmsAllZones
+            // 
+            this.cmsAllZones.BackColor = System.Drawing.Color.White;
+            this.cmsAllZones.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewZone,
+            this.tsmiSortZonesByName,
+            this.toolStripSeparator9,
+            this.tsmiClearZones});
+            this.cmsAllZones.Name = "cmsAllZones";
+            this.cmsAllZones.Size = new System.Drawing.Size(246, 82);
+            // 
+            // tsmiNewZone
+            // 
+            this.tsmiNewZone.Name = "tsmiNewZone";
+            this.tsmiNewZone.Size = new System.Drawing.Size(245, 24);
+            this.tsmiNewZone.Text = "Новая";
+            this.tsmiNewZone.Click += new System.EventHandler(this.tsmiNewZone_Click);
+            // 
+            // tsmiSortZonesByName
+            // 
+            this.tsmiSortZonesByName.Name = "tsmiSortZonesByName";
+            this.tsmiSortZonesByName.Size = new System.Drawing.Size(245, 24);
+            this.tsmiSortZonesByName.Text = "Упорядочить по алфавиту";
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(242, 6);
+            // 
+            // tsmiClearZones
+            // 
+            this.tsmiClearZones.Name = "tsmiClearZones";
+            this.tsmiClearZones.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
+            this.tsmiClearZones.Size = new System.Drawing.Size(245, 24);
+            this.tsmiClearZones.Text = "Очистить";
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -786,6 +829,7 @@
             this.Controls.Add(this.tbConsole);
             this.Controls.Add(this.tsMainControls);
             this.Controls.Add(this.msMain);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -807,6 +851,7 @@
             this.cmsSingleContact.ResumeLayout(false);
             this.cmsSingleSatellite.ResumeLayout(false);
             this.cmsSingleChannel.ResumeLayout(false);
+            this.cmsAllZones.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -879,6 +924,11 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiContactUp;
         private System.Windows.Forms.ToolStripMenuItem tsmiContactDown;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ContextMenuStrip cmsAllZones;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSortZonesByName;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem tsmiClearZones;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNewZone;
     }
 }
 
