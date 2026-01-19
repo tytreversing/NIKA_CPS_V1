@@ -357,6 +357,33 @@ namespace NIKA_CPS_V1.Codeplug
                 return false;
         }
 
+        //поиск первого свободного номера списка
+        public byte GetFirstGroupListFreeNumber()
+        {
+            if (_grouplists.Count == 0)
+            {
+                return 0; //зон нет
+            }
+            HashSet<byte> usedNumbers = new HashSet<byte>();
+            foreach (var list in _grouplists)
+            {
+                if (list != null)
+                {
+                    usedNumbers.Add(list.Number);
+                }
+            }
+            // Ищем первое свободное число, начиная с 0
+            for (byte i = 0; i < MAX_GROUPLISTS_COUNT; i++)
+            {
+                if (!usedNumbers.Contains(i))
+                {
+                    return i;
+                }
+            }
+            // Если все числа заняты, возвращаем 255
+            return byte.MaxValue;
+        }
+
         public void ClearGroupLists()
         {
             _grouplists.Clear();

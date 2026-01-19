@@ -451,7 +451,7 @@
             treeNode3.SelectedImageIndex = 7;
             treeNode3.Text = "Зоны";
             treeNode4.ImageIndex = 6;
-            treeNode4.Name = "GroupListsNode";
+            treeNode4.Name = "GrouplistsNode";
             treeNode4.SelectedImageIndex = 6;
             treeNode4.Text = "Списки групп";
             treeNode5.ImageIndex = 9;

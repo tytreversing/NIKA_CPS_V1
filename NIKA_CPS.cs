@@ -51,6 +51,7 @@ namespace NIKA_CPS_V1
             CONTACTS,
             CHANNELS,
             ZONES,
+            GROUPLISTS,
             SATELLITES
         }
 
@@ -230,6 +231,14 @@ namespace NIKA_CPS_V1
             {
                 CodeplugInternal.Zones[0].Channels.Add(channel.Number);
             }
+            CodeplugInternal.AddGroupList(new CodeplugGroupList(CodeplugInternal.GetFirstGroupListFreeNumber(), "Тестовый список"));
+            foreach (CodeplugContact contact in CodeplugInternal.Contacts)
+            {
+                if (contact.Type == CodeplugContact.ContactType.GROUP)
+                {
+                    CodeplugInternal.Grouplists[0].Contacts.Add(contact.Number);
+                }
+            }
             CodeplugInternal.AddSatellite(new CodeplugSatellite());
         }
 
@@ -374,6 +383,42 @@ namespace NIKA_CPS_V1
                     tvMain.EndUpdate();
                 }
             }
+            //ДЕРЕВО СПИСКОВ
+            if (mode == TreeRefreshType.ALL || mode == TreeRefreshType.GROUPLISTS)
+            {
+                TreeNode listsNode = tvMain.Nodes.Find("GrouplistsNode", true).FirstOrDefault();
+                if (listsNode != null && CodeplugInternal != null && CodeplugInternal.Grouplists != null)
+                {
+                    tvMain.BeginUpdate();
+                    listsNode.Nodes.Clear();
+                    foreach (CodeplugGroupList list in CodeplugInternal.Grouplists)
+                    {
+                        string name = list.Name ?? "Безымянный";
+                        TreeNode newNode = new TreeNode(name);
+                        newNode.Tag = list;
+                        newNode.ToolTipText = list.Name + " Контактов: " + (list.Contacts.Count).ToString();
+                        newNode.ImageIndex = 6;
+                        newNode.SelectedImageIndex = 6;
+                        listsNode.Nodes.Add(newNode);
+                    }
+                    if (RegistryOperations.getProfileIntWithDefault("ExpandGrouplists", 0) != 0)
+                        listsNode.Expand();
+                    if (mode != TreeRefreshType.ALL)
+                    {
+                        foreach (TreeNode node in listsNode.Nodes)
+                        {
+                            if (node.Tag == null) continue;
+                            /*   if (((Codeplug.Zone)node.Tag).Number == lastSelectedZone)
+                               {
+                                   tvMain.SelectedNode = node;
+                                   node.EnsureVisible();
+                                   tvMain.Focus();
+                               }*/
+                        }
+                    }
+                    tvMain.EndUpdate();
+                }
+            }
             if (mode == TreeRefreshType.ALL || mode == TreeRefreshType.SATELLITES)
             {
                 TreeNode satellitesNode = tvSecondary.Nodes.Find("SatellitesNode", true).FirstOrDefault();
@@ -433,6 +478,7 @@ namespace NIKA_CPS_V1
                     case "SatellitesNode":
                         cmsSingleSatellite.Show(tvSecondary, e.Location);
                         break;
+                        //TODO клик правой по списку групп
                 }
             }
 
@@ -454,20 +500,16 @@ namespace NIKA_CPS_V1
                 switch (e.Node.Parent.Name)
                 {
                     case "ContactsNode":
-                        if (e.Button == MouseButtons.Left)
-                        {
-                            Contact contactForm = new Contact((CodeplugContact)e.Node.Tag);
-                            contactForm.ShowDialog();
-                            GenerateTree(TreeRefreshType.CONTACTS);
-                        }
+                        Contact contactForm = new Contact((CodeplugContact)e.Node.Tag);
+                        contactForm.ShowDialog();
                         break;
                     case "ZonesNode":
-                        if (e.Button == MouseButtons.Left)
-                        {
-                            Zone zoneForm = new Zone((CodeplugZone)e.Node.Tag);
-                            zoneForm.ShowDialog();
-                            GenerateTree(TreeRefreshType.ZONES);
-                        }
+                        Zone zoneForm = new Zone((CodeplugZone)e.Node.Tag);
+                        zoneForm.ShowDialog();
+                        GenerateTree(TreeRefreshType.ZONES);
+                        break;
+                    //TODO двойные клики на списках групп
+                    case "GrouplistsNode":
                         break;
                 }
             }
