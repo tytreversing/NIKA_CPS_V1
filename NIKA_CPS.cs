@@ -11,8 +11,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -21,10 +25,13 @@ using System.Windows.Forms;
 
 
 
+
 namespace NIKA_CPS_V1
 {
     public partial class MainForm: Form
     {
+
+        public const string FILENAME = "NIKA_CPS_V1";
 
         public static string PRODUCT_VERSION;
 
@@ -896,6 +903,7 @@ namespace NIKA_CPS_V1
                         {
                             MessageBox.Show("Ошибка при сохранении кодплага!\r\n" + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+                        httpClient?.Dispose();
                         break;
 
                 }
@@ -990,17 +998,83 @@ namespace NIKA_CPS_V1
 
         private void tsmiSortZonesByName_Click(object sender, EventArgs e)
         {
-            //TODO сортировка зон по алфавиту
+            CodeplugInternal.SortZonesByName();
+            GenerateTree(TreeRefreshType.ZONES);
         }
 
         private void tsmiReloadLocalSatellites_Click(object sender, EventArgs e)
         {
-            //TODO перезагрузка сохраненного списка спутников
+            string[] satellites = null;
+            string storedSats = Application.StartupPath + "\\" + FILENAME + ".ars"; //перечень радиолюбительских спутников, сериализуемый в объекты дерева
+            try
+            {
+                satellites = File.ReadAllText(storedSats).Split('\n');
+            }
+            catch
+            {
+                MessageBox.Show("Локальное сохранение данных о радиолюбительских спутниках отсутствует. Данные в кодплаг можно ввести только вручную.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            finally
+            {
+                CodeplugInternal.ClearSatellites();
+                List<CodeplugSatellite> satsList = new List<CodeplugSatellite>();
+                for (int i = 1; i < Math.Min(satellites.Length, CodeplugData.MAX_SATELLITES_COUNT); i++)
+                {
+                    if (satellites[i].Trim().Length > 0)
+                    {
+                        CodeplugSatellite satellite = new CodeplugSatellite(satellites[i]);
+                        CodeplugInternal.AddSatellite(satellite);
+                    }
+                }
+                GenerateTree(TreeRefreshType.SATELLITES);
+            }
+            
         }
 
-        private void tsmiReloadFromNetwork_Click(object sender, EventArgs e)
+        private HttpClient httpClient;
+        private async void tsmiReloadFromNetwork_Click(object sender, EventArgs e)
         {
-            //TODO перезагрузка списка спутников из интернета
+            httpClient = new HttpClient();
+            httpClient.Timeout = TimeSpan.FromSeconds(30);
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "WinFormsApp/1.0");
+            tbConsole.AppendText("Пробуем загрузить данные о спутниках по адресу " + RegistryOperations.getProfileStringWithDefault("SatelliteDataURL", "https://r4uab.ru/satonline.txt") + "...\r\n");
+            await DownloadFileAsync();
+        }
+
+        string satData = "";
+        private async Task DownloadFileAsync()
+        {
+            try
+            {
+                string content = await httpClient.GetStringAsync(RegistryOperations.getProfileStringWithDefault("SatelliteDataURL", "https://r4uab.ru/satonline.txt"));
+
+                // Проверяем, не была ли форма закрыта во время загрузки
+                if (!IsDisposed && !Disposing)
+                {
+                    satData = content;
+                    tbConsole.AppendText($"Загружено успешно. Символов: {content.Length}\r\n");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке файла:\n{ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (TaskCanceledException)
+            {
+                tbConsole.AppendText("Таймаут запроса\r\n");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка:\n{ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                httpClient.Dispose();
+                File.WriteAllText(Application.StartupPath + "\\" + FILENAME + ".sat", satData); //сохраняем данные TLE
+            }
         }
     }
 }

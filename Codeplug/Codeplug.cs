@@ -27,7 +27,7 @@ namespace NIKA_CPS_V1.Codeplug
         public const int MAX_GROUPLISTS_COUNT = 16;       //максимальное количество списков
         public const int MAX_CHANNELS_IN_ZONE_COUNT = 80; //максимальное количество каналов в зоне
         public const int MAX_CONTACTS_IN_LIST_COUNT = 80; //максимальное количество контактов в списке
-        public const int MAX_SATELLITES_COUNT = 20;       //максимальное число спутников
+        public const int MAX_SATELLITES_COUNT = 26;       //максимальное число спутников
         [XmlElement("User")]
         public CodeplugUserData DMRID
         {
@@ -340,6 +340,15 @@ namespace NIKA_CPS_V1.Codeplug
                 zone.Name = name;
                 zone.Channels = channels;
             }
+        }
+
+        // Сортировка по алфавиту по полю Name
+        public void SortZonesByName()
+        {
+            _zones = _zones
+                .OrderBy(zone => zone?.Name, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(zone => zone?.Name)
+                .ToList();
         }
 
         public void ClearZones()
