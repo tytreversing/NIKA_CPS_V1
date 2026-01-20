@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace NIKA_CPS_V1.Codeplug
@@ -96,7 +97,10 @@ namespace NIKA_CPS_V1.Codeplug
             TimeSlot = slot;
         }
 
-
+        public override string ToString()
+        {
+            return _alias ?? string.Empty;
+        }
         private string ValidateLength(string value, int maxLength)
         {
             if (value == null)

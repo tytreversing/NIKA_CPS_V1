@@ -24,8 +24,9 @@ namespace NIKA_CPS_V1.Codeplug
         public const int MAX_CONTACTS_COUNT = 256;        //максимальное число контактов
         public const int MAX_CHANNELS_COUNT = 1024;       //максимальное число каналов
         public const int MAX_ZONES_COUNT = 16;            //максимальное количество зон
-        public const int MAX_GROUPLISTS_COUNT = 16;       //максимальное количество cgbcrjd
-        public const int MAX_CHANNELS_IN_ZONE_COUNT = 80; //максимальное количенство каналов в зоне
+        public const int MAX_GROUPLISTS_COUNT = 16;       //максимальное количество списков
+        public const int MAX_CHANNELS_IN_ZONE_COUNT = 80; //максимальное количество каналов в зоне
+        public const int MAX_CONTACTS_IN_LIST_COUNT = 80; //максимальное количество контактов в списке
         public const int MAX_SATELLITES_COUNT = 20;       //максимальное число спутников
         [XmlElement("User")]
         public CodeplugUserData DMRID
@@ -382,6 +383,20 @@ namespace NIKA_CPS_V1.Codeplug
             }
             // Если все числа заняты, возвращаем 255
             return byte.MaxValue;
+        }
+
+        public void UpdateGrouplistByNumber(byte number, string name, List<ushort> contacts)
+        {
+            if (_grouplists == null) return;
+
+            CodeplugGroupList list = _grouplists.FirstOrDefault(c => c.Number == number);
+
+            if (list != null)
+            {
+                list.Number = number;
+                list.Name = name;
+                list.Contacts = contacts;
+            }
         }
 
         public void ClearGroupLists()

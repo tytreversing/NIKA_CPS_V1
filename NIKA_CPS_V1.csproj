@@ -210,6 +210,12 @@
     <Compile Include="FirmwareUploader.Designer.cs">
       <DependentUpon>FirmwareUploader.cs</DependentUpon>
     </Compile>
+    <Compile Include="Grouplist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Grouplist.Designer.cs">
+      <DependentUpon>Grouplist.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\COMPort.cs" />
     <Compile Include="Interfaces\DataTransfer.cs" />
     <Compile Include="Interfaces\FirmwareUpdateMessageEventArgs.cs" />
@@ -220,7 +226,6 @@
     <Compile Include="MainFormUtilities.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PowerSettingData.cs" />
     <Compile Include="RegistryOperations.cs" />
     <Compile Include="NIKA_CPS.cs">
       <SubType>Form</SubType>
@@ -265,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FirmwareUploader.resx">
       <DependentUpon>FirmwareUploader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grouplist.resx">
+      <DependentUpon>Grouplist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NIKA_CPS.resx">
       <DependentUpon>NIKA_CPS.cs</DependentUpon>

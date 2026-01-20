@@ -508,8 +508,10 @@ namespace NIKA_CPS_V1
                         zoneForm.ShowDialog();
                         GenerateTree(TreeRefreshType.ZONES);
                         break;
-                    //TODO двойные клики на списках групп
                     case "GrouplistsNode":
+                        Grouplist listForm = new Grouplist((CodeplugGroupList)e.Node.Tag);
+                        listForm.ShowDialog();
+                        GenerateTree(TreeRefreshType.GROUPLISTS);
                         break;
                 }
             }
