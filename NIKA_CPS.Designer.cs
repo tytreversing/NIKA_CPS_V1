@@ -112,6 +112,11 @@
             this.tsmiChannelDown = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteChannel = new System.Windows.Forms.ToolStripMenuItem();
+            this.cnsAllGrouplists = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiNewGrouplist = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSortGrouplists = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiClearGrouplists = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllContacts.SuspendLayout();
             this.cmsAllChannels.SuspendLayout();
             this.cmsAllZones.SuspendLayout();
@@ -121,6 +126,7 @@
             this.cmsSingleContact.SuspendLayout();
             this.cmsSingleSatellite.SuspendLayout();
             this.cmsSingleChannel.SuspendLayout();
+            this.cnsAllGrouplists.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsAllContacts
@@ -450,6 +456,7 @@
             treeNode3.Name = "ZonesNode";
             treeNode3.SelectedImageIndex = 7;
             treeNode3.Text = "Зоны";
+            treeNode4.ContextMenuStrip = this.cnsAllGrouplists;
             treeNode4.ImageIndex = 6;
             treeNode4.Name = "GrouplistsNode";
             treeNode4.SelectedImageIndex = 6;
@@ -810,6 +817,41 @@
             this.tsmiDeleteChannel.Text = "Удалить";
             this.tsmiDeleteChannel.Click += new System.EventHandler(this.tsmiDeleteChannel_Click);
             // 
+            // cnsAllGrouplists
+            // 
+            this.cnsAllGrouplists.BackColor = System.Drawing.Color.White;
+            this.cnsAllGrouplists.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewGrouplist,
+            this.tsmiSortGrouplists,
+            this.toolStripSeparator10,
+            this.tsmiClearGrouplists});
+            this.cnsAllGrouplists.Name = "cnsAllGrouplists";
+            this.cnsAllGrouplists.Size = new System.Drawing.Size(246, 82);
+            // 
+            // tsmiNewGrouplist
+            // 
+            this.tsmiNewGrouplist.Name = "tsmiNewGrouplist";
+            this.tsmiNewGrouplist.Size = new System.Drawing.Size(245, 24);
+            this.tsmiNewGrouplist.Text = "Новый";
+            // 
+            // tsmiSortGrouplists
+            // 
+            this.tsmiSortGrouplists.Name = "tsmiSortGrouplists";
+            this.tsmiSortGrouplists.Size = new System.Drawing.Size(245, 24);
+            this.tsmiSortGrouplists.Text = "Упорядочить по алфавиту";
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(242, 6);
+            // 
+            // tsmiClearGrouplists
+            // 
+            this.tsmiClearGrouplists.Name = "tsmiClearGrouplists";
+            this.tsmiClearGrouplists.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
+            this.tsmiClearGrouplists.Size = new System.Drawing.Size(245, 24);
+            this.tsmiClearGrouplists.Text = "Очистить";
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -843,6 +885,7 @@
             this.cmsSingleContact.ResumeLayout(false);
             this.cmsSingleSatellite.ResumeLayout(false);
             this.cmsSingleChannel.ResumeLayout(false);
+            this.cnsAllGrouplists.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -920,6 +963,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem tsmiClearZones;
         private System.Windows.Forms.ToolStripMenuItem tsmiNewZone;
+        private System.Windows.Forms.ContextMenuStrip cnsAllGrouplists;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNewGrouplist;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSortGrouplists;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripMenuItem tsmiClearGrouplists;
     }
 }
 

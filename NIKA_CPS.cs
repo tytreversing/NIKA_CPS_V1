@@ -574,7 +574,7 @@ namespace NIKA_CPS_V1
         private void tsbFirmware_Click(object sender, EventArgs e)
         {
             pollingTimer.Stop();
-            new FirmwareUploader(this).Show();
+            new FirmwareUploader(this).ShowDialog();
             pollingTimer.Start();
         }
 
@@ -716,29 +716,43 @@ namespace NIKA_CPS_V1
                 {
                     tbConsole.AppendText("Обнаружен подключенный STM32-совместимый процессор в режиме DFU.\r\nИмя устройства: ");
                     tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
-                    System.Media.SystemSounds.Asterisk.Play();
+                    SystemSounds.Asterisk.Play();
                     foundDFUDevice = true;
                 }
             }
             else
+            {
                 foundDFUDevice = false;
-            if (USBChecker.IsUsbDeviceConnected(radioVID, radioPID))
-            {
-                if (!foundFlashedRadio)
+                if (USBChecker.IsUsbDeviceConnected("1FC9", "0094"))
                 {
-                    tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с этими прошивками не поддерживается!\r\nИмя устройства: ");
-                    tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
-                    System.Media.SystemSounds.Hand.Play();
-                    foundFlashedRadio = true;
-                    tsbReadFromRadio.Enabled = true;
-                    tsbWriteToRadio.Enabled = true;
+                    if (!foundFlashedRadio)
+                    {
+                        tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с этими прошивками не поддерживается!\r\nИмя устройства: ");
+                        tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
+                        SystemSounds.Hand.Play();
+                        foundFlashedRadio = true;
+                        tsbReadFromRadio.Enabled = true;
+                        tsbWriteToRadio.Enabled = true;
+                    }
                 }
-            }
-            else
-            {
-                foundFlashedRadio = false;
-                tsbReadFromRadio.Enabled = false;
-                tsbWriteToRadio.Enabled = false;
+                else if (USBChecker.IsUsbDeviceConnected(radioVID, radioPID))
+                {
+                    if (!foundFlashedRadio)
+                    {
+                        tbConsole.AppendText("Подключена совместимая радиостанция!\r\nИмя устройства: ");
+                        tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
+                        SystemSounds.Hand.Play();
+                        foundFlashedRadio = true;
+                        tsbReadFromRadio.Enabled = true;
+                        tsbWriteToRadio.Enabled = true;
+                    }
+                }
+                else
+                {
+                    foundFlashedRadio = false;
+                    tsbReadFromRadio.Enabled = false;
+                    tsbWriteToRadio.Enabled = false;
+                }
             }
 
         }
