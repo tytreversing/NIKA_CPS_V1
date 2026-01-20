@@ -41,6 +41,7 @@ namespace NIKA_CPS_V1
         public static bool playAudio = false;
         public bool foundDFUDevice = false;
         public bool foundFlashedRadio = false;
+        public bool gotInternalDescription = false;
 
         public static string radioVID = "";
         public static string radioPID = "";
@@ -120,9 +121,32 @@ namespace NIKA_CPS_V1
             return null;
         }
 
+        private bool ValidFullAccess(string[] args)
+        {
+            if (args == null) return false;
+
+            foreach (string arg in args)
+            {
+                if (string.IsNullOrWhiteSpace(arg)) continue;
+
+                try
+                {
+                    return arg.Contains("-all");
+                }
+                catch
+                {
+                    // Если возникла ошибка, переходим к следующему аргументу
+                    continue;
+                }
+            }
+
+            return false;
+        }
+
+        public bool isElevated;
+        public static bool hasFullAccess = false;
         private void MainForm_Load(object sender, EventArgs e)
         {
-            bool isElevated;
             string thisFilePath = Application.StartupPath;
 
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
@@ -131,6 +155,11 @@ namespace NIKA_CPS_V1
             if (isElevated == false && thisFilePath.Contains("Program Files"))
             {
                 MessageBox.Show("Программа установлена в папку " + thisFilePath + ", но не запущена от имени администратора. Часть функций программы может быть недоступной из-за ограничений Windows. Удалите программу и переустановите ее в другую папку, либо установите для исполняемого файла программы галочку запуска от имени администратора.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            hasFullAccess = ValidFullAccess(Environment.GetCommandLineArgs().Skip(1).ToArray());
+            if (hasFullAccess)
+            {
+                tbConsole.AppendText("Получен полный доступ\r\n");
             }
             //проверяем, нет ли в командной строке имени файла с кодплагом
             codeplugFileName = ValidCodeplugFilePath(Environment.GetCommandLineArgs().Skip(1).ToArray());
@@ -246,7 +275,7 @@ namespace NIKA_CPS_V1
                     CodeplugInternal.Grouplists[0].Contacts.Add(contact.Number);
                 }
             }
-            CodeplugInternal.AddSatellite(new CodeplugSatellite());
+            ReloadHAMSatellites();
         }
 
         public void GenerateTree(TreeRefreshType mode = TreeRefreshType.ALL)
@@ -749,9 +778,19 @@ namespace NIKA_CPS_V1
                         tbConsole.AppendText("Подключена совместимая радиостанция!\r\nИмя устройства: ");
                         tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                         SystemSounds.Hand.Play();
+                        if (isElevated && !gotInternalDescription)
+                        {
+                            string desc = RegistryOperations.FindBusDeviceDescInSubKeys(radioVID, radioPID);
+                            if (desc != null)
+                            {
+                                tbConsole.AppendText("Описание устройства: " + desc + "\r\n");
+                                gotInternalDescription = true;
+                            }
+                        }
                         foundFlashedRadio = true;
                         tsbReadFromRadio.Enabled = true;
                         tsbWriteToRadio.Enabled = true;
+                        pollingTimer.Interval = 10000;
                     }
                 }
                 else
@@ -759,6 +798,8 @@ namespace NIKA_CPS_V1
                     foundFlashedRadio = false;
                     tsbReadFromRadio.Enabled = false;
                     tsbWriteToRadio.Enabled = false;
+                    gotInternalDescription = false;
+                    pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
                 }
             }
 
@@ -1004,6 +1045,12 @@ namespace NIKA_CPS_V1
 
         private void tsmiReloadLocalSatellites_Click(object sender, EventArgs e)
         {
+            ReloadHAMSatellites();
+            
+        }
+
+        private void ReloadHAMSatellites()
+        {
             string[] satellites = null;
             string storedSats = Application.StartupPath + "\\" + FILENAME + ".ars"; //перечень радиолюбительских спутников, сериализуемый в объекты дерева
             try
@@ -1029,8 +1076,8 @@ namespace NIKA_CPS_V1
                 }
                 GenerateTree(TreeRefreshType.SATELLITES);
             }
-            
         }
+
 
         private HttpClient httpClient;
         private async void tsmiReloadFromNetwork_Click(object sender, EventArgs e)

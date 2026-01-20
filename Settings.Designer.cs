@@ -34,8 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.rbFastPolling = new System.Windows.Forms.RadioButton();
             this.rbSlowPolling = new System.Windows.Forms.RadioButton();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lVID = new System.Windows.Forms.Label();
+            this.lPID = new System.Windows.Forms.Label();
             this.tbRadioVID = new System.Windows.Forms.TextBox();
             this.tbRadioPID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -75,12 +75,13 @@
             this.bSaveAppSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
             this.bSaveAppSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.bSaveAppSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bSaveAppSettings.ForeColor = System.Drawing.SystemColors.ControlText;
             this.bSaveAppSettings.Location = new System.Drawing.Point(127, 240);
             this.bSaveAppSettings.Name = "bSaveAppSettings";
             this.bSaveAppSettings.Size = new System.Drawing.Size(204, 28);
             this.bSaveAppSettings.TabIndex = 2;
             this.bSaveAppSettings.Text = "Сохранить настройки";
-            this.bSaveAppSettings.UseVisualStyleBackColor = false;
+            this.bSaveAppSettings.UseVisualStyleBackColor = true;
             this.bSaveAppSettings.Click += new System.EventHandler(this.bSaveAppSettings_Click);
             this.bSaveAppSettings.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
@@ -117,23 +118,25 @@
             this.rbSlowPolling.UseVisualStyleBackColor = true;
             this.rbSlowPolling.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
-            // label2
+            // lVID
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 123);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 15);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "VID устройства";
+            this.lVID.AutoSize = true;
+            this.lVID.Location = new System.Drawing.Point(14, 123);
+            this.lVID.Name = "lVID";
+            this.lVID.Size = new System.Drawing.Size(101, 15);
+            this.lVID.TabIndex = 6;
+            this.lVID.Text = "VID устройства";
+            this.lVID.Visible = false;
             // 
-            // label3
+            // lPID
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 155);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 15);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "PID устройства";
+            this.lPID.AutoSize = true;
+            this.lPID.Location = new System.Drawing.Point(14, 155);
+            this.lPID.Name = "lPID";
+            this.lPID.Size = new System.Drawing.Size(101, 15);
+            this.lPID.TabIndex = 7;
+            this.lPID.Text = "PID устройства";
+            this.lPID.Visible = false;
             // 
             // tbRadioVID
             // 
@@ -141,6 +144,7 @@
             this.tbRadioVID.Name = "tbRadioVID";
             this.tbRadioVID.Size = new System.Drawing.Size(117, 23);
             this.tbRadioVID.TabIndex = 8;
+            this.tbRadioVID.Visible = false;
             // 
             // tbRadioPID
             // 
@@ -148,6 +152,7 @@
             this.tbRadioPID.Name = "tbRadioPID";
             this.tbRadioPID.Size = new System.Drawing.Size(117, 23);
             this.tbRadioPID.TabIndex = 9;
+            this.tbRadioPID.Visible = false;
             // 
             // label4
             // 
@@ -181,7 +186,7 @@
             // cbConfirmExit
             // 
             this.cbConfirmExit.AutoSize = true;
-            this.cbConfirmExit.Location = new System.Drawing.Point(13, 193);
+            this.cbConfirmExit.Location = new System.Drawing.Point(14, 123);
             this.cbConfirmExit.Name = "cbConfirmExit";
             this.cbConfirmExit.Size = new System.Drawing.Size(279, 19);
             this.cbConfirmExit.TabIndex = 13;
@@ -199,8 +204,8 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbRadioPID);
             this.Controls.Add(this.tbRadioVID);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lPID);
+            this.Controls.Add(this.lVID);
             this.Controls.Add(this.rbSlowPolling);
             this.Controls.Add(this.rbFastPolling);
             this.Controls.Add(this.label1);
@@ -232,8 +237,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton rbFastPolling;
         private System.Windows.Forms.RadioButton rbSlowPolling;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lVID;
+        private System.Windows.Forms.Label lPID;
         private System.Windows.Forms.TextBox tbRadioVID;
         private System.Windows.Forms.TextBox tbRadioPID;
         private System.Windows.Forms.Label label4;

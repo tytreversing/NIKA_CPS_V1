@@ -32,6 +32,14 @@ namespace NIKA_CPS_V1
             cbConfirmExit.Checked = (RegistryOperations.getProfileIntWithDefault("ConfirmExit", 1) != 0);
             cbExpandContacts.Checked = (RegistryOperations.getProfileIntWithDefault("ExpandContacts", 0) != 0);
             cbExpandChannels.Checked = (RegistryOperations.getProfileIntWithDefault("ExpandChannels", 0) != 0);
+            if (MainForm.hasFullAccess)
+            {
+                lVID.Visible = true;
+                lPID.Visible = true;    
+                tbRadioPID.Visible = true;
+                tbRadioVID.Visible = true;
+                cbConfirmExit.Location = new Point(14, 193);
+            }
         }
 
         private void bSaveAppSettings_Click(object sender, EventArgs e)
