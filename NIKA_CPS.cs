@@ -53,6 +53,8 @@ namespace NIKA_CPS_V1
         private uint lastSelectedContact = 0;
         private string lastSelectedSatellite = "";
 
+        public static ConnectedRadioType radioType = ConnectedRadioType.NOT_CONNECTED;
+
         public enum TreeRefreshType
         {
             ALL,
@@ -61,6 +63,14 @@ namespace NIKA_CPS_V1
             ZONES,
             GROUPLISTS,
             SATELLITES
+        }
+
+        public enum ConnectedRadioType
+        {
+            NOT_CONNECTED,
+            NOT_SUPPORTED,
+            MD9600,
+            MDUV380
         }
 
         public static bool isValidHex(string input)
@@ -538,6 +548,7 @@ namespace NIKA_CPS_V1
                     case "ContactsNode":
                         Contact contactForm = new Contact((CodeplugContact)e.Node.Tag);
                         contactForm.ShowDialog();
+                        GenerateTree(TreeRefreshType.CONTACTS);
                         break;
                     case "ZonesNode":
                         Zone zoneForm = new Zone((CodeplugZone)e.Node.Tag);
@@ -750,7 +761,7 @@ namespace NIKA_CPS_V1
             {
                 if (!foundDFUDevice)
                 {
-                    tbConsole.AppendText("Обнаружен подключенный STM32-совместимый процессор в режиме DFU.\r\nИмя устройства: ");
+                    tbConsole.AppendText("Обнаружен подключенный STM32-совместимый процессор в режиме DFU.\r\nОписание устройства: ");
                     tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                     SystemSounds.Asterisk.Play();
                     foundDFUDevice = true;
@@ -763,27 +774,32 @@ namespace NIKA_CPS_V1
                 {
                     if (!foundFlashedRadio)
                     {
-                        tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с этими прошивками не поддерживается!\r\nИмя устройства: ");
+                        tbConsole.AppendText("Подключена рация с прошивкой OpenGD77 или OpenGD77 RUS. Работа с этими прошивками не поддерживается!\r\nПорт: ");
                         tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                         SystemSounds.Hand.Play();
                         foundFlashedRadio = true;
-                        tsbReadFromRadio.Enabled = true;
-                        tsbWriteToRadio.Enabled = true;
+                        tsbReadFromRadio.Enabled = false;
+                        tsbWriteToRadio.Enabled = false;
+                        radioType = ConnectedRadioType.NOT_SUPPORTED;
                     }
                 }
                 else if (USBChecker.IsUsbDeviceConnected(radioVID, radioPID))
                 {
                     if (!foundFlashedRadio)
                     {
-                        tbConsole.AppendText("Подключена совместимая радиостанция!\r\nИмя устройства: ");
+                        tbConsole.AppendText("Подключена совместимая радиостанция!\r\nПорт: ");
                         tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                         SystemSounds.Hand.Play();
                         if (isElevated && !gotInternalDescription)
                         {
-                            string desc = RegistryOperations.FindBusDeviceDescInSubKeys(radioVID, radioPID);
+                            string desc = SetupAPI.GetBusReportedDeviceDesc(radioVID, radioPID);
                             if (desc != null)
                             {
-                                tbConsole.AppendText("Описание устройства: " + desc + "\r\n");
+                                if (desc.Contains("V1") && desc.Contains("(MD-9600)"))
+                                {
+                                    tbConsole.AppendText("В радиостанции установлена поддерживаемая прошивка " + desc + "\r\n");
+                                    radioType = ConnectedRadioType.MD9600;
+                                }
                                 gotInternalDescription = true;
                             }
                         }
@@ -800,6 +816,7 @@ namespace NIKA_CPS_V1
                     tsbWriteToRadio.Enabled = false;
                     gotInternalDescription = false;
                     pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
+                    radioType = ConnectedRadioType.NOT_CONNECTED;
                 }
             }
 

@@ -102,78 +102,7 @@ internal class RegistryOperations
 		}
 	}
 
-    public static string FindBusDeviceDescInSubKeys(string vid, string pid)
-    {
-        string basePath = "SYSTEM\\Setup\\Upgrade\\PnP\\CurrentControlSet\\Control\\DeviceMigration\\Devices\\USB\\VID_" + vid + "&PID_" + pid;
-        string valueName = "BusDeviceDesc";
-
-        try
-        {
-            using (RegistryKey baseKey = Registry.LocalMachine.OpenSubKey(basePath))
-            {
-                if (baseKey == null)
-                {
-                    return null;
-                }
-
-                // Ищем во всех подключах
-                foreach (string subKeyName in baseKey.GetSubKeyNames())
-                {
-                    using (RegistryKey subKey = baseKey.OpenSubKey(subKeyName))
-                    {
-                        if (subKey != null)
-                        {
-                            string value = subKey.GetValue(valueName) as string;
-                            if (!string.IsNullOrEmpty(value))
-                            {
-                                return value;
-                            }
-
-                            // Рекурсивный поиск в более глубоких подразделах
-                            value = FindBusDeviceDescRecursive(subKey, valueName);
-                            if (!string.IsNullOrEmpty(value))
-                            {
-                                return value;
-                            }
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-        catch
-        {
-            return null;
-        }
-    }
-
-    private static string FindBusDeviceDescRecursive(RegistryKey parentKey, string valueName)
-    {
-        foreach (string subKeyName in parentKey.GetSubKeyNames())
-        {
-            using (RegistryKey subKey = parentKey.OpenSubKey(subKeyName))
-            {
-                if (subKey != null)
-                {
-                    string value = subKey.GetValue(valueName) as string;
-                    if (!string.IsNullOrEmpty(value))
-                    {
-                        return value;
-                    }
-
-                    // Рекурсивно ищем в более глубоких уровнях
-                    value = FindBusDeviceDescRecursive(subKey, valueName);
-                    if (!string.IsNullOrEmpty(value))
-                    {
-                        return value;
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
-
+    
     static RegistryOperations()
 	{
 		keyName = "HKEY_CURRENT_USER\\Software\\NIKA";

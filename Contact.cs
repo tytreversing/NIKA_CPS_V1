@@ -28,13 +28,13 @@ namespace NIKA_CPS_V1
             _id = contact.DMR_ID;
             switch (contact.Type)
             {
-                case Codeplug.CodeplugContact.ContactType.PRIVATE:
+                case CodeplugContact.ContactType.PRIVATE:
                     rbPrivateCall.Checked = true;
                     break;
-                case Codeplug.CodeplugContact.ContactType.GROUP:
+                case CodeplugContact.ContactType.GROUP:
                     rbGroupCall.Checked = true;
                     break;
-                case Codeplug.CodeplugContact.ContactType.ALL_CALL:
+                case CodeplugContact.ContactType.ALL_CALL:
                     rbAllCall.Checked = true;
                     break;
             }
@@ -48,14 +48,22 @@ namespace NIKA_CPS_V1
             if (tbDMRID.Text == "")
                 tbDMRID.Text = "0";
             if (rbPrivateCall.Checked)
-                type = Codeplug.CodeplugContact.ContactType.PRIVATE;
+                type = CodeplugContact.ContactType.PRIVATE;
             else if (rbGroupCall.Checked)
-                type = Codeplug.CodeplugContact.ContactType.GROUP;
-            else type = Codeplug.CodeplugContact.ContactType.ALL_CALL;
-            if ((string)cbTimeslot.SelectedItem == "TS1")
-                timeslot = Codeplug.CodeplugContact.Timeslot.TS1;
-            else
-                timeslot = Codeplug.CodeplugContact.Timeslot.TS2;
+                type = CodeplugContact.ContactType.GROUP;
+            else type = CodeplugContact.ContactType.ALL_CALL;
+            switch ((string)cbTimeslot.SelectedItem)
+            {
+                case "TS1":
+                    timeslot = CodeplugContact.Timeslot.TS1;
+                    break;
+                case "TS2":
+                    timeslot = CodeplugContact.Timeslot.TS2;
+                    break;
+                default:
+                    timeslot = CodeplugContact.Timeslot.NONE;
+                    break;
+            }
             MainForm.CodeplugInternal.UpdateContactByID(_number, tbAlias.Text, uint.Parse(tbDMRID.Text), tbData.Text, type, timeslot);
             Close();
         }
