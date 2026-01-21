@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -116,16 +117,26 @@ namespace NIKA_CPS_V1
 
         private void RearrangeContacts()
         {
+            Dictionary<ushort, ushort> mapping = new Dictionary<ushort, ushort>(); //сопоставитель старых номеров каналов новым
+
             CodeplugInternal.ClearContacts();
             ushort number = 0;
             TreeNode cNode = FindTreeNodeByName(tvMain, "ContactsNode");
             foreach (TreeNode node in cNode.Nodes)
             {
                 CodeplugContact contact = node.Tag as CodeplugContact; //список контактов заполняем с заменой Number по порядку
-                //TODO ДОБАВИТЬ коррекцию каналов!!!
+                mapping.Add(contact.Number, number);
                 contact.Number = number;
                 CodeplugInternal.AddContact(node.Tag as CodeplugContact);
                 number++;
+            }
+            foreach (CodeplugChannel channel in CodeplugInternal.Channels)
+            {
+                ushort newNum;
+                if (mapping.ContainsKey(channel.Contact) && mapping.TryGetValue(channel.Contact, out newNum)) //ключ найден и получено соответствующее значение
+                {
+                    channel.Contact = newNum;
+                }
             }
         }
 

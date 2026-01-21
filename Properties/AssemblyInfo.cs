@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NIKA CPS V1")]
-[assembly: AssemblyCopyright("Copyright © Aufwiegler 2025")]
+[assembly: AssemblyCopyright("Copyright © Aufwiegler 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

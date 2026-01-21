@@ -351,6 +351,12 @@ namespace NIKA_CPS_V1.Codeplug
                 .ToList();
         }
 
+        public void DeleteZone(ushort n)
+        {
+            _zones.RemoveAll(c => c != null && c.Number == n);
+
+        }
+
         public void ClearZones()
         {
             _zones.Clear(); 
@@ -408,6 +414,19 @@ namespace NIKA_CPS_V1.Codeplug
             }
         }
 
+        public void SortGrouplistsByName()
+        {
+            _grouplists = _grouplists
+                .OrderBy(list => list?.Name, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(list => list?.Name)
+                .ToList();
+        }
+
+        public void DeleteGrouplist(ushort n)
+        {
+            _grouplists.RemoveAll(c => c != null && c.Number == n);
+
+        }
         public void ClearGroupLists()
         {
             _grouplists.Clear();

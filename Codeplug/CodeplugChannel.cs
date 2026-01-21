@@ -23,6 +23,7 @@ namespace NIKA_CPS_V1.Codeplug
         private string _name;
         private ChannelType _type;
         private uint _rxFrequency;
+        private ushort _contact;
 
 
         [XmlAttribute("Number")]
@@ -49,6 +50,15 @@ namespace NIKA_CPS_V1.Codeplug
             get => _rxFrequency;
             set => _rxFrequency = value;
         }
+
+        [XmlAttribute("Contact")]
+        public ushort Contact
+        {
+            get => _contact;
+            set => _contact = value;
+        }
+
+        // TODO Доделать поля
         public CodeplugChannel()
         {
             _number = 0;

@@ -41,7 +41,7 @@ namespace NIKA_CPS_V1
         public static bool playAudio = false;
         public bool foundDFUDevice = false;
         public bool foundFlashedRadio = false;
-        public bool gotInternalDescription = false;
+
 
         public static string radioVID = "";
         public static string radioPID = "";
@@ -521,10 +521,16 @@ namespace NIKA_CPS_V1
                     case "ChannelsNode":
                         cmsSingleChannel.Show(tvMain, e.Location);
                         break;
+                    case "ZonesNode":
+                        cmsSingleZone.Show(tvMain, e.Location); 
+                        break;
+                    case "GrouplistsNode":
+                        cmsSingleGrouplist.Show(tvMain, e.Location);
+                        break;
                     case "SatellitesNode":
                         cmsSingleSatellite.Show(tvSecondary, e.Location);
                         break;
-                        //TODO клик правой по списку групп
+
                 }
             }
 
@@ -549,6 +555,11 @@ namespace NIKA_CPS_V1
                         Contact contactForm = new Contact((CodeplugContact)e.Node.Tag);
                         contactForm.ShowDialog();
                         GenerateTree(TreeRefreshType.CONTACTS);
+                        break;
+                    case "ChannelsNode":
+                        Channel channelForm = new Channel((CodeplugChannel)e.Node.Tag);
+                        channelForm.ShowDialog();
+                        GenerateTree(TreeRefreshType.CHANNELS);
                         break;
                     case "ZonesNode":
                         Zone zoneForm = new Zone((CodeplugZone)e.Node.Tag);
@@ -780,7 +791,6 @@ namespace NIKA_CPS_V1
                         foundFlashedRadio = true;
                         tsbReadFromRadio.Enabled = false;
                         tsbWriteToRadio.Enabled = false;
-                        radioType = ConnectedRadioType.NOT_SUPPORTED;
                     }
                 }
                 else if (USBChecker.IsUsbDeviceConnected(radioVID, radioPID))
@@ -790,19 +800,6 @@ namespace NIKA_CPS_V1
                         tbConsole.AppendText("Подключена совместимая радиостанция!\r\nПорт: ");
                         tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                         SystemSounds.Hand.Play();
-                        if (isElevated && !gotInternalDescription)
-                        {
-                            string desc = SetupAPI.GetBusReportedDeviceDesc(radioVID, radioPID);
-                            if (desc != null)
-                            {
-                                if (desc.Contains("V1") && desc.Contains("(MD-9600)"))
-                                {
-                                    tbConsole.AppendText("В радиостанции установлена поддерживаемая прошивка " + desc + "\r\n");
-                                    radioType = ConnectedRadioType.MD9600;
-                                }
-                                gotInternalDescription = true;
-                            }
-                        }
                         foundFlashedRadio = true;
                         tsbReadFromRadio.Enabled = true;
                         tsbWriteToRadio.Enabled = true;
@@ -814,9 +811,7 @@ namespace NIKA_CPS_V1
                     foundFlashedRadio = false;
                     tsbReadFromRadio.Enabled = false;
                     tsbWriteToRadio.Enabled = false;
-                    gotInternalDescription = false;
                     pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
-                    radioType = ConnectedRadioType.NOT_CONNECTED;
                 }
             }
 
@@ -855,6 +850,11 @@ namespace NIKA_CPS_V1
             if (MessageBox.Show("ВНИМАНИЕ! Из кодплага будут удалены ВСЕ записанные в нем каналы! Продолжить?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 CodeplugInternal.ClearChannels();
+                foreach (CodeplugZone zone in CodeplugInternal.Zones) //так как все контакты удалены, очищаем зоны
+                {
+                    zone.Channels.Clear();
+                }
+                GenerateTree(TreeRefreshType.ZONES);
                 GenerateTree(TreeRefreshType.CHANNELS);
             }
         }
@@ -1029,6 +1029,16 @@ namespace NIKA_CPS_V1
             }
         }
 
+        private void tsmiZoneDelete_Click(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = tvMain.SelectedNode;
+            if (selectedNode != null)
+            {
+                CodeplugInternal.DeleteZone((selectedNode.Tag as CodeplugZone).Number);
+                GenerateTree(TreeRefreshType.ZONES);
+            }
+        }
+
         private void tsmiDeleteSatellite_Click(object sender, EventArgs e)
         {
             TreeNode selectedNode = tvSecondary.SelectedNode;
@@ -1138,6 +1148,57 @@ namespace NIKA_CPS_V1
             {
                 httpClient.Dispose();
                 File.WriteAllText(Application.StartupPath + "\\" + FILENAME + ".sat", satData); //сохраняем данные TLE
+            }
+        }
+
+        private void tsmiNewGrouplist_Click(object sender, EventArgs e)
+        {
+            byte freeNumber = CodeplugInternal.GetFirstGroupListFreeNumber();
+            if (freeNumber < CodeplugData.MAX_GROUPLISTS_COUNT)
+            {
+                CodeplugGroupList newList = new CodeplugGroupList(freeNumber, "Список #" + freeNumber.ToString());
+                CodeplugInternal.AddGroupList(newList);
+                Grouplist listForm = new Grouplist(newList);
+                listForm.ShowDialog();
+                GenerateTree(TreeRefreshType.GROUPLISTS);
+            }
+            else
+                MessageBox.Show("Память списков групп полностью заполнена, добавить новый невозможно.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void tsmiSortGrouplists_Click(object sender, EventArgs e)
+        {
+            CodeplugInternal.SortGrouplistsByName();
+            GenerateTree(TreeRefreshType.GROUPLISTS);
+        }
+
+        private void tsmiClearGrouplists_Click(object sender, EventArgs e)
+        {
+            CodeplugInternal.ClearGroupLists();
+            GenerateTree(TreeRefreshType.GROUPLISTS);
+        }
+
+        private void tsmiDeleteGrouplist_Click(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = tvMain.SelectedNode;
+            if (selectedNode != null)
+            {
+                CodeplugInternal.DeleteGrouplist((selectedNode.Tag as CodeplugGroupList).Number);
+                GenerateTree(TreeRefreshType.GROUPLISTS);
+            }
+        }
+
+        private void tsmiClearContacts_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("ВНИМАНИЕ! Из кодплага будут удалены ВСЕ записанные в нем контакты! Продолжить?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                CodeplugInternal.ClearContacts();
+                foreach (CodeplugChannel channel in CodeplugInternal.Channels) //так как все контакты удалены, очищаем каналы
+                {
+                    channel.Contact = ushort.MaxValue;
+                }
+                GenerateTree(TreeRefreshType.CONTACTS);
+                GenerateTree(TreeRefreshType.CHANNELS);
             }
         }
     }

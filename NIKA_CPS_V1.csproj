@@ -59,7 +59,7 @@
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>1D65A409FFA3D94F84408DB900C554BC4C6C302B</ManifestCertificateThumbprint>
@@ -184,6 +184,12 @@
     <Compile Include="CalibrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Channel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Channel.Designer.cs">
+      <DependentUpon>Channel.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChannelsGenerator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,7 +236,6 @@
     <Compile Include="Interfaces\FirmwareUpdateMessageEventArgs.cs" />
     <Compile Include="Interfaces\FirmwareUpdateProgressEventArgs.cs" />
     <Compile Include="Interfaces\FirmwareUpdateProgressEventHandler.cs" />
-    <Compile Include="Interfaces\SetupAPI.cs" />
     <Compile Include="Interfaces\STM32_DFU.cs" />
     <Compile Include="Interfaces\USBChecker.cs" />
     <Compile Include="MainFormUtilities.cs">
@@ -268,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CalibrationForm.resx">
       <DependentUpon>CalibrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Channel.resx">
+      <DependentUpon>Channel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChannelsGenerator.resx">
       <DependentUpon>ChannelsGenerator.cs</DependentUpon>
