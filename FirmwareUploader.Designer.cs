@@ -116,6 +116,7 @@
             // rbMDUV380
             // 
             this.rbMDUV380.AutoSize = true;
+            this.rbMDUV380.Enabled = false;
             this.rbMDUV380.Location = new System.Drawing.Point(17, 49);
             this.rbMDUV380.Name = "rbMDUV380";
             this.rbMDUV380.Size = new System.Drawing.Size(236, 19);
@@ -223,6 +224,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Загрузчик прошивки";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FirmwareUploader_FormClosing);
             this.tsUpdater.ResumeLayout(false);
             this.tsUpdater.PerformLayout();
             this.gbRadioType.ResumeLayout(false);

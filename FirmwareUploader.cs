@@ -19,6 +19,7 @@ namespace NIKA_CPS_V1
         private STM_DFU_FwUpdate fwUpdate;
 
         private bool firmwareVerified = false;
+        private bool blockClosing = false;
 
         public enum OutputType
         {
@@ -150,6 +151,7 @@ namespace NIKA_CPS_V1
             }
             needleTimer.Start();
             MainForm.playMessage("uploadCompleted");
+            blockClosing = false;
         }
 
         private bool containsStringSequence(byte[] data, string marker)
@@ -270,6 +272,7 @@ namespace NIKA_CPS_V1
         {
             if (firmwareVerified)
             {
+                blockClosing = true;
                 fwUpdate.UpdateRadioFirmware(this, decryptedFirmware, outputType);
             }
         }
@@ -296,6 +299,15 @@ namespace NIKA_CPS_V1
                 agProgress.Value--;
             else
                 needleTimer.Stop();
+        }
+
+        private void FirmwareUploader_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing && blockClosing)
+            {
+                MessageBox.Show("Нельзя прерывать процесс обновления прошивки!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Cancel = true;
+            }
         }
     }
 }
