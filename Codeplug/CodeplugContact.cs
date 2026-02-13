@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using static System.Windows.Forms.LinkLabel;
 
 namespace NIKA_CPS_V1.Codeplug
 {
@@ -95,6 +96,73 @@ namespace NIKA_CPS_V1.Codeplug
             UserData = userData;
             Type = type;    
             TimeSlot = slot;
+        }
+
+        //конструктор из строки в CSV
+
+        public CodeplugContact(CodeplugData codeplug, string data, char delimiter)
+        {
+            try
+            {
+                string[] values = data.Split(delimiter);
+
+                for (int j = 0; j < values.Length; j++)
+                {
+                    values[j] = values[j].Trim().Trim('"');
+                }
+
+                if (values.Length == 6) //импорт из экспортированного в том же формате
+                {
+                    Number = ushort.Parse(values[0]);
+                    if (codeplug.IsNumberUsedInContacts(Number))
+                        Number = codeplug.GetFirstContactFreeNumber();
+                    Alias = values[1];
+                    DMR_ID = uint.Parse(values[2]);
+                    UserData = values[3];
+                    Type = values[4].ToUpper() switch
+                    {
+                        "PRIVATE" => CodeplugContact.ContactType.PRIVATE,
+                        "GROUP" => CodeplugContact.ContactType.GROUP,
+                        "ALLCALL" or "ALL_CALL" => CodeplugContact.ContactType.ALL_CALL,
+                        _ => CodeplugContact.ContactType.PRIVATE
+                    };
+
+
+                    TimeSlot = values[5].ToUpper() switch
+                    {
+                        "NONE" => CodeplugContact.Timeslot.NONE,
+                        "TS1" => CodeplugContact.Timeslot.TS1,
+                        "TS2" => CodeplugContact.Timeslot.TS2,
+                        _ => CodeplugContact.Timeslot.NONE
+                    };
+                }
+                else if (values.Length == 4) //опенгдшный CSV
+                {
+                    Number = codeplug.GetFirstContactFreeNumber();
+                    Alias = values[0];
+                    DMR_ID = uint.Parse(values[1]);
+                    UserData = "";
+                    Type = values[2].ToUpper() switch
+                    {
+                        "PRIVATE" => CodeplugContact.ContactType.PRIVATE,
+                        "GROUP" => CodeplugContact.ContactType.GROUP,
+                        "ALLCALL" or "ALL_CALL" => CodeplugContact.ContactType.ALL_CALL,
+                        _ => CodeplugContact.ContactType.PRIVATE
+                    };
+
+
+                    TimeSlot = values[3].ToUpper() switch
+                    {
+                        "DISABLED" => CodeplugContact.Timeslot.NONE,
+                        "1" => CodeplugContact.Timeslot.TS1,
+                        "2" => CodeplugContact.Timeslot.TS2,
+                        _ => CodeplugContact.Timeslot.NONE
+                    };
+                }
+            }
+            catch 
+            {
+            }
         }
 
         public override string ToString()

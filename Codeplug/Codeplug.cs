@@ -21,7 +21,7 @@ namespace NIKA_CPS_V1.Codeplug
         private List<CodeplugSatellite> _satelliteKeps;
 
         //константы
-        public const int MAX_CONTACTS_COUNT = 256;        //максимальное число контактов
+        public const int MAX_CONTACTS_COUNT = 1000;       //максимальное число контактов
         public const int MAX_CHANNELS_COUNT = 1024;       //максимальное число каналов
         public const int MAX_ZONES_COUNT = 16;            //максимальное количество зон
         public const int MAX_GROUPLISTS_COUNT = 16;       //максимальное количество списков
@@ -213,6 +213,16 @@ namespace NIKA_CPS_V1.Codeplug
                 contact.Type = type;    
                 contact.TimeSlot = slot;
             }
+        }
+
+        public bool IsNumberUsedInContacts(ushort num)
+        {
+            foreach (var contact in _contacts)
+            {
+                if (contact.Number == num)
+                    return true;
+            }
+            return false;
         }
 
         public void DeleteContactByAlias(string alias)

@@ -7,6 +7,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -1200,6 +1201,38 @@ namespace NIKA_CPS_V1
                 GenerateTree(TreeRefreshType.CONTACTS);
                 GenerateTree(TreeRefreshType.CHANNELS);
             }
+        }
+
+        private void tsbCSV_Click(object sender, EventArgs e)
+        {
+            cmsCSV.Show(Control.MousePosition);
+        }
+
+        private void tsmiAddContactsFromCSV_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                Filter = "CSV Files (*.csv)|*.csv",
+                Title = "Выберите CSV-файл"
+            };
+
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            string filePath = openFileDialog.FileName;
+
+            using StreamReader reader = new StreamReader(filePath);
+            // Пропускаем первую строку файла
+            reader.ReadLine();
+            while (!reader.EndOfStream)
+            {
+                string line = reader.ReadLine()?.Trim();
+                if (string.IsNullOrEmpty(line)) continue;
+
+                var contact = new CodeplugContact(CodeplugInternal, line, ';'); 
+                CodeplugInternal.AddContact(contact); 
+            }
+            GenerateTree(TreeRefreshType.CONTACTS);
         }
     }
 }

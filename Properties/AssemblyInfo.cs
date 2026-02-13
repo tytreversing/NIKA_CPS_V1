@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 //      Номер сборки
 //      Редакция
 //
-[assembly: AssemblyVersion("1.2026.2.6")]
-[assembly: AssemblyFileVersion("1.2026.2.6")]
+[assembly: AssemblyVersion("1.2026.2.13")]
+[assembly: AssemblyFileVersion("1.2026.2.13")]
 
-[assembly: AssemblyInformationalVersion("1.2026.2.6")]
+[assembly: AssemblyInformationalVersion("1.2026.2.13")]
