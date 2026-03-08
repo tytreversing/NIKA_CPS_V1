@@ -45,7 +45,7 @@ internal static class COMPort
             Port = null;
             SystemSounds.Hand.Play();
             MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            RegistryOperations.WriteProfileString("COMPort", "");
+            RegistryOperations.WriteString("COMPort", "");
             return false;
         }
         try

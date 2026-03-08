@@ -28,18 +28,18 @@ internal class RegistryOperations
 
 	private const string _SETUP = "Setup";
 
-	public static string getIniFilePath()
+	public static string GetIniFilePath()
 	{
 		return iniPath;
 	}
 
-	public static void setIniFilePath(string path)
+	public static void SetIniFilePath(string path)
 	{
 		iniPath = path;
 	}
 
 
-	public static string getProfileStringWithDefault(string key, string defval)
+	public static string GetString(string key, string defval)
 	{
 		if (iniPath != null)
 		{
@@ -55,7 +55,7 @@ internal class RegistryOperations
 		return defval;
 	}
 
-	public static int getProfileIntWithDefault(string key, int defval)
+	public static int GetInt(string key, int defval)
 	{
 		if (iniPath != null)
 		{
@@ -80,17 +80,17 @@ internal class RegistryOperations
 
 	public static bool IsFlagSet(string key, bool defvalue = true)
 	{
-		int retval = getProfileIntWithDefault(key, defvalue ? 1 : 0);
+		int retval = GetInt(key, defvalue ? 1 : 0);
 		return retval != 0;
 	}
 
 	public static void SetFlag(string key, bool value)
 	{
-		WriteProfileInt(key, value ? 1 : 0);
+		WriteInt(key, value ? 1 : 0);
 	}
 
 
-    public static void WriteProfileString(string key, string value)
+    public static void WriteString(string key, string value)
 	{
 		if (iniPath != null)
 		{
@@ -102,7 +102,7 @@ internal class RegistryOperations
 		}
 	}
 
-	public static void WriteProfileInt(string key, int value)
+	public static void WriteInt(string key, int value)
 	{
 		if (iniPath != null)
 		{

@@ -56,12 +56,12 @@ namespace NIKA_CPS_V1
             MainForm.playAudio = cbUseVoiceHelp.Checked;
             if (MainForm.isValidHex(tbRadioVID.Text))
             {
-                RegistryOperations.WriteProfileString("DeviceVID", tbRadioVID.Text);
+                RegistryOperations.WriteString("DeviceVID", tbRadioVID.Text);
                 MainForm.radioVID = tbRadioVID.Text.ToUpper();
             }
             if (MainForm.isValidHex(tbRadioPID.Text))
             {
-                RegistryOperations.WriteProfileString("DevicePID", tbRadioPID.Text);
+                RegistryOperations.WriteString("DevicePID", tbRadioPID.Text);
                 MainForm.radioPID = tbRadioPID.Text.ToUpper();
             }
             Close();

@@ -367,9 +367,9 @@
             this.tsbSettings,
             this.tsbAbout});
             this.tsMainControls.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.tsMainControls.Location = new System.Drawing.Point(6, 33);
+            this.tsMainControls.Location = new System.Drawing.Point(6, 6);
             this.tsMainControls.Name = "tsMainControls";
-            this.tsMainControls.Size = new System.Drawing.Size(53, 648);
+            this.tsMainControls.Size = new System.Drawing.Size(53, 675);
             this.tsMainControls.TabIndex = 0;
             // 
             // tsbMenuToggle
@@ -519,7 +519,7 @@
             this.tvMain.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tvMain.ImageIndex = 0;
             this.tvMain.ImageList = this.ilTreeItems;
-            this.tvMain.Location = new System.Drawing.Point(59, 33);
+            this.tvMain.Location = new System.Drawing.Point(59, 6);
             this.tvMain.Margin = new System.Windows.Forms.Padding(8, 8, 4, 3);
             this.tvMain.Name = "tvMain";
             treeNode1.ContextMenuStrip = this.cmsAllContacts;
@@ -562,7 +562,7 @@
             treeNode7});
             this.tvMain.SelectedImageIndex = 0;
             this.tvMain.ShowNodeToolTips = true;
-            this.tvMain.Size = new System.Drawing.Size(337, 578);
+            this.tvMain.Size = new System.Drawing.Size(337, 605);
             this.tvMain.TabIndex = 1;
             this.tvMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvMain_AfterSelect);
             this.tvMain.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
@@ -823,7 +823,7 @@
             this.tvSecondary.Dock = System.Windows.Forms.DockStyle.Left;
             this.tvSecondary.ImageIndex = 0;
             this.tvSecondary.ImageList = this.ilTreeItems;
-            this.tvSecondary.Location = new System.Drawing.Point(396, 33);
+            this.tvSecondary.Location = new System.Drawing.Point(396, 6);
             this.tvSecondary.Name = "tvSecondary";
             treeNode8.ImageIndex = 1;
             treeNode8.Name = "SettingsNode";
@@ -844,7 +844,7 @@
             treeNode10});
             this.tvSecondary.SelectedImageIndex = 0;
             this.tvSecondary.ShowNodeToolTips = true;
-            this.tvSecondary.Size = new System.Drawing.Size(347, 578);
+            this.tvSecondary.Size = new System.Drawing.Size(347, 605);
             this.tvSecondary.TabIndex = 4;
             this.tvSecondary.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
             this.tvSecondary.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseDoubleClick);

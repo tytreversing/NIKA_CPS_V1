@@ -93,8 +93,8 @@ namespace NIKA_CPS_V1
                 new SplashScreen().ShowDialog();
             }
             playAudio = (RegistryOperations.IsFlagSet("AccessibilityOptions", false));
-            radioVID = RegistryOperations.getProfileStringWithDefault("DeviceVID", "05D0");
-            radioPID = RegistryOperations.getProfileStringWithDefault("DevicePID", "0094");
+            radioVID = RegistryOperations.GetString("DeviceVID", "05D0");
+            radioPID = RegistryOperations.GetString("DevicePID", "0094");
         }
 
         //поиск в аргументах командной строки имени файла кодплага
@@ -178,7 +178,7 @@ namespace NIKA_CPS_V1
             if (codeplugFileName == null) //запуск без передачи параметров
             {
                 //получаем из реестра последний файл кодплага, если сохранен, иначе болванку в папке с программой
-                codeplugFileName = RegistryOperations.getProfileStringWithDefault("LastCodeplugFile", "");
+                codeplugFileName = RegistryOperations.GetString("LastCodeplugFile", "");
 
             }
             else //запуск с параметрами
@@ -196,7 +196,7 @@ namespace NIKA_CPS_V1
                     playMessage("file_not_found_error");
                     MessageBox.Show("Файл " + codeplugFileName + " не найден по указанному адресу. Будет сгенерирован шаблонный кодплаг.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     codeplugFileName = "";
-                    RegistryOperations.WriteProfileString("LastCodeplugFile", "");
+                    RegistryOperations.WriteString("LastCodeplugFile", "");
                    
                 }
                 GenerateCodeplugTemplate();
@@ -214,12 +214,12 @@ namespace NIKA_CPS_V1
                 }
             }
             Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + codeplugFileName;
-            Width = RegistryOperations.getProfileIntWithDefault("LastWindowWidth", 1000);
-            Height = RegistryOperations.getProfileIntWithDefault("LastWindowHeight", 800);
+            Width = RegistryOperations.GetInt("LastWindowWidth", 1000);
+            Height = RegistryOperations.GetInt("LastWindowHeight", 800);
             msMain.Visible = (RegistryOperations.IsFlagSet("MenuStringVisible", false));
             tsbReadFromRadio.Enabled = false;
             tsbWriteToRadio.Enabled = false;
-            if (RegistryOperations.getProfileStringWithDefault("AgreementConfirmed", "NO") == "NO")
+            if (RegistryOperations.GetString("AgreementConfirmed", "NO") == "NO")
             {
                 if (MessageBox.Show("Программное обеспечение НИКА предоставляется бесплатно на условиях «КАК ЕСТЬ». Все действия, производимые с оборудованием и программным обеспечением, находятся исключительно на ответственности конечного пользователя. Разработчик не несет ответственности за возможный ущерб, причиненный действиями конечного пользователя программного обеспечения.\r\nСовместимость программного обеспечения с радиостанциями гарантируется в объеме, обеспеченном тестированием на момент публикации данной версии.\r\nЕсли Вы согласны с условиями предоставления программного обеспечения, нажмите «ДА».", "Пользовательское соглашение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 {
@@ -234,7 +234,7 @@ namespace NIKA_CPS_V1
                 }
                 else
                 {
-                    RegistryOperations.WriteProfileString("AgreementConfirmed", "YES");
+                    RegistryOperations.WriteString("AgreementConfirmed", "YES");
                 }
             }
             tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
@@ -653,8 +653,8 @@ namespace NIKA_CPS_V1
 
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
-            RegistryOperations.WriteProfileInt("LastWindowWidth", this.Width);
-            RegistryOperations.WriteProfileInt("LastWindowHeight", this.Height);
+            RegistryOperations.WriteInt("LastWindowWidth", this.Width);
+            RegistryOperations.WriteInt("LastWindowHeight", this.Height);
         }
 
         public static void playMessage(string message)
@@ -807,7 +807,7 @@ namespace NIKA_CPS_V1
                         SystemSounds.Hand.Play();
                         foundFlashedRadio = true;
                         COMPortUsed = USBChecker.GetComPortFromString();
-                        RegistryOperations.WriteProfileString("COMPort", COMPortUsed);
+                        RegistryOperations.WriteString("COMPort", COMPortUsed);
                         if (RegistryOperations.IsFlagSet("ShowInfoBox"))
                         {
                             if (!COMPort.SetupPort())
@@ -851,14 +851,18 @@ namespace NIKA_CPS_V1
                     break;
             }
             string serial = $"Серийный номер: {info.serial}\r\n";
-            string year = info.buildDateTime.Substring(0, 4);
-            string month = info.buildDateTime.Substring(4, 2);
-            string day = info.buildDateTime.Substring(6, 2);
+            string day = info.buildDateTime.Substring(0, 2);
+            string month = info.buildDateTime.Substring(2, 2);
+            string year = info.buildDateTime.Substring(4, 4);
             string buildDate = $"Дата сборки прошивки: {day}.{month}.{year}\r\n";
+            day = info.fwDate.Substring(0, 2);
+            month = info.fwDate.Substring(2, 2);
+            year = info.fwDate.Substring(4, 4);
+            string fwDate = $"Дата прошивки рации: {day}.{month}.{year}\r\n";
             string platform = (info.radioType == 88) ? "Платформа: TYT MD-9600 V" + info.radioHardware.ToString() + "\r\n" : "Неизвестная аппаратная платформа\r\n";
-            if (MessageBox.Show(identifier + platform + serial + buildDate + "\r\nСкопировать данные в буфер обмена?", "Данные о рации", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            if (MessageBox.Show(identifier + platform + serial + buildDate + fwDate + "\r\nСкопировать данные в буфер обмена?", "Данные о рации", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
-                Clipboard.SetText(identifier + platform + serial + buildDate);
+                Clipboard.SetText(identifier + platform + serial + buildDate + fwDate);
             }
         }
 
@@ -928,7 +932,7 @@ namespace NIKA_CPS_V1
                     CheckLoadedCodeplug();
                     GenerateTree();
                     codeplugFileName = fileName;
-                    RegistryOperations.WriteProfileString("LastCodeplugFile", fileName);
+                    RegistryOperations.WriteString("LastCodeplugFile", fileName);
                     Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + fileName;
                 }
             }
@@ -968,7 +972,7 @@ namespace NIKA_CPS_V1
             }
             finally
             {
-                RegistryOperations.WriteProfileString("LastCodeplugFile", codeplugFileName);
+                RegistryOperations.WriteString("LastCodeplugFile", codeplugFileName);
                 Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + codeplugFileName;
             }
 
@@ -1157,7 +1161,7 @@ namespace NIKA_CPS_V1
             httpClient = new HttpClient();
             httpClient.Timeout = TimeSpan.FromSeconds(30);
             httpClient.DefaultRequestHeaders.Add("User-Agent", "WinFormsApp/1.0");
-            tbConsole.AppendText("Пробуем загрузить данные о спутниках по адресу " + RegistryOperations.getProfileStringWithDefault("SatelliteDataURL", "https://r4uab.ru/satonline.txt") + "...\r\n");
+            tbConsole.AppendText("Пробуем загрузить данные о спутниках по адресу " + RegistryOperations.GetString("SatelliteDataURL", "https://r4uab.ru/satonline.txt") + "...\r\n");
             await DownloadFileAsync();
         }
 
@@ -1166,7 +1170,7 @@ namespace NIKA_CPS_V1
         {
             try
             {
-                string content = await httpClient.GetStringAsync(RegistryOperations.getProfileStringWithDefault("SatelliteDataURL", "https://r4uab.ru/satonline.txt"));
+                string content = await httpClient.GetStringAsync(RegistryOperations.GetString("SatelliteDataURL", "https://r4uab.ru/satonline.txt"));
 
                 // Проверяем, не была ли форма закрыта во время загрузки
                 if (!IsDisposed && !Disposing)

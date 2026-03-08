@@ -31,6 +31,9 @@ namespace NIKA_CPS_V1.Interfaces
 
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 18)]
             public string serial;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+            public string fwDate;
         }
         public static bool sendCommand(SerialPort port, int commandNumber, int x_or_command_option_number = 0, int y = 0, int iSize = 0, int alignment = 0, int isInverted = 0, string message = "")
         {

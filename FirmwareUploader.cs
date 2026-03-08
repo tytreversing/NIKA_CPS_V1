@@ -34,7 +34,7 @@ namespace NIKA_CPS_V1
         public FirmwareUploader(MainForm parent)
         {
             InitializeComponent();
-            string lastRadioType = RegistryOperations.getProfileStringWithDefault("LastFlashedRadio", null);
+            string lastRadioType = RegistryOperations.GetString("LastFlashedRadio", null);
             if (lastRadioType != "")
             {
                 foreach (RadioButton control in gbRadioType.Controls)
@@ -158,31 +158,53 @@ namespace NIKA_CPS_V1
         {
             // Преобразуем строку в байты с использованием UTF-8 кодировки
             byte[] searchBytes = Encoding.UTF8.GetBytes(marker);
-            return containsSubsequence(data, searchBytes);
+            return (FindSequence(data, searchBytes) > 0);
         }
 
-        private static bool containsSubsequence(byte[] source, byte[] sequence)
-        {
-            // Обработка случая с пустой последовательностью
-            if (sequence.Length == 0)
-                return false; // Или true, если пустая строка считается найденной
 
-            // Проверяем вхождение последовательности
-            for (int i = 0; i <= source.Length - sequence.Length; i++)
+        private void ReplaceFirmwareDate(byte[] decryptedFirmware)
+        {
+            // Искомая последовательность
+            string searchString = "XFWDATEX";
+            byte[] searchBytes = Encoding.UTF8.GetBytes(searchString);
+
+            // Текущая дата в нужном формате
+            string currentDate = DateTime.Now.ToString("ddMMyyyy");
+            byte[] dateBytes = Encoding.UTF8.GetBytes(currentDate);
+
+            // Поиск последовательности в массиве
+            int foundIndex = FindSequence(decryptedFirmware, searchBytes);
+
+            if (foundIndex >= 0)
             {
-                bool match = true;
-                for (int j = 0; j < sequence.Length; j++)
+                // Проверяем, что длины совпадают (FWDATE = 6 байт, дата тоже 6 байт в формате ddMMyyyy)
+                if (searchBytes.Length == dateBytes.Length)
                 {
-                    if (source[i + j] != sequence[j])
+                    // Заменяем байты
+                    Array.Copy(dateBytes, 0, decryptedFirmware, foundIndex, dateBytes.Length);
+                }
+            }
+        }
+
+        private int FindSequence(byte[] data, byte[] pattern)
+        {
+            for (int i = 0; i <= data.Length - pattern.Length; i++)
+            {
+                bool found = true;
+                for (int j = 0; j < pattern.Length; j++)
+                {
+                    if (data[i + j] != pattern[j])
                     {
-                        match = false;
+                        found = false;
                         break;
                     }
                 }
-                if (match)
-                    return true;
+                if (found)
+                {
+                    return i;
+                }
             }
-            return false;
+            return -1;
         }
 
         private void tsbOpen_Click(object sender, EventArgs e)
@@ -190,21 +212,21 @@ namespace NIKA_CPS_V1
             tbConsole.Text = "";
             if (rbMD9600.Checked)
             {
-                RegistryOperations.WriteProfileString("LastFlashedRadio", rbMD9600.Text);
+                RegistryOperations.WriteString("LastFlashedRadio", rbMD9600.Text);
                 outputType = OutputType.OutputType_MD9600;
             }
             else if (rbMDUV380.Checked)
             {
-                RegistryOperations.WriteProfileString("LastFlashedRadio", rbMDUV380.Text);
+                RegistryOperations.WriteString("LastFlashedRadio", rbMDUV380.Text);
                 outputType = OutputType.OutputType_MDUV380;
             }
             agProgress.Value = 0;
-            ofdOpenFirmware.InitialDirectory = RegistryOperations.getProfileStringWithDefault("FirmwareLocation", null);
+            ofdOpenFirmware.InitialDirectory = RegistryOperations.GetString("FirmwareLocation", null);
             if (ofdOpenFirmware.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
-            RegistryOperations.WriteProfileString("FirmwareLocation", Path.GetDirectoryName(ofdOpenFirmware.FileName));
+            RegistryOperations.WriteString("FirmwareLocation", Path.GetDirectoryName(ofdOpenFirmware.FileName));
             byte[] openFirmwareBuf = null;
             try
             {
@@ -231,7 +253,7 @@ namespace NIKA_CPS_V1
                     {
                         rbMD9600.Checked = true;
                         tbConsole.AppendText("Целевая рация сменена\r\n");
-                        RegistryOperations.WriteProfileString("LastFlashedRadio", rbMD9600.Text);
+                        RegistryOperations.WriteString("LastFlashedRadio", rbMD9600.Text);
                     }
             }
             else if (containsStringSequence(decryptedFirmware, "TYT MD-UV3xx"))
@@ -242,7 +264,7 @@ namespace NIKA_CPS_V1
                     {
                         rbMDUV380.Checked = true;
                         tbConsole.AppendText("Целевая рация сменена\r\n");
-                        RegistryOperations.WriteProfileString("LastFlashedRadio", rbMDUV380.Text);
+                        RegistryOperations.WriteString("LastFlashedRadio", rbMDUV380.Text);
                     }
             }
             else
@@ -253,6 +275,7 @@ namespace NIKA_CPS_V1
                 tsbUpdate.Enabled = false;
                 return;
             }
+            ReplaceFirmwareDate(decryptedFirmware);
             tbConsole.AppendText("Контрольная сумма файла прошивки: 0x" + CalculateChecksum(openFirmwareBuf) + "\r\n");
             tbConsole.AppendText("Контрольная сумма дешифрованной прошивки: 0x" + CalculateChecksum(decryptedFirmware) + "\r\n");
             tbConsole.AppendText("Теперь запишите прошивку в радиостанцию\r\n");

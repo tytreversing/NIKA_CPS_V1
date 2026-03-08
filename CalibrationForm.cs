@@ -510,7 +510,7 @@ namespace NIKA_CPS_V1
 
         private void btnReadFile_Click(object sender, EventArgs e)
         {
-            string profileStringWithDefault = RegistryOperations.getProfileStringWithDefault("LastFilePath", "");
+            string profileStringWithDefault = RegistryOperations.GetString("LastFilePath", "");
             string initialDirectory;
             try
             {
@@ -610,7 +610,7 @@ namespace NIKA_CPS_V1
 
         private void btnSaveCalibration_Click(object sender, EventArgs e)
         {
-            string profileStringWithDefault = RegistryOperations.getProfileStringWithDefault("LastFilePath", "");
+            string profileStringWithDefault = RegistryOperations.GetString("LastFilePath", "");
             string initialDirectory;
             string radioType = "MD-9600_RT-90";
 
