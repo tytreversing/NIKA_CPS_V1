@@ -145,6 +145,7 @@
       <Private>False</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
@@ -179,6 +180,12 @@
     </Compile>
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CalibrationCharts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalibrationCharts.Designer.cs">
+      <DependentUpon>CalibrationCharts.cs</DependentUpon>
     </Compile>
     <Compile Include="CalibrationData.cs" />
     <Compile Include="CalibrationForm.cs">
@@ -270,6 +277,9 @@
     </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalibrationCharts.resx">
+      <DependentUpon>CalibrationCharts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CalibrationForm.resx">
       <DependentUpon>CalibrationForm.cs</DependentUpon>

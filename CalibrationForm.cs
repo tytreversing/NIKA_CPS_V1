@@ -22,8 +22,6 @@ namespace NIKA_CPS_V1
 
         public static int MEMORY_LOCATION_STM32 = 65536;
 
-        public static int CALIBRATION_MEMORY_LOCATION_OFFICIAL_USB_PROTOCOL = 31744;
-
         public static int CALIBRATION_TABLE_SIZE = 0x14C;
 
         private char writeCommandCharacter = 'W';
@@ -1147,8 +1145,8 @@ namespace NIKA_CPS_V1
 
         private void btnChart_Click(object sender, EventArgs e)
         {
-         /*   CalibrationCharts chartsForm = new CalibrationCharts(CalData);
-            chartsForm.ShowDialog();*/
+            CalibrationCharts chartsForm = new CalibrationCharts(CalData);
+            chartsForm.ShowDialog();
         }
 
         protected override void Dispose(bool disposing)
