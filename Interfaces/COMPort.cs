@@ -11,7 +11,7 @@ using System.Windows.Forms;
 internal static class COMPort
 {
     public static SerialPort Port;
-    public static bool setupCommPort()
+    public static bool SetupPort()
     {
         if (Port != null)
         {
@@ -46,7 +46,7 @@ internal static class COMPort
             Port = null;
             SystemSounds.Hand.Play();
             MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            RegistryOperations.WriteProfileString("LastCommPort", "");
+            RegistryOperations.WriteProfileString("COMPort", "");
             return false;
         }
         try

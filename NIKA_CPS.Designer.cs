@@ -133,8 +133,8 @@
             this.cmsCSV = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiExportCSV = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddFromCSV = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiRebuiltFromCSV = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddContactsFromCSV = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiRebuiltFromCSV = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllContacts.SuspendLayout();
             this.cmsAllChannels.SuspendLayout();
             this.cmsAllZones.SuspendLayout();
@@ -367,9 +367,9 @@
             this.tsbSettings,
             this.tsbAbout});
             this.tsMainControls.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.tsMainControls.Location = new System.Drawing.Point(6, 6);
+            this.tsMainControls.Location = new System.Drawing.Point(6, 33);
             this.tsMainControls.Name = "tsMainControls";
-            this.tsMainControls.Size = new System.Drawing.Size(53, 675);
+            this.tsMainControls.Size = new System.Drawing.Size(53, 648);
             this.tsMainControls.TabIndex = 0;
             // 
             // tsbMenuToggle
@@ -519,7 +519,7 @@
             this.tvMain.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tvMain.ImageIndex = 0;
             this.tvMain.ImageList = this.ilTreeItems;
-            this.tvMain.Location = new System.Drawing.Point(59, 6);
+            this.tvMain.Location = new System.Drawing.Point(59, 33);
             this.tvMain.Margin = new System.Windows.Forms.Padding(8, 8, 4, 3);
             this.tvMain.Name = "tvMain";
             treeNode1.ContextMenuStrip = this.cmsAllContacts;
@@ -562,7 +562,7 @@
             treeNode7});
             this.tvMain.SelectedImageIndex = 0;
             this.tvMain.ShowNodeToolTips = true;
-            this.tvMain.Size = new System.Drawing.Size(337, 605);
+            this.tvMain.Size = new System.Drawing.Size(337, 578);
             this.tvMain.TabIndex = 1;
             this.tvMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvMain_AfterSelect);
             this.tvMain.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
@@ -823,7 +823,7 @@
             this.tvSecondary.Dock = System.Windows.Forms.DockStyle.Left;
             this.tvSecondary.ImageIndex = 0;
             this.tvSecondary.ImageList = this.ilTreeItems;
-            this.tvSecondary.Location = new System.Drawing.Point(396, 6);
+            this.tvSecondary.Location = new System.Drawing.Point(396, 33);
             this.tvSecondary.Name = "tvSecondary";
             treeNode8.ImageIndex = 1;
             treeNode8.Name = "SettingsNode";
@@ -844,7 +844,7 @@
             treeNode10});
             this.tvSecondary.SelectedImageIndex = 0;
             this.tvSecondary.ShowNodeToolTips = true;
-            this.tvSecondary.Size = new System.Drawing.Size(347, 605);
+            this.tvSecondary.Size = new System.Drawing.Size(347, 578);
             this.tvSecondary.TabIndex = 4;
             this.tvSecondary.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
             this.tvSecondary.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseDoubleClick);
@@ -988,7 +988,7 @@
             this.tsmiAddFromCSV,
             this.tsmiRebuiltFromCSV});
             this.cmsCSV.Name = "cmsCSV";
-            this.cmsCSV.Size = new System.Drawing.Size(254, 98);
+            this.cmsCSV.Size = new System.Drawing.Size(254, 76);
             // 
             // tsmiExportCSV
             // 
@@ -1004,19 +1004,19 @@
             this.tsmiAddFromCSV.Size = new System.Drawing.Size(253, 24);
             this.tsmiAddFromCSV.Text = "Добавить из CSV в кодплаг";
             // 
+            // tsmiAddContactsFromCSV
+            // 
+            this.tsmiAddContactsFromCSV.BackColor = System.Drawing.Color.White;
+            this.tsmiAddContactsFromCSV.Name = "tsmiAddContactsFromCSV";
+            this.tsmiAddContactsFromCSV.Size = new System.Drawing.Size(138, 24);
+            this.tsmiAddContactsFromCSV.Text = "Контакты";
+            this.tsmiAddContactsFromCSV.Click += new System.EventHandler(this.tsmiAddContactsFromCSV_Click);
+            // 
             // tsmiRebuiltFromCSV
             // 
             this.tsmiRebuiltFromCSV.Name = "tsmiRebuiltFromCSV";
             this.tsmiRebuiltFromCSV.Size = new System.Drawing.Size(253, 24);
             this.tsmiRebuiltFromCSV.Text = "Переписать кодплаг из CSV";
-            // 
-            // tsmiAddContactsFromCSV
-            // 
-            this.tsmiAddContactsFromCSV.BackColor = System.Drawing.Color.White;
-            this.tsmiAddContactsFromCSV.Name = "tsmiAddContactsFromCSV";
-            this.tsmiAddContactsFromCSV.Size = new System.Drawing.Size(180, 24);
-            this.tsmiAddContactsFromCSV.Text = "Контакты";
-            this.tsmiAddContactsFromCSV.Click += new System.EventHandler(this.tsmiAddContactsFromCSV_Click);
             // 
             // MainForm
             // 

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Management;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 
 namespace NIKA_CPS_V1.Interfaces
@@ -16,6 +17,12 @@ namespace NIKA_CPS_V1.Interfaces
         {
             return _deviceDescription;
         }
+
+        public static string GetComPortFromString()
+        {
+            Match match = Regex.Match(_deviceDescription, @"COM\d{1,3}", RegexOptions.IgnoreCase);
+            return match.Success ? match.Value.ToUpper() : null;
+        }
         public static bool IsUsbDeviceConnected(string vid, string pid)
         {
             try
@@ -25,7 +32,7 @@ namespace NIKA_CPS_V1.Interfaces
 
                 // Запрос к WMI для получения активных PnP-устройств
                 using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(
-                      "SELECT DeviceID, Status, Description FROM Win32_PnPEntity WHERE Status = 'OK'"))
+                      "SELECT DeviceID, Status, Name FROM Win32_PnPEntity WHERE Status = 'OK'"))
                 {
                     foreach (ManagementObject device in searcher.Get())
                     {
@@ -35,7 +42,7 @@ namespace NIKA_CPS_V1.Interfaces
                         {
                             try
                             {
-                                _deviceDescription = (device["Description"] as string);
+                                _deviceDescription = (device["Name"] as string);
                             }
                             catch
                             {

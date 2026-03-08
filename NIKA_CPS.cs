@@ -790,6 +790,7 @@ namespace NIKA_CPS_V1
                         tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                         SystemSounds.Hand.Play();
                         foundFlashedRadio = true;
+                        RegistryOperations.WriteProfileString("COMPort", USBChecker.GetComPortFromString());
                         tsbReadFromRadio.Enabled = false;
                         tsbWriteToRadio.Enabled = false;
                     }
@@ -802,6 +803,7 @@ namespace NIKA_CPS_V1
                         tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                         SystemSounds.Hand.Play();
                         foundFlashedRadio = true;
+                        RegistryOperations.WriteProfileString("COMPort", USBChecker.GetComPortFromString());
                         tsbReadFromRadio.Enabled = true;
                         tsbWriteToRadio.Enabled = true;
                         pollingTimer.Interval = 10000;
@@ -820,7 +822,7 @@ namespace NIKA_CPS_V1
 
         private void msiCalibration_Click(object sender, EventArgs e)
         {
-            new CalibrationForm(this).ShowDialog();
+            new CalibrationForm().ShowDialog();
         }
 
 

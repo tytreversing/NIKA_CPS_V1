@@ -2,7 +2,7 @@ namespace NIKA_CPS_V1;
 
 public class DataTransfer
 {
-	public enum CommsDataMode
+	public enum DataMode
 	{
 		DataModeNone,
 		DataModeReadFlash,
@@ -21,7 +21,7 @@ public class DataTransfer
 		DataModeReadBandlimits
 	}
 
-	public enum CommsAction
+	public enum CPSAction
 	{
 		NONE,
 		BACKUP_EEPROM,
@@ -47,23 +47,23 @@ public class DataTransfer
 		WRITE_SETTINGS
 	}
 
-	public CommsDataMode mode;
+	public DataMode mode;
 
-	public CommsAction action;
+	public CPSAction action;
 
-	public int startDataAddressInTheRadio;
+	public int flashAddress;
 
 	public int transferLength;
 
-	public int localDataBufferStartPosition;
+	public int localAddress;
 
-	public int data_sector;
+	public int dataSector;
 
-	public byte[] dataBuff;
+	public byte[] dataBuffer;
 
 	public int responseCode;
 
-	public DataTransfer(CommsAction theAction = CommsAction.NONE)
+	public DataTransfer(CPSAction theAction = CPSAction.NONE)
 	{
 		action = theAction;
 	}
