@@ -77,67 +77,51 @@ namespace NIKA_CPS_V1
         [MarshalAs(UnmanagedType.U2)]
         public ushort RSSI70;
 
-        [XmlIgnore]
-        public ushort[][] PowersVHFAs2D
+        private void ValidateIndices(int powerIndex, int tuneIndex, int maxPower, int maxTune, string band)
         {
-            get
-            {
-                if (powersVHF == null) return null;
-                var result = new ushort[POWERS_TOTAL][];
-                for (int i = 0; i < POWERS_TOTAL; i++)
-                {
-                    result[i] = new ushort[VHF_ARRAY_SIZE];
-                    Array.Copy(powersVHF, i * VHF_ARRAY_SIZE, result[i], 0, VHF_ARRAY_SIZE);
-                }
-                return result;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    powersVHF = null;
-                    return;
-                }
-                powersVHF = new ushort[POWERS_TOTAL * VHF_ARRAY_SIZE];
-                for (int i = 0; i < POWERS_TOTAL; i++)
-                {
-                    if (value[i] != null && value[i].Length == VHF_ARRAY_SIZE)
-                    {
-                        Array.Copy(value[i], 0, powersVHF, i * VHF_ARRAY_SIZE, VHF_ARRAY_SIZE);
-                    }
-                }
-            }
+            if (powerIndex < 0 || powerIndex >= maxPower)
+                throw new ArgumentOutOfRangeException(nameof(powerIndex),
+                    $"Power индекс для {band} должен быть от 0 до {maxPower - 1}");
+
+            if (tuneIndex < 0 || tuneIndex >= maxTune)
+                throw new ArgumentOutOfRangeException(nameof(tuneIndex),
+                    $"Tune индекс для {band} должен быть от 0 до {maxTune - 1}");
         }
-        [XmlIgnore]
-        public ushort[][] PowersUHFAs2D
+
+        /// <summary>
+        /// Получить значение из powersVHF по индексам [powerIndex, tuneIndex]
+        /// </summary>
+        public ushort GetPowerVHF(int powerIndex, int tuneIndex)
         {
-            get
-            {
-                if (powersUHF == null) return null;
-                var result = new ushort[POWERS_TOTAL][];
-                for (int i = 0; i < POWERS_TOTAL; i++)
-                {
-                    result[i] = new ushort[UHF_ARRAY_SIZE];
-                    Array.Copy(powersUHF, i * UHF_ARRAY_SIZE, result[i], 0, UHF_ARRAY_SIZE);
-                }
-                return result;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    powersUHF = null;
-                    return;
-                }
-                powersUHF = new ushort[POWERS_TOTAL * UHF_ARRAY_SIZE];
-                for (int i = 0; i < POWERS_TOTAL; i++)
-                {
-                    if (value[i] != null && value[i].Length == UHF_ARRAY_SIZE)
-                    {
-                        Array.Copy(value[i], 0, powersUHF, i * UHF_ARRAY_SIZE, UHF_ARRAY_SIZE);
-                    }
-                }
-            }
+            ValidateIndices(powerIndex, tuneIndex, POWERS_TOTAL, VHF_ARRAY_SIZE, "VHF");
+            return powersVHF[powerIndex * VHF_ARRAY_SIZE + tuneIndex];
+        }
+
+        /// <summary>
+        /// Установить значение в powersVHF по индексам [powerIndex, tuneIndex]
+        /// </summary>
+        public void SetPowerVHF(int powerIndex, int tuneIndex, ushort value)
+        {
+            ValidateIndices(powerIndex, tuneIndex, POWERS_TOTAL, VHF_ARRAY_SIZE, "VHF");
+            powersVHF[powerIndex * VHF_ARRAY_SIZE + tuneIndex] = value;
+        }
+
+        /// <summary>
+        /// Получить значение из powersUHF по индексам [powerIndex, tuneIndex]
+        /// </summary>
+        public ushort GetPowerUHF(int powerIndex, int tuneIndex)
+        {
+            ValidateIndices(powerIndex, tuneIndex, POWERS_TOTAL, UHF_ARRAY_SIZE, "UHF");
+            return powersUHF[powerIndex * UHF_ARRAY_SIZE + tuneIndex];
+        }
+
+        /// <summary>
+        /// Установить значение в powersUHF по индексам [powerIndex, tuneIndex]
+        /// </summary>
+        public void SetPowerUHF(int powerIndex, int tuneIndex, ushort value)
+        {
+            ValidateIndices(powerIndex, tuneIndex, POWERS_TOTAL, UHF_ARRAY_SIZE, "UHF");
+            powersUHF[powerIndex * UHF_ARRAY_SIZE + tuneIndex] = value;
         }
 
 

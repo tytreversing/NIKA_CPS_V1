@@ -193,6 +193,8 @@ namespace NIKA_CPS_V1
 
         private void updateProgess(int progressPercentage)
         {
+            if (progressPercentage >= 96)
+                progressPercentage = 100;
             pBar.Value = progressPercentage;
         }
 
@@ -441,9 +443,9 @@ namespace NIKA_CPS_V1
             dataObj.dataSector = -1;
             for (int num3 = dataObj.flashAddress + dataObj.transferLength - num2; num3 > 0; num3 = dataObj.flashAddress + dataObj.transferLength - num2)
             {
-                if (num3 > 1024)
+                if (num3 > 32)
                 {
-                    num3 = 1024;
+                    num3 = 32;
                 }
                 if (dataObj.dataSector == -1 && !flashWritePrepareSector(port, writeCommandCharacter, num2, ref sendbuffer, ref readbuffer, dataObj))
                 {
@@ -631,6 +633,7 @@ namespace NIKA_CPS_V1
             saveFileDialog.InitialDirectory = initialDirectory;
             if (saveFileDialog.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(saveFileDialog.FileName))
             {
+                buildCalDataFromVariables(CalData);
                 try
                 {
                     using (FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.Create))
@@ -1033,21 +1036,19 @@ namespace NIKA_CPS_V1
             nmVHFOscRef.Value = c.OscRefTuneVHF;
             nmUHFOscRef.Value = c.OscRefTuneVHF;
             //tlpVHF
-            var vhfPowers = c.PowersVHFAs2D;
-            var uhfPowers = c.PowersUHFAs2D;
             for (int i = 0; i < 5; i++)
             {
 
                 frequenciesTxVHF[i].Text = ((radioBandlimits.VHFLowCal + (i * 950000)) / 100000.0f).ToString("N3");
-                power8VHF[i].Value = vhfPowers[8][i];
-                power7VHF[i].Value = vhfPowers[7][i];
-                power6VHF[i].Value = vhfPowers[6][i];
-                power5VHF[i].Value = vhfPowers[5][i];
-                power4VHF[i].Value = vhfPowers[4][i];
-                power3VHF[i].Value = vhfPowers[3][i];
-                power2VHF[i].Value = vhfPowers[2][i];
-                power1VHF[i].Value = vhfPowers[1][i];
-                power0VHF[i].Value = vhfPowers[0][i];
+                power8VHF[i].Value = c.GetPowerVHF(8, i);
+                power7VHF[i].Value = c.GetPowerVHF(7, i);
+                power6VHF[i].Value = c.GetPowerVHF(6, i);
+                power5VHF[i].Value = c.GetPowerVHF(5, i);
+                power4VHF[i].Value = c.GetPowerVHF(4, i);
+                power3VHF[i].Value = c.GetPowerVHF(3, i);
+                power2VHF[i].Value = c.GetPowerVHF(2, i);
+                power1VHF[i].Value = c.GetPowerVHF(1, i);
+                power0VHF[i].Value = c.GetPowerVHF(0, i);
                 rxTuningVHF[i].Value = c.RxTuneVHF[i];
                 iGainDMRVHF[i].Value = c.IGainDMRVHF[i];
                 qGainDMRVHF[i].Value = c.QGainDMRVHF[i];
@@ -1058,15 +1059,15 @@ namespace NIKA_CPS_V1
             {
 
                 frequenciesTxUHF[i].Text = ((radioBandlimits.UHFLowCal + (i * 1000000)) / 100000.0f).ToString("N3");
-                power8UHF[i].Value = uhfPowers[8][i];
-                power7UHF[i].Value = uhfPowers[7][i];
-                power6UHF[i].Value = uhfPowers[6][i];
-                power5UHF[i].Value = uhfPowers[5][i];
-                power4UHF[i].Value = uhfPowers[4][i];
-                power3UHF[i].Value = uhfPowers[3][i];
-                power2UHF[i].Value = uhfPowers[2][i];
-                power1UHF[i].Value = uhfPowers[1][i];
-                power0UHF[i].Value = uhfPowers[0][i];
+                power8UHF[i].Value = c.GetPowerUHF(8, i);
+                power7UHF[i].Value = c.GetPowerUHF(7, i);
+                power6UHF[i].Value = c.GetPowerUHF(6, i);
+                power5UHF[i].Value = c.GetPowerUHF(5, i);
+                power4UHF[i].Value = c.GetPowerUHF(4, i);
+                power3UHF[i].Value = c.GetPowerUHF(3, i);
+                power2UHF[i].Value = c.GetPowerUHF(2, i);
+                power1UHF[i].Value = c.GetPowerUHF(1, i);
+                power0UHF[i].Value = c.GetPowerUHF(0, i);
                 rxTuningUHF[i].Value = c.RxTuneUHF[i];
                 iGainDMRUHF[i].Value = c.IGainDMRUHF[i];
                 qGainDMRUHF[i].Value = c.QGainDMRUHF[i];
@@ -1086,15 +1087,15 @@ namespace NIKA_CPS_V1
                 c.OscRefTuneUHF = (byte)nmUHFOscRef.Value;
                 for (int i = 0; i < 5; i++)
                 {
-                    c.PowersVHFAs2D[8][i] = (ushort)power8VHF[i].Value;
-                    c.PowersVHFAs2D[7][i] = (ushort)power7VHF[i].Value;
-                    c.PowersVHFAs2D[6][i] = (ushort)power6VHF[i].Value;
-                    c.PowersVHFAs2D[5][i] = (ushort)power5VHF[i].Value;
-                    c.PowersVHFAs2D[4][i] = (ushort)power4VHF[i].Value;
-                    c.PowersVHFAs2D[3][i] = (ushort)power3VHF[i].Value;
-                    c.PowersVHFAs2D[2][i] = (ushort)power2VHF[i].Value;
-                    c.PowersVHFAs2D[1][i] = (ushort)power1VHF[i].Value;
-                    c.PowersVHFAs2D[0][i] = (ushort)power0VHF[i].Value;
+                    c.SetPowerVHF(8, i, (ushort)power8VHF[i].Value);
+                    c.SetPowerVHF(7, i, (ushort)power7VHF[i].Value);
+                    c.SetPowerVHF(6, i, (ushort)power6VHF[i].Value);
+                    c.SetPowerVHF(5, i, (ushort)power5VHF[i].Value);
+                    c.SetPowerVHF(4, i, (ushort)power4VHF[i].Value);
+                    c.SetPowerVHF(3, i, (ushort)power3VHF[i].Value);
+                    c.SetPowerVHF(2, i, (ushort)power2VHF[i].Value);
+                    c.SetPowerVHF(1, i, (ushort)power1VHF[i].Value);
+                    c.SetPowerVHF(0, i, (ushort)power0VHF[i].Value);
                     c.RxTuneVHF[i] = (byte)rxTuningVHF[i].Value;
                     c.IGainDMRVHF[i] = (byte)iGainDMRVHF[i].Value;
                     c.QGainDMRVHF[i] = (byte)qGainDMRVHF[i].Value;
@@ -1103,15 +1104,15 @@ namespace NIKA_CPS_V1
                 }
                 for (int i = 0; i < 9; i++)
                 {
-                    c.PowersUHFAs2D[8][i] = (ushort)power8UHF[i].Value;
-                    c.PowersUHFAs2D[7][i] = (ushort)power7UHF[i].Value;
-                    c.PowersUHFAs2D[6][i] = (ushort)power6UHF[i].Value;
-                    c.PowersUHFAs2D[5][i] = (ushort)power5UHF[i].Value;
-                    c.PowersUHFAs2D[4][i] = (ushort)power4UHF[i].Value;
-                    c.PowersUHFAs2D[3][i] = (ushort)power3UHF[i].Value;
-                    c.PowersUHFAs2D[2][i] = (ushort)power2UHF[i].Value;
-                    c.PowersUHFAs2D[1][i] = (ushort)power1UHF[i].Value;
-                    c.PowersUHFAs2D[0][i] = (ushort)power0UHF[i].Value;
+                    c.SetPowerUHF(8, i, (ushort)power8UHF[i].Value);
+                    c.SetPowerUHF(7, i, (ushort)power7UHF[i].Value);
+                    c.SetPowerUHF(6, i, (ushort)power6UHF[i].Value);
+                    c.SetPowerUHF(5, i, (ushort)power5UHF[i].Value);
+                    c.SetPowerUHF(4, i, (ushort)power4UHF[i].Value);
+                    c.SetPowerUHF(3, i, (ushort)power3UHF[i].Value);
+                    c.SetPowerUHF(2, i, (ushort)power2UHF[i].Value);
+                    c.SetPowerUHF(1, i, (ushort)power1UHF[i].Value);
+                    c.SetPowerUHF(0, i, (ushort)power0UHF[i].Value);
                     c.RxTuneUHF[i] = (byte)rxTuningUHF[i].Value;
                     c.IGainDMRUHF[i] = (byte)iGainDMRUHF[i].Value;
                     c.QGainDMRUHF[i] = (byte)qGainDMRUHF[i].Value;
