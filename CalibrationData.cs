@@ -143,7 +143,7 @@ namespace NIKA_CPS_V1
 
         public CalibrationData()
         {
-            checksum = 0;
+            checksum = 0xDEFECA7E; //указание прошивке регенерировать чексумму
             OscRefTuneVHF = 0;
             OscRefTuneUHF = 0;
 

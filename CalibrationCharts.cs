@@ -15,15 +15,15 @@ namespace NIKA_CPS_V1
         public CalibrationCharts(CalibrationData calData)
         {
             InitializeComponent();
-            chPowers.Series["srVHFPow0"].LegendText = "Уровень мощности 1";
-            chPowers.Series["srVHFPow1"].LegendText = "Уровень мощности 2";
-            chPowers.Series["srVHFPow2"].LegendText = "Уровень мощности 3";
-            chPowers.Series["srVHFPow3"].LegendText = "Уровень мощности 4";
-            chPowers.Series["srVHFPow4"].LegendText = "Уровень мощности 5";
-            chPowers.Series["srVHFPow5"].LegendText = "Уровень мощности 6";
-            chPowers.Series["srVHFPow6"].LegendText = "Уровень мощности 7";
-            chPowers.Series["srVHFPow7"].LegendText = "Уровень мощности 8";
-            chPowers.Series["srVHFPow8"].LegendText = "Уровень мощности 9";
+            chPowers.Series["srVHFPow0"].LegendText = "Мощность 100 мВт";
+            chPowers.Series["srVHFPow1"].LegendText = "Мощность 250 мВт";
+            chPowers.Series["srVHFPow2"].LegendText = "Мощность 500 мВт";
+            chPowers.Series["srVHFPow3"].LegendText = "Мощность 750 мВт";
+            chPowers.Series["srVHFPow4"].LegendText = "Мощность 1 Вт";
+            chPowers.Series["srVHFPow5"].LegendText = "Мощность 5 Вт";
+            chPowers.Series["srVHFPow6"].LegendText = "Мощность 10 Вт";
+            chPowers.Series["srVHFPow7"].LegendText = "Мощность 25 Вт";
+            chPowers.Series["srVHFPow8"].LegendText = "Мощность 40 Вт";
             for (int i = 0; i < 5; i++)
             {
                 chPowers.Series["srVHFPow0"].Points.AddXY(i, calData.PowersVHFAs2D[0][i]);
@@ -36,15 +36,15 @@ namespace NIKA_CPS_V1
                 chPowers.Series["srVHFPow7"].Points.AddXY(i, calData.PowersVHFAs2D[7][i]);
                 chPowers.Series["srVHFPow8"].Points.AddXY(i, calData.PowersVHFAs2D[8][i]);
             }
-            chPowers.Series["srUHFPow0"].LegendText = "Уровень мощности 1";
-            chPowers.Series["srUHFPow1"].LegendText = "Уровень мощности 2";
-            chPowers.Series["srUHFPow2"].LegendText = "Уровень мощности 3";
-            chPowers.Series["srUHFPow3"].LegendText = "Уровень мощности 4";
-            chPowers.Series["srUHFPow4"].LegendText = "Уровень мощности 5";
-            chPowers.Series["srUHFPow5"].LegendText = "Уровень мощности 6";
-            chPowers.Series["srUHFPow6"].LegendText = "Уровень мощности 7";
-            chPowers.Series["srUHFPow7"].LegendText = "Уровень мощности 8";
-            chPowers.Series["srUHFPow8"].LegendText = "Уровень мощности 9";
+            chPowers.Series["srUHFPow0"].LegendText = "Мощность 100 мВт";
+            chPowers.Series["srUHFPow1"].LegendText = "Мощность 250 мВт";
+            chPowers.Series["srUHFPow2"].LegendText = "Мощность 500 мВт";
+            chPowers.Series["srUHFPow3"].LegendText = "Мощность 750 мВт";
+            chPowers.Series["srUHFPow4"].LegendText = "Мощность 1 Вт";
+            chPowers.Series["srUHFPow5"].LegendText = "Мощность 5 Вт";
+            chPowers.Series["srUHFPow6"].LegendText = "Мощность 10 Вт";
+            chPowers.Series["srUHFPow7"].LegendText = "Мощность 25 Вт";
+            chPowers.Series["srUHFPow8"].LegendText = "Мощность 40 Вт";
             for (int i = 0; i < 9; i++)
             {
                 chPowers.Series["srUHFPow0"].Points.AddXY(i, calData.PowersUHFAs2D[0][i]);

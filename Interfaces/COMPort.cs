@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NIKA_CPS_V1;
+using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
@@ -29,15 +30,13 @@ internal static class COMPort
         }
         try
         {
-            string text = RegistryOperations.getProfileStringWithDefault("COMPort", "");
-
-            if (text == null)
+            if (MainForm.COMPortUsed == "")
             {
                 MessageBox.Show("COM-порт не выбран!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                Port = new SerialPort(text, 115200, Parity.None, 8, StopBits.One);
+                Port = new SerialPort(MainForm.COMPortUsed, 115200, Parity.None, 8, StopBits.One);
                 Port.ReadTimeout = 1000;
             }
         }

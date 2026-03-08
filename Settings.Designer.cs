@@ -42,6 +42,7 @@
             this.cbExpandContacts = new System.Windows.Forms.CheckBox();
             this.cbExpandChannels = new System.Windows.Forms.CheckBox();
             this.cbConfirmExit = new System.Windows.Forms.CheckBox();
+            this.cbInfoBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // cbShowSplashScreen
@@ -193,11 +194,22 @@
             this.cbConfirmExit.Text = "Запрашивать подтверждение при выходе";
             this.cbConfirmExit.UseVisualStyleBackColor = true;
             // 
+            // cbInfoBox
+            // 
+            this.cbInfoBox.AutoSize = true;
+            this.cbInfoBox.Location = new System.Drawing.Point(14, 156);
+            this.cbInfoBox.Name = "cbInfoBox";
+            this.cbInfoBox.Size = new System.Drawing.Size(300, 19);
+            this.cbInfoBox.TabIndex = 14;
+            this.cbInfoBox.Text = "Окно с информацией при обнаружении рации";
+            this.cbInfoBox.UseVisualStyleBackColor = true;
+            // 
             // Settings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(470, 278);
+            this.Controls.Add(this.cbInfoBox);
             this.Controls.Add(this.cbConfirmExit);
             this.Controls.Add(this.cbExpandChannels);
             this.Controls.Add(this.cbExpandContacts);
@@ -245,5 +257,6 @@
         private System.Windows.Forms.CheckBox cbExpandContacts;
         private System.Windows.Forms.CheckBox cbExpandChannels;
         private System.Windows.Forms.CheckBox cbConfirmExit;
+        private System.Windows.Forms.CheckBox cbInfoBox;
     }
 }

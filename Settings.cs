@@ -23,15 +23,16 @@ namespace NIKA_CPS_V1
 
         private void Settings_Load(object sender, EventArgs e)
         {
-            cbShowSplashScreen.Checked = (RegistryOperations.getProfileIntWithDefault("ShowSplashScreen", 1) != 0);
-            cbUseVoiceHelp.Checked = (RegistryOperations.getProfileIntWithDefault("AccessibilityOptions", 0) != 0);
-            rbFastPolling.Checked = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) != 0);
+            cbShowSplashScreen.Checked = (RegistryOperations.IsFlagSet("ShowSplashScreen"));
+            cbUseVoiceHelp.Checked = (RegistryOperations.IsFlagSet("AccessibilityOptions", false));
+            rbFastPolling.Checked = (RegistryOperations.IsFlagSet("UsingFastPolling"));
             rbSlowPolling.Checked = !rbFastPolling.Checked;
             tbRadioVID.Text = MainForm.radioVID;
             tbRadioPID.Text = MainForm.radioPID;
-            cbConfirmExit.Checked = (RegistryOperations.getProfileIntWithDefault("ConfirmExit", 1) != 0);
-            cbExpandContacts.Checked = (RegistryOperations.getProfileIntWithDefault("ExpandContacts", 0) != 0);
-            cbExpandChannels.Checked = (RegistryOperations.getProfileIntWithDefault("ExpandChannels", 0) != 0);
+            cbConfirmExit.Checked = (RegistryOperations.IsFlagSet("ConfirmExit"));
+            cbExpandContacts.Checked = (RegistryOperations.IsFlagSet("ExpandContacts", false));
+            cbExpandChannels.Checked = (RegistryOperations.IsFlagSet("ExpandChannels", false));
+            cbInfoBox.Checked = (RegistryOperations.IsFlagSet("ShowInfoBox"));
             if (MainForm.hasFullAccess)
             {
                 lVID.Visible = true;
@@ -39,17 +40,19 @@ namespace NIKA_CPS_V1
                 tbRadioPID.Visible = true;
                 tbRadioVID.Visible = true;
                 cbConfirmExit.Location = new Point(14, 193);
+                cbInfoBox.Location = new Point(14, 210);
             }
         }
 
         private void bSaveAppSettings_Click(object sender, EventArgs e)
         {
-            RegistryOperations.WriteProfileInt("ShowSplashScreen", (cbShowSplashScreen.Checked ? 1 : 0));
-            RegistryOperations.WriteProfileInt("AccessibilityOptions", (cbUseVoiceHelp.Checked ? 1 : 0));
-            RegistryOperations.WriteProfileInt("ConfirmExit", (cbConfirmExit.Checked ? 1 : 0));
-            RegistryOperations.WriteProfileInt("UsingFastPolling", (rbFastPolling.Checked ? 1 : 0));
-            RegistryOperations.WriteProfileInt("ExpandContacts", (cbExpandContacts.Checked ? 1 : 0));
-            RegistryOperations.WriteProfileInt("ExpandChannels", (cbExpandChannels.Checked ? 1 : 0));
+            RegistryOperations.SetFlag("ShowSplashScreen", cbShowSplashScreen.Checked);
+            RegistryOperations.SetFlag("AccessibilityOptions", cbUseVoiceHelp.Checked);
+            RegistryOperations.SetFlag("ConfirmExit", cbConfirmExit.Checked);
+            RegistryOperations.SetFlag("UsingFastPolling", rbFastPolling.Checked);
+            RegistryOperations.SetFlag("ExpandContacts", cbExpandContacts.Checked);
+            RegistryOperations.SetFlag("ExpandChannels", cbExpandChannels.Checked);
+            RegistryOperations.SetFlag("ShowInfoBox", cbInfoBox.Checked);
             MainForm.playAudio = cbUseVoiceHelp.Checked;
             if (MainForm.isValidHex(tbRadioVID.Text))
             {

@@ -240,6 +240,7 @@
     </Compile>
     <Compile Include="Interfaces\COMPort.cs" />
     <Compile Include="Interfaces\DataTransfer.cs" />
+    <Compile Include="Interfaces\FirmwareInterface.cs" />
     <Compile Include="Interfaces\FirmwareUpdateMessageEventArgs.cs" />
     <Compile Include="Interfaces\FirmwareUpdateProgressEventArgs.cs" />
     <Compile Include="Interfaces\FirmwareUpdateProgressEventHandler.cs" />
