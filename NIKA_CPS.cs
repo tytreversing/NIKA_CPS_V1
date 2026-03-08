@@ -868,7 +868,9 @@ namespace NIKA_CPS_V1
 
         private void msiCalibration_Click(object sender, EventArgs e)
         {
+            pollingTimer.Stop();
             new CalibrationForm().ShowDialog();
+            pollingTimer.Start();
         }
 
 

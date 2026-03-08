@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Wave;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,11 +7,12 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NAudio.Wave;
 
 namespace NIKA_CPS_V1
 {
@@ -206,6 +208,8 @@ namespace NIKA_CPS_V1
             }
             return -1;
         }
+
+
 
         private void tsbOpen_Click(object sender, EventArgs e)
         {

@@ -89,6 +89,7 @@ namespace NIKA_CPS_V1
         private Label label54;
         private Button btnClearColors;
         private Button btnChart;
+        private ProgressBar pBar;
         CalibrationData CalData = new CalibrationData();
 
         public CalibrationForm()
@@ -192,6 +193,7 @@ namespace NIKA_CPS_V1
 
         private void updateProgess(int progressPercentage)
         {
+            pBar.Value = progressPercentage;
         }
 
 
@@ -327,6 +329,7 @@ namespace NIKA_CPS_V1
             FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
             FirmwareInterface.sendCommand(COMPort.Port, 3);
             FirmwareInterface.sendCommand(COMPort.Port, 6, 4);
+            pBar.Value = 0;
             COMData.mode = DataTransfer.DataMode.DataModeWriteFlash;
             COMData.localAddress = 0;
             COMData.flashAddress = CALIBRATIONS_ADDRESS ;
@@ -439,7 +442,9 @@ namespace NIKA_CPS_V1
             for (int num3 = dataObj.flashAddress + dataObj.transferLength - num2; num3 > 0; num3 = dataObj.flashAddress + dataObj.transferLength - num2)
             {
                 if (num3 > 1024)
+                {
                     num3 = 1024;
+                }
                 if (dataObj.dataSector == -1 && !flashWritePrepareSector(port, writeCommandCharacter, num2, ref sendbuffer, ref readbuffer, dataObj))
                 {
                     return false;
@@ -475,7 +480,6 @@ namespace NIKA_CPS_V1
             }
             if (dataObj.dataSector != -1 && !flashWriteSector(port, writeCommandCharacter, ref sendbuffer, ref readbuffer, dataObj))
             {
-                MessageBox.Show($"Запись остановлена по адресу {num2:X8}.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
@@ -1082,15 +1086,15 @@ namespace NIKA_CPS_V1
                 c.OscRefTuneUHF = (byte)nmUHFOscRef.Value;
                 for (int i = 0; i < 5; i++)
                 {
-                    c.PowersUHFAs2D[8][i] = (ushort)power8VHF[i].Value;
-                    c.PowersUHFAs2D[7][i] = (ushort)power7VHF[i].Value;
-                    c.PowersUHFAs2D[6][i] = (ushort)power6VHF[i].Value;
-                    c.PowersUHFAs2D[5][i] = (ushort)power5VHF[i].Value;
-                    c.PowersUHFAs2D[4][i] = (ushort)power4VHF[i].Value;
-                    c.PowersUHFAs2D[3][i] = (ushort)power3VHF[i].Value;
-                    c.PowersUHFAs2D[2][i] = (ushort)power2VHF[i].Value;
-                    c.PowersUHFAs2D[1][i] = (ushort)power1VHF[i].Value;
-                    c.PowersUHFAs2D[0][i] = (ushort)power0VHF[i].Value;
+                    c.PowersVHFAs2D[8][i] = (ushort)power8VHF[i].Value;
+                    c.PowersVHFAs2D[7][i] = (ushort)power7VHF[i].Value;
+                    c.PowersVHFAs2D[6][i] = (ushort)power6VHF[i].Value;
+                    c.PowersVHFAs2D[5][i] = (ushort)power5VHF[i].Value;
+                    c.PowersVHFAs2D[4][i] = (ushort)power4VHF[i].Value;
+                    c.PowersVHFAs2D[3][i] = (ushort)power3VHF[i].Value;
+                    c.PowersVHFAs2D[2][i] = (ushort)power2VHF[i].Value;
+                    c.PowersVHFAs2D[1][i] = (ushort)power1VHF[i].Value;
+                    c.PowersVHFAs2D[0][i] = (ushort)power0VHF[i].Value;
                     c.RxTuneVHF[i] = (byte)rxTuningVHF[i].Value;
                     c.IGainDMRVHF[i] = (byte)iGainDMRVHF[i].Value;
                     c.QGainDMRVHF[i] = (byte)qGainDMRVHF[i].Value;
@@ -1189,6 +1193,7 @@ namespace NIKA_CPS_V1
             this.lblRadioType = new System.Windows.Forms.Label();
             this.btnClearColors = new System.Windows.Forms.Button();
             this.btnChart = new System.Windows.Forms.Button();
+            this.pBar = new System.Windows.Forms.ProgressBar();
             this.tabs.SuspendLayout();
             this.tabVHF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmVHFOscRef)).BeginInit();
@@ -1205,7 +1210,7 @@ namespace NIKA_CPS_V1
             // 
             this.btnWrite.BackColor = System.Drawing.Color.White;
             this.btnWrite.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnWrite.Location = new System.Drawing.Point(877, 267);
+            this.btnWrite.Location = new System.Drawing.Point(877, 297);
             this.btnWrite.Name = "btnWrite";
             this.btnWrite.Size = new System.Drawing.Size(268, 25);
             this.btnWrite.TabIndex = 1;
@@ -1218,7 +1223,7 @@ namespace NIKA_CPS_V1
             // 
             this.btnReadFile.BackColor = System.Drawing.Color.White;
             this.btnReadFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnReadFile.Location = new System.Drawing.Point(877, 222);
+            this.btnReadFile.Location = new System.Drawing.Point(877, 262);
             this.btnReadFile.Name = "btnReadFile";
             this.btnReadFile.Size = new System.Drawing.Size(268, 25);
             this.btnReadFile.TabIndex = 1;
@@ -1230,7 +1235,7 @@ namespace NIKA_CPS_V1
             // 
             this.btnReadFromRadio.BackColor = System.Drawing.Color.White;
             this.btnReadFromRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnReadFromRadio.Location = new System.Drawing.Point(877, 177);
+            this.btnReadFromRadio.Location = new System.Drawing.Point(877, 227);
             this.btnReadFromRadio.Name = "btnReadFromRadio";
             this.btnReadFromRadio.Size = new System.Drawing.Size(268, 25);
             this.btnReadFromRadio.TabIndex = 1;
@@ -1242,7 +1247,7 @@ namespace NIKA_CPS_V1
             // 
             this.btnSaveCalibration.BackColor = System.Drawing.Color.White;
             this.btnSaveCalibration.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSaveCalibration.Location = new System.Drawing.Point(877, 312);
+            this.btnSaveCalibration.Location = new System.Drawing.Point(877, 332);
             this.btnSaveCalibration.Name = "btnSaveCalibration";
             this.btnSaveCalibration.Size = new System.Drawing.Size(268, 25);
             this.btnSaveCalibration.TabIndex = 1;
@@ -1825,7 +1830,7 @@ namespace NIKA_CPS_V1
             // 
             this.btnReadFactoryFromRadio.BackColor = System.Drawing.Color.White;
             this.btnReadFactoryFromRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnReadFactoryFromRadio.Location = new System.Drawing.Point(877, 357);
+            this.btnReadFactoryFromRadio.Location = new System.Drawing.Point(877, 367);
             this.btnReadFactoryFromRadio.Name = "btnReadFactoryFromRadio";
             this.btnReadFactoryFromRadio.Size = new System.Drawing.Size(268, 25);
             this.btnReadFactoryFromRadio.TabIndex = 5;
@@ -1858,7 +1863,7 @@ namespace NIKA_CPS_V1
             // 
             this.btnChart.BackColor = System.Drawing.Color.White;
             this.btnChart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnChart.Location = new System.Drawing.Point(877, 132);
+            this.btnChart.Location = new System.Drawing.Point(877, 192);
             this.btnChart.Name = "btnChart";
             this.btnChart.Size = new System.Drawing.Size(268, 25);
             this.btnChart.TabIndex = 11;
@@ -1867,11 +1872,21 @@ namespace NIKA_CPS_V1
             this.btnChart.Visible = false;
             this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
             // 
+            // pBar
+            // 
+            this.pBar.ForeColor = System.Drawing.Color.Red;
+            this.pBar.Location = new System.Drawing.Point(877, 135);
+            this.pBar.Name = "pBar";
+            this.pBar.Size = new System.Drawing.Size(267, 18);
+            this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pBar.TabIndex = 12;
+            // 
             // CalibrationForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1156, 454);
+            this.Controls.Add(this.pBar);
             this.Controls.Add(this.btnChart);
             this.Controls.Add(this.btnClearColors);
             this.Controls.Add(this.lblRadioType);
