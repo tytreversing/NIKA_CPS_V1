@@ -7,12 +7,14 @@ namespace NIKA_CPS_V1
 {
     [Serializable]
     [XmlRoot("NIKA_V1_Calibrations")]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 0x14C)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 0x150)]
     public class CalibrationData
     {
         private const int VHF_ARRAY_SIZE = 5;
         private const int UHF_ARRAY_SIZE = 9;
         private const int POWERS_TOTAL = 9;
+        // Полином STM32F4 (0x04C11DB7)
+        private const uint STM32F4_POLYNOME = 0x04C11DB7;
         [XmlElement("Checksum")]
         [MarshalAs(UnmanagedType.U4)]
         public uint checksum;
@@ -76,6 +78,18 @@ namespace NIKA_CPS_V1
         [XmlElement("RSSI70")]
         [MarshalAs(UnmanagedType.U2)]
         public ushort RSSI70;
+        [XmlElement("DevFMVHF")]
+        [MarshalAs(UnmanagedType.U1)]
+        public byte DevFMVHF;
+        [XmlElement("DevFMNVHF")]
+        [MarshalAs(UnmanagedType.U1)]
+        public byte DevFMNVHF;
+        [XmlElement("DevFMUHF")]
+        [MarshalAs(UnmanagedType.U1)]
+        public byte DevFMUHF;
+        [XmlElement("DevFMNUHF")]
+        [MarshalAs(UnmanagedType.U1)]
+        public byte DevFMNUHF;
 
         private void ValidateIndices(int powerIndex, int tuneIndex, int maxPower, int maxTune, string band)
         {
@@ -151,6 +165,11 @@ namespace NIKA_CPS_V1
 
             RSSI120 = 0;
             RSSI70 = 0;
+
+            DevFMVHF = 0;
+            DevFMNVHF = 0;
+            DevFMUHF = 0;
+            DevFMNUHF = 0;
         }
     }
 

@@ -1,17 +1,18 @@
-﻿using System;
+﻿using NIKA_CPS_V1.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Media;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using NIKA_CPS_V1.Interfaces;
 
 
 
@@ -23,7 +24,7 @@ namespace NIKA_CPS_V1
 
         public static int CALIBRATIONS_ADDRESS = 0x10000;
 
-        public static int CALIBRATION_TABLE_SIZE = 0x14C;
+        public static int CALIBRATION_TABLE_SIZE = 0x150;
 
         private char writeCommandCharacter = 'W';
 
@@ -90,7 +91,15 @@ namespace NIKA_CPS_V1
         private Button btnClearColors;
         private Button btnChart;
         private ProgressBar pBar;
-        CalibrationData CalData = new CalibrationData();
+        private NumericUpDown nmDevFMVHF;
+        private Label label1;
+        private NumericUpDown nmDevFMNVHF;
+        private Label label2;
+        private Label label4;
+        private NumericUpDown nmDevFMUHF;
+        private Label label3;
+        private NumericUpDown nmDevFMNUHF;
+        public static CalibrationData CalData = new CalibrationData();
 
         public CalibrationForm()
         {
@@ -114,7 +123,7 @@ namespace NIKA_CPS_V1
             prop?.SetValue(control, true, null);
         }
 
-        private RadioBandlimits radioBandlimits = new();
+        public static RadioBandlimits radioBandlimits = new();
 
         private static RadioBandlimits ByteArrayToRadioBandlimits(byte[] bytes)
         {
@@ -193,7 +202,7 @@ namespace NIKA_CPS_V1
 
         private void updateProgess(int progressPercentage)
         {
-            if (progressPercentage >= 96)
+            if (progressPercentage >= 90)
                 progressPercentage = 100;
             pBar.Value = progressPercentage;
         }
@@ -698,79 +707,19 @@ namespace NIKA_CPS_V1
                 frequenciesTxVHF[i].Height = 20;
                 frequenciesTxVHF[i].Margin = margin;
                 frequenciesTxVHF[i].ReadOnly = true;
-
-                power8VHF[i] = new NumericUpDown();
-                power8VHF[i].Width = 74;
-                power8VHF[i].Increment = 1;
-                power8VHF[i].Height = 20;
-                power8VHF[i].Margin = margin;
-                power8VHF[i].Minimum = 0;
-                power8VHF[i].Maximum = 4095;
-                power8VHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power7VHF[i] = new NumericUpDown();
-                power7VHF[i].Width = 74;
-                power7VHF[i].Increment = 1;
-                power7VHF[i].Height = 20;
-                power7VHF[i].Margin = margin;
-                power7VHF[i].Minimum = 0;
-                power7VHF[i].Maximum = 4095;
-                power7VHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power6VHF[i] = new NumericUpDown();
-                power6VHF[i].Width = 74;
-                power6VHF[i].Increment = 1;
-                power6VHF[i].Height = 20;
-                power6VHF[i].Margin = margin;
-                power6VHF[i].Minimum = 0;
-                power6VHF[i].Maximum = 4095;
-                power6VHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power5VHF[i] = new NumericUpDown();
-                power5VHF[i].Width = 74;
-                power5VHF[i].Increment = 1;
-                power5VHF[i].Height = 20;
-                power5VHF[i].Margin = margin;
-                power5VHF[i].Minimum = 0;
-                power5VHF[i].Maximum = 4095;
-                power5VHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power4VHF[i] = new NumericUpDown();
-                power4VHF[i].Width = 74;
-                power4VHF[i].Increment = 1;
-                power4VHF[i].Height = 20;
-                power4VHF[i].Margin = margin;
-                power4VHF[i].Minimum = 0;
-                power4VHF[i].Maximum = 4095;
-                power4VHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power3VHF[i] = new NumericUpDown();
-                power3VHF[i].Width = 74;
-                power3VHF[i].Increment = 1;
-                power3VHF[i].Height = 20;
-                power3VHF[i].Margin = margin;
-                power3VHF[i].Minimum = 0;
-                power3VHF[i].Maximum = 4095;
-                power3VHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power2VHF[i] = new NumericUpDown();
-                power2VHF[i].Width = 74;
-                power2VHF[i].Increment = 1;
-                power2VHF[i].Height = 20;
-                power2VHF[i].Margin = margin;
-                power2VHF[i].Minimum = 0;
-                power2VHF[i].Maximum = 4095;
-                power2VHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power1VHF[i] = new NumericUpDown();
-                power1VHF[i].Width = 74;
-                power1VHF[i].Increment = 1;
-                power1VHF[i].Height = 20;
-                power1VHF[i].Margin = margin;
-                power1VHF[i].Minimum = 0;
-                power1VHF[i].Maximum = 4095;
-                power1VHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power0VHF[i] = new NumericUpDown();
-                power0VHF[i].Width = 74;
-                power0VHF[i].Increment = 1;
-                power0VHF[i].Height = 20;
-                power0VHF[i].Margin = margin;
-                power0VHF[i].Minimum = 0;
-                power0VHF[i].Maximum = 4095;
-                power0VHF[i].ValueChanged += new EventHandler(nmValueChanged);
+                var powerControls = new[] { power0VHF, power1VHF, power2VHF, power3VHF,
+                           power4VHF, power5VHF, power6VHF, power7VHF, power8VHF };
+                for (int j = 0; j < 9; j++)
+                {
+                    powerControls[j][i] = new NumericUpDown();
+                    powerControls[j][i].Width = 74;
+                    powerControls[j][i].Increment = 1;
+                    powerControls[j][i].Height = 20;
+                    powerControls[j][i].Margin = margin;
+                    powerControls[j][i].Minimum = 0;
+                    powerControls[j][i].Maximum = 4095;
+                    powerControls[j][i].ValueChanged += new EventHandler(nmValueChanged);
+                }
                 rxTuningVHF[i] = new NumericUpDown();
                 rxTuningVHF[i].Width = 74;
                 rxTuningVHF[i].Height = 20;
@@ -830,79 +779,19 @@ namespace NIKA_CPS_V1
                 frequenciesTxUHF[i].Height = 20;
                 frequenciesTxUHF[i].Margin = margin;
                 frequenciesTxUHF[i].ReadOnly = true;
-            
-                power8UHF[i] = new NumericUpDown();
-                power8UHF[i].Width = 74;
-                power8UHF[i].Increment = 1;
-                power8UHF[i].Height = 20;
-                power8UHF[i].Margin = margin;
-                power8UHF[i].Minimum = 0;
-                power8UHF[i].Maximum = 4095;
-                power8UHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power7UHF[i] = new NumericUpDown();
-                power7UHF[i].Width = 74;
-                power7UHF[i].Increment = 1;
-                power7UHF[i].Height = 20;
-                power7UHF[i].Margin = margin;
-                power7UHF[i].Minimum = 0;
-                power7UHF[i].Maximum = 4095;
-                power7UHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power6UHF[i] = new NumericUpDown();
-                power6UHF[i].Width = 74;
-                power6UHF[i].Increment = 1;
-                power6UHF[i].Height = 20;
-                power6UHF[i].Margin = margin;
-                power6UHF[i].Minimum = 0;
-                power6UHF[i].Maximum = 4095;
-                power6UHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power5UHF[i] = new NumericUpDown();
-                power5UHF[i].Width = 74;
-                power5UHF[i].Increment = 1;
-                power5UHF[i].Height = 20;
-                power5UHF[i].Margin = margin;
-                power5UHF[i].Minimum = 0;
-                power5UHF[i].Maximum = 4095;
-                power5UHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power4UHF[i] = new NumericUpDown();
-                power4UHF[i].Width = 74;
-                power4UHF[i].Increment = 1;
-                power4UHF[i].Height = 20;
-                power4UHF[i].Margin = margin;
-                power4UHF[i].Minimum = 0;
-                power4UHF[i].Maximum = 4095;
-                power4UHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power3UHF[i] = new NumericUpDown();
-                power3UHF[i].Width = 74;
-                power3UHF[i].Increment = 1;
-                power3UHF[i].Height = 20;
-                power3UHF[i].Margin = margin;
-                power3UHF[i].Minimum = 0;
-                power3UHF[i].Maximum = 4095;
-                power3UHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power2UHF[i] = new NumericUpDown();
-                power2UHF[i].Width = 74;
-                power2UHF[i].Increment = 1;
-                power2UHF[i].Height = 20;
-                power2UHF[i].Margin = margin;
-                power2UHF[i].Minimum = 0;
-                power2UHF[i].Maximum = 4095;
-                power2UHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power1UHF[i] = new NumericUpDown();
-                power1UHF[i].Width = 74;
-                power1UHF[i].Increment = 1;
-                power1UHF[i].Height = 20;
-                power1UHF[i].Margin = margin;
-                power1UHF[i].Minimum = 0;
-                power1UHF[i].Maximum = 4095;
-                power1UHF[i].ValueChanged += new EventHandler(nmValueChanged);
-                power0UHF[i] = new NumericUpDown();
-                power0UHF[i].Width = 74;
-                power0UHF[i].Increment = 1;
-                power0UHF[i].Height = 20;
-                power0UHF[i].Margin = margin;
-                power0UHF[i].Minimum = 0;
-                power0UHF[i].Maximum = 4095;
-                power0UHF[i].ValueChanged += new EventHandler(nmValueChanged);
+                var powerControls = new[] { power0UHF, power1UHF, power2UHF, power3UHF,
+           power4UHF, power5UHF, power6UHF, power7UHF, power8UHF };
+                for (int j = 0; j < 9; j++)
+                {
+                    powerControls[j][i] = new NumericUpDown();
+                    powerControls[j][i].Width = 74;
+                    powerControls[j][i].Increment = 1;
+                    powerControls[j][i].Height = 20;
+                    powerControls[j][i].Margin = margin;
+                    powerControls[j][i].Minimum = 0;
+                    powerControls[j][i].Maximum = 4095;
+                    powerControls[j][i].ValueChanged += new EventHandler(nmValueChanged);
+                }
                 rxTuningUHF[i] = new NumericUpDown();
                 rxTuningUHF[i].Width = 74;
                 rxTuningUHF[i].Height = 20;
@@ -956,19 +845,10 @@ namespace NIKA_CPS_V1
                 tlpUHF.Controls.Add(qGainFMUHF[i], i + 1, 14);
             }
 
-            foreach (var item in tlpVHF.Controls)
+            foreach (var item in tlpVHF.Controls.OfType<NumericUpDown>()
+                .Concat(tlpUHF.Controls.OfType<NumericUpDown>()))
             {
-                if (item is NumericUpDown)
-                {
-                    ((NumericUpDown)item).Click += new EventHandler(nmClick);
-                }
-            }
-            foreach (var item in tlpUHF.Controls)
-            {
-                if (item is NumericUpDown)
-                {
-                    ((NumericUpDown)item).Click += new EventHandler(nmClick);
-                }
+                item.Click += nmClick;
             }
 
             commonFont = new Font(power8UHF[0].Font.Name, power8UHF[0].Font.Size, FontStyle.Regular);
@@ -1028,28 +908,30 @@ namespace NIKA_CPS_V1
 
         private void buildVariablesFromCalData(CalibrationData c)
         {
-            lblRadioType.Text = "Тип рации: ";
+            lblRadioType.Text = "Контрольная сумма: 0x";
 
-            lblRadioType.Text += "TYT MD-9600/Retevis RT-90";
+            lblRadioType.Text += c.checksum.ToString("X8");
             isReading = true;
             nmRSSI120.Value = c.RSSI120;
             nmRSSI70.Value = c.RSSI70;
             nmVHFOscRef.Value = c.OscRefTuneVHF;
             nmUHFOscRef.Value = c.OscRefTuneVHF;
+            nmDevFMNVHF.Value = c.DevFMNVHF;
+            nmDevFMVHF.Value = c.DevFMVHF;
+            nmDevFMNUHF.Value = c.DevFMNUHF;
+            nmDevFMUHF.Value = c.DevFMUHF;
             //tlpVHF
             for (int i = 0; i < 5; i++)
             {
 
                 frequenciesTxVHF[i].Text = ((radioBandlimits.VHFLowCal + (i * 950000)) / 100000.0f).ToString("N3");
-                power8VHF[i].Value = c.GetPowerVHF(8, i);
-                power7VHF[i].Value = c.GetPowerVHF(7, i);
-                power6VHF[i].Value = c.GetPowerVHF(6, i);
-                power5VHF[i].Value = c.GetPowerVHF(5, i);
-                power4VHF[i].Value = c.GetPowerVHF(4, i);
-                power3VHF[i].Value = c.GetPowerVHF(3, i);
-                power2VHF[i].Value = c.GetPowerVHF(2, i);
-                power1VHF[i].Value = c.GetPowerVHF(1, i);
-                power0VHF[i].Value = c.GetPowerVHF(0, i);
+                var powerControls = new[] { power0VHF, power1VHF, power2VHF, power3VHF,
+                           power4VHF, power5VHF, power6VHF, power7VHF, power8VHF };
+
+                for (int j = 0; j < 9; j++)
+                {
+                    powerControls[j][i].Value = c.GetPowerVHF(j, i);
+                }
                 rxTuningVHF[i].Value = c.RxTuneVHF[i];
                 iGainDMRVHF[i].Value = c.IGainDMRVHF[i];
                 qGainDMRVHF[i].Value = c.QGainDMRVHF[i];
@@ -1060,15 +942,13 @@ namespace NIKA_CPS_V1
             {
 
                 frequenciesTxUHF[i].Text = ((radioBandlimits.UHFLowCal + (i * 1000000)) / 100000.0f).ToString("N3");
-                power8UHF[i].Value = c.GetPowerUHF(8, i);
-                power7UHF[i].Value = c.GetPowerUHF(7, i);
-                power6UHF[i].Value = c.GetPowerUHF(6, i);
-                power5UHF[i].Value = c.GetPowerUHF(5, i);
-                power4UHF[i].Value = c.GetPowerUHF(4, i);
-                power3UHF[i].Value = c.GetPowerUHF(3, i);
-                power2UHF[i].Value = c.GetPowerUHF(2, i);
-                power1UHF[i].Value = c.GetPowerUHF(1, i);
-                power0UHF[i].Value = c.GetPowerUHF(0, i);
+                var powerControls = new[] { power0UHF, power1UHF, power2UHF, power3UHF,
+                           power4UHF, power5UHF, power6UHF, power7UHF, power8UHF };
+
+                for (int j = 0; j < 9; j++)
+                {
+                    powerControls[j][i].Value = c.GetPowerUHF(j, i);
+                }
                 rxTuningUHF[i].Value = c.RxTuneUHF[i];
                 iGainDMRUHF[i].Value = c.IGainDMRUHF[i];
                 qGainDMRUHF[i].Value = c.QGainDMRUHF[i];
@@ -1082,21 +962,22 @@ namespace NIKA_CPS_V1
         {
             if (!isReading)
             {
-                c.RSSI120 = (byte)(nmRSSI120.Value);
-                c.RSSI70 = (byte)(nmRSSI70.Value);
+                c.RSSI120 = (ushort)(nmRSSI120.Value);
+                c.RSSI70 = (ushort)(nmRSSI70.Value);
                 c.OscRefTuneVHF = (byte)nmVHFOscRef.Value;
                 c.OscRefTuneUHF = (byte)nmUHFOscRef.Value;
+                c.DevFMNVHF = (byte)nmDevFMNVHF.Value;
+                c.DevFMVHF = (byte)nmDevFMVHF.Value;
+                c.DevFMNUHF = (byte)nmDevFMNUHF.Value;
+                c.DevFMUHF = (byte)nmDevFMUHF.Value;
                 for (int i = 0; i < 5; i++)
                 {
-                    c.SetPowerVHF(8, i, (ushort)power8VHF[i].Value);
-                    c.SetPowerVHF(7, i, (ushort)power7VHF[i].Value);
-                    c.SetPowerVHF(6, i, (ushort)power6VHF[i].Value);
-                    c.SetPowerVHF(5, i, (ushort)power5VHF[i].Value);
-                    c.SetPowerVHF(4, i, (ushort)power4VHF[i].Value);
-                    c.SetPowerVHF(3, i, (ushort)power3VHF[i].Value);
-                    c.SetPowerVHF(2, i, (ushort)power2VHF[i].Value);
-                    c.SetPowerVHF(1, i, (ushort)power1VHF[i].Value);
-                    c.SetPowerVHF(0, i, (ushort)power0VHF[i].Value);
+                    var powerControls = new[] { power0VHF, power1VHF, power2VHF, power3VHF,
+                           power4VHF, power5VHF, power6VHF, power7VHF, power8VHF };
+                    for (int j = 0; j < 9; j++)
+                    {
+                        c.SetPowerVHF(j, i, (ushort)powerControls[j][i].Value);
+                    }
                     c.RxTuneVHF[i] = (byte)rxTuningVHF[i].Value;
                     c.IGainDMRVHF[i] = (byte)iGainDMRVHF[i].Value;
                     c.QGainDMRVHF[i] = (byte)qGainDMRVHF[i].Value;
@@ -1105,15 +986,12 @@ namespace NIKA_CPS_V1
                 }
                 for (int i = 0; i < 9; i++)
                 {
-                    c.SetPowerUHF(8, i, (ushort)power8UHF[i].Value);
-                    c.SetPowerUHF(7, i, (ushort)power7UHF[i].Value);
-                    c.SetPowerUHF(6, i, (ushort)power6UHF[i].Value);
-                    c.SetPowerUHF(5, i, (ushort)power5UHF[i].Value);
-                    c.SetPowerUHF(4, i, (ushort)power4UHF[i].Value);
-                    c.SetPowerUHF(3, i, (ushort)power3UHF[i].Value);
-                    c.SetPowerUHF(2, i, (ushort)power2UHF[i].Value);
-                    c.SetPowerUHF(1, i, (ushort)power1UHF[i].Value);
-                    c.SetPowerUHF(0, i, (ushort)power0UHF[i].Value);
+                    var powerControls = new[] { power0UHF, power1UHF, power2UHF, power3UHF,
+                           power4UHF, power5UHF, power6UHF, power7UHF, power8UHF };
+                    for (int j = 0; j < 9; j++)
+                    {
+                        c.SetPowerUHF(j, i, (ushort)powerControls[j][i].Value);
+                    }
                     c.RxTuneUHF[i] = (byte)rxTuningUHF[i].Value;
                     c.IGainDMRUHF[i] = (byte)iGainDMRUHF[i].Value;
                     c.QGainDMRUHF[i] = (byte)qGainDMRUHF[i].Value;
@@ -1124,10 +1002,39 @@ namespace NIKA_CPS_V1
             }
         }
 
+        public static string getVHFFreq(int i)
+        {
+            return ((radioBandlimits.VHFLowCal + (i * 950000)) / 100000.0f).ToString("N3") + "МГц";
+        }
+
+        public static string getUHFFreq(int i)
+        {
+            return ((radioBandlimits.UHFLowCal + (i * 1000000)) / 100000.0f).ToString("N3") + "МГц";
+        }
+
+        public static CalibrationData getActualCals()
+        {
+            return CalData;
+        }
+
+        private CalibrationCharts chartsForm = null;
+
         private void btnChart_Click(object sender, EventArgs e)
         {
-            CalibrationCharts chartsForm = new CalibrationCharts(CalData);
-            chartsForm.ShowDialog();
+            if (chartsForm == null || chartsForm.IsDisposed)
+            {
+                // Форма не создана или была закрыта - создаем новую
+                chartsForm = new CalibrationCharts();
+                chartsForm.Show();
+
+                // Подписываемся на закрытие, чтобы обнулить ссылку
+                chartsForm.FormClosed += (s, args) => chartsForm = null;
+            }
+            else
+            {
+                // Форма уже существует - активируем её
+                chartsForm.Activate();
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -1196,6 +1103,14 @@ namespace NIKA_CPS_V1
             this.btnClearColors = new System.Windows.Forms.Button();
             this.btnChart = new System.Windows.Forms.Button();
             this.pBar = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nmDevFMVHF = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nmDevFMNVHF = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.nmDevFMUHF = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.nmDevFMNUHF = new System.Windows.Forms.NumericUpDown();
             this.tabs.SuspendLayout();
             this.tabVHF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmVHFOscRef)).BeginInit();
@@ -1206,6 +1121,10 @@ namespace NIKA_CPS_V1
             this.gbCommons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmRSSI70)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmRSSI120)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMVHF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNVHF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMUHF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNUHF)).BeginInit();
             this.SuspendLayout();
             // 
             // btnWrite
@@ -1279,6 +1198,10 @@ namespace NIKA_CPS_V1
             // tabVHF
             // 
             this.tabVHF.BackColor = System.Drawing.Color.White;
+            this.tabVHF.Controls.Add(this.nmDevFMNVHF);
+            this.tabVHF.Controls.Add(this.label2);
+            this.tabVHF.Controls.Add(this.nmDevFMVHF);
+            this.tabVHF.Controls.Add(this.label1);
             this.tabVHF.Controls.Add(this.nmVHFOscRef);
             this.tabVHF.Controls.Add(this.label34);
             this.tabVHF.Controls.Add(this.tlpVHF);
@@ -1298,7 +1221,7 @@ namespace NIKA_CPS_V1
             0,
             0});
             this.nmVHFOscRef.Name = "nmVHFOscRef";
-            this.nmVHFOscRef.Size = new System.Drawing.Size(89, 20);
+            this.nmVHFOscRef.Size = new System.Drawing.Size(52, 20);
             this.nmVHFOscRef.TabIndex = 9;
             this.nmVHFOscRef.ValueChanged += new System.EventHandler(this.nmValueChanged);
             // 
@@ -1520,6 +1443,10 @@ namespace NIKA_CPS_V1
             // tabUHF
             // 
             this.tabUHF.BackColor = System.Drawing.Color.White;
+            this.tabUHF.Controls.Add(this.nmDevFMNUHF);
+            this.tabUHF.Controls.Add(this.label4);
+            this.tabUHF.Controls.Add(this.nmDevFMUHF);
+            this.tabUHF.Controls.Add(this.label3);
             this.tabUHF.Controls.Add(this.nmUHFOscRef);
             this.tabUHF.Controls.Add(this.label35);
             this.tabUHF.Controls.Add(this.tlpUHF);
@@ -1539,7 +1466,7 @@ namespace NIKA_CPS_V1
             0,
             0});
             this.nmUHFOscRef.Name = "nmUHFOscRef";
-            this.nmUHFOscRef.Size = new System.Drawing.Size(89, 20);
+            this.nmUHFOscRef.Size = new System.Drawing.Size(52, 20);
             this.nmUHFOscRef.TabIndex = 16;
             this.nmUHFOscRef.ValueChanged += new System.EventHandler(this.nmValueChanged);
             // 
@@ -1873,6 +1800,89 @@ namespace NIKA_CPS_V1
             this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.pBar.TabIndex = 12;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(350, 368);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Девиация FM";
+            // 
+            // nmDevFMVHF
+            // 
+            this.nmDevFMVHF.Location = new System.Drawing.Point(432, 364);
+            this.nmDevFMVHF.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nmDevFMVHF.Name = "nmDevFMVHF";
+            this.nmDevFMVHF.Size = new System.Drawing.Size(52, 20);
+            this.nmDevFMVHF.TabIndex = 11;
+            this.nmDevFMVHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(500, 368);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Девиация FMN";
+            // 
+            // nmDevFMNVHF
+            // 
+            this.nmDevFMNVHF.Location = new System.Drawing.Point(590, 364);
+            this.nmDevFMNVHF.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nmDevFMNVHF.Name = "nmDevFMNVHF";
+            this.nmDevFMNVHF.Size = new System.Drawing.Size(52, 20);
+            this.nmDevFMNVHF.TabIndex = 13;
+            this.nmDevFMNVHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(211, 347);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Девиация FM";
+            // 
+            // nmDevFMUHF
+            // 
+            this.nmDevFMUHF.Location = new System.Drawing.Point(293, 343);
+            this.nmDevFMUHF.Name = "nmDevFMUHF";
+            this.nmDevFMUHF.Size = new System.Drawing.Size(52, 20);
+            this.nmDevFMUHF.TabIndex = 18;
+            this.nmDevFMUHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(368, 347);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 13);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Девиация FMN";
+            // 
+            // nmDevFMNUHF
+            // 
+            this.nmDevFMNUHF.Location = new System.Drawing.Point(458, 343);
+            this.nmDevFMNUHF.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nmDevFMNUHF.Name = "nmDevFMNUHF";
+            this.nmDevFMNUHF.Size = new System.Drawing.Size(52, 20);
+            this.nmDevFMNUHF.TabIndex = 20;
+            this.nmDevFMNUHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            // 
             // CalibrationForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -1912,6 +1922,10 @@ namespace NIKA_CPS_V1
             this.gbCommons.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmRSSI70)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmRSSI120)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMVHF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNVHF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMUHF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNUHF)).EndInit();
             this.ResumeLayout(false);
 
         }

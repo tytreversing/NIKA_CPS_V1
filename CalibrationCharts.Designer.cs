@@ -75,12 +75,13 @@
             this.chPowers.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.DockedToChartArea = "caVHF";
             legend1.IsDockedInsideChartArea = false;
-            legend1.LegendItemOrder = System.Windows.Forms.DataVisualization.Charting.LegendItemOrder.ReversedSeriesOrder;
+            legend1.LegendItemOrder = System.Windows.Forms.DataVisualization.Charting.LegendItemOrder.SameAsSeriesOrder;
             legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
             legend1.Name = "Legend1";
             legend1.TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Wide;
             legend2.DockedToChartArea = "caUHF";
             legend2.IsDockedInsideChartArea = false;
+            legend2.LegendItemOrder = System.Windows.Forms.DataVisualization.Charting.LegendItemOrder.SameAsSeriesOrder;
             legend2.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
             legend2.Name = "Legend2";
             legend2.TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Wide;
@@ -209,12 +210,10 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1116, 688);
             this.Controls.Add(this.chPowers);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "CalibrationCharts";
             this.Text = "Кривые калибровок мощности";
+            this.Activated += new System.EventHandler(this.CalibrationCharts_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.chPowers)).EndInit();
             this.ResumeLayout(false);
 
