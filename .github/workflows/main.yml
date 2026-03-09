@@ -1,0 +1,27 @@
+name: Sync to GitLab
+
+on:
+  push:
+    branches: [ "*" ]   # Срабатывает на пуш в любую ветку
+    tags: [ "*" ]       # Срабатывает на создание любого тега
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # Важно: загружаем всю историю, все ветки и теги
+
+      - name: Push all branches and tags to GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
+        run: |
+          # Добавляем GitLab как новый удаленный репозиторий
+          git remote add gitlab "${GITLAB_REPO}"
+          # Пушим ВСЕ (--mirror) в GitLab, используя токен для аутентификации
+          # Формат URL: https://oauth2:TOKEN@gitlab.com/...
+          git push --mirror "https://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO#https://}"
