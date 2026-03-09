@@ -735,6 +735,30 @@ namespace NIKA_CPS_V1
                     Instance.tvSecondary.Visible = true;
                 }
             }
+            if (Instance?.tsMainControls != null)
+            {
+                if (Instance.tsMainControls.InvokeRequired)
+                {
+                    Instance.tsMainControls.Invoke(new Action(() =>
+                        Instance.tsMainControls.Enabled = true));
+                }
+                else
+                {
+                    Instance.tsMainControls.Enabled = true;
+                }
+            }
+            if (Instance?.msMain != null)
+            {
+                if (Instance.msMain.InvokeRequired)
+                {
+                    Instance.msMain.Invoke(new Action(() =>
+                        Instance.msMain.Enabled = true));
+                }
+                else
+                {
+                    Instance.msMain.Enabled = true;
+                }
+            }
         }
 
         public static void playMessage(string message)
@@ -1377,6 +1401,8 @@ namespace NIKA_CPS_V1
             {
                 tvMain.Visible = false;
                 tvSecondary.Visible = false;
+                tsMainControls.Enabled = false;
+                msMain.Enabled = false;
                 agMain.Visible = true;
                 agMain.Value = 0;
                 DataTransfer dataObj = new DataTransfer(DataTransfer.CPSAction.BACKUP_FLASH);
