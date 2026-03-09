@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
@@ -7,12 +8,13 @@ namespace NIKA_CPS_V1
 {
     [Serializable]
     [XmlRoot("NIKA_V1_Calibrations")]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 0x14C)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 0x150)]
     public class CalibrationData
     {
         private const int VHF_ARRAY_SIZE = 5;
         private const int UHF_ARRAY_SIZE = 9;
         private const int POWERS_TOTAL = 9;
+        
         [XmlElement("Checksum")]
         [MarshalAs(UnmanagedType.U4)]
         public uint checksum;
@@ -76,6 +78,18 @@ namespace NIKA_CPS_V1
         [XmlElement("RSSI70")]
         [MarshalAs(UnmanagedType.U2)]
         public ushort RSSI70;
+        [XmlElement("DevFMVHF")]
+        [MarshalAs(UnmanagedType.U1)]
+        public byte DevFMVHF;
+        [XmlElement("DevFMNVHF")]
+        [MarshalAs(UnmanagedType.U1)]
+        public byte DevFMNVHF;
+        [XmlElement("DevFMUHF")]
+        [MarshalAs(UnmanagedType.U1)]
+        public byte DevFMUHF;
+        [XmlElement("DevFMNUHF")]
+        [MarshalAs(UnmanagedType.U1)]
+        public byte DevFMNUHF;
 
         private void ValidateIndices(int powerIndex, int tuneIndex, int maxPower, int maxTune, string band)
         {
@@ -127,7 +141,7 @@ namespace NIKA_CPS_V1
 
         public CalibrationData()
         {
-            checksum = 0xDEFECA7E; //указание прошивке регенерировать чексумму
+            checksum = 0xDEFECA7E; //указание прошивке регенерировать чексумму, ибо CRC в исполнении STM32F4 черезжопен
             OscRefTuneVHF = 0;
             OscRefTuneUHF = 0;
 
@@ -151,7 +165,13 @@ namespace NIKA_CPS_V1
 
             RSSI120 = 0;
             RSSI70 = 0;
+
+            DevFMVHF = 0;
+            DevFMNVHF = 0;
+            DevFMUHF = 0;
+            DevFMNUHF = 0;
         }
+
     }
 
     [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 24)]

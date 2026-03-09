@@ -42,6 +42,18 @@
             System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Настройки", 1, 1);
             System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("DMR ID", 13, 13);
             System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10);
+            System.Windows.Forms.AGaugeLabel aGaugeLabel1 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel2 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel3 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel4 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel5 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel6 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel7 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel8 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel9 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel10 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeRange aGaugeRange1 = new System.Windows.Forms.AGaugeRange();
+            System.Windows.Forms.AGaugeRange aGaugeRange2 = new System.Windows.Forms.AGaugeRange();
             this.cmsAllContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewContact = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +114,7 @@
             this.msiTools = new System.Windows.Forms.ToolStripMenuItem();
             this.msiDMRMon = new System.Windows.Forms.ToolStripMenuItem();
             this.msiCalibration = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFlashBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.msiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tbConsole = new System.Windows.Forms.TextBox();
             this.pollingTimer = new System.Windows.Forms.Timer(this.components);
@@ -135,6 +148,7 @@
             this.tsmiAddFromCSV = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddContactsFromCSV = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRebuiltFromCSV = new System.Windows.Forms.ToolStripMenuItem();
+            this.agMain = new System.Windows.Forms.AGauge();
             this.cmsAllContacts.SuspendLayout();
             this.cmsAllChannels.SuspendLayout();
             this.cmsAllZones.SuspendLayout();
@@ -148,6 +162,7 @@
             this.cmsSingleZone.SuspendLayout();
             this.cmsSingleGrouplist.SuspendLayout();
             this.cmsCSV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.agMain)).BeginInit();
             this.SuspendLayout();
             // 
             // cmsAllContacts
@@ -367,9 +382,9 @@
             this.tsbSettings,
             this.tsbAbout});
             this.tsMainControls.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.tsMainControls.Location = new System.Drawing.Point(6, 33);
+            this.tsMainControls.Location = new System.Drawing.Point(6, 6);
             this.tsMainControls.Name = "tsMainControls";
-            this.tsMainControls.Size = new System.Drawing.Size(53, 648);
+            this.tsMainControls.Size = new System.Drawing.Size(53, 675);
             this.tsMainControls.TabIndex = 0;
             // 
             // tsbMenuToggle
@@ -519,7 +534,7 @@
             this.tvMain.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tvMain.ImageIndex = 0;
             this.tvMain.ImageList = this.ilTreeItems;
-            this.tvMain.Location = new System.Drawing.Point(59, 33);
+            this.tvMain.Location = new System.Drawing.Point(59, 6);
             this.tvMain.Margin = new System.Windows.Forms.Padding(8, 8, 4, 3);
             this.tvMain.Name = "tvMain";
             treeNode1.ContextMenuStrip = this.cmsAllContacts;
@@ -562,7 +577,7 @@
             treeNode7});
             this.tvMain.SelectedImageIndex = 0;
             this.tvMain.ShowNodeToolTips = true;
-            this.tvMain.Size = new System.Drawing.Size(337, 578);
+            this.tvMain.Size = new System.Drawing.Size(337, 605);
             this.tvMain.TabIndex = 1;
             this.tvMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvMain_AfterSelect);
             this.tvMain.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
@@ -717,7 +732,8 @@
             // 
             this.msiTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.msiDMRMon,
-            this.msiCalibration});
+            this.msiCalibration,
+            this.tsmiFlashBackup});
             this.msiTools.Name = "msiTools";
             this.msiTools.Size = new System.Drawing.Size(124, 23);
             this.msiTools.Text = "Инструменты";
@@ -725,16 +741,23 @@
             // msiDMRMon
             // 
             this.msiDMRMon.Name = "msiDMRMon";
-            this.msiDMRMon.Size = new System.Drawing.Size(244, 24);
+            this.msiDMRMon.Size = new System.Drawing.Size(257, 24);
             this.msiDMRMon.Text = "Монитор DMR";
             this.msiDMRMon.Click += new System.EventHandler(this.msiDMRMon_Click);
             // 
             // msiCalibration
             // 
             this.msiCalibration.Name = "msiCalibration";
-            this.msiCalibration.Size = new System.Drawing.Size(244, 24);
+            this.msiCalibration.Size = new System.Drawing.Size(257, 24);
             this.msiCalibration.Text = "Редактор калибровок";
             this.msiCalibration.Click += new System.EventHandler(this.msiCalibration_Click);
+            // 
+            // tsmiFlashBackup
+            // 
+            this.tsmiFlashBackup.Name = "tsmiFlashBackup";
+            this.tsmiFlashBackup.Size = new System.Drawing.Size(257, 24);
+            this.tsmiFlashBackup.Text = "Бэкап внешнего флеша";
+            this.tsmiFlashBackup.Click += new System.EventHandler(this.tsmiFlashBackup_Click);
             // 
             // msiAbout
             // 
@@ -752,7 +775,7 @@
             this.tbConsole.Name = "tbConsole";
             this.tbConsole.ReadOnly = true;
             this.tbConsole.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbConsole.Size = new System.Drawing.Size(1103, 70);
+            this.tbConsole.Size = new System.Drawing.Size(680, 70);
             this.tbConsole.TabIndex = 3;
             // 
             // pollingTimer
@@ -823,7 +846,7 @@
             this.tvSecondary.Dock = System.Windows.Forms.DockStyle.Left;
             this.tvSecondary.ImageIndex = 0;
             this.tvSecondary.ImageList = this.ilTreeItems;
-            this.tvSecondary.Location = new System.Drawing.Point(396, 33);
+            this.tvSecondary.Location = new System.Drawing.Point(396, 6);
             this.tvSecondary.Name = "tvSecondary";
             treeNode8.ImageIndex = 1;
             treeNode8.Name = "SettingsNode";
@@ -844,7 +867,7 @@
             treeNode10});
             this.tvSecondary.SelectedImageIndex = 0;
             this.tvSecondary.ShowNodeToolTips = true;
-            this.tvSecondary.Size = new System.Drawing.Size(347, 578);
+            this.tvSecondary.Size = new System.Drawing.Size(347, 605);
             this.tvSecondary.TabIndex = 4;
             this.tvSecondary.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
             this.tvSecondary.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseDoubleClick);
@@ -1018,11 +1041,117 @@
             this.tsmiRebuiltFromCSV.Size = new System.Drawing.Size(253, 24);
             this.tsmiRebuiltFromCSV.Text = "Переписать кодплаг из CSV";
             // 
+            // agMain
+            // 
+            this.agMain.BaseArcColor = System.Drawing.Color.Black;
+            this.agMain.BaseArcRadius = 150;
+            this.agMain.BaseArcStart = 190;
+            this.agMain.BaseArcSweep = 160;
+            this.agMain.Center = new System.Drawing.Point(200, 200);
+            this.agMain.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel1.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel1.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel1.Name = "glS1";
+            aGaugeLabel1.Position = new System.Drawing.Point(-160, -80);
+            aGaugeLabel1.Text = "S1";
+            aGaugeLabel2.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel2.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel2.Name = "glS2";
+            aGaugeLabel2.Position = new System.Drawing.Point(-140, -125);
+            aGaugeLabel2.Text = "S2";
+            aGaugeLabel3.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel3.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel3.Name = "glS3";
+            aGaugeLabel3.Position = new System.Drawing.Point(-100, -160);
+            aGaugeLabel3.Text = "S3";
+            aGaugeLabel4.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel4.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel4.Name = "glS4";
+            aGaugeLabel4.Position = new System.Drawing.Point(-50, -180);
+            aGaugeLabel4.Text = "S4";
+            aGaugeLabel5.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel5.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel5.Name = "glS9";
+            aGaugeLabel5.Position = new System.Drawing.Point(160, -80);
+            aGaugeLabel5.Text = "S9";
+            aGaugeLabel6.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel6.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel6.Name = "glS6";
+            aGaugeLabel6.Position = new System.Drawing.Point(50, -180);
+            aGaugeLabel6.Text = "S6";
+            aGaugeLabel7.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel7.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel7.Name = "glS7";
+            aGaugeLabel7.Position = new System.Drawing.Point(95, -160);
+            aGaugeLabel7.Text = "S7";
+            aGaugeLabel8.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel8.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel8.Name = "glS8";
+            aGaugeLabel8.Position = new System.Drawing.Point(135, -125);
+            aGaugeLabel8.Text = "S8";
+            aGaugeLabel9.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel9.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel9.Name = "glS9p";
+            aGaugeLabel9.Position = new System.Drawing.Point(170, -30);
+            aGaugeLabel9.Text = "S9+";
+            aGaugeLabel10.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel10.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel10.Name = "glS5";
+            aGaugeLabel10.Position = new System.Drawing.Point(0, -185);
+            aGaugeLabel10.Text = "S5";
+            this.agMain.GaugeLabels.Add(aGaugeLabel1);
+            this.agMain.GaugeLabels.Add(aGaugeLabel2);
+            this.agMain.GaugeLabels.Add(aGaugeLabel3);
+            this.agMain.GaugeLabels.Add(aGaugeLabel4);
+            this.agMain.GaugeLabels.Add(aGaugeLabel5);
+            this.agMain.GaugeLabels.Add(aGaugeLabel6);
+            this.agMain.GaugeLabels.Add(aGaugeLabel7);
+            this.agMain.GaugeLabels.Add(aGaugeLabel8);
+            this.agMain.GaugeLabels.Add(aGaugeLabel9);
+            this.agMain.GaugeLabels.Add(aGaugeLabel10);
+            aGaugeRange1.Color = System.Drawing.Color.Red;
+            aGaugeRange1.EndValue = 100F;
+            aGaugeRange1.InnerRadius = 140;
+            aGaugeRange1.InRange = false;
+            aGaugeRange1.Name = "GaugeRange1";
+            aGaugeRange1.OuterRadius = 150;
+            aGaugeRange1.StartValue = 90F;
+            aGaugeRange2.Color = System.Drawing.Color.LawnGreen;
+            aGaugeRange2.EndValue = 90F;
+            aGaugeRange2.InnerRadius = 140;
+            aGaugeRange2.InRange = false;
+            aGaugeRange2.Name = "GaugeRange2";
+            aGaugeRange2.OuterRadius = 150;
+            aGaugeRange2.StartValue = 40F;
+            this.agMain.GaugeRanges.Add(aGaugeRange1);
+            this.agMain.GaugeRanges.Add(aGaugeRange2);
+            this.agMain.Location = new System.Drawing.Point(119, 63);
+            this.agMain.MaxValue = 100F;
+            this.agMain.MinValue = 0F;
+            this.agMain.Name = "agMain";
+            this.agMain.NeedleColor1 = System.Windows.Forms.AGaugeNeedleColor.Green;
+            this.agMain.NeedleColor2 = System.Drawing.Color.Black;
+            this.agMain.NeedleRadius = 150;
+            this.agMain.ScaleLinesInterInnerRadius = 150;
+            this.agMain.ScaleLinesInterOuterRadius = 140;
+            this.agMain.ScaleLinesMajorInnerRadius = 150;
+            this.agMain.ScaleLinesMajorOuterRadius = 130;
+            this.agMain.ScaleLinesMajorStepValue = 10F;
+            this.agMain.ScaleLinesMinorInnerRadius = 150;
+            this.agMain.ScaleLinesMinorOuterRadius = 145;
+            this.agMain.ScaleNumbersRadius = 165;
+            this.agMain.ScaleNumbersStartScaleLine = 100;
+            this.agMain.Size = new System.Drawing.Size(400, 400);
+            this.agMain.TabIndex = 12;
+            this.agMain.Value = 0F;
+            this.agMain.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1168, 687);
+            this.ClientSize = new System.Drawing.Size(745, 687);
+            this.Controls.Add(this.agMain);
             this.Controls.Add(this.tvSecondary);
             this.Controls.Add(this.tvMain);
             this.Controls.Add(this.tbConsole);
@@ -1055,6 +1184,7 @@
             this.cmsSingleZone.ResumeLayout(false);
             this.cmsSingleGrouplist.ResumeLayout(false);
             this.cmsCSV.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.agMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1155,6 +1285,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAddFromCSV;
         private System.Windows.Forms.ToolStripMenuItem tsmiRebuiltFromCSV;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddContactsFromCSV;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFlashBackup;
+        private System.Windows.Forms.AGauge agMain;
     }
 }
 
