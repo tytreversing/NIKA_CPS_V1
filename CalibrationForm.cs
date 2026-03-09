@@ -334,7 +334,7 @@ namespace NIKA_CPS_V1
             pBar.Value = 0;
             COMData.mode = DataTransfer.DataMode.DataModeWriteFlash;
             COMData.localAddress = 0;
-            COMData.flashAddress = CALIBRATIONS_ADDRESS ;
+            COMData.flashAddress = CALIBRATIONS_ADDRESS;
             COMData.transferLength = CALIBRATION_TABLE_SIZE;
             if (!WriteFlash(COMPort.Port, COMData))
             {
@@ -436,8 +436,8 @@ namespace NIKA_CPS_V1
         private bool WriteFlash(SerialPort port, DataTransfer dataObj)
         {
             int num = 0;
-            byte[] sendbuffer = new byte[1032];
-            byte[] readbuffer = new byte[1032];
+            byte[] sendbuffer = new byte[512];
+            byte[] readbuffer = new byte[512];
             int num2 = dataObj.flashAddress;
             int localDataBufferStartPosition = dataObj.localAddress;
             dataObj.dataSector = -1;
@@ -482,6 +482,7 @@ namespace NIKA_CPS_V1
             }
             if (dataObj.dataSector != -1 && !flashWriteSector(port, writeCommandCharacter, ref sendbuffer, ref readbuffer, dataObj))
             {
+                MessageBox.Show($"Error. Write stopped (write sector error at {num2:X8})");
                 return false;
             }
             return true;
@@ -1031,8 +1032,8 @@ namespace NIKA_CPS_V1
 
             lblRadioType.Text += "TYT MD-9600/Retevis RT-90";
             isReading = true;
-            nmRSSI120.Value = c.RSSI120 * 16;
-            nmRSSI70.Value = c.RSSI70 * 16;
+            nmRSSI120.Value = c.RSSI120;
+            nmRSSI70.Value = c.RSSI70;
             nmVHFOscRef.Value = c.OscRefTuneVHF;
             nmUHFOscRef.Value = c.OscRefTuneVHF;
             //tlpVHF
@@ -1081,8 +1082,8 @@ namespace NIKA_CPS_V1
         {
             if (!isReading)
             {
-                c.RSSI120 = (byte)(nmRSSI120.Value / 16);
-                c.RSSI70 = (byte)(nmRSSI70.Value / 16);
+                c.RSSI120 = (byte)(nmRSSI120.Value);
+                c.RSSI70 = (byte)(nmRSSI70.Value);
                 c.OscRefTuneVHF = (byte)nmVHFOscRef.Value;
                 c.OscRefTuneUHF = (byte)nmUHFOscRef.Value;
                 for (int i = 0; i < 5; i++)
@@ -1775,11 +1776,6 @@ namespace NIKA_CPS_V1
             // 
             // nmRSSI70
             // 
-            this.nmRSSI70.Increment = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
             this.nmRSSI70.Location = new System.Drawing.Point(184, 59);
             this.nmRSSI70.Maximum = new decimal(new int[] {
             4095,
@@ -1802,11 +1798,6 @@ namespace NIKA_CPS_V1
             // 
             // nmRSSI120
             // 
-            this.nmRSSI120.Increment = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
             this.nmRSSI120.Location = new System.Drawing.Point(184, 30);
             this.nmRSSI120.Maximum = new decimal(new int[] {
             4095,
