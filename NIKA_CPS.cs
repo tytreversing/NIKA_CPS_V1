@@ -27,6 +27,7 @@ using System.Windows.Forms;
 
 
 
+
 namespace NIKA_CPS_V1
 {
     public partial class MainForm: Form
@@ -87,13 +88,13 @@ namespace NIKA_CPS_V1
         {
             PRODUCT_VERSION = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             InitializeComponent();
-            if (RegistryOperations.getProfileIntWithDefault("ShowSplashScreen", 1) != 0)
+            if (RegistryOperations.IsFlagSet("ShowSplashScreen"))
             {
                 new SplashScreen().ShowDialog();
             }
-            playAudio = (RegistryOperations.getProfileIntWithDefault("AccessibilityOptions", 0) != 0);
-            radioVID = RegistryOperations.getProfileStringWithDefault("DeviceVID", "05D0");
-            radioPID = RegistryOperations.getProfileStringWithDefault("DevicePID", "0094");
+            playAudio = (RegistryOperations.IsFlagSet("AccessibilityOptions", false));
+            radioVID = RegistryOperations.GetString("DeviceVID", "05D0");
+            radioPID = RegistryOperations.GetString("DevicePID", "0094");
         }
 
         //поиск в аргументах командной строки имени файла кодплага
@@ -177,7 +178,7 @@ namespace NIKA_CPS_V1
             if (codeplugFileName == null) //запуск без передачи параметров
             {
                 //получаем из реестра последний файл кодплага, если сохранен, иначе болванку в папке с программой
-                codeplugFileName = RegistryOperations.getProfileStringWithDefault("LastCodeplugFile", "");
+                codeplugFileName = RegistryOperations.GetString("LastCodeplugFile", "");
 
             }
             else //запуск с параметрами
@@ -195,7 +196,7 @@ namespace NIKA_CPS_V1
                     playMessage("file_not_found_error");
                     MessageBox.Show("Файл " + codeplugFileName + " не найден по указанному адресу. Будет сгенерирован шаблонный кодплаг.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     codeplugFileName = "";
-                    RegistryOperations.WriteProfileString("LastCodeplugFile", "");
+                    RegistryOperations.WriteString("LastCodeplugFile", "");
                    
                 }
                 GenerateCodeplugTemplate();
@@ -213,12 +214,12 @@ namespace NIKA_CPS_V1
                 }
             }
             Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + codeplugFileName;
-            Width = RegistryOperations.getProfileIntWithDefault("LastWindowWidth", 1000);
-            Height = RegistryOperations.getProfileIntWithDefault("LastWindowHeight", 800);
-            msMain.Visible = (RegistryOperations.getProfileIntWithDefault("MenuStringVisible", 0) != 0);
+            Width = RegistryOperations.GetInt("LastWindowWidth", 1000);
+            Height = RegistryOperations.GetInt("LastWindowHeight", 800);
+            msMain.Visible = (RegistryOperations.IsFlagSet("MenuStringVisible", false));
             tsbReadFromRadio.Enabled = false;
             tsbWriteToRadio.Enabled = false;
-            if (RegistryOperations.getProfileStringWithDefault("AgreementConfirmed", "NO") == "NO")
+            if (RegistryOperations.GetString("AgreementConfirmed", "NO") == "NO")
             {
                 if (MessageBox.Show("Программное обеспечение НИКА предоставляется бесплатно на условиях «КАК ЕСТЬ». Все действия, производимые с оборудованием и программным обеспечением, находятся исключительно на ответственности конечного пользователя. Разработчик не несет ответственности за возможный ущерб, причиненный действиями конечного пользователя программного обеспечения.\r\nСовместимость программного обеспечения с радиостанциями гарантируется в объеме, обеспеченном тестированием на момент публикации данной версии.\r\nЕсли Вы согласны с условиями предоставления программного обеспечения, нажмите «ДА».", "Пользовательское соглашение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 {
@@ -233,7 +234,7 @@ namespace NIKA_CPS_V1
                 }
                 else
                 {
-                    RegistryOperations.WriteProfileString("AgreementConfirmed", "YES");
+                    RegistryOperations.WriteString("AgreementConfirmed", "YES");
                 }
             }
             tbConsole.AppendText("Программа загружена " + DateTime.Now.ToString() + "\r\n");
@@ -241,7 +242,7 @@ namespace NIKA_CPS_V1
             GenerateTree();
             CheckLoadedCodeplug();
             
-            pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
+            pollingTimer.Interval = (RegistryOperations.IsFlagSet("UsingFastPolling")) ? 500 : 1000;
             pollingTimer.Start();
             
         }
@@ -331,7 +332,7 @@ namespace NIKA_CPS_V1
                     }
 
                     // Разворачиваем узел для отображения дочерних элементов, если настроено
-                    if (RegistryOperations.getProfileIntWithDefault("ExpandContacts", 0) != 0)
+                    if (RegistryOperations.IsFlagSet("ExpandContacts", false))
                         contactsNode.Expand();
                     if (mode != TreeRefreshType.ALL) //обновляли только контакты - выделить повторно lastSelectedChannel
                     {
@@ -376,7 +377,7 @@ namespace NIKA_CPS_V1
                         channelsNode.Nodes.Add(newNode);
 
                     }
-                    if (RegistryOperations.getProfileIntWithDefault("ExpandChannels", 0) != 0)
+                    if (RegistryOperations.IsFlagSet("ExpandChannels", false))
                         channelsNode.Expand();
                     if (mode != TreeRefreshType.ALL)
                     {
@@ -412,7 +413,7 @@ namespace NIKA_CPS_V1
                         newNode.SelectedImageIndex = 7;
                         zonesNode.Nodes.Add(newNode);
                     }
-                    if (RegistryOperations.getProfileIntWithDefault("ExpandZones", 0) != 0)
+                    if (RegistryOperations.IsFlagSet("ExpandZones", false))
                         zonesNode.Expand();
                     if (mode != TreeRefreshType.ALL)
                     {
@@ -448,7 +449,7 @@ namespace NIKA_CPS_V1
                         newNode.SelectedImageIndex = 6;
                         listsNode.Nodes.Add(newNode);
                     }
-                    if (RegistryOperations.getProfileIntWithDefault("ExpandGrouplists", 0) != 0)
+                    if (RegistryOperations.IsFlagSet("ExpandGrouplists", false))
                         listsNode.Expand();
                     if (mode != TreeRefreshType.ALL)
                     {
@@ -484,7 +485,7 @@ namespace NIKA_CPS_V1
                         satellitesNode.Nodes.Add(newNode);
 
                     }
-                    if (RegistryOperations.getProfileIntWithDefault("ExpandSatellites", 0) != 0)
+                    if (RegistryOperations.IsFlagSet("ExpandSatellites", false))
                         satellitesNode.Expand();
                     if (mode != TreeRefreshType.ALL)
                     {
@@ -642,18 +643,18 @@ namespace NIKA_CPS_V1
             msMain.Visible = !msMain.Visible;
             if (msMain.Visible)
             {
-                RegistryOperations.WriteProfileInt("MenuStringVisible", 1);
+                RegistryOperations.SetFlag("MenuStringVisible", true);
             }
             else
             {
-                RegistryOperations.WriteProfileInt("MenuStringVisible", 0);
+                RegistryOperations.SetFlag("MenuStringVisible", false);
             }
         }
 
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
-            RegistryOperations.WriteProfileInt("LastWindowWidth", this.Width);
-            RegistryOperations.WriteProfileInt("LastWindowHeight", this.Height);
+            RegistryOperations.WriteInt("LastWindowWidth", this.Width);
+            RegistryOperations.WriteInt("LastWindowHeight", this.Height);
         }
 
         public static void playMessage(string message)
@@ -762,10 +763,12 @@ namespace NIKA_CPS_V1
             {
                 playMessage("settingsSaved");
                 tbConsole.AppendText("Настройки программы сохранены\r\n");
-                pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
+                pollingTimer.Interval = (RegistryOperations.IsFlagSet("UsingFastPolling")) ? 500 : 1000;
             }
                 
         }
+
+        public static string COMPortUsed = "";
 
         private void pollingTimer_Tick(object sender, EventArgs e)
         {
@@ -777,6 +780,7 @@ namespace NIKA_CPS_V1
                     tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                     SystemSounds.Asterisk.Play();
                     foundDFUDevice = true;
+                    COMPortUsed = "";
                 }
             }
             else
@@ -790,7 +794,6 @@ namespace NIKA_CPS_V1
                         tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                         SystemSounds.Hand.Play();
                         foundFlashedRadio = true;
-                        RegistryOperations.WriteProfileString("COMPort", USBChecker.GetComPortFromString());
                         tsbReadFromRadio.Enabled = false;
                         tsbWriteToRadio.Enabled = false;
                     }
@@ -803,7 +806,19 @@ namespace NIKA_CPS_V1
                         tbConsole.AppendText(USBChecker.DeviceDescription() + "\r\n");
                         SystemSounds.Hand.Play();
                         foundFlashedRadio = true;
-                        RegistryOperations.WriteProfileString("COMPort", USBChecker.GetComPortFromString());
+                        COMPortUsed = USBChecker.GetComPortFromString();
+                        RegistryOperations.WriteString("COMPort", COMPortUsed);
+                        if (RegistryOperations.IsFlagSet("ShowInfoBox"))
+                        {
+                            if (!COMPort.SetupPort())
+                            {
+                                SystemSounds.Hand.Play();
+                                MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            FirmwareInterface.RadioInfo info = FirmwareInterface.ReadRadioInfo(COMPort.Port);
+                            showRadioInfo(info);
+                        }
                         tsbReadFromRadio.Enabled = true;
                         tsbWriteToRadio.Enabled = true;
                         pollingTimer.Interval = 10000;
@@ -814,15 +829,48 @@ namespace NIKA_CPS_V1
                     foundFlashedRadio = false;
                     tsbReadFromRadio.Enabled = false;
                     tsbWriteToRadio.Enabled = false;
-                    pollingTimer.Interval = (RegistryOperations.getProfileIntWithDefault("UsingFastPolling", 1) == 1) ? 500 : 1000;
+                    pollingTimer.Interval = (RegistryOperations.IsFlagSet("UsingFastPolling")) ? 500 : 1000;
                 }
             }
 
         }
 
+        private void showRadioInfo(FirmwareInterface.RadioInfo info)
+        {
+            string identifier;
+            switch(info.identifier)
+            {
+                case "RUSSIAN":
+                    identifier = "Радиостанция использует прошивку OpenGD77 RUS\r\n";
+                    break;
+                case "NIKA V1":
+                    identifier = "Радиостанция использует прошивку НИКА версии 1\r\n";
+                    break;
+                default:
+                    identifier = "Ответ радиостанции некорректен\r\n";
+                    break;
+            }
+            string serial = $"Серийный номер: {info.serial}\r\n";
+            string day = info.buildDateTime.Substring(0, 2);
+            string month = info.buildDateTime.Substring(2, 2);
+            string year = info.buildDateTime.Substring(4, 4);
+            string buildDate = $"Дата сборки прошивки: {day}.{month}.{year}\r\n";
+            day = info.fwDate.Substring(0, 2);
+            month = info.fwDate.Substring(2, 2);
+            year = info.fwDate.Substring(4, 4);
+            string fwDate = $"Дата прошивки рации: {day}.{month}.{year}\r\n";
+            string platform = (info.radioType == 88) ? "Платформа: TYT MD-9600 V" + info.radioHardware.ToString() + "\r\n" : "Неизвестная аппаратная платформа\r\n";
+            if (MessageBox.Show(identifier + platform + serial + buildDate + fwDate + "\r\nСкопировать данные в буфер обмена?", "Данные о рации", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                Clipboard.SetText(identifier + platform + serial + buildDate + fwDate);
+            }
+        }
+
         private void msiCalibration_Click(object sender, EventArgs e)
         {
+            pollingTimer.Stop();
             new CalibrationForm().ShowDialog();
+            pollingTimer.Start();
         }
 
 
@@ -886,7 +934,7 @@ namespace NIKA_CPS_V1
                     CheckLoadedCodeplug();
                     GenerateTree();
                     codeplugFileName = fileName;
-                    RegistryOperations.WriteProfileString("LastCodeplugFile", fileName);
+                    RegistryOperations.WriteString("LastCodeplugFile", fileName);
                     Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + fileName;
                 }
             }
@@ -926,7 +974,7 @@ namespace NIKA_CPS_V1
             }
             finally
             {
-                RegistryOperations.WriteProfileString("LastCodeplugFile", codeplugFileName);
+                RegistryOperations.WriteString("LastCodeplugFile", codeplugFileName);
                 Text = "НИКА CPS  [Версия " + PRODUCT_VERSION + "]  " + codeplugFileName;
             }
 
@@ -934,7 +982,7 @@ namespace NIKA_CPS_V1
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bool confirmExit = (RegistryOperations.getProfileIntWithDefault("ConfirmExit", 1) == 1);
+            bool confirmExit = (RegistryOperations.IsFlagSet("ConfirmExit"));
             // Если пользователь пытается закрыть форму и установлен запрос подтверждения
             if (e.CloseReason == CloseReason.UserClosing && confirmExit)
             {
@@ -1115,7 +1163,7 @@ namespace NIKA_CPS_V1
             httpClient = new HttpClient();
             httpClient.Timeout = TimeSpan.FromSeconds(30);
             httpClient.DefaultRequestHeaders.Add("User-Agent", "WinFormsApp/1.0");
-            tbConsole.AppendText("Пробуем загрузить данные о спутниках по адресу " + RegistryOperations.getProfileStringWithDefault("SatelliteDataURL", "https://r4uab.ru/satonline.txt") + "...\r\n");
+            tbConsole.AppendText("Пробуем загрузить данные о спутниках по адресу " + RegistryOperations.GetString("SatelliteDataURL", "https://r4uab.ru/satonline.txt") + "...\r\n");
             await DownloadFileAsync();
         }
 
@@ -1124,7 +1172,7 @@ namespace NIKA_CPS_V1
         {
             try
             {
-                string content = await httpClient.GetStringAsync(RegistryOperations.getProfileStringWithDefault("SatelliteDataURL", "https://r4uab.ru/satonline.txt"));
+                string content = await httpClient.GetStringAsync(RegistryOperations.GetString("SatelliteDataURL", "https://r4uab.ru/satonline.txt"));
 
                 // Проверяем, не была ли форма закрыта во время загрузки
                 if (!IsDisposed && !Disposing)

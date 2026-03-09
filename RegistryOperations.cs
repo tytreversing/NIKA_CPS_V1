@@ -28,77 +28,89 @@ internal class RegistryOperations
 
 	private const string _SETUP = "Setup";
 
-	public static string getIniFilePath()
+	public static string GetIniFilePath()
 	{
 		return iniPath;
 	}
 
-	public static void setIniFilePath(string string_0)
+	public static void SetIniFilePath(string path)
 	{
-		iniPath = string_0;
+		iniPath = path;
 	}
 
 
-	public static string getProfileStringWithDefault(string string_1, string string_2)
+	public static string GetString(string key, string defval)
 	{
 		if (iniPath != null)
 		{
 			StringBuilder stringBuilder = new StringBuilder(1024);
-			GetPrivateProfileString(_SETUP, string_1, string_2, stringBuilder, 1024, iniPath);
+			GetPrivateProfileString(_SETUP, key, defval, stringBuilder, 1024, iniPath);
 			return stringBuilder.ToString();
 		}
-		object value = Registry.GetValue(keyName, string_1, string_2);
+		object value = Registry.GetValue(keyName, key, defval);
 		if (value != null)
 		{
 			return (string)value;
 		}
-		return string_2;
+		return defval;
 	}
 
-	public static int getProfileIntWithDefault(string string_1, int int_1)
+	public static int GetInt(string key, int defval)
 	{
 		if (iniPath != null)
 		{
 			StringBuilder stringBuilder = new StringBuilder(1024);
-			GetPrivateProfileString(_SETUP, string_1, int_1.ToString(), stringBuilder, 1024, iniPath);
+			GetPrivateProfileString(_SETUP, key, defval.ToString(), stringBuilder, 1024, iniPath);
 			try
 			{
 				return int.Parse(stringBuilder.ToString());
 			}
 			catch (Exception)
 			{
-				return int_1;
+				return defval;
 			}
 		}
-		object value = Registry.GetValue(keyName, string_1, int_1);
+		object value = Registry.GetValue(keyName, key, defval);
 		if (value != null)
 		{
 			return (int)value;
 		}
-		return int_1;
+		return defval;
 	}
 
-	public static void WriteProfileString(string string_1, string string_2)
+	public static bool IsFlagSet(string key, bool defvalue = true)
+	{
+		int retval = GetInt(key, defvalue ? 1 : 0);
+		return retval != 0;
+	}
+
+	public static void SetFlag(string key, bool value)
+	{
+		WriteInt(key, value ? 1 : 0);
+	}
+
+
+    public static void WriteString(string key, string value)
 	{
 		if (iniPath != null)
 		{
-			WritePrivateProfileString(_SETUP, string_1, string_2, iniPath);
+			WritePrivateProfileString(_SETUP, key, value, iniPath);
 		}
 		else
 		{
-			Registry.SetValue(keyName, string_1, string_2, RegistryValueKind.String);
+			Registry.SetValue(keyName, key, value, RegistryValueKind.String);
 		}
 	}
 
-	public static void WriteProfileInt(string string_1, int int_1)
+	public static void WriteInt(string key, int value)
 	{
 		if (iniPath != null)
 		{
-			WritePrivateProfileString(_SETUP, string_1, int_1.ToString(), iniPath);
+			WritePrivateProfileString(_SETUP, key, value.ToString(), iniPath);
 		}
 		else
 		{
-			Registry.SetValue(keyName, string_1, int_1, RegistryValueKind.DWord);
+			Registry.SetValue(keyName, key, value, RegistryValueKind.DWord);
 		}
 	}
 

@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using NIKA_CPS_V1.Interfaces;
 
 
 
@@ -20,9 +21,7 @@ namespace NIKA_CPS_V1
     {
         public const int MAX_TRANSFER_BUFFER_SIZE = 1032;
 
-        public static int MEMORY_LOCATION_STM32 = 65536;
-
-        public static int CALIBRATION_MEMORY_LOCATION_OFFICIAL_USB_PROTOCOL = 31744;
+        public static int CALIBRATIONS_ADDRESS = 0x10000;
 
         public static int CALIBRATION_TABLE_SIZE = 0x14C;
 
@@ -90,6 +89,7 @@ namespace NIKA_CPS_V1
         private Label label54;
         private Button btnClearColors;
         private Button btnChart;
+        private ProgressBar pBar;
         CalibrationData CalData = new CalibrationData();
 
         public CalibrationForm()
@@ -189,39 +189,13 @@ namespace NIKA_CPS_V1
 
         }
 
-        private bool sendCommand(SerialPort port, int commandNumber, int x_or_command_option_number = 0, int y = 0, int iSize = 0, int alignment = 0, int isInverted = 0, string message = "")
-        {
-            byte[] array = new byte[64];
-            array[0] = 67;
-            array[1] = (byte)commandNumber;
-            switch (commandNumber)
-            {
-                case 2:
-                    array[3] = (byte)y;
-                    array[4] = (byte)iSize;
-                    array[5] = (byte)alignment;
-                    array[6] = (byte)isInverted;
-                    Encoding inEncoding = Encoding.Unicode;
-                    Encoding outEncoding = Encoding.GetEncoding(1251);
-                    byte[] sourceBuffer = inEncoding.GetBytes(message);
-                    byte[] destBuffer = Encoding.Convert(inEncoding, outEncoding, sourceBuffer);
-                    Buffer.BlockCopy(destBuffer, 0, array, 7, Math.Min(message.Length, 16));
-                    break;
-                case 6:
-                    array[2] = (byte)x_or_command_option_number;
-                    break;
-            }
-            COMPort.Port.Write(array, 0, 32);
-            while (COMPort.Port.BytesToRead == 0)
-            {
-                Thread.Sleep(0);
-            }
-            COMPort.Port.Read(array, 0, 64);
-            return array[1] == commandNumber;
-        }
+       
 
         private void updateProgess(int progressPercentage)
         {
+            if (progressPercentage >= 96)
+                progressPercentage = 100;
+            pBar.Value = progressPercentage;
         }
 
 
@@ -303,17 +277,17 @@ namespace NIKA_CPS_V1
                 return false;
             }
             DataTransfer COMData = new DataTransfer();
-            sendCommand(COMPort.Port, 0);
-            sendCommand(COMPort.Port, 1);
-            sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
-            sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Чтение");
-            sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
-            sendCommand(COMPort.Port, 3);
-            sendCommand(COMPort.Port, 6, 3);
+            FirmwareInterface.sendCommand(COMPort.Port, 0);
+            FirmwareInterface.sendCommand(COMPort.Port, 1);
+            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
+            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Чтение");
+            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
+            FirmwareInterface.sendCommand(COMPort.Port, 3);
+            FirmwareInterface.sendCommand(COMPort.Port, 6, 3);
             COMData.mode = DataTransfer.DataMode.DataModeReadFlash;
             COMData.dataBuffer = new byte[CALIBRATION_TABLE_SIZE];
             COMData.localAddress = 0;
-            COMData.flashAddress = MEMORY_LOCATION_STM32;
+            COMData.flashAddress = CALIBRATIONS_ADDRESS;
             COMData.transferLength = CALIBRATION_TABLE_SIZE;
             if (!ReadFlash(COMPort.Port, COMData))
             {
@@ -326,8 +300,8 @@ namespace NIKA_CPS_V1
             }
 
 
-            sendCommand(COMPort.Port, 5);
-            sendCommand(COMPort.Port, 7);
+            FirmwareInterface.sendCommand(COMPort.Port, 5);
+            FirmwareInterface.sendCommand(COMPort.Port, 7);
             COMPort.Port.Close();
             COMPort.Port = null;
             CalData = ByteArrayToCalData(COMData.dataBuffer);
@@ -344,24 +318,31 @@ namespace NIKA_CPS_V1
             COMData.dataBuffer = new byte[CALIBRATION_TABLE_SIZE];
             dataBuffer = DataToByte(CalData);
             Array.Copy(dataBuffer, 0, COMData.dataBuffer, 0, CALIBRATION_TABLE_SIZE);
-            sendCommand(COMPort.Port, 0);
-            sendCommand(COMPort.Port, 1);
-            sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
-            sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Запись");
-            sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
-            sendCommand(COMPort.Port, 3);
-            sendCommand(COMPort.Port, 6, 4);
+            if (!COMPort.SetupPort())
+            {
+                SystemSounds.Hand.Play();
+                MessageBox.Show("Отсутствует заданный COM-порт");
+                return;
+            }
+            FirmwareInterface.sendCommand(COMPort.Port, 0);
+            FirmwareInterface.sendCommand(COMPort.Port, 1);
+            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
+            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Запись");
+            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
+            FirmwareInterface.sendCommand(COMPort.Port, 3);
+            FirmwareInterface.sendCommand(COMPort.Port, 6, 4);
+            pBar.Value = 0;
             COMData.mode = DataTransfer.DataMode.DataModeWriteFlash;
             COMData.localAddress = 0;
-            COMData.flashAddress = MEMORY_LOCATION_STM32 ;
+            COMData.flashAddress = CALIBRATIONS_ADDRESS;
             COMData.transferLength = CALIBRATION_TABLE_SIZE;
             if (!WriteFlash(COMPort.Port, COMData))
             {
                 MessageBox.Show("Ошибка при записи в последовательный порт!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 COMData.responseCode = 1;
             }
-            sendCommand(COMPort.Port, 6, 2);
-            sendCommand(COMPort.Port, 6, 1);
+            FirmwareInterface.sendCommand(COMPort.Port, 6, 2);
+            FirmwareInterface.sendCommand(COMPort.Port, 6, 1);
             COMPort.Port.Close();
             COMPort.Port = null;
         }
@@ -453,20 +434,20 @@ namespace NIKA_CPS_V1
         }
 
         private bool WriteFlash(SerialPort port, DataTransfer dataObj)
-        {/*
+        {
             int num = 0;
-            byte[] sendbuffer = new byte[1032];
-            byte[] readbuffer = new byte[1032];
-            int num2 = dataObj.startDataAddressInTheRadio;
-            int localDataBufferStartPosition = dataObj.localDataBufferStartPosition;
-            dataObj.data_sector = -1;
-            for (int num3 = dataObj.startDataAddressInTheRadio + dataObj.transferLength - num2; num3 > 0; num3 = dataObj.startDataAddressInTheRadio + dataObj.transferLength - num2)
+            byte[] sendbuffer = new byte[512];
+            byte[] readbuffer = new byte[512];
+            int num2 = dataObj.flashAddress;
+            int localDataBufferStartPosition = dataObj.localAddress;
+            dataObj.dataSector = -1;
+            for (int num3 = dataObj.flashAddress + dataObj.transferLength - num2; num3 > 0; num3 = dataObj.flashAddress + dataObj.transferLength - num2)
             {
-                if (num3 > OpenGD77Form.getUSBWriteBufferSize())
+                if (num3 > 32)
                 {
-                    num3 = OpenGD77Form.getUSBWriteBufferSize();
+                    num3 = 32;
                 }
-                if (dataObj.data_sector == -1 && !flashWritePrepareSector(port, writeCommandCharacter, num2, ref sendbuffer, ref readbuffer, dataObj))
+                if (dataObj.dataSector == -1 && !flashWritePrepareSector(port, writeCommandCharacter, num2, ref sendbuffer, ref readbuffer, dataObj))
                 {
                     return false;
                 }
@@ -475,9 +456,9 @@ namespace NIKA_CPS_V1
                     int num4 = 0;
                     for (int i = 0; i < num3; i++)
                     {
-                        sendbuffer[i + 8] = dataObj.dataBuff[localDataBufferStartPosition++];
+                        sendbuffer[i + 8] = dataObj.dataBuffer[localDataBufferStartPosition++];
                         num4++;
-                        if (dataObj.data_sector != (num2 + num4) / 4096)
+                        if (dataObj.dataSector != (num2 + num4) / 4096)
                         {
                             break;
                         }
@@ -486,24 +467,24 @@ namespace NIKA_CPS_V1
                     {
                         return false;
                     }
-                    int num5 = (num2 - dataObj.startDataAddressInTheRadio) * 100 / dataObj.transferLength;
+                    int num5 = (num2 - dataObj.flashAddress) * 100 / dataObj.transferLength;
                     if (num != num5)
                     {
                         updateProgess(num5);
                         num = num5;
                     }
                     num2 += num4;
-                    if (dataObj.data_sector != num2 / 4096 && !flashWriteSector(port, writeCommandCharacter, ref sendbuffer, ref readbuffer, dataObj))
+                    if (dataObj.dataSector != num2 / 4096 && !flashWriteSector(port, writeCommandCharacter, ref sendbuffer, ref readbuffer, dataObj))
                     {
                         return false;
                     }
                 }
             }
-            if (dataObj.data_sector != -1 && !flashWriteSector(port, writeCommandCharacter, ref sendbuffer, ref readbuffer, dataObj))
+            if (dataObj.dataSector != -1 && !flashWriteSector(port, writeCommandCharacter, ref sendbuffer, ref readbuffer, dataObj))
             {
-                Console.WriteLine($"Error. Write stopped (write sector error at {num2:X8})");
+                MessageBox.Show($"Error. Write stopped (write sector error at {num2:X8})");
                 return false;
-            }*/
+            }
             return true;
         }
 
@@ -536,7 +517,7 @@ namespace NIKA_CPS_V1
 
         private void btnReadFile_Click(object sender, EventArgs e)
         {
-            string profileStringWithDefault = RegistryOperations.getProfileStringWithDefault("LastFilePath", "");
+            string profileStringWithDefault = RegistryOperations.GetString("LastFilePath", "");
             string initialDirectory;
             try
             {
@@ -602,26 +583,25 @@ namespace NIKA_CPS_V1
             }
             DataTransfer COMData = new DataTransfer();
             COMData.dataBuffer = new byte[CALIBRATION_TABLE_SIZE];
-            dataBuffer = DataToByte(CalData);
             Array.Copy(dataBuffer, 0, COMData.dataBuffer, 0, CALIBRATION_TABLE_SIZE);
-            sendCommand(COMPort.Port, 0);
-            sendCommand(COMPort.Port, 1);
-            sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
-            sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Восстановление");
-            sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
-            sendCommand(COMPort.Port, 3);
-            sendCommand(COMPort.Port, 6, 4);
+            FirmwareInterface.sendCommand(COMPort.Port, 0);
+            FirmwareInterface.sendCommand(COMPort.Port, 1);
+            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
+            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Восстановление");
+            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
+            FirmwareInterface.sendCommand(COMPort.Port, 3);
+            FirmwareInterface.sendCommand(COMPort.Port, 6, 4);
             COMData.mode = DataTransfer.DataMode.DataModeWriteFlash;
             COMData.localAddress = 0;
-            COMData.flashAddress = MEMORY_LOCATION_STM32;
+            COMData.flashAddress = CALIBRATIONS_ADDRESS;
             COMData.transferLength = CALIBRATION_TABLE_SIZE;
             if (!WriteFlash(COMPort.Port, COMData))
             {
                 MessageBox.Show("Ошибка при восстановлении!");
                 COMData.responseCode = 1;
             }
-            sendCommand(COMPort.Port, 6, 2);
-            sendCommand(COMPort.Port, 6, 1);
+            FirmwareInterface.sendCommand(COMPort.Port, 6, 2);
+            FirmwareInterface.sendCommand(COMPort.Port, 6, 1);
             COMPort.Port.Close();
             COMPort.Port = null;
             MessageBox.Show("После перезагрузки рация перестроит таблицы, исходя из заводских калибровок, сохраненных в защищенной памяти.", "Сброс калибровок", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -637,7 +617,7 @@ namespace NIKA_CPS_V1
 
         private void btnSaveCalibration_Click(object sender, EventArgs e)
         {
-            string profileStringWithDefault = RegistryOperations.getProfileStringWithDefault("LastFilePath", "");
+            string profileStringWithDefault = RegistryOperations.GetString("LastFilePath", "");
             string initialDirectory;
             string radioType = "MD-9600_RT-90";
 
@@ -654,6 +634,7 @@ namespace NIKA_CPS_V1
             saveFileDialog.InitialDirectory = initialDirectory;
             if (saveFileDialog.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(saveFileDialog.FileName))
             {
+                buildCalDataFromVariables(CalData);
                 try
                 {
                     using (FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.Create))
@@ -720,7 +701,7 @@ namespace NIKA_CPS_V1
 
                 power8VHF[i] = new NumericUpDown();
                 power8VHF[i].Width = 74;
-                power8VHF[i].Increment = 16;
+                power8VHF[i].Increment = 1;
                 power8VHF[i].Height = 20;
                 power8VHF[i].Margin = margin;
                 power8VHF[i].Minimum = 0;
@@ -728,7 +709,7 @@ namespace NIKA_CPS_V1
                 power8VHF[i].ValueChanged += new EventHandler(nmValueChanged);
                 power7VHF[i] = new NumericUpDown();
                 power7VHF[i].Width = 74;
-                power7VHF[i].Increment = 16;
+                power7VHF[i].Increment = 1;
                 power7VHF[i].Height = 20;
                 power7VHF[i].Margin = margin;
                 power7VHF[i].Minimum = 0;
@@ -736,7 +717,7 @@ namespace NIKA_CPS_V1
                 power7VHF[i].ValueChanged += new EventHandler(nmValueChanged);
                 power6VHF[i] = new NumericUpDown();
                 power6VHF[i].Width = 74;
-                power6VHF[i].Increment = 16;
+                power6VHF[i].Increment = 1;
                 power6VHF[i].Height = 20;
                 power6VHF[i].Margin = margin;
                 power6VHF[i].Minimum = 0;
@@ -744,7 +725,7 @@ namespace NIKA_CPS_V1
                 power6VHF[i].ValueChanged += new EventHandler(nmValueChanged);
                 power5VHF[i] = new NumericUpDown();
                 power5VHF[i].Width = 74;
-                power5VHF[i].Increment = 16;
+                power5VHF[i].Increment = 1;
                 power5VHF[i].Height = 20;
                 power5VHF[i].Margin = margin;
                 power5VHF[i].Minimum = 0;
@@ -852,7 +833,7 @@ namespace NIKA_CPS_V1
             
                 power8UHF[i] = new NumericUpDown();
                 power8UHF[i].Width = 74;
-                power8UHF[i].Increment = 16;
+                power8UHF[i].Increment = 1;
                 power8UHF[i].Height = 20;
                 power8UHF[i].Margin = margin;
                 power8UHF[i].Minimum = 0;
@@ -860,7 +841,7 @@ namespace NIKA_CPS_V1
                 power8UHF[i].ValueChanged += new EventHandler(nmValueChanged);
                 power7UHF[i] = new NumericUpDown();
                 power7UHF[i].Width = 74;
-                power7UHF[i].Increment = 16;
+                power7UHF[i].Increment = 1;
                 power7UHF[i].Height = 20;
                 power7UHF[i].Margin = margin;
                 power7UHF[i].Minimum = 0;
@@ -868,7 +849,7 @@ namespace NIKA_CPS_V1
                 power7UHF[i].ValueChanged += new EventHandler(nmValueChanged);
                 power6UHF[i] = new NumericUpDown();
                 power6UHF[i].Width = 74;
-                power6UHF[i].Increment = 16;
+                power6UHF[i].Increment = 1;
                 power6UHF[i].Height = 20;
                 power6UHF[i].Margin = margin;
                 power6UHF[i].Minimum = 0;
@@ -876,7 +857,7 @@ namespace NIKA_CPS_V1
                 power6UHF[i].ValueChanged += new EventHandler(nmValueChanged);
                 power5UHF[i] = new NumericUpDown();
                 power5UHF[i].Width = 74;
-                power5UHF[i].Increment = 16;
+                power5UHF[i].Increment = 1;
                 power5UHF[i].Height = 20;
                 power5UHF[i].Margin = margin;
                 power5UHF[i].Minimum = 0;
@@ -1051,26 +1032,24 @@ namespace NIKA_CPS_V1
 
             lblRadioType.Text += "TYT MD-9600/Retevis RT-90";
             isReading = true;
-            nmRSSI120.Value = c.RSSI120 * 16;
-            nmRSSI70.Value = c.RSSI70 * 16;
+            nmRSSI120.Value = c.RSSI120;
+            nmRSSI70.Value = c.RSSI70;
             nmVHFOscRef.Value = c.OscRefTuneVHF;
             nmUHFOscRef.Value = c.OscRefTuneVHF;
             //tlpVHF
-            var vhfPowers = c.PowersVHFAs2D;
-            var uhfPowers = c.PowersUHFAs2D;
             for (int i = 0; i < 5; i++)
             {
 
                 frequenciesTxVHF[i].Text = ((radioBandlimits.VHFLowCal + (i * 950000)) / 100000.0f).ToString("N3");
-                power8VHF[i].Value = vhfPowers[8][i];
-                power7VHF[i].Value = vhfPowers[7][i];
-                power6VHF[i].Value = vhfPowers[6][i];
-                power5VHF[i].Value = vhfPowers[5][i];
-                power4VHF[i].Value = vhfPowers[4][i];
-                power3VHF[i].Value = vhfPowers[3][i];
-                power2VHF[i].Value = vhfPowers[2][i];
-                power1VHF[i].Value = vhfPowers[1][i];
-                power0VHF[i].Value = vhfPowers[0][i];
+                power8VHF[i].Value = c.GetPowerVHF(8, i);
+                power7VHF[i].Value = c.GetPowerVHF(7, i);
+                power6VHF[i].Value = c.GetPowerVHF(6, i);
+                power5VHF[i].Value = c.GetPowerVHF(5, i);
+                power4VHF[i].Value = c.GetPowerVHF(4, i);
+                power3VHF[i].Value = c.GetPowerVHF(3, i);
+                power2VHF[i].Value = c.GetPowerVHF(2, i);
+                power1VHF[i].Value = c.GetPowerVHF(1, i);
+                power0VHF[i].Value = c.GetPowerVHF(0, i);
                 rxTuningVHF[i].Value = c.RxTuneVHF[i];
                 iGainDMRVHF[i].Value = c.IGainDMRVHF[i];
                 qGainDMRVHF[i].Value = c.QGainDMRVHF[i];
@@ -1081,15 +1060,15 @@ namespace NIKA_CPS_V1
             {
 
                 frequenciesTxUHF[i].Text = ((radioBandlimits.UHFLowCal + (i * 1000000)) / 100000.0f).ToString("N3");
-                power8UHF[i].Value = uhfPowers[8][i];
-                power7UHF[i].Value = uhfPowers[7][i];
-                power6UHF[i].Value = uhfPowers[6][i];
-                power5UHF[i].Value = uhfPowers[5][i];
-                power4UHF[i].Value = uhfPowers[4][i];
-                power3UHF[i].Value = uhfPowers[3][i];
-                power2UHF[i].Value = uhfPowers[2][i];
-                power1UHF[i].Value = uhfPowers[1][i];
-                power0UHF[i].Value = uhfPowers[0][i];
+                power8UHF[i].Value = c.GetPowerUHF(8, i);
+                power7UHF[i].Value = c.GetPowerUHF(7, i);
+                power6UHF[i].Value = c.GetPowerUHF(6, i);
+                power5UHF[i].Value = c.GetPowerUHF(5, i);
+                power4UHF[i].Value = c.GetPowerUHF(4, i);
+                power3UHF[i].Value = c.GetPowerUHF(3, i);
+                power2UHF[i].Value = c.GetPowerUHF(2, i);
+                power1UHF[i].Value = c.GetPowerUHF(1, i);
+                power0UHF[i].Value = c.GetPowerUHF(0, i);
                 rxTuningUHF[i].Value = c.RxTuneUHF[i];
                 iGainDMRUHF[i].Value = c.IGainDMRUHF[i];
                 qGainDMRUHF[i].Value = c.QGainDMRUHF[i];
@@ -1103,21 +1082,21 @@ namespace NIKA_CPS_V1
         {
             if (!isReading)
             {
-                c.RSSI120 = (byte)(nmRSSI120.Value / 16);
-                c.RSSI70 = (byte)(nmRSSI70.Value / 16);
+                c.RSSI120 = (byte)(nmRSSI120.Value);
+                c.RSSI70 = (byte)(nmRSSI70.Value);
                 c.OscRefTuneVHF = (byte)nmVHFOscRef.Value;
                 c.OscRefTuneUHF = (byte)nmUHFOscRef.Value;
                 for (int i = 0; i < 5; i++)
                 {
-                    c.PowersUHFAs2D[8][i] = (ushort)power8VHF[i].Value;
-                    c.PowersUHFAs2D[7][i] = (ushort)power7VHF[i].Value;
-                    c.PowersUHFAs2D[6][i] = (ushort)power6VHF[i].Value;
-                    c.PowersUHFAs2D[5][i] = (ushort)power5VHF[i].Value;
-                    c.PowersUHFAs2D[4][i] = (ushort)power4VHF[i].Value;
-                    c.PowersUHFAs2D[3][i] = (ushort)power3VHF[i].Value;
-                    c.PowersUHFAs2D[2][i] = (ushort)power2VHF[i].Value;
-                    c.PowersUHFAs2D[1][i] = (ushort)power1VHF[i].Value;
-                    c.PowersUHFAs2D[0][i] = (ushort)power0VHF[i].Value;
+                    c.SetPowerVHF(8, i, (ushort)power8VHF[i].Value);
+                    c.SetPowerVHF(7, i, (ushort)power7VHF[i].Value);
+                    c.SetPowerVHF(6, i, (ushort)power6VHF[i].Value);
+                    c.SetPowerVHF(5, i, (ushort)power5VHF[i].Value);
+                    c.SetPowerVHF(4, i, (ushort)power4VHF[i].Value);
+                    c.SetPowerVHF(3, i, (ushort)power3VHF[i].Value);
+                    c.SetPowerVHF(2, i, (ushort)power2VHF[i].Value);
+                    c.SetPowerVHF(1, i, (ushort)power1VHF[i].Value);
+                    c.SetPowerVHF(0, i, (ushort)power0VHF[i].Value);
                     c.RxTuneVHF[i] = (byte)rxTuningVHF[i].Value;
                     c.IGainDMRVHF[i] = (byte)iGainDMRVHF[i].Value;
                     c.QGainDMRVHF[i] = (byte)qGainDMRVHF[i].Value;
@@ -1126,29 +1105,29 @@ namespace NIKA_CPS_V1
                 }
                 for (int i = 0; i < 9; i++)
                 {
-                    c.PowersUHFAs2D[8][i] = (ushort)power8UHF[i].Value;
-                    c.PowersUHFAs2D[7][i] = (ushort)power7UHF[i].Value;
-                    c.PowersUHFAs2D[6][i] = (ushort)power6UHF[i].Value;
-                    c.PowersUHFAs2D[5][i] = (ushort)power5UHF[i].Value;
-                    c.PowersUHFAs2D[4][i] = (ushort)power4UHF[i].Value;
-                    c.PowersUHFAs2D[3][i] = (ushort)power3UHF[i].Value;
-                    c.PowersUHFAs2D[2][i] = (ushort)power2UHF[i].Value;
-                    c.PowersUHFAs2D[1][i] = (ushort)power1UHF[i].Value;
-                    c.PowersUHFAs2D[0][i] = (ushort)power0UHF[i].Value;
+                    c.SetPowerUHF(8, i, (ushort)power8UHF[i].Value);
+                    c.SetPowerUHF(7, i, (ushort)power7UHF[i].Value);
+                    c.SetPowerUHF(6, i, (ushort)power6UHF[i].Value);
+                    c.SetPowerUHF(5, i, (ushort)power5UHF[i].Value);
+                    c.SetPowerUHF(4, i, (ushort)power4UHF[i].Value);
+                    c.SetPowerUHF(3, i, (ushort)power3UHF[i].Value);
+                    c.SetPowerUHF(2, i, (ushort)power2UHF[i].Value);
+                    c.SetPowerUHF(1, i, (ushort)power1UHF[i].Value);
+                    c.SetPowerUHF(0, i, (ushort)power0UHF[i].Value);
                     c.RxTuneUHF[i] = (byte)rxTuningUHF[i].Value;
                     c.IGainDMRUHF[i] = (byte)iGainDMRUHF[i].Value;
                     c.QGainDMRUHF[i] = (byte)qGainDMRUHF[i].Value;
                     c.IGainUHF[i] = (byte)iGainFMUHF[i].Value;
                     c.QGainUHF[i] = (byte)qGainFMUHF[i].Value;
                 }
-                c.checksum = 0;
+                c.checksum = 0xDEFECA7E;
             }
         }
 
         private void btnChart_Click(object sender, EventArgs e)
         {
-         /*   CalibrationCharts chartsForm = new CalibrationCharts(CalData);
-            chartsForm.ShowDialog();*/
+            CalibrationCharts chartsForm = new CalibrationCharts(CalData);
+            chartsForm.ShowDialog();
         }
 
         protected override void Dispose(bool disposing)
@@ -1216,6 +1195,7 @@ namespace NIKA_CPS_V1
             this.lblRadioType = new System.Windows.Forms.Label();
             this.btnClearColors = new System.Windows.Forms.Button();
             this.btnChart = new System.Windows.Forms.Button();
+            this.pBar = new System.Windows.Forms.ProgressBar();
             this.tabs.SuspendLayout();
             this.tabVHF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmVHFOscRef)).BeginInit();
@@ -1231,10 +1211,10 @@ namespace NIKA_CPS_V1
             // btnWrite
             // 
             this.btnWrite.BackColor = System.Drawing.Color.White;
-            this.btnWrite.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnWrite.Location = new System.Drawing.Point(878, 258);
+            this.btnWrite.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnWrite.Location = new System.Drawing.Point(877, 297);
             this.btnWrite.Name = "btnWrite";
-            this.btnWrite.Size = new System.Drawing.Size(268, 23);
+            this.btnWrite.Size = new System.Drawing.Size(268, 25);
             this.btnWrite.TabIndex = 1;
             this.btnWrite.Text = "Записать в рацию";
             this.btnWrite.UseVisualStyleBackColor = false;
@@ -1244,10 +1224,10 @@ namespace NIKA_CPS_V1
             // btnReadFile
             // 
             this.btnReadFile.BackColor = System.Drawing.Color.White;
-            this.btnReadFile.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnReadFile.Location = new System.Drawing.Point(878, 216);
+            this.btnReadFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnReadFile.Location = new System.Drawing.Point(877, 262);
             this.btnReadFile.Name = "btnReadFile";
-            this.btnReadFile.Size = new System.Drawing.Size(268, 23);
+            this.btnReadFile.Size = new System.Drawing.Size(268, 25);
             this.btnReadFile.TabIndex = 1;
             this.btnReadFile.Text = "Открыть файл калибровок";
             this.btnReadFile.UseVisualStyleBackColor = false;
@@ -1256,10 +1236,10 @@ namespace NIKA_CPS_V1
             // btnReadFromRadio
             // 
             this.btnReadFromRadio.BackColor = System.Drawing.Color.White;
-            this.btnReadFromRadio.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnReadFromRadio.Location = new System.Drawing.Point(878, 177);
+            this.btnReadFromRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnReadFromRadio.Location = new System.Drawing.Point(877, 227);
             this.btnReadFromRadio.Name = "btnReadFromRadio";
-            this.btnReadFromRadio.Size = new System.Drawing.Size(268, 23);
+            this.btnReadFromRadio.Size = new System.Drawing.Size(268, 25);
             this.btnReadFromRadio.TabIndex = 1;
             this.btnReadFromRadio.Text = "Считать калибровки из рации";
             this.btnReadFromRadio.UseVisualStyleBackColor = false;
@@ -1268,10 +1248,10 @@ namespace NIKA_CPS_V1
             // btnSaveCalibration
             // 
             this.btnSaveCalibration.BackColor = System.Drawing.Color.White;
-            this.btnSaveCalibration.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnSaveCalibration.Location = new System.Drawing.Point(878, 303);
+            this.btnSaveCalibration.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSaveCalibration.Location = new System.Drawing.Point(877, 332);
             this.btnSaveCalibration.Name = "btnSaveCalibration";
-            this.btnSaveCalibration.Size = new System.Drawing.Size(268, 23);
+            this.btnSaveCalibration.Size = new System.Drawing.Size(268, 25);
             this.btnSaveCalibration.TabIndex = 1;
             this.btnSaveCalibration.Text = "Сохранить файл калибровок";
             this.btnSaveCalibration.UseVisualStyleBackColor = false;
@@ -1399,7 +1379,7 @@ namespace NIKA_CPS_V1
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(144, 20);
             this.label9.TabIndex = 2;
-            this.label9.Text = "Уровень мощности 9";
+            this.label9.Text = "Мощность 40 Вт";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label10
@@ -1409,7 +1389,7 @@ namespace NIKA_CPS_V1
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(144, 20);
             this.label10.TabIndex = 3;
-            this.label10.Text = "Уровень мощности 8";
+            this.label10.Text = "Мощность 25 Вт";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label11
@@ -1419,7 +1399,7 @@ namespace NIKA_CPS_V1
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(144, 20);
             this.label11.TabIndex = 4;
-            this.label11.Text = "Уровень мощности 7";
+            this.label11.Text = "Мощность 10 Вт";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label12
@@ -1429,7 +1409,7 @@ namespace NIKA_CPS_V1
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(144, 20);
             this.label12.TabIndex = 5;
-            this.label12.Text = "Уровень мощности 6";
+            this.label12.Text = "Мощность 5 Вт";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label16
@@ -1490,7 +1470,7 @@ namespace NIKA_CPS_V1
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(144, 20);
             this.label45.TabIndex = 19;
-            this.label45.Text = "Уровень мощности 5";
+            this.label45.Text = "Мощность 1 Вт";
             this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label46
@@ -1501,7 +1481,7 @@ namespace NIKA_CPS_V1
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(144, 20);
             this.label46.TabIndex = 20;
-            this.label46.Text = "Уровень мощности 4";
+            this.label46.Text = "Мощность 750 мВт";
             this.label46.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label47
@@ -1512,7 +1492,7 @@ namespace NIKA_CPS_V1
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(144, 20);
             this.label47.TabIndex = 21;
-            this.label47.Text = "Уровень мощности 3";
+            this.label47.Text = "Мощность 500 мВт";
             this.label47.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label48
@@ -1523,7 +1503,7 @@ namespace NIKA_CPS_V1
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(144, 20);
             this.label48.TabIndex = 22;
-            this.label48.Text = "Уровень мощности 2";
+            this.label48.Text = "Мощность 250 мВт";
             this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label49
@@ -1534,7 +1514,7 @@ namespace NIKA_CPS_V1
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(144, 20);
             this.label49.TabIndex = 23;
-            this.label49.Text = "Уровень мощности 1";
+            this.label49.Text = "Мощность 100 мВт";
             this.label49.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tabUHF
@@ -1546,7 +1526,7 @@ namespace NIKA_CPS_V1
             this.tabUHF.Location = new System.Drawing.Point(4, 22);
             this.tabUHF.Name = "tabUHF";
             this.tabUHF.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUHF.Size = new System.Drawing.Size(849, 381);
+            this.tabUHF.Size = new System.Drawing.Size(849, 396);
             this.tabUHF.TabIndex = 1;
             this.tabUHF.Text = "Диапазон 70 см";
             // 
@@ -1642,7 +1622,7 @@ namespace NIKA_CPS_V1
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(144, 20);
             this.label41.TabIndex = 2;
-            this.label41.Text = "Уровень мощности 9";
+            this.label41.Text = "Мощность 40 Вт";
             this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label42
@@ -1652,7 +1632,7 @@ namespace NIKA_CPS_V1
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(144, 20);
             this.label42.TabIndex = 3;
-            this.label42.Text = "Уровень мощности 8";
+            this.label42.Text = "Мощность 25 Вт";
             this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label43
@@ -1662,7 +1642,7 @@ namespace NIKA_CPS_V1
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(144, 20);
             this.label43.TabIndex = 4;
-            this.label43.Text = "Уровень мощности 7";
+            this.label43.Text = "Мощность 10 Вт";
             this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label44
@@ -1672,7 +1652,7 @@ namespace NIKA_CPS_V1
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(144, 20);
             this.label44.TabIndex = 5;
-            this.label44.Text = "Уровень мощности 6";
+            this.label44.Text = "Мощность 5 Вт";
             this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label7
@@ -1734,7 +1714,7 @@ namespace NIKA_CPS_V1
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(144, 20);
             this.label50.TabIndex = 22;
-            this.label50.Text = "Уровень мощности 5";
+            this.label50.Text = "Мощность 1 Вт";
             this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label51
@@ -1745,7 +1725,7 @@ namespace NIKA_CPS_V1
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(144, 20);
             this.label51.TabIndex = 23;
-            this.label51.Text = "Уровень мощности 4";
+            this.label51.Text = "Мощность 750 мВт";
             this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label52
@@ -1756,7 +1736,7 @@ namespace NIKA_CPS_V1
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(144, 20);
             this.label52.TabIndex = 24;
-            this.label52.Text = "Уровень мощности 3";
+            this.label52.Text = "Мощность 500 мВт";
             this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label53
@@ -1767,7 +1747,7 @@ namespace NIKA_CPS_V1
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(144, 20);
             this.label53.TabIndex = 25;
-            this.label53.Text = "Уровень мощности 2";
+            this.label53.Text = "Мощность 250 мВт";
             this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label54
@@ -1778,7 +1758,7 @@ namespace NIKA_CPS_V1
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(144, 20);
             this.label54.TabIndex = 26;
-            this.label54.Text = "Уровень мощности 1";
+            this.label54.Text = "Мощность 100 мВт";
             this.label54.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // gbCommons
@@ -1841,11 +1821,12 @@ namespace NIKA_CPS_V1
             // btnReadFactoryFromRadio
             // 
             this.btnReadFactoryFromRadio.BackColor = System.Drawing.Color.White;
-            this.btnReadFactoryFromRadio.Location = new System.Drawing.Point(878, 345);
+            this.btnReadFactoryFromRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnReadFactoryFromRadio.Location = new System.Drawing.Point(877, 367);
             this.btnReadFactoryFromRadio.Name = "btnReadFactoryFromRadio";
-            this.btnReadFactoryFromRadio.Size = new System.Drawing.Size(268, 23);
+            this.btnReadFactoryFromRadio.Size = new System.Drawing.Size(268, 25);
             this.btnReadFactoryFromRadio.TabIndex = 5;
-            this.btnReadFactoryFromRadio.Text = "Считать заводские калибровки рации";
+            this.btnReadFactoryFromRadio.Text = "Восстановить заводские калибровки";
             this.btnReadFactoryFromRadio.UseVisualStyleBackColor = false;
             this.btnReadFactoryFromRadio.Visible = false;
             this.btnReadFactoryFromRadio.Click += new System.EventHandler(this.btnReadFactoryFromRadio_Click);
@@ -1861,9 +1842,10 @@ namespace NIKA_CPS_V1
             // btnClearColors
             // 
             this.btnClearColors.BackColor = System.Drawing.Color.White;
-            this.btnClearColors.Location = new System.Drawing.Point(880, 392);
+            this.btnClearColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnClearColors.Location = new System.Drawing.Point(877, 402);
             this.btnClearColors.Name = "btnClearColors";
-            this.btnClearColors.Size = new System.Drawing.Size(266, 23);
+            this.btnClearColors.Size = new System.Drawing.Size(268, 25);
             this.btnClearColors.TabIndex = 10;
             this.btnClearColors.Text = "Сбросить маркеры";
             this.btnClearColors.UseVisualStyleBackColor = false;
@@ -1872,20 +1854,31 @@ namespace NIKA_CPS_V1
             // btnChart
             // 
             this.btnChart.BackColor = System.Drawing.Color.White;
-            this.btnChart.Location = new System.Drawing.Point(877, 132);
+            this.btnChart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnChart.Location = new System.Drawing.Point(877, 192);
             this.btnChart.Name = "btnChart";
-            this.btnChart.Size = new System.Drawing.Size(267, 23);
+            this.btnChart.Size = new System.Drawing.Size(268, 25);
             this.btnChart.TabIndex = 11;
             this.btnChart.Text = "Калибровочные кривые";
             this.btnChart.UseVisualStyleBackColor = false;
             this.btnChart.Visible = false;
             this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
             // 
+            // pBar
+            // 
+            this.pBar.ForeColor = System.Drawing.Color.Red;
+            this.pBar.Location = new System.Drawing.Point(877, 135);
+            this.pBar.Name = "pBar";
+            this.pBar.Size = new System.Drawing.Size(267, 18);
+            this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pBar.TabIndex = 12;
+            // 
             // CalibrationForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1156, 454);
+            this.Controls.Add(this.pBar);
             this.Controls.Add(this.btnChart);
             this.Controls.Add(this.btnClearColors);
             this.Controls.Add(this.lblRadioType);
