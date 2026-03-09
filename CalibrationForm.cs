@@ -13,6 +13,9 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using static NIKA_CPS_V1.Interfaces.FirmwareInterface;
+using static NIKA_CPS_V1.DataTransfer;
+
 
 
 
@@ -26,11 +29,11 @@ namespace NIKA_CPS_V1
 
         public static int CALIBRATION_TABLE_SIZE = 0x150;
 
-        private char writeCommandCharacter = 'W';
+        
 
         public static byte[] dataBuffer;
 
-        private IContainer components;
+        private IContainer components = null;
 
         private Button btnWrite;
 
@@ -90,7 +93,6 @@ namespace NIKA_CPS_V1
         private Label label54;
         private Button btnClearColors;
         private Button btnChart;
-        private ProgressBar pBar;
         private NumericUpDown nmDevFMVHF;
         private Label label1;
         private NumericUpDown nmDevFMNVHF;
@@ -181,7 +183,7 @@ namespace NIKA_CPS_V1
                 return false;
             }
             DataTransfer COMData = new DataTransfer();
-            COMData.mode = DataTransfer.DataMode.DataModeReadBandlimits;
+            COMData.mode = DataMode.DataModeReadBandlimits;
             COMData.localAddress = 0;
             COMData.transferLength = 0;
             COMData.dataBuffer = new byte[128];
@@ -197,69 +199,6 @@ namespace NIKA_CPS_V1
             return true;
 
         }
-
-       
-
-        private void updateProgess(int progressPercentage)
-        {
-            if (progressPercentage >= 90)
-                progressPercentage = 100;
-            pBar.Value = progressPercentage;
-        }
-
-
-        private bool ReadFlash(SerialPort port, DataTransfer dataObj)
-        {
-            int num = 0;
-            byte[] array = new byte[512];
-            byte[] array2 = new byte[512];
-            bool result = true;
-            int num2 = dataObj.flashAddress;
-            int localDataBufferStartPosition = dataObj.localAddress;
-            for (int num3 = dataObj.flashAddress + dataObj.transferLength - num2; num3 > 0; num3 = dataObj.flashAddress + dataObj.transferLength - num2)
-            {
-                if (num3 > 32)
-                {
-                    num3 = 32;
-                }
-                array[0] = 82;
-                array[1] = (byte)dataObj.mode;
-                array[2] = (byte)((num2 >> 24) & 0xFF);
-                array[3] = (byte)((num2 >> 16) & 0xFF);
-                array[4] = (byte)((num2 >> 8) & 0xFF);
-                array[5] = (byte)(num2 & 0xFF);
-                array[6] = (byte)((num3 >> 8) & 0xFF);
-                array[7] = (byte)(num3 & 0xFF);
-                port.Write(array, 0, 8);
-                while (port.BytesToRead == 0)
-                {
-                    Thread.Sleep(0);
-                }
-                port.Read(array2, 0, 64);
-                if (array2[0] == 82)
-                {
-                    int num4 = (array2[1] << 8) + array2[2];
-                    for (int i = 0; i < num4; i++)
-                    {
-                        dataObj.dataBuffer[localDataBufferStartPosition++] = array2[i + 3];
-                    }
-                    int num5 = (num2 - dataObj.flashAddress) * 100 / dataObj.transferLength;
-                    if (num != num5)
-                    {
-                        updateProgess(num5);
-                        num = num5;
-                    }
-                    num2 += num4;
-                }
-                else
-                {
-                    result = false;
-                }
-            }
-            return result;
-        }
-
-
 
         private static CalibrationData ByteArrayToCalData(byte[] bytes)
         {
@@ -286,14 +225,13 @@ namespace NIKA_CPS_V1
                 return false;
             }
             DataTransfer COMData = new DataTransfer();
-            FirmwareInterface.sendCommand(COMPort.Port, 0);
-            FirmwareInterface.sendCommand(COMPort.Port, 1);
-            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
-            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Чтение");
-            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
-            FirmwareInterface.sendCommand(COMPort.Port, 3);
-            FirmwareInterface.sendCommand(COMPort.Port, 6, 3);
-            COMData.mode = DataTransfer.DataMode.DataModeReadFlash;
+            sendCommand(COMPort.Port, CPSCommand.InitUI);
+            sendCommand(COMPort.Port, CPSCommand.ClearScreen);
+            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Чтение");
+            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "калибровок");
+            sendCommand(COMPort.Port, CPSCommand.UpdateScreen);
+            
+            COMData.mode = DataMode.DataModeReadFlash;
             COMData.dataBuffer = new byte[CALIBRATION_TABLE_SIZE];
             COMData.localAddress = 0;
             COMData.flashAddress = CALIBRATIONS_ADDRESS;
@@ -307,10 +245,10 @@ namespace NIKA_CPS_V1
             {
                 SystemSounds.Exclamation.Play();
             }
-
-
-            FirmwareInterface.sendCommand(COMPort.Port, 5);
-            FirmwareInterface.sendCommand(COMPort.Port, 7);
+            Thread.Sleep(1000);
+            sendCommand(COMPort.Port, CPSCommand.Finish, 3);
+            sendCommand(COMPort.Port, CPSCommand.CloseUI);
+            sendCommand(COMPort.Port, CPSCommand.RestartGPS);
             COMPort.Port.Close();
             COMPort.Port = null;
             CalData = ByteArrayToCalData(COMData.dataBuffer);
@@ -333,15 +271,13 @@ namespace NIKA_CPS_V1
                 MessageBox.Show("Отсутствует заданный COM-порт");
                 return;
             }
-            FirmwareInterface.sendCommand(COMPort.Port, 0);
-            FirmwareInterface.sendCommand(COMPort.Port, 1);
-            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
-            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Запись");
-            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
-            FirmwareInterface.sendCommand(COMPort.Port, 3);
-            FirmwareInterface.sendCommand(COMPort.Port, 6, 4);
-            pBar.Value = 0;
-            COMData.mode = DataTransfer.DataMode.DataModeWriteFlash;
+            sendCommand(COMPort.Port, CPSCommand.InitUI);
+            sendCommand(COMPort.Port, CPSCommand.ClearScreen);
+            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Запись");
+            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "калибровок");
+            sendCommand(COMPort.Port, CPSCommand.UpdateScreen);
+            sendCommand(COMPort.Port, CPSCommand.Finish, 4);
+            COMData.mode = DataMode.DataModeWriteFlash;
             COMData.localAddress = 0;
             COMData.flashAddress = CALIBRATIONS_ADDRESS;
             COMData.transferLength = CALIBRATION_TABLE_SIZE;
@@ -350,151 +286,11 @@ namespace NIKA_CPS_V1
                 MessageBox.Show("Ошибка при записи в последовательный порт!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 COMData.responseCode = 1;
             }
-            FirmwareInterface.sendCommand(COMPort.Port, 6, 2);
-            FirmwareInterface.sendCommand(COMPort.Port, 6, 1);
+            sendCommand(COMPort.Port, CPSCommand.Finish, 2);
+            sendCommand(COMPort.Port, CPSCommand.Finish, 1);
+            sendCommand(COMPort.Port, CPSCommand.CloseUI);
             COMPort.Port.Close();
             COMPort.Port = null;
-        }
-
-        private bool flashWriteSector(SerialPort port, char writeCharacter, ref byte[] sendbuffer, ref byte[] readbuffer, DataTransfer dataObj)
-        {
-            int num = 100;
-            dataObj.dataSector = -1;
-            sendbuffer[0] = (byte)writeCharacter;
-            sendbuffer[1] = 3;
-            port.Write(sendbuffer, 0, 2);
-            while (port.BytesToRead == 0)
-            {
-                Thread.Sleep(1);
-            }
-            Thread.Sleep(100);
-            while (port.BytesToRead == 0 && num-- > 0)
-            {
-                Thread.Sleep(5);
-            }
-            port.Read(readbuffer, 0, port.BytesToRead);
-            if (readbuffer[0] == sendbuffer[0] && readbuffer[1] == sendbuffer[1])
-            {
-                return num != -1;
-            }
-            return false;
-        }
-
-        private bool flashWritePrepareSector(SerialPort port, char writeCharacter, int address, ref byte[] sendbuffer, ref byte[] readbuffer, DataTransfer dataObj)
-        {
-            int num = 100;
-            dataObj.dataSector = address / 4096;
-            sendbuffer[0] = (byte)writeCharacter;
-            sendbuffer[1] = 1;
-            sendbuffer[2] = (byte)((dataObj.dataSector >> 16) & 0xFF);
-            sendbuffer[3] = (byte)((dataObj.dataSector >> 8) & 0xFF);
-            sendbuffer[4] = (byte)(dataObj.dataSector & 0xFF);
-            port.Write(sendbuffer, 0, 5);
-            while (port.BytesToRead == 0)
-            {
-                Thread.Sleep(1);
-            }
-            Thread.Sleep(50);
-            while (port.BytesToRead == 0 && num-- > 0)
-            {
-                Thread.Sleep(1);
-            }
-            if (num != -1)
-            {
-                port.Read(readbuffer, 0, port.BytesToRead);
-            }
-            if (readbuffer[0] == sendbuffer[0] && readbuffer[1] == sendbuffer[1])
-            {
-                return num != -1;
-            }
-            return false;
-        }
-
-        private bool flashSendData(SerialPort port, char writeCharacter, int address, int len, ref byte[] sendbuffer, ref byte[] readbuffer)
-        {
-            int num = 100;
-            sendbuffer[0] = (byte)writeCharacter;
-            sendbuffer[1] = 2;
-            sendbuffer[2] = (byte)((address >> 24) & 0xFF);
-            sendbuffer[3] = (byte)((address >> 16) & 0xFF);
-            sendbuffer[4] = (byte)((address >> 8) & 0xFF);
-            sendbuffer[5] = (byte)(address & 0xFF);
-            sendbuffer[6] = (byte)((len >> 8) & 0xFF);
-            sendbuffer[7] = (byte)(len & 0xFF);
-            port.Write(sendbuffer, 0, len + 8);
-            while (port.BytesToRead == 0)
-            {
-                Thread.Sleep(1);
-            }
-            Thread.Sleep(20);
-            while (port.BytesToRead == 0 && num-- > 0)
-            {
-                Thread.Sleep(1);
-            }
-            if (num != -1)
-            {
-                port.Read(readbuffer, 0, port.BytesToRead);
-            }
-            if (readbuffer[0] == sendbuffer[0] && readbuffer[1] == sendbuffer[1])
-            {
-                return num != -1;
-            }
-            return false;
-        }
-
-        private bool WriteFlash(SerialPort port, DataTransfer dataObj)
-        {
-            int num = 0;
-            byte[] sendbuffer = new byte[512];
-            byte[] readbuffer = new byte[512];
-            int num2 = dataObj.flashAddress;
-            int localDataBufferStartPosition = dataObj.localAddress;
-            dataObj.dataSector = -1;
-            for (int num3 = dataObj.flashAddress + dataObj.transferLength - num2; num3 > 0; num3 = dataObj.flashAddress + dataObj.transferLength - num2)
-            {
-                if (num3 > 32)
-                {
-                    num3 = 32;
-                }
-                if (dataObj.dataSector == -1 && !flashWritePrepareSector(port, writeCommandCharacter, num2, ref sendbuffer, ref readbuffer, dataObj))
-                {
-                    return false;
-                }
-                if (dataObj.mode != 0)
-                {
-                    int num4 = 0;
-                    for (int i = 0; i < num3; i++)
-                    {
-                        sendbuffer[i + 8] = dataObj.dataBuffer[localDataBufferStartPosition++];
-                        num4++;
-                        if (dataObj.dataSector != (num2 + num4) / 4096)
-                        {
-                            break;
-                        }
-                    }
-                    if (!flashSendData(port, writeCommandCharacter, num2, num4, ref sendbuffer, ref readbuffer))
-                    {
-                        return false;
-                    }
-                    int num5 = (num2 - dataObj.flashAddress) * 100 / dataObj.transferLength;
-                    if (num != num5)
-                    {
-                        updateProgess(num5);
-                        num = num5;
-                    }
-                    num2 += num4;
-                    if (dataObj.dataSector != num2 / 4096 && !flashWriteSector(port, writeCommandCharacter, ref sendbuffer, ref readbuffer, dataObj))
-                    {
-                        return false;
-                    }
-                }
-            }
-            if (dataObj.dataSector != -1 && !flashWriteSector(port, writeCommandCharacter, ref sendbuffer, ref readbuffer, dataObj))
-            {
-                MessageBox.Show($"Error. Write stopped (write sector error at {num2:X8})");
-                return false;
-            }
-            return true;
         }
 
 
@@ -593,14 +389,13 @@ namespace NIKA_CPS_V1
             DataTransfer COMData = new DataTransfer();
             COMData.dataBuffer = new byte[CALIBRATION_TABLE_SIZE];
             Array.Copy(dataBuffer, 0, COMData.dataBuffer, 0, CALIBRATION_TABLE_SIZE);
-            FirmwareInterface.sendCommand(COMPort.Port, 0);
-            FirmwareInterface.sendCommand(COMPort.Port, 1);
-            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 0, 3, 1, 0, "CPS");
-            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 16, 3, 1, 0, "Восстановление");
-            FirmwareInterface.sendCommand(COMPort.Port, 2, 0, 32, 3, 1, 0, "калибровок");
-            FirmwareInterface.sendCommand(COMPort.Port, 3);
-            FirmwareInterface.sendCommand(COMPort.Port, 6, 4);
-            COMData.mode = DataTransfer.DataMode.DataModeWriteFlash;
+            sendCommand(COMPort.Port, CPSCommand.InitUI);
+            sendCommand(COMPort.Port, CPSCommand.ClearScreen);
+            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Восстановление");
+            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "калибровок");
+            sendCommand(COMPort.Port, CPSCommand.UpdateScreen);
+            sendCommand(COMPort.Port, CPSCommand.Finish, 4);
+            COMData.mode = DataMode.DataModeWriteFlash;
             COMData.localAddress = 0;
             COMData.flashAddress = CALIBRATIONS_ADDRESS;
             COMData.transferLength = CALIBRATION_TABLE_SIZE;
@@ -609,8 +404,9 @@ namespace NIKA_CPS_V1
                 MessageBox.Show("Ошибка при восстановлении!");
                 COMData.responseCode = 1;
             }
-            FirmwareInterface.sendCommand(COMPort.Port, 6, 2);
-            FirmwareInterface.sendCommand(COMPort.Port, 6, 1);
+            sendCommand(COMPort.Port, CPSCommand.Finish, 2);
+            sendCommand(COMPort.Port, CPSCommand.Finish, 1);
+            sendCommand(COMPort.Port, CPSCommand.CloseUI);
             COMPort.Port.Close();
             COMPort.Port = null;
             MessageBox.Show("После перезагрузки рация перестроит таблицы, исходя из заводских калибровок, сохраненных в защищенной памяти.", "Сброс калибровок", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1056,6 +852,10 @@ namespace NIKA_CPS_V1
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tabs = new System.Windows.Forms.TabControl();
             this.tabVHF = new System.Windows.Forms.TabPage();
+            this.nmDevFMNVHF = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nmDevFMVHF = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.nmVHFOscRef = new System.Windows.Forms.NumericUpDown();
             this.label34 = new System.Windows.Forms.Label();
             this.tlpVHF = new System.Windows.Forms.TableLayoutPanel();
@@ -1075,6 +875,10 @@ namespace NIKA_CPS_V1
             this.label48 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
             this.tabUHF = new System.Windows.Forms.TabPage();
+            this.nmDevFMNUHF = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.nmDevFMUHF = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             this.nmUHFOscRef = new System.Windows.Forms.NumericUpDown();
             this.label35 = new System.Windows.Forms.Label();
             this.tlpUHF = new System.Windows.Forms.TableLayoutPanel();
@@ -1102,29 +906,20 @@ namespace NIKA_CPS_V1
             this.lblRadioType = new System.Windows.Forms.Label();
             this.btnClearColors = new System.Windows.Forms.Button();
             this.btnChart = new System.Windows.Forms.Button();
-            this.pBar = new System.Windows.Forms.ProgressBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nmDevFMVHF = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.nmDevFMNVHF = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.nmDevFMUHF = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.nmDevFMNUHF = new System.Windows.Forms.NumericUpDown();
             this.tabs.SuspendLayout();
             this.tabVHF.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNVHF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMVHF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmVHFOscRef)).BeginInit();
             this.tlpVHF.SuspendLayout();
             this.tabUHF.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNUHF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMUHF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmUHFOscRef)).BeginInit();
             this.tlpUHF.SuspendLayout();
             this.gbCommons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmRSSI70)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmRSSI120)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMVHF)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNVHF)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMUHF)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNUHF)).BeginInit();
             this.SuspendLayout();
             // 
             // btnWrite
@@ -1211,6 +1006,50 @@ namespace NIKA_CPS_V1
             this.tabVHF.Size = new System.Drawing.Size(849, 396);
             this.tabVHF.TabIndex = 0;
             this.tabVHF.Text = "Диапазон 2 м";
+            // 
+            // nmDevFMNVHF
+            // 
+            this.nmDevFMNVHF.Location = new System.Drawing.Point(590, 364);
+            this.nmDevFMNVHF.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nmDevFMNVHF.Name = "nmDevFMNVHF";
+            this.nmDevFMNVHF.Size = new System.Drawing.Size(52, 20);
+            this.nmDevFMNVHF.TabIndex = 13;
+            this.nmDevFMNVHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(500, 368);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Девиация FMN";
+            // 
+            // nmDevFMVHF
+            // 
+            this.nmDevFMVHF.Location = new System.Drawing.Point(432, 364);
+            this.nmDevFMVHF.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nmDevFMVHF.Name = "nmDevFMVHF";
+            this.nmDevFMVHF.Size = new System.Drawing.Size(52, 20);
+            this.nmDevFMVHF.TabIndex = 11;
+            this.nmDevFMVHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(350, 368);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Девиация FM";
             // 
             // nmVHFOscRef
             // 
@@ -1456,6 +1295,45 @@ namespace NIKA_CPS_V1
             this.tabUHF.Size = new System.Drawing.Size(849, 396);
             this.tabUHF.TabIndex = 1;
             this.tabUHF.Text = "Диапазон 70 см";
+            // 
+            // nmDevFMNUHF
+            // 
+            this.nmDevFMNUHF.Location = new System.Drawing.Point(458, 343);
+            this.nmDevFMNUHF.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nmDevFMNUHF.Name = "nmDevFMNUHF";
+            this.nmDevFMNUHF.Size = new System.Drawing.Size(52, 20);
+            this.nmDevFMNUHF.TabIndex = 20;
+            this.nmDevFMNUHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(368, 347);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 13);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Девиация FMN";
+            // 
+            // nmDevFMUHF
+            // 
+            this.nmDevFMUHF.Location = new System.Drawing.Point(293, 343);
+            this.nmDevFMUHF.Name = "nmDevFMUHF";
+            this.nmDevFMUHF.Size = new System.Drawing.Size(52, 20);
+            this.nmDevFMUHF.TabIndex = 18;
+            this.nmDevFMUHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(211, 347);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Девиация FM";
             // 
             // nmUHFOscRef
             // 
@@ -1791,104 +1669,11 @@ namespace NIKA_CPS_V1
             this.btnChart.Visible = false;
             this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
             // 
-            // pBar
-            // 
-            this.pBar.ForeColor = System.Drawing.Color.Red;
-            this.pBar.Location = new System.Drawing.Point(877, 135);
-            this.pBar.Name = "pBar";
-            this.pBar.Size = new System.Drawing.Size(267, 18);
-            this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.pBar.TabIndex = 12;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(350, 368);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Девиация FM";
-            // 
-            // nmDevFMVHF
-            // 
-            this.nmDevFMVHF.Location = new System.Drawing.Point(432, 364);
-            this.nmDevFMVHF.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nmDevFMVHF.Name = "nmDevFMVHF";
-            this.nmDevFMVHF.Size = new System.Drawing.Size(52, 20);
-            this.nmDevFMVHF.TabIndex = 11;
-            this.nmDevFMVHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(500, 368);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Девиация FMN";
-            // 
-            // nmDevFMNVHF
-            // 
-            this.nmDevFMNVHF.Location = new System.Drawing.Point(590, 364);
-            this.nmDevFMNVHF.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nmDevFMNVHF.Name = "nmDevFMNVHF";
-            this.nmDevFMNVHF.Size = new System.Drawing.Size(52, 20);
-            this.nmDevFMNVHF.TabIndex = 13;
-            this.nmDevFMNVHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(211, 347);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 13);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Девиация FM";
-            // 
-            // nmDevFMUHF
-            // 
-            this.nmDevFMUHF.Location = new System.Drawing.Point(293, 343);
-            this.nmDevFMUHF.Name = "nmDevFMUHF";
-            this.nmDevFMUHF.Size = new System.Drawing.Size(52, 20);
-            this.nmDevFMUHF.TabIndex = 18;
-            this.nmDevFMUHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(368, 347);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 13);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Девиация FMN";
-            // 
-            // nmDevFMNUHF
-            // 
-            this.nmDevFMNUHF.Location = new System.Drawing.Point(458, 343);
-            this.nmDevFMNUHF.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nmDevFMNUHF.Name = "nmDevFMNUHF";
-            this.nmDevFMNUHF.Size = new System.Drawing.Size(52, 20);
-            this.nmDevFMNUHF.TabIndex = 20;
-            this.nmDevFMNUHF.ValueChanged += new System.EventHandler(this.nmValueChanged);
-            // 
             // CalibrationForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1156, 454);
-            this.Controls.Add(this.pBar);
             this.Controls.Add(this.btnChart);
             this.Controls.Add(this.btnClearColors);
             this.Controls.Add(this.lblRadioType);
@@ -1910,11 +1695,15 @@ namespace NIKA_CPS_V1
             this.tabs.ResumeLayout(false);
             this.tabVHF.ResumeLayout(false);
             this.tabVHF.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNVHF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMVHF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmVHFOscRef)).EndInit();
             this.tlpVHF.ResumeLayout(false);
             this.tlpVHF.PerformLayout();
             this.tabUHF.ResumeLayout(false);
             this.tabUHF.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNUHF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMUHF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmUHFOscRef)).EndInit();
             this.tlpUHF.ResumeLayout(false);
             this.tlpUHF.PerformLayout();
@@ -1922,10 +1711,6 @@ namespace NIKA_CPS_V1
             this.gbCommons.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmRSSI70)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmRSSI120)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMVHF)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNVHF)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMUHF)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDevFMNUHF)).EndInit();
             this.ResumeLayout(false);
 
         }

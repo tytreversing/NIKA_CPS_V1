@@ -11,18 +11,19 @@ using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Management.Instrumentation;
 using System.Media;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Runtime.Remoting.Channels;
-using System.Runtime.Remoting.Contexts;
 using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static NIKA_CPS_V1.DataTransfer;
+using static NIKA_CPS_V1.Interfaces.FirmwareInterface;
 
 
 
@@ -57,6 +58,9 @@ namespace NIKA_CPS_V1
 
         public static ConnectedRadioType radioType = ConnectedRadioType.NOT_CONNECTED;
 
+        private static MainForm _instance;
+        public static MainForm Instance => _instance;
+
         public enum TreeRefreshType
         {
             ALL,
@@ -75,6 +79,7 @@ namespace NIKA_CPS_V1
             MDUV380
         }
 
+        public static BackgroundWorker worker;
         public static bool isValidHex(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
@@ -88,6 +93,7 @@ namespace NIKA_CPS_V1
         {
             PRODUCT_VERSION = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             InitializeComponent();
+            _instance = this;
             if (RegistryOperations.IsFlagSet("ShowSplashScreen"))
             {
                 new SplashScreen().ShowDialog();
@@ -655,6 +661,80 @@ namespace NIKA_CPS_V1
         {
             RegistryOperations.WriteInt("LastWindowWidth", this.Width);
             RegistryOperations.WriteInt("LastWindowHeight", this.Height);
+        }
+
+        public static void logMessage(string s)
+        {
+            if (Instance?.tbConsole != null)
+            {
+                // Проверка на наличие InvokeRequired для потокобезопасности
+                if (Instance.tbConsole.InvokeRequired)
+                {
+                    Instance.tbConsole.Invoke(new Action(() =>
+                        Instance.tbConsole.AppendText(s + "\r\n")));
+                }
+                else
+                {
+                    Instance.tbConsole.AppendText(s + "\r\n");
+                }
+            }
+        }
+
+        public static void setProgress(int i)
+        {
+            if (Instance?.agMain != null)
+            {
+                // Проверка на наличие InvokeRequired для потокобезопасности
+                if (Instance.tbConsole.InvokeRequired)
+                {
+                    Instance.agMain.Invoke(new Action(() =>
+                        Instance.agMain.Value = i));
+                }
+                else
+                {
+                    Instance.agMain.Value = i;
+                }
+            }
+        }
+
+        public static void restoreUI()
+        {
+            if (Instance?.agMain != null)
+            {
+                if (Instance.tbConsole.InvokeRequired)
+                {
+                    Instance.agMain.Invoke(new Action(() =>
+                        Instance.agMain.Visible = false));
+                }
+                else
+                {
+                    Instance.agMain.Visible = false;
+                }
+            }
+            if (Instance?.tvMain != null)
+            {
+                if (Instance.tbConsole.InvokeRequired)
+                {
+                    Instance.tvMain.Invoke(new Action(() =>
+                        Instance.tvMain.Visible = true));
+                }
+                else
+                {
+                    Instance.tvMain.Visible = true;
+                }
+            }
+            if (Instance?.tvSecondary != null)
+            {
+                if (Instance.tvSecondary.InvokeRequired)
+                {
+                    Instance.tvSecondary.Invoke(new Action(() =>
+                        Instance.tvSecondary.Visible = true));
+                }
+                else
+                {
+                    Instance.tvSecondary.Visible = true;
+                }
+            }
         }
 
         public static void playMessage(string message)
@@ -1283,6 +1363,25 @@ namespace NIKA_CPS_V1
                 CodeplugInternal.AddContact(contact); 
             }
             GenerateTree(TreeRefreshType.CONTACTS);
+        }
+
+        private void tsmiFlashBackup_Click(object sender, EventArgs e)
+        {
+            if (!COMPort.SetupPort())
+            {
+                SystemSounds.Hand.Play();
+                MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                tvMain.Visible = false;
+                tvSecondary.Visible = false;
+                agMain.Visible = true;
+                agMain.Value = 0;
+                DataTransfer dataObj = new DataTransfer(DataTransfer.CPSAction.BACKUP_FLASH);
+                DataTask(dataObj);
+            }
         }
     }
 }

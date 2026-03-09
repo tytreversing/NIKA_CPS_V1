@@ -30,18 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Контакты", 2, 2);
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Каналы", 8, 8);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Зоны", 7, 7);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Списки групп", 6, 6);
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("VFO A", 9, 9);
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("VFO B", 9, 9);
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("VFO", 9, 9, new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6});
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Настройки", 1, 1);
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("DMR ID", 13, 13);
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10);
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Контакты", 2, 2);
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Каналы", 8, 8);
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Зоны", 7, 7);
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Списки групп", 6, 6);
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("VFO A", 9, 9);
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("VFO B", 9, 9);
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("VFO", 9, 9, new System.Windows.Forms.TreeNode[] {
+            treeNode15,
+            treeNode16});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Настройки", 1, 1);
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("DMR ID", 13, 13);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10);
+            System.Windows.Forms.AGaugeRange aGaugeRange2 = new System.Windows.Forms.AGaugeRange();
             this.cmsAllContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewContact = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +103,7 @@
             this.msiTools = new System.Windows.Forms.ToolStripMenuItem();
             this.msiDMRMon = new System.Windows.Forms.ToolStripMenuItem();
             this.msiCalibration = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFlashBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.msiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tbConsole = new System.Windows.Forms.TextBox();
             this.pollingTimer = new System.Windows.Forms.Timer(this.components);
@@ -135,6 +137,7 @@
             this.tsmiAddFromCSV = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddContactsFromCSV = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRebuiltFromCSV = new System.Windows.Forms.ToolStripMenuItem();
+            this.agMain = new System.Windows.Forms.AGauge();
             this.cmsAllContacts.SuspendLayout();
             this.cmsAllChannels.SuspendLayout();
             this.cmsAllZones.SuspendLayout();
@@ -148,6 +151,7 @@
             this.cmsSingleZone.SuspendLayout();
             this.cmsSingleGrouplist.SuspendLayout();
             this.cmsCSV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.agMain)).BeginInit();
             this.SuspendLayout();
             // 
             // cmsAllContacts
@@ -367,9 +371,9 @@
             this.tsbSettings,
             this.tsbAbout});
             this.tsMainControls.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.tsMainControls.Location = new System.Drawing.Point(6, 33);
+            this.tsMainControls.Location = new System.Drawing.Point(6, 6);
             this.tsMainControls.Name = "tsMainControls";
-            this.tsMainControls.Size = new System.Drawing.Size(53, 648);
+            this.tsMainControls.Size = new System.Drawing.Size(53, 675);
             this.tsMainControls.TabIndex = 0;
             // 
             // tsbMenuToggle
@@ -519,50 +523,50 @@
             this.tvMain.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tvMain.ImageIndex = 0;
             this.tvMain.ImageList = this.ilTreeItems;
-            this.tvMain.Location = new System.Drawing.Point(59, 33);
+            this.tvMain.Location = new System.Drawing.Point(59, 6);
             this.tvMain.Margin = new System.Windows.Forms.Padding(8, 8, 4, 3);
             this.tvMain.Name = "tvMain";
-            treeNode1.ContextMenuStrip = this.cmsAllContacts;
-            treeNode1.ImageIndex = 2;
-            treeNode1.Name = "ContactsNode";
-            treeNode1.SelectedImageIndex = 2;
-            treeNode1.Text = "Контакты";
-            treeNode2.ContextMenuStrip = this.cmsAllChannels;
-            treeNode2.ImageIndex = 8;
-            treeNode2.Name = "ChannelsNode";
-            treeNode2.SelectedImageIndex = 8;
-            treeNode2.Text = "Каналы";
-            treeNode3.ContextMenuStrip = this.cmsAllZones;
-            treeNode3.ImageIndex = 7;
-            treeNode3.Name = "ZonesNode";
-            treeNode3.SelectedImageIndex = 7;
-            treeNode3.Text = "Зоны";
-            treeNode4.ContextMenuStrip = this.cmsAllGrouplists;
-            treeNode4.ImageIndex = 6;
-            treeNode4.Name = "GrouplistsNode";
-            treeNode4.SelectedImageIndex = 6;
-            treeNode4.Text = "Списки групп";
-            treeNode5.ImageIndex = 9;
-            treeNode5.Name = "tnVFOA";
-            treeNode5.SelectedImageIndex = 9;
-            treeNode5.Text = "VFO A";
-            treeNode6.ImageIndex = 9;
-            treeNode6.Name = "tnVFOB";
-            treeNode6.SelectedImageIndex = 9;
-            treeNode6.Text = "VFO B";
-            treeNode7.ImageIndex = 9;
-            treeNode7.Name = "VFONode";
-            treeNode7.SelectedImageIndex = 9;
-            treeNode7.Text = "VFO";
+            treeNode11.ContextMenuStrip = this.cmsAllContacts;
+            treeNode11.ImageIndex = 2;
+            treeNode11.Name = "ContactsNode";
+            treeNode11.SelectedImageIndex = 2;
+            treeNode11.Text = "Контакты";
+            treeNode12.ContextMenuStrip = this.cmsAllChannels;
+            treeNode12.ImageIndex = 8;
+            treeNode12.Name = "ChannelsNode";
+            treeNode12.SelectedImageIndex = 8;
+            treeNode12.Text = "Каналы";
+            treeNode13.ContextMenuStrip = this.cmsAllZones;
+            treeNode13.ImageIndex = 7;
+            treeNode13.Name = "ZonesNode";
+            treeNode13.SelectedImageIndex = 7;
+            treeNode13.Text = "Зоны";
+            treeNode14.ContextMenuStrip = this.cmsAllGrouplists;
+            treeNode14.ImageIndex = 6;
+            treeNode14.Name = "GrouplistsNode";
+            treeNode14.SelectedImageIndex = 6;
+            treeNode14.Text = "Списки групп";
+            treeNode15.ImageIndex = 9;
+            treeNode15.Name = "tnVFOA";
+            treeNode15.SelectedImageIndex = 9;
+            treeNode15.Text = "VFO A";
+            treeNode16.ImageIndex = 9;
+            treeNode16.Name = "tnVFOB";
+            treeNode16.SelectedImageIndex = 9;
+            treeNode16.Text = "VFO B";
+            treeNode17.ImageIndex = 9;
+            treeNode17.Name = "VFONode";
+            treeNode17.SelectedImageIndex = 9;
+            treeNode17.Text = "VFO";
             this.tvMain.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode7});
+            treeNode11,
+            treeNode12,
+            treeNode13,
+            treeNode14,
+            treeNode17});
             this.tvMain.SelectedImageIndex = 0;
             this.tvMain.ShowNodeToolTips = true;
-            this.tvMain.Size = new System.Drawing.Size(337, 578);
+            this.tvMain.Size = new System.Drawing.Size(337, 605);
             this.tvMain.TabIndex = 1;
             this.tvMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvMain_AfterSelect);
             this.tvMain.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
@@ -717,7 +721,8 @@
             // 
             this.msiTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.msiDMRMon,
-            this.msiCalibration});
+            this.msiCalibration,
+            this.tsmiFlashBackup});
             this.msiTools.Name = "msiTools";
             this.msiTools.Size = new System.Drawing.Size(124, 23);
             this.msiTools.Text = "Инструменты";
@@ -725,16 +730,23 @@
             // msiDMRMon
             // 
             this.msiDMRMon.Name = "msiDMRMon";
-            this.msiDMRMon.Size = new System.Drawing.Size(244, 24);
+            this.msiDMRMon.Size = new System.Drawing.Size(257, 24);
             this.msiDMRMon.Text = "Монитор DMR";
             this.msiDMRMon.Click += new System.EventHandler(this.msiDMRMon_Click);
             // 
             // msiCalibration
             // 
             this.msiCalibration.Name = "msiCalibration";
-            this.msiCalibration.Size = new System.Drawing.Size(244, 24);
+            this.msiCalibration.Size = new System.Drawing.Size(257, 24);
             this.msiCalibration.Text = "Редактор калибровок";
             this.msiCalibration.Click += new System.EventHandler(this.msiCalibration_Click);
+            // 
+            // tsmiFlashBackup
+            // 
+            this.tsmiFlashBackup.Name = "tsmiFlashBackup";
+            this.tsmiFlashBackup.Size = new System.Drawing.Size(257, 24);
+            this.tsmiFlashBackup.Text = "Бэкап внешнего флеша";
+            this.tsmiFlashBackup.Click += new System.EventHandler(this.tsmiFlashBackup_Click);
             // 
             // msiAbout
             // 
@@ -752,7 +764,7 @@
             this.tbConsole.Name = "tbConsole";
             this.tbConsole.ReadOnly = true;
             this.tbConsole.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbConsole.Size = new System.Drawing.Size(1103, 70);
+            this.tbConsole.Size = new System.Drawing.Size(680, 70);
             this.tbConsole.TabIndex = 3;
             // 
             // pollingTimer
@@ -823,28 +835,28 @@
             this.tvSecondary.Dock = System.Windows.Forms.DockStyle.Left;
             this.tvSecondary.ImageIndex = 0;
             this.tvSecondary.ImageList = this.ilTreeItems;
-            this.tvSecondary.Location = new System.Drawing.Point(396, 33);
+            this.tvSecondary.Location = new System.Drawing.Point(396, 6);
             this.tvSecondary.Name = "tvSecondary";
-            treeNode8.ImageIndex = 1;
-            treeNode8.Name = "SettingsNode";
-            treeNode8.SelectedImageIndex = 1;
-            treeNode8.Text = "Настройки";
-            treeNode9.ImageIndex = 13;
-            treeNode9.Name = "DMRIDNode";
-            treeNode9.SelectedImageIndex = 13;
-            treeNode9.Text = "DMR ID";
-            treeNode10.ContextMenuStrip = this.cmsAllSatellites;
-            treeNode10.ImageIndex = 10;
-            treeNode10.Name = "SatellitesNode";
-            treeNode10.SelectedImageIndex = 10;
-            treeNode10.Text = "Радиолюбительские спутники";
+            treeNode1.ImageIndex = 1;
+            treeNode1.Name = "SettingsNode";
+            treeNode1.SelectedImageIndex = 1;
+            treeNode1.Text = "Настройки";
+            treeNode2.ImageIndex = 13;
+            treeNode2.Name = "DMRIDNode";
+            treeNode2.SelectedImageIndex = 13;
+            treeNode2.Text = "DMR ID";
+            treeNode3.ContextMenuStrip = this.cmsAllSatellites;
+            treeNode3.ImageIndex = 10;
+            treeNode3.Name = "SatellitesNode";
+            treeNode3.SelectedImageIndex = 10;
+            treeNode3.Text = "Радиолюбительские спутники";
             this.tvSecondary.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode9,
-            treeNode10});
+            treeNode1,
+            treeNode2,
+            treeNode3});
             this.tvSecondary.SelectedImageIndex = 0;
             this.tvSecondary.ShowNodeToolTips = true;
-            this.tvSecondary.Size = new System.Drawing.Size(347, 578);
+            this.tvSecondary.Size = new System.Drawing.Size(347, 605);
             this.tvSecondary.TabIndex = 4;
             this.tvSecondary.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
             this.tvSecondary.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseDoubleClick);
@@ -1018,11 +1030,47 @@
             this.tsmiRebuiltFromCSV.Size = new System.Drawing.Size(253, 24);
             this.tsmiRebuiltFromCSV.Text = "Переписать кодплаг из CSV";
             // 
+            // agMain
+            // 
+            this.agMain.BaseArcColor = System.Drawing.Color.Black;
+            this.agMain.BaseArcRadius = 150;
+            this.agMain.Center = new System.Drawing.Point(200, 200);
+            this.agMain.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeRange2.Color = System.Drawing.Color.Red;
+            aGaugeRange2.EndValue = 100F;
+            aGaugeRange2.InnerRadius = 140;
+            aGaugeRange2.InRange = false;
+            aGaugeRange2.Name = "GaugeRange1";
+            aGaugeRange2.OuterRadius = 150;
+            aGaugeRange2.StartValue = 80F;
+            this.agMain.GaugeRanges.Add(aGaugeRange2);
+            this.agMain.Location = new System.Drawing.Point(119, 63);
+            this.agMain.MaxValue = 100F;
+            this.agMain.MinValue = 0F;
+            this.agMain.Name = "agMain";
+            this.agMain.NeedleColor1 = System.Windows.Forms.AGaugeNeedleColor.Green;
+            this.agMain.NeedleColor2 = System.Drawing.Color.Black;
+            this.agMain.NeedleRadius = 150;
+            this.agMain.ScaleLinesInterInnerRadius = 150;
+            this.agMain.ScaleLinesInterOuterRadius = 140;
+            this.agMain.ScaleLinesMajorInnerRadius = 150;
+            this.agMain.ScaleLinesMajorOuterRadius = 135;
+            this.agMain.ScaleLinesMajorStepValue = 10F;
+            this.agMain.ScaleLinesMinorInnerRadius = 150;
+            this.agMain.ScaleLinesMinorOuterRadius = 140;
+            this.agMain.ScaleNumbersRadius = 165;
+            this.agMain.Size = new System.Drawing.Size(400, 400);
+            this.agMain.TabIndex = 12;
+            this.agMain.Text = "aGauge1";
+            this.agMain.Value = 0F;
+            this.agMain.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1168, 687);
+            this.ClientSize = new System.Drawing.Size(745, 687);
+            this.Controls.Add(this.agMain);
             this.Controls.Add(this.tvSecondary);
             this.Controls.Add(this.tvMain);
             this.Controls.Add(this.tbConsole);
@@ -1055,6 +1103,7 @@
             this.cmsSingleZone.ResumeLayout(false);
             this.cmsSingleGrouplist.ResumeLayout(false);
             this.cmsCSV.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.agMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1155,6 +1204,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAddFromCSV;
         private System.Windows.Forms.ToolStripMenuItem tsmiRebuiltFromCSV;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddContactsFromCSV;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFlashBackup;
+        private System.Windows.Forms.AGauge agMain;
     }
 }
 

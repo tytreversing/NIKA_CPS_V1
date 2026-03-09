@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
@@ -13,8 +14,7 @@ namespace NIKA_CPS_V1
         private const int VHF_ARRAY_SIZE = 5;
         private const int UHF_ARRAY_SIZE = 9;
         private const int POWERS_TOTAL = 9;
-        // Полином STM32F4 (0x04C11DB7)
-        private const uint STM32F4_POLYNOME = 0x04C11DB7;
+        
         [XmlElement("Checksum")]
         [MarshalAs(UnmanagedType.U4)]
         public uint checksum;
@@ -141,7 +141,7 @@ namespace NIKA_CPS_V1
 
         public CalibrationData()
         {
-            checksum = 0xDEFECA7E; //указание прошивке регенерировать чексумму
+            checksum = 0xDEFECA7E; //указание прошивке регенерировать чексумму, ибо CRC в исполнении STM32F4 черезжопен
             OscRefTuneVHF = 0;
             OscRefTuneUHF = 0;
 
@@ -171,6 +171,7 @@ namespace NIKA_CPS_V1
             DevFMUHF = 0;
             DevFMNUHF = 0;
         }
+
     }
 
     [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 24)]

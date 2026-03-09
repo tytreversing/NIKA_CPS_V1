@@ -281,7 +281,6 @@ namespace NIKA_CPS_V1
             }
             ReplaceFirmwareDate(decryptedFirmware);
             tbConsole.AppendText("Контрольная сумма файла прошивки: 0x" + CalculateChecksum(openFirmwareBuf) + "\r\n");
-            tbConsole.AppendText("Контрольная сумма дешифрованной прошивки: 0x" + CalculateChecksum(decryptedFirmware) + "\r\n");
             tbConsole.AppendText("Теперь запишите прошивку в радиостанцию\r\n");
             MainForm.playMessage("nowYouCanUpload");
             System.Media.SystemSounds.Asterisk.Play();
