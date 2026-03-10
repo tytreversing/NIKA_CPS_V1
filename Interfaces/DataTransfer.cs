@@ -4,21 +4,23 @@ public class DataTransfer
 {
 	public enum DataMode
 	{
-		DataModeNone,
-		DataModeReadFlash,
-		DataModeReadEEPROM,
-		DataModeWriteFlash,
-		DataModeWriteEEPROM,
-		DataModeReadMCUROM,
-		DataModeReadScreenGrab,
-		DataModeWriteWAV,
-		DataModeReadAMBE,
-		DataModeReadRadioInfo,
-		DataModeReadSecureRegisters,
-		DataModeReadSettings,
-		DataModeWriteSettings,
-		DataModeReadFactoryCalibrations,
-		DataModeReadBandlimits
+		None,
+		ReadFlash,
+		ReadEEPROM,
+		WriteFlash,
+		WriteLoFlash,
+		ReadMCUFlash,
+		Screenshot,
+		WriteWAV,
+		ReadAMBE,
+		ReadRadioInfo,
+		ReadSecureRegisters,
+		ReadSettings,
+		WriteSettings,
+		ReadFactoryCalibrations,
+		ReadBandlimits,
+		ReadCalibrations,
+		WriteCalibrations
 	}
 
 	public enum CPSAction
