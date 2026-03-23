@@ -427,8 +427,6 @@ namespace NIKA_CPS_V1.Interfaces
         {
             bytesToRead = DEFAULT_BLOCK_SIZE;
         }
-
-        MainForm.logMessage("Чтение по адресу 0x" + currentFlashAddress.ToString("X"));
         
         // Формирование команды чтения
         sendBuffer[0] = CPS_READ;
