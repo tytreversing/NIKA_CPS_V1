@@ -8,6 +8,9 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    # Опционально: принудительно использовать Node.js 24
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout source repository
@@ -20,26 +23,30 @@ jobs:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
           GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
         run: |
-          # Добавляем GitLab как новый удаленный репозиторий
-          git remote add gitlab "${GITLAB_REPO}"
-          
-          # Формируем URL для пуша с токеном
-          # Поддерживаем разные форматы URL:
-          # https://gitlab.com/username/repo.git
-          # git@gitlab.com:username/repo.git
-          # https://oauth2:TOKEN@gitlab.com/...
-          
-          if [[ "${GITLAB_REPO}" == https://* ]]; then
-            # Для HTTPS: https://oauth2:TOKEN@gitlab.com/username/repo.git
-            GITLAB_URL_WITH_TOKEN="https://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO#https://}"
-          elif [[ "${GITLAB_REPO}" == http://* ]]; then
-            # Для HTTP (не рекомендуется): http://oauth2:TOKEN@gitlab.com/...
-            GITLAB_URL_WITH_TOKEN="http://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO#http://}"
-          else
-            # Для других форматов (например, SSH) просто используем стандартный push с токеном
-            echo "::error::Unsupported repository URL format: ${GITLAB_REPO}"
+          # Проверяем, что переменные установлены
+          if [ -z "${GITLAB_REPO}" ]; then
+            echo "::error::GITLAB_REPO secret is not set"
             exit 1
           fi
           
-          # Пушим ВСЕ (--mirror) в GitLab, используя токен для аутентификации
+          if [ -z "${GITLAB_TOKEN}" ]; then
+            echo "::error::GITLAB_TOKEN secret is not set"
+            exit 1
+          fi
+          
+          # Добавляем GitLab как новый удаленный репозиторий
+          git remote add gitlab "${GITLAB_REPO}"
+          
+          # Формируем URL с токеном для аутентификации
+          # Поддерживаем HTTPS формат
+          if [[ "${GITLAB_REPO}" == https://* ]]; then
+            GITLAB_URL_WITH_TOKEN="https://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO#https://}"
+          elif [[ "${GITLAB_REPO}" == http://* ]]; then
+            GITLAB_URL_WITH_TOKEN="http://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO#http://}"
+          else
+            echo "::error::Unsupported repository URL format. Please use HTTPS URL like: https://gitlab.com/username/repo.git"
+            exit 1
+          fi
+          
+          # Пушим все ветки и теги в GitLab
           git push --mirror "${GITLAB_URL_WITH_TOKEN}"
