@@ -8,6 +8,9 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    # Опционально: принудительно использовать Node.js 24
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout source repository
@@ -20,6 +23,32 @@ jobs:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
           GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
         run: |
+          # Проверяем, что переменные установлены
+          if [ -z "${GITLAB_REPO}" ]; then
+            echo "::error::GITLAB_REPO secret is not set"
+            exit 1
+          fi
+          
+          if [ -z "${GITLAB_TOKEN}" ]; then
+            echo "::error::GITLAB_TOKEN secret is not set"
+            exit 1
+          fi
+          
+          # Добавляем GitLab как новый удаленный репозиторий
+          git remote add gitlab "${GITLAB_REPO}"
+          
+          # Формируем URL с токеном для аутентификации
+          # Поддерживаем HTTPS формат
+          if [[ "${GITLAB_REPO}" == https://* ]]; then
+            GITLAB_URL_WITH_TOKEN="https://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO#https://}"
+          elif [[ "${GITLAB_REPO}" == http://* ]]; then
+            GITLAB_URL_WITH_TOKEN="http://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO#http://}"
+          else
+            echo "::error::Unsupported repository URL format. Please use HTTPS URL like: https://gitlab.com/username/repo.git"
+            exit 1
+          fi
+          
+          # Пушим все ветки и теги в GitLab
           # Добавляем GitLab как новый удаленный репозиторий
           git remote add gitlab "${GITLAB_REPO}"
           

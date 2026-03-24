@@ -30,30 +30,30 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Контакты", 2, 2);
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Каналы", 8, 8);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Зоны", 7, 7);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Списки групп", 6, 6);
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("VFO A", 9, 9);
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("VFO B", 9, 9);
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("VFO", 9, 9, new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6});
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Настройки", 1, 1);
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("DMR ID", 13, 13);
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10);
-            System.Windows.Forms.AGaugeLabel aGaugeLabel1 = new System.Windows.Forms.AGaugeLabel();
-            System.Windows.Forms.AGaugeLabel aGaugeLabel2 = new System.Windows.Forms.AGaugeLabel();
-            System.Windows.Forms.AGaugeLabel aGaugeLabel3 = new System.Windows.Forms.AGaugeLabel();
-            System.Windows.Forms.AGaugeLabel aGaugeLabel4 = new System.Windows.Forms.AGaugeLabel();
-            System.Windows.Forms.AGaugeLabel aGaugeLabel5 = new System.Windows.Forms.AGaugeLabel();
-            System.Windows.Forms.AGaugeLabel aGaugeLabel6 = new System.Windows.Forms.AGaugeLabel();
-            System.Windows.Forms.AGaugeLabel aGaugeLabel7 = new System.Windows.Forms.AGaugeLabel();
-            System.Windows.Forms.AGaugeLabel aGaugeLabel8 = new System.Windows.Forms.AGaugeLabel();
-            System.Windows.Forms.AGaugeLabel aGaugeLabel9 = new System.Windows.Forms.AGaugeLabel();
-            System.Windows.Forms.AGaugeLabel aGaugeLabel10 = new System.Windows.Forms.AGaugeLabel();
-            System.Windows.Forms.AGaugeRange aGaugeRange1 = new System.Windows.Forms.AGaugeRange();
-            System.Windows.Forms.AGaugeRange aGaugeRange2 = new System.Windows.Forms.AGaugeRange();
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Контакты", 2, 2);
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Каналы", 8, 8);
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Зоны", 7, 7);
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Списки групп", 6, 6);
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("VFO A", 9, 9);
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("VFO B", 9, 9);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("VFO", 9, 9, new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9});
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Настройки", 1, 1);
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("DMR ID", 13, 13);
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Радиолюбительские спутники", 10, 10);
+            System.Windows.Forms.AGaugeLabel aGaugeLabel21 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel22 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel23 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel24 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel25 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel26 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel27 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel28 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel29 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeLabel aGaugeLabel30 = new System.Windows.Forms.AGaugeLabel();
+            System.Windows.Forms.AGaugeRange aGaugeRange5 = new System.Windows.Forms.AGaugeRange();
+            System.Windows.Forms.AGaugeRange aGaugeRange6 = new System.Windows.Forms.AGaugeRange();
             this.cmsAllContacts = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewContact = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiArrange = new System.Windows.Forms.ToolStripMenuItem();
@@ -114,6 +114,7 @@
             this.msiTools = new System.Windows.Forms.ToolStripMenuItem();
             this.msiDMRMon = new System.Windows.Forms.ToolStripMenuItem();
             this.msiCalibration = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiFlashBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.msiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tbConsole = new System.Windows.Forms.TextBox();
@@ -149,6 +150,7 @@
             this.tsmiAddContactsFromCSV = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRebuiltFromCSV = new System.Windows.Forms.ToolStripMenuItem();
             this.agMain = new System.Windows.Forms.AGauge();
+            this.tsmiBackupMCUFlash = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAllContacts.SuspendLayout();
             this.cmsAllChannels.SuspendLayout();
             this.cmsAllZones.SuspendLayout();
@@ -382,9 +384,9 @@
             this.tsbSettings,
             this.tsbAbout});
             this.tsMainControls.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.tsMainControls.Location = new System.Drawing.Point(6, 6);
+            this.tsMainControls.Location = new System.Drawing.Point(6, 33);
             this.tsMainControls.Name = "tsMainControls";
-            this.tsMainControls.Size = new System.Drawing.Size(53, 675);
+            this.tsMainControls.Size = new System.Drawing.Size(53, 648);
             this.tsMainControls.TabIndex = 0;
             // 
             // tsbMenuToggle
@@ -471,6 +473,7 @@
             this.tsbWriteToRadio.Name = "tsbWriteToRadio";
             this.tsbWriteToRadio.Size = new System.Drawing.Size(50, 52);
             this.tsbWriteToRadio.Text = "Записать в рацию";
+            this.tsbWriteToRadio.Click += new System.EventHandler(this.tsbWriteToRadio_Click);
             this.tsbWriteToRadio.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // toolStripSeparator2
@@ -534,50 +537,50 @@
             this.tvMain.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tvMain.ImageIndex = 0;
             this.tvMain.ImageList = this.ilTreeItems;
-            this.tvMain.Location = new System.Drawing.Point(59, 6);
+            this.tvMain.Location = new System.Drawing.Point(59, 33);
             this.tvMain.Margin = new System.Windows.Forms.Padding(8, 8, 4, 3);
             this.tvMain.Name = "tvMain";
-            treeNode1.ContextMenuStrip = this.cmsAllContacts;
-            treeNode1.ImageIndex = 2;
-            treeNode1.Name = "ContactsNode";
-            treeNode1.SelectedImageIndex = 2;
-            treeNode1.Text = "Контакты";
-            treeNode2.ContextMenuStrip = this.cmsAllChannels;
-            treeNode2.ImageIndex = 8;
-            treeNode2.Name = "ChannelsNode";
-            treeNode2.SelectedImageIndex = 8;
-            treeNode2.Text = "Каналы";
-            treeNode3.ContextMenuStrip = this.cmsAllZones;
-            treeNode3.ImageIndex = 7;
-            treeNode3.Name = "ZonesNode";
-            treeNode3.SelectedImageIndex = 7;
-            treeNode3.Text = "Зоны";
-            treeNode4.ContextMenuStrip = this.cmsAllGrouplists;
-            treeNode4.ImageIndex = 6;
-            treeNode4.Name = "GrouplistsNode";
-            treeNode4.SelectedImageIndex = 6;
-            treeNode4.Text = "Списки групп";
-            treeNode5.ImageIndex = 9;
-            treeNode5.Name = "tnVFOA";
-            treeNode5.SelectedImageIndex = 9;
-            treeNode5.Text = "VFO A";
-            treeNode6.ImageIndex = 9;
-            treeNode6.Name = "tnVFOB";
-            treeNode6.SelectedImageIndex = 9;
-            treeNode6.Text = "VFO B";
-            treeNode7.ImageIndex = 9;
-            treeNode7.Name = "VFONode";
-            treeNode7.SelectedImageIndex = 9;
-            treeNode7.Text = "VFO";
+            treeNode4.ContextMenuStrip = this.cmsAllContacts;
+            treeNode4.ImageIndex = 2;
+            treeNode4.Name = "ContactsNode";
+            treeNode4.SelectedImageIndex = 2;
+            treeNode4.Text = "Контакты";
+            treeNode5.ContextMenuStrip = this.cmsAllChannels;
+            treeNode5.ImageIndex = 8;
+            treeNode5.Name = "ChannelsNode";
+            treeNode5.SelectedImageIndex = 8;
+            treeNode5.Text = "Каналы";
+            treeNode6.ContextMenuStrip = this.cmsAllZones;
+            treeNode6.ImageIndex = 7;
+            treeNode6.Name = "ZonesNode";
+            treeNode6.SelectedImageIndex = 7;
+            treeNode6.Text = "Зоны";
+            treeNode7.ContextMenuStrip = this.cmsAllGrouplists;
+            treeNode7.ImageIndex = 6;
+            treeNode7.Name = "GrouplistsNode";
+            treeNode7.SelectedImageIndex = 6;
+            treeNode7.Text = "Списки групп";
+            treeNode8.ImageIndex = 9;
+            treeNode8.Name = "tnVFOA";
+            treeNode8.SelectedImageIndex = 9;
+            treeNode8.Text = "VFO A";
+            treeNode9.ImageIndex = 9;
+            treeNode9.Name = "tnVFOB";
+            treeNode9.SelectedImageIndex = 9;
+            treeNode9.Text = "VFO B";
+            treeNode10.ImageIndex = 9;
+            treeNode10.Name = "VFONode";
+            treeNode10.SelectedImageIndex = 9;
+            treeNode10.Text = "VFO";
             this.tvMain.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
             treeNode4,
-            treeNode7});
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode10});
             this.tvMain.SelectedImageIndex = 0;
             this.tvMain.ShowNodeToolTips = true;
-            this.tvMain.Size = new System.Drawing.Size(337, 605);
+            this.tvMain.Size = new System.Drawing.Size(337, 578);
             this.tvMain.TabIndex = 1;
             this.tvMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvMain_AfterSelect);
             this.tvMain.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
@@ -614,7 +617,7 @@
             this.msiAbout});
             this.msMain.Location = new System.Drawing.Point(6, 6);
             this.msMain.Name = "msMain";
-            this.msMain.Size = new System.Drawing.Size(1156, 27);
+            this.msMain.Size = new System.Drawing.Size(733, 27);
             this.msMain.TabIndex = 2;
             this.msMain.Text = "menuStrip1";
             this.msMain.Visible = false;
@@ -733,29 +736,41 @@
             this.msiTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.msiDMRMon,
             this.msiCalibration,
-            this.tsmiFlashBackup});
+            this.toolStripSeparator15,
+            this.tsmiFlashBackup,
+            this.tsmiBackupMCUFlash});
             this.msiTools.Name = "msiTools";
             this.msiTools.Size = new System.Drawing.Size(124, 23);
             this.msiTools.Text = "Инструменты";
             // 
             // msiDMRMon
             // 
+            this.msiDMRMon.BackColor = System.Drawing.Color.White;
             this.msiDMRMon.Name = "msiDMRMon";
-            this.msiDMRMon.Size = new System.Drawing.Size(257, 24);
+            this.msiDMRMon.Size = new System.Drawing.Size(327, 24);
             this.msiDMRMon.Text = "Монитор DMR";
             this.msiDMRMon.Click += new System.EventHandler(this.msiDMRMon_Click);
             // 
             // msiCalibration
             // 
+            this.msiCalibration.BackColor = System.Drawing.Color.White;
             this.msiCalibration.Name = "msiCalibration";
-            this.msiCalibration.Size = new System.Drawing.Size(257, 24);
+            this.msiCalibration.Size = new System.Drawing.Size(327, 24);
             this.msiCalibration.Text = "Редактор калибровок";
             this.msiCalibration.Click += new System.EventHandler(this.msiCalibration_Click);
             // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.BackColor = System.Drawing.Color.White;
+            this.toolStripSeparator15.ForeColor = System.Drawing.Color.Black;
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(324, 6);
+            // 
             // tsmiFlashBackup
             // 
+            this.tsmiFlashBackup.BackColor = System.Drawing.Color.White;
             this.tsmiFlashBackup.Name = "tsmiFlashBackup";
-            this.tsmiFlashBackup.Size = new System.Drawing.Size(257, 24);
+            this.tsmiFlashBackup.Size = new System.Drawing.Size(327, 24);
             this.tsmiFlashBackup.Text = "Бэкап внешнего флеша";
             this.tsmiFlashBackup.Click += new System.EventHandler(this.tsmiFlashBackup_Click);
             // 
@@ -846,28 +861,28 @@
             this.tvSecondary.Dock = System.Windows.Forms.DockStyle.Left;
             this.tvSecondary.ImageIndex = 0;
             this.tvSecondary.ImageList = this.ilTreeItems;
-            this.tvSecondary.Location = new System.Drawing.Point(396, 6);
+            this.tvSecondary.Location = new System.Drawing.Point(396, 33);
             this.tvSecondary.Name = "tvSecondary";
-            treeNode8.ImageIndex = 1;
-            treeNode8.Name = "SettingsNode";
-            treeNode8.SelectedImageIndex = 1;
-            treeNode8.Text = "Настройки";
-            treeNode9.ImageIndex = 13;
-            treeNode9.Name = "DMRIDNode";
-            treeNode9.SelectedImageIndex = 13;
-            treeNode9.Text = "DMR ID";
-            treeNode10.ContextMenuStrip = this.cmsAllSatellites;
-            treeNode10.ImageIndex = 10;
-            treeNode10.Name = "SatellitesNode";
-            treeNode10.SelectedImageIndex = 10;
-            treeNode10.Text = "Радиолюбительские спутники";
+            treeNode11.ImageIndex = 1;
+            treeNode11.Name = "SettingsNode";
+            treeNode11.SelectedImageIndex = 1;
+            treeNode11.Text = "Настройки";
+            treeNode12.ImageIndex = 13;
+            treeNode12.Name = "DMRIDNode";
+            treeNode12.SelectedImageIndex = 13;
+            treeNode12.Text = "DMR ID";
+            treeNode13.ContextMenuStrip = this.cmsAllSatellites;
+            treeNode13.ImageIndex = 10;
+            treeNode13.Name = "SatellitesNode";
+            treeNode13.SelectedImageIndex = 10;
+            treeNode13.Text = "Радиолюбительские спутники";
             this.tvSecondary.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode9,
-            treeNode10});
+            treeNode11,
+            treeNode12,
+            treeNode13});
             this.tvSecondary.SelectedImageIndex = 0;
             this.tvSecondary.ShowNodeToolTips = true;
-            this.tvSecondary.Size = new System.Drawing.Size(347, 605);
+            this.tvSecondary.Size = new System.Drawing.Size(347, 578);
             this.tvSecondary.TabIndex = 4;
             this.tvSecondary.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseClick);
             this.tvSecondary.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvNodeMouseDoubleClick);
@@ -1049,82 +1064,82 @@
             this.agMain.BaseArcSweep = 160;
             this.agMain.Center = new System.Drawing.Point(200, 200);
             this.agMain.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            aGaugeLabel1.Color = System.Drawing.SystemColors.WindowText;
-            aGaugeLabel1.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            aGaugeLabel1.Name = "glS1";
-            aGaugeLabel1.Position = new System.Drawing.Point(-160, -80);
-            aGaugeLabel1.Text = "S1";
-            aGaugeLabel2.Color = System.Drawing.SystemColors.WindowText;
-            aGaugeLabel2.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            aGaugeLabel2.Name = "glS2";
-            aGaugeLabel2.Position = new System.Drawing.Point(-140, -125);
-            aGaugeLabel2.Text = "S2";
-            aGaugeLabel3.Color = System.Drawing.SystemColors.WindowText;
-            aGaugeLabel3.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            aGaugeLabel3.Name = "glS3";
-            aGaugeLabel3.Position = new System.Drawing.Point(-100, -160);
-            aGaugeLabel3.Text = "S3";
-            aGaugeLabel4.Color = System.Drawing.SystemColors.WindowText;
-            aGaugeLabel4.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            aGaugeLabel4.Name = "glS4";
-            aGaugeLabel4.Position = new System.Drawing.Point(-50, -180);
-            aGaugeLabel4.Text = "S4";
-            aGaugeLabel5.Color = System.Drawing.SystemColors.WindowText;
-            aGaugeLabel5.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            aGaugeLabel5.Name = "glS9";
-            aGaugeLabel5.Position = new System.Drawing.Point(160, -80);
-            aGaugeLabel5.Text = "S9";
-            aGaugeLabel6.Color = System.Drawing.SystemColors.WindowText;
-            aGaugeLabel6.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            aGaugeLabel6.Name = "glS6";
-            aGaugeLabel6.Position = new System.Drawing.Point(50, -180);
-            aGaugeLabel6.Text = "S6";
-            aGaugeLabel7.Color = System.Drawing.SystemColors.WindowText;
-            aGaugeLabel7.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            aGaugeLabel7.Name = "glS7";
-            aGaugeLabel7.Position = new System.Drawing.Point(95, -160);
-            aGaugeLabel7.Text = "S7";
-            aGaugeLabel8.Color = System.Drawing.SystemColors.WindowText;
-            aGaugeLabel8.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            aGaugeLabel8.Name = "glS8";
-            aGaugeLabel8.Position = new System.Drawing.Point(135, -125);
-            aGaugeLabel8.Text = "S8";
-            aGaugeLabel9.Color = System.Drawing.SystemColors.WindowText;
-            aGaugeLabel9.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            aGaugeLabel9.Name = "glS9p";
-            aGaugeLabel9.Position = new System.Drawing.Point(170, -30);
-            aGaugeLabel9.Text = "S9+";
-            aGaugeLabel10.Color = System.Drawing.SystemColors.WindowText;
-            aGaugeLabel10.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            aGaugeLabel10.Name = "glS5";
-            aGaugeLabel10.Position = new System.Drawing.Point(0, -185);
-            aGaugeLabel10.Text = "S5";
-            this.agMain.GaugeLabels.Add(aGaugeLabel1);
-            this.agMain.GaugeLabels.Add(aGaugeLabel2);
-            this.agMain.GaugeLabels.Add(aGaugeLabel3);
-            this.agMain.GaugeLabels.Add(aGaugeLabel4);
-            this.agMain.GaugeLabels.Add(aGaugeLabel5);
-            this.agMain.GaugeLabels.Add(aGaugeLabel6);
-            this.agMain.GaugeLabels.Add(aGaugeLabel7);
-            this.agMain.GaugeLabels.Add(aGaugeLabel8);
-            this.agMain.GaugeLabels.Add(aGaugeLabel9);
-            this.agMain.GaugeLabels.Add(aGaugeLabel10);
-            aGaugeRange1.Color = System.Drawing.Color.Red;
-            aGaugeRange1.EndValue = 100F;
-            aGaugeRange1.InnerRadius = 140;
-            aGaugeRange1.InRange = false;
-            aGaugeRange1.Name = "GaugeRange1";
-            aGaugeRange1.OuterRadius = 150;
-            aGaugeRange1.StartValue = 90F;
-            aGaugeRange2.Color = System.Drawing.Color.LawnGreen;
-            aGaugeRange2.EndValue = 90F;
-            aGaugeRange2.InnerRadius = 140;
-            aGaugeRange2.InRange = false;
-            aGaugeRange2.Name = "GaugeRange2";
-            aGaugeRange2.OuterRadius = 150;
-            aGaugeRange2.StartValue = 40F;
-            this.agMain.GaugeRanges.Add(aGaugeRange1);
-            this.agMain.GaugeRanges.Add(aGaugeRange2);
+            aGaugeLabel21.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel21.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel21.Name = "glS1";
+            aGaugeLabel21.Position = new System.Drawing.Point(-160, -80);
+            aGaugeLabel21.Text = "S1";
+            aGaugeLabel22.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel22.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel22.Name = "glS2";
+            aGaugeLabel22.Position = new System.Drawing.Point(-140, -125);
+            aGaugeLabel22.Text = "S2";
+            aGaugeLabel23.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel23.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel23.Name = "glS3";
+            aGaugeLabel23.Position = new System.Drawing.Point(-100, -160);
+            aGaugeLabel23.Text = "S3";
+            aGaugeLabel24.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel24.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel24.Name = "glS4";
+            aGaugeLabel24.Position = new System.Drawing.Point(-50, -180);
+            aGaugeLabel24.Text = "S4";
+            aGaugeLabel25.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel25.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel25.Name = "glS9";
+            aGaugeLabel25.Position = new System.Drawing.Point(160, -80);
+            aGaugeLabel25.Text = "S9";
+            aGaugeLabel26.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel26.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel26.Name = "glS6";
+            aGaugeLabel26.Position = new System.Drawing.Point(50, -180);
+            aGaugeLabel26.Text = "S6";
+            aGaugeLabel27.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel27.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel27.Name = "glS7";
+            aGaugeLabel27.Position = new System.Drawing.Point(95, -160);
+            aGaugeLabel27.Text = "S7";
+            aGaugeLabel28.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel28.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel28.Name = "glS8";
+            aGaugeLabel28.Position = new System.Drawing.Point(135, -125);
+            aGaugeLabel28.Text = "S8";
+            aGaugeLabel29.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel29.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel29.Name = "glS9p";
+            aGaugeLabel29.Position = new System.Drawing.Point(170, -30);
+            aGaugeLabel29.Text = "S9+";
+            aGaugeLabel30.Color = System.Drawing.SystemColors.WindowText;
+            aGaugeLabel30.Font = new System.Drawing.Font("Roboto", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            aGaugeLabel30.Name = "glS5";
+            aGaugeLabel30.Position = new System.Drawing.Point(0, -185);
+            aGaugeLabel30.Text = "S5";
+            this.agMain.GaugeLabels.Add(aGaugeLabel21);
+            this.agMain.GaugeLabels.Add(aGaugeLabel22);
+            this.agMain.GaugeLabels.Add(aGaugeLabel23);
+            this.agMain.GaugeLabels.Add(aGaugeLabel24);
+            this.agMain.GaugeLabels.Add(aGaugeLabel25);
+            this.agMain.GaugeLabels.Add(aGaugeLabel26);
+            this.agMain.GaugeLabels.Add(aGaugeLabel27);
+            this.agMain.GaugeLabels.Add(aGaugeLabel28);
+            this.agMain.GaugeLabels.Add(aGaugeLabel29);
+            this.agMain.GaugeLabels.Add(aGaugeLabel30);
+            aGaugeRange5.Color = System.Drawing.Color.Red;
+            aGaugeRange5.EndValue = 100F;
+            aGaugeRange5.InnerRadius = 140;
+            aGaugeRange5.InRange = false;
+            aGaugeRange5.Name = "GaugeRange1";
+            aGaugeRange5.OuterRadius = 150;
+            aGaugeRange5.StartValue = 90F;
+            aGaugeRange6.Color = System.Drawing.Color.LawnGreen;
+            aGaugeRange6.EndValue = 90F;
+            aGaugeRange6.InnerRadius = 140;
+            aGaugeRange6.InRange = false;
+            aGaugeRange6.Name = "GaugeRange2";
+            aGaugeRange6.OuterRadius = 150;
+            aGaugeRange6.StartValue = 40F;
+            this.agMain.GaugeRanges.Add(aGaugeRange5);
+            this.agMain.GaugeRanges.Add(aGaugeRange6);
             this.agMain.Location = new System.Drawing.Point(119, 63);
             this.agMain.MaxValue = 100F;
             this.agMain.MinValue = 0F;
@@ -1145,6 +1160,14 @@
             this.agMain.TabIndex = 12;
             this.agMain.Value = 0F;
             this.agMain.Visible = false;
+            // 
+            // tsmiBackupMCUFlash
+            // 
+            this.tsmiBackupMCUFlash.BackColor = System.Drawing.Color.White;
+            this.tsmiBackupMCUFlash.Name = "tsmiBackupMCUFlash";
+            this.tsmiBackupMCUFlash.Size = new System.Drawing.Size(327, 24);
+            this.tsmiBackupMCUFlash.Text = "Бэкап флеш-памяти процессора";
+            this.tsmiBackupMCUFlash.Click += new System.EventHandler(this.tsmiBackupMCUFlash_Click);
             // 
             // MainForm
             // 
@@ -1287,6 +1310,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAddContactsFromCSV;
         private System.Windows.Forms.ToolStripMenuItem tsmiFlashBackup;
         private System.Windows.Forms.AGauge agMain;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+        private System.Windows.Forms.ToolStripMenuItem tsmiBackupMCUFlash;
     }
 }
 

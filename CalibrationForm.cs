@@ -23,15 +23,16 @@ namespace NIKA_CPS_V1
 {
     public class CalibrationForm : Form
     {
-        public const int MAX_TRANSFER_BUFFER_SIZE = 1032;
+        private const int BUFFER_SIZE = 1032;
 
-        public static int CALIBRATIONS_ADDRESS = 0x10000;
+        private const int CALIBRATIONS_ADDRESS = 0x10000;
 
-        public static int CALIBRATION_TABLE_SIZE = 0x150;
+        private const int CALIBRATION_TABLE_SIZE = 0x150;
 
-        
+        private const byte CPS_WRITE = 0x57;
+        private const byte CPS_READ = 0x52;
 
-        public static byte[] dataBuffer;
+        private byte[] dataBuffer;
 
         private IContainer components = null;
 
@@ -59,7 +60,7 @@ namespace NIKA_CPS_V1
         private Label label10;
         private Label label11;
         private Label label12;
-        private Button btnReadFactoryFromRadio;
+        private Button btnRestoreFactory;
         private Label label16;
         private Label lblRadioType;
         private Label label30;
@@ -140,84 +141,54 @@ namespace NIKA_CPS_V1
             }
         }
 
-        private static bool ReadRadioBandlimits(SerialPort port, DataTransfer dataObj)
+        private RadioBandlimits readBandlimits()
         {
-            byte[] array = new byte[1032];
-            byte[] array2 = new byte[1032];
+            byte[] send = new byte[BUFFER_SIZE];
+            byte[] receive = new byte[BUFFER_SIZE];
+            byte[] raw = new byte[BUFFER_SIZE];
             int num = 0;
-            array[0] = 82;
-            array[1] = (byte)dataObj.mode;
-            array[2] = 0;
-            array[3] = 0;
-            array[4] = 0;
-            array[5] = 0;
-            array[6] = 0;
-            array[7] = 0;
-            port.Write(array, 0, 8);
-            while (port.BytesToWrite > 0)
-            {
-                Thread.Sleep(1);
-            }
-            while (port.BytesToRead == 0)
-            {
-                Thread.Sleep(5);
-            }
-            port.Read(array2, 0, port.BytesToRead);
-            if (array2[0] == 82)
-            {
-                int num2 = (array2[1] << 8) + array2[2];
-                for (int i = 0; i < num2; i++)
-                {
-                    dataObj.dataBuffer[num++] = array2[i + 3];
-                }
-                return true;
-            }
-            return false;
-        }
-        private bool readBandlimits()
-        {
             if (!COMPort.SetupPort())
             {
                 SystemSounds.Hand.Play();
-                MessageBox.Show("Нет соединения с портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                return false;
+                MessageBox.Show("Отсутствует заданный COM-порт");
+                return null;
             }
-            DataTransfer COMData = new DataTransfer();
-            COMData.mode = DataMode.DataModeReadBandlimits;
-            COMData.localAddress = 0;
-            COMData.transferLength = 0;
-            COMData.dataBuffer = new byte[128];
-            radioBandlimits = default(RadioBandlimits);
-            if (ReadRadioBandlimits(COMPort.Port, COMData))
+            send[0] = CPS_READ;
+            send[1] = (byte)DataTransfer.DataMode.ReadBandlimits;
+            send[2] = 0;
+            send[3] = 0;
+            send[4] = 0;
+            send[5] = 0;
+            send[6] = 0;
+            send[7] = 0;
+            COMPort.Port.Write(send, 0, 8);
+            while (COMPort.Port.BytesToWrite > 0)
             {
-                radioBandlimits = ByteArrayToRadioBandlimits(COMData.dataBuffer);
-            
+                Thread.Sleep(1);
             }
-            COMPort.Port.Close();
-            COMPort.Port = null;
-        
-            return true;
-
+            while (COMPort.Port.BytesToRead == 0)
+            {
+                Thread.Sleep(5);
+            }
+            COMPort.Port.Read(receive, 0, COMPort.Port.BytesToRead);
+            if (receive[0] == CPS_READ)
+            {
+                int num2 = (receive[1] << 8) + receive[2];
+                for (int i = 0; i < num2; i++)
+                {
+                    raw[num++] = receive[i + 3];
+                }
+                COMPort.Port.Close();
+                COMPort.Port = null;
+                return ByteArrayToRadioBandlimits(raw);
+            }
+            return null;
         }
 
-        private static CalibrationData ByteArrayToCalData(byte[] bytes)
-        {
-            GCHandle gCHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
-            try
-            {
-                return (CalibrationData)Marshal.PtrToStructure(gCHandle.AddrOfPinnedObject(), typeof(CalibrationData));
-            }
-            finally
-            {
-                gCHandle.Free();
-            }
-        }
+
 
         public bool readDataFromRadio()
         {
-            bool result = true;
-            int num = Marshal.SizeOf(typeof(CalibrationData));
-            byte[] array = new byte[num];
             if (!COMPort.SetupPort())
             {
                 SystemSounds.Hand.Play();
@@ -225,35 +196,22 @@ namespace NIKA_CPS_V1
                 return false;
             }
             DataTransfer COMData = new DataTransfer();
-            sendCommand(COMPort.Port, CPSCommand.InitUI);
-            sendCommand(COMPort.Port, CPSCommand.ClearScreen);
-            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Чтение");
-            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "калибровок");
-            sendCommand(COMPort.Port, CPSCommand.UpdateScreen);
-            
-            COMData.mode = DataMode.DataModeReadFlash;
-            COMData.dataBuffer = new byte[CALIBRATION_TABLE_SIZE];
-            COMData.localAddress = 0;
-            COMData.flashAddress = CALIBRATIONS_ADDRESS;
-            COMData.transferLength = CALIBRATION_TABLE_SIZE;
-            if (!ReadFlash(COMPort.Port, COMData))
-            {
-                result = false;
-                COMData.responseCode = 1;
-            }
-            else
-            {
-                SystemSounds.Exclamation.Play();
-            }
+            SendCommand(COMPort.Port, CPSCommand.InitUI);
+            SendCommand(COMPort.Port, CPSCommand.ClearScreen);
+            SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Чтение");
+            SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "калибровок");
+            SendCommand(COMPort.Port, CPSCommand.UpdateScreen);
+
+            CalData = ReadCalibrations(COMPort.Port);
             Thread.Sleep(1000);
-            sendCommand(COMPort.Port, CPSCommand.Finish, 3);
-            sendCommand(COMPort.Port, CPSCommand.CloseUI);
-            sendCommand(COMPort.Port, CPSCommand.RestartGPS);
+            SendCommand(COMPort.Port, CPSCommand.Finish, 3);
+            SendCommand(COMPort.Port, CPSCommand.CloseUI);
+            SendCommand(COMPort.Port, CPSCommand.RestartGPS);
             COMPort.Port.Close();
             COMPort.Port = null;
-            CalData = ByteArrayToCalData(COMData.dataBuffer);
+
             buildVariablesFromCalData(CalData);
-            return result;
+            return true;
         }
 
 
@@ -271,24 +229,24 @@ namespace NIKA_CPS_V1
                 MessageBox.Show("Отсутствует заданный COM-порт");
                 return;
             }
-            sendCommand(COMPort.Port, CPSCommand.InitUI);
-            sendCommand(COMPort.Port, CPSCommand.ClearScreen);
-            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Запись");
-            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "калибровок");
-            sendCommand(COMPort.Port, CPSCommand.UpdateScreen);
-            sendCommand(COMPort.Port, CPSCommand.Finish, 4);
-            COMData.mode = DataMode.DataModeWriteFlash;
+            SendCommand(COMPort.Port, CPSCommand.InitUI);
+            SendCommand(COMPort.Port, CPSCommand.ClearScreen);
+            SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Запись");
+            SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "калибровок");
+            SendCommand(COMPort.Port, CPSCommand.UpdateScreen);
+            SendCommand(COMPort.Port, CPSCommand.Finish, 4);
+            COMData.mode = DataMode.WriteFlash;
             COMData.localAddress = 0;
             COMData.flashAddress = CALIBRATIONS_ADDRESS;
             COMData.transferLength = CALIBRATION_TABLE_SIZE;
-            if (!WriteFlash(COMPort.Port, COMData))
+            if (!WriteFlash(COMPort.Port, COMData, CALIBRATION_TABLE_SIZE))
             {
                 MessageBox.Show("Ошибка при записи в последовательный порт!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 COMData.responseCode = 1;
             }
-            sendCommand(COMPort.Port, CPSCommand.Finish, 2);
-            sendCommand(COMPort.Port, CPSCommand.Finish, 1);
-            sendCommand(COMPort.Port, CPSCommand.CloseUI);
+            SendCommand(COMPort.Port, CPSCommand.Finish, 2);
+            SendCommand(COMPort.Port, CPSCommand.Finish, 1);
+            SendCommand(COMPort.Port, CPSCommand.CloseUI);
             COMPort.Port.Close();
             COMPort.Port = null;
         }
@@ -366,7 +324,8 @@ namespace NIKA_CPS_V1
 
         private void btnReadFromRadio_Click(object sender, EventArgs e)
         {
-            if (!readBandlimits())
+            radioBandlimits = readBandlimits();
+            if (radioBandlimits == null)
             {
                 MessageBox.Show("Ограничения частот не считаны из рации!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -378,38 +337,20 @@ namespace NIKA_CPS_V1
 
         }
 
-        private void btnReadFactoryFromRadio_Click(object sender, EventArgs e)
+        private void btnRestoreFactory_Click(object sender, EventArgs e)
         {
-            if (!COMPort.SetupPort())
+            if (MessageBox.Show("Радиостанция восстановит таблицу калибровок, исходя из заводских, хранящихся в защищенной области памяти. Все внесенные изменения будут сброшены.\r\nПоскольку заводская калибровка каждой конкретной рации де-факто на заводе не выполняется, расчетные значения для малых мощностей, опираясь на зашитые заводом данные, могут быть крайне неточными.\r\n\r\nВыполнить сброс?", "ВНИМАНИЕ!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                SystemSounds.Hand.Play();
-                MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (!COMPort.SetupPort())
+                {
+                    SystemSounds.Hand.Play();
+                    MessageBox.Show("Отсутствует заданный COM-порт");
+                    return;
+                }
+                SendCommand(COMPort.Port, CPSCommand.RestoreCalibrations);
+                COMPort.Port.Close();
+                COMPort.Port = null;
             }
-            DataTransfer COMData = new DataTransfer();
-            COMData.dataBuffer = new byte[CALIBRATION_TABLE_SIZE];
-            Array.Copy(dataBuffer, 0, COMData.dataBuffer, 0, CALIBRATION_TABLE_SIZE);
-            sendCommand(COMPort.Port, CPSCommand.InitUI);
-            sendCommand(COMPort.Port, CPSCommand.ClearScreen);
-            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Восстановление");
-            sendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "калибровок");
-            sendCommand(COMPort.Port, CPSCommand.UpdateScreen);
-            sendCommand(COMPort.Port, CPSCommand.Finish, 4);
-            COMData.mode = DataMode.DataModeWriteFlash;
-            COMData.localAddress = 0;
-            COMData.flashAddress = CALIBRATIONS_ADDRESS;
-            COMData.transferLength = CALIBRATION_TABLE_SIZE;
-            if (!WriteFlash(COMPort.Port, COMData))
-            {
-                MessageBox.Show("Ошибка при восстановлении!");
-                COMData.responseCode = 1;
-            }
-            sendCommand(COMPort.Port, CPSCommand.Finish, 2);
-            sendCommand(COMPort.Port, CPSCommand.Finish, 1);
-            sendCommand(COMPort.Port, CPSCommand.CloseUI);
-            COMPort.Port.Close();
-            COMPort.Port = null;
-            MessageBox.Show("После перезагрузки рация перестроит таблицы, исходя из заводских калибровок, сохраненных в защищенной памяти.", "Сброс калибровок", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void showButtons()
@@ -417,7 +358,7 @@ namespace NIKA_CPS_V1
             btnWrite.Visible = true;
             btnSaveCalibration.Visible = true;
             btnChart.Visible = true;
-            btnReadFactoryFromRadio.Visible = true;
+            btnRestoreFactory.Visible = true;
         }
 
         private void btnSaveCalibration_Click(object sender, EventArgs e)
@@ -902,7 +843,7 @@ namespace NIKA_CPS_V1
             this.label6 = new System.Windows.Forms.Label();
             this.nmRSSI120 = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnReadFactoryFromRadio = new System.Windows.Forms.Button();
+            this.btnRestoreFactory = new System.Windows.Forms.Button();
             this.lblRadioType = new System.Windows.Forms.Label();
             this.btnClearColors = new System.Windows.Forms.Button();
             this.btnChart = new System.Windows.Forms.Button();
@@ -1623,18 +1564,18 @@ namespace NIKA_CPS_V1
             this.label5.TabIndex = 8;
             this.label5.Text = "Уровень RSSI -120 дБм:";
             // 
-            // btnReadFactoryFromRadio
+            // btnRestoreFactory
             // 
-            this.btnReadFactoryFromRadio.BackColor = System.Drawing.Color.White;
-            this.btnReadFactoryFromRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnReadFactoryFromRadio.Location = new System.Drawing.Point(877, 367);
-            this.btnReadFactoryFromRadio.Name = "btnReadFactoryFromRadio";
-            this.btnReadFactoryFromRadio.Size = new System.Drawing.Size(268, 25);
-            this.btnReadFactoryFromRadio.TabIndex = 5;
-            this.btnReadFactoryFromRadio.Text = "Восстановить заводские калибровки";
-            this.btnReadFactoryFromRadio.UseVisualStyleBackColor = false;
-            this.btnReadFactoryFromRadio.Visible = false;
-            this.btnReadFactoryFromRadio.Click += new System.EventHandler(this.btnReadFactoryFromRadio_Click);
+            this.btnRestoreFactory.BackColor = System.Drawing.Color.White;
+            this.btnRestoreFactory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRestoreFactory.Location = new System.Drawing.Point(877, 367);
+            this.btnRestoreFactory.Name = "btnRestoreFactory";
+            this.btnRestoreFactory.Size = new System.Drawing.Size(268, 25);
+            this.btnRestoreFactory.TabIndex = 5;
+            this.btnRestoreFactory.Text = "Восстановить заводские калибровки";
+            this.btnRestoreFactory.UseVisualStyleBackColor = false;
+            this.btnRestoreFactory.Visible = false;
+            this.btnRestoreFactory.Click += new System.EventHandler(this.btnRestoreFactory_Click);
             // 
             // lblRadioType
             // 
@@ -1677,7 +1618,7 @@ namespace NIKA_CPS_V1
             this.Controls.Add(this.btnChart);
             this.Controls.Add(this.btnClearColors);
             this.Controls.Add(this.lblRadioType);
-            this.Controls.Add(this.btnReadFactoryFromRadio);
+            this.Controls.Add(this.btnRestoreFactory);
             this.Controls.Add(this.gbCommons);
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.btnReadFromRadio);

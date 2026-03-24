@@ -101,6 +101,7 @@ namespace NIKA_CPS_V1
             playAudio = (RegistryOperations.IsFlagSet("AccessibilityOptions", false));
             radioVID = RegistryOperations.GetString("DeviceVID", "05D0");
             radioPID = RegistryOperations.GetString("DevicePID", "0094");
+
         }
 
         //поиск в аргументах командной строки имени файла кодплага
@@ -250,7 +251,6 @@ namespace NIKA_CPS_V1
             
             pollingTimer.Interval = (RegistryOperations.IsFlagSet("UsingFastPolling")) ? 500 : 1000;
             pollingTimer.Start();
-            
         }
 
         private void CheckLoadedCodeplug()
@@ -1409,5 +1409,49 @@ namespace NIKA_CPS_V1
                 DataTask(dataObj);
             }
         }
+
+        private void tsmiBackupMCUFlash_Click(object sender, EventArgs e)
+        {
+            if (!COMPort.SetupPort())
+            {
+                SystemSounds.Hand.Play();
+                MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                tvMain.Visible = false;
+                tvSecondary.Visible = false;
+                tsMainControls.Enabled = false;
+                msMain.Enabled = false;
+                agMain.Visible = true;
+                agMain.Value = 0;
+                DataTransfer dataObj = new DataTransfer(DataTransfer.CPSAction.BACKUP_MCU_FLASH);
+                DataTask(dataObj);
+            }
+        }
+
+        private void tsbWriteToRadio_Click(object sender, EventArgs e)
+        {
+            if (!COMPort.SetupPort())
+            {
+                SystemSounds.Hand.Play();
+                MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                SendCommand(COMPort.Port, CPSCommand.InitUI);
+                SendCommand(COMPort.Port, CPSCommand.ClearScreen);
+                SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Кодплаг");
+                SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "записан");
+                SendCommand(COMPort.Port, CPSCommand.UpdateScreen);
+                SendCommand(COMPort.Port, CPSCommand.SetCodeplugWritten);
+                COMPort.Port.Close();
+                COMPort.Port = null;
+            }
+        }
+
+
     }
 }
