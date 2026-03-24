@@ -515,21 +515,33 @@ namespace NIKA_CPS_V1.Interfaces
                     switch (tData.action)
                     {
                         case DataTransfer.CPSAction.BACKUP_FLASH:
+                            SaveFileDialog sfdFlash = new SaveFileDialog();
+                            sfdFlash.InitialDirectory = RegistryOperations.GetString("LastFlashBackupFolder", null);
+                            sfdFlash.Filter = "Бинарные файлы (*.bin)|*.bin";
+                            sfdFlash.FilterIndex = 1;
+                            if (sfdFlash.ShowDialog() == DialogResult.OK)
                             {
-                                SaveFileDialog sfdFlash = new SaveFileDialog();
-                                sfdFlash.InitialDirectory = RegistryOperations.GetString("LastFlashBackupFolder", null);
-                                sfdFlash.Filter = "Бинарные файлы (*.bin)|*.bin";
-                                sfdFlash.FilterIndex = 1;
-                                if (sfdFlash.ShowDialog() == DialogResult.OK)
-                                {
-                                    File.WriteAllBytes(sfdFlash.FileName, tData.dataBuffer);
-                                    RegistryOperations.WriteString("LastFlashBackupFolder", Path.GetDirectoryName(sfdFlash.FileName));
-                                }
-                                tData.action = DataTransfer.CPSAction.NONE;
-                                MainForm.logMessage("Бэкап флеш-памяти завершен!");
-                                MainForm.restoreUI();
-                                break;
+                                File.WriteAllBytes(sfdFlash.FileName, tData.dataBuffer);
+                                RegistryOperations.WriteString("LastFlashBackupFolder", Path.GetDirectoryName(sfdFlash.FileName));
                             }
+                            tData.action = DataTransfer.CPSAction.NONE;
+                            MainForm.logMessage("Бэкап флеш-памяти завершен!");
+                            MainForm.restoreUI();
+                            break;
+                        case DataTransfer.CPSAction.BACKUP_MCU_FLASH:
+                            SaveFileDialog sfdMCUFlash = new SaveFileDialog();
+                            sfdMCUFlash.InitialDirectory = RegistryOperations.GetString("LastFlashBackupFolder", null);
+                            sfdMCUFlash.Filter = "Бинарные файлы (*.bin)|*.bin";
+                            sfdMCUFlash.FilterIndex = 1;
+                            if (sfdMCUFlash.ShowDialog() == DialogResult.OK)
+                            {
+                                File.WriteAllBytes(sfdMCUFlash.FileName, tData.dataBuffer);
+                                RegistryOperations.WriteString("LastFlashBackupFolder", Path.GetDirectoryName(sfdMCUFlash.FileName));
+                            }
+                            tData.action = DataTransfer.CPSAction.NONE;
+                            MainForm.logMessage("Бэкап флеш-памяти процессора завершен!");
+                            MainForm.restoreUI();
+                            break;
                     }
                 }
                 else
@@ -551,25 +563,25 @@ namespace NIKA_CPS_V1.Interfaces
                 MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (!SendCommand(COMPort.Port, 0))
+            {
+                MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tData.responseCode = 1;
+                COMPort.Port = null;
+                return;
+            }
+            SendCommand(COMPort.Port, CPSCommand.ClearScreen);
             try
             {
                 switch (tData.action)
                 {         
                     case DataTransfer.CPSAction.BACKUP_FLASH:
-                        if (!SendCommand(COMPort.Port, 0))
-                        {
-                            MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            tData.responseCode = 1;
-                            COMPort.Port = null;
-                            break;
-                        }
-                        SendCommand(COMPort.Port, CPSCommand.ClearScreen);
                         SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Бэкап");
                         SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "флеш-памяти");
                         SendCommand(COMPort.Port, CPSCommand.UpdateScreen);
                         SendCommand(COMPort.Port, CPSCommand.Finish, 3);
                         tData.mode = DataTransfer.DataMode.ReadFlash;
-                        tData.dataBuffer = new byte[16777216];
+                        tData.dataBuffer = new byte[0x1000000];
                         tData.localAddress = 0;
                         tData.flashAddress = 0;
                         tData.transferLength = tData.dataBuffer.Length;
@@ -584,7 +596,27 @@ namespace NIKA_CPS_V1.Interfaces
                         COMPort.Port.Close();
                         COMPort.Port = null;
                         break;
-
+                    case DataTransfer.CPSAction.BACKUP_MCU_FLASH:
+                        SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Бэкап");
+                        SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "прошивки");
+                        SendCommand(COMPort.Port, CPSCommand.UpdateScreen);
+                        SendCommand(COMPort.Port, CPSCommand.Finish, 3);
+                        tData.mode = DataTransfer.DataMode.ReadMCUFlash;
+                        tData.dataBuffer = new byte[0x100000];
+                        tData.localAddress = 0;
+                        tData.flashAddress = 0;
+                        tData.transferLength = tData.dataBuffer.Length;
+                        MainForm.logMessage("Начато чтение флеш-памяти процессора...");
+                        if (!ReadFlash(COMPort.Port, tData))
+                        {
+                            MainForm.logMessage("Ошибка при чтении флеш-памяти процессора!");
+                            tData.responseCode = 1;
+                        }
+                        SendCommand(COMPort.Port, CPSCommand.CloseUI);
+                        SendCommand(COMPort.Port, CPSCommand.RestartGPS);
+                        COMPort.Port.Close();
+                        COMPort.Port = null;
+                        break;
                 }
             }
             catch (Exception ex)

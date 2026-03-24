@@ -1410,6 +1410,27 @@ namespace NIKA_CPS_V1
             }
         }
 
+        private void tsmiBackupMCUFlash_Click(object sender, EventArgs e)
+        {
+            if (!COMPort.SetupPort())
+            {
+                SystemSounds.Hand.Play();
+                MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                tvMain.Visible = false;
+                tvSecondary.Visible = false;
+                tsMainControls.Enabled = false;
+                msMain.Enabled = false;
+                agMain.Visible = true;
+                agMain.Value = 0;
+                DataTransfer dataObj = new DataTransfer(DataTransfer.CPSAction.BACKUP_MCU_FLASH);
+                DataTask(dataObj);
+            }
+        }
+
         private void tsbWriteToRadio_Click(object sender, EventArgs e)
         {
             if (!COMPort.SetupPort())
@@ -1430,5 +1451,7 @@ namespace NIKA_CPS_V1
                 COMPort.Port = null;
             }
         }
+
+
     }
 }
