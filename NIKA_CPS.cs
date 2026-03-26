@@ -1447,6 +1447,9 @@ namespace NIKA_CPS_V1
                 SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "записан");
                 SendCommand(COMPort.Port, CPSCommand.UpdateScreen);
                 SendCommand(COMPort.Port, CPSCommand.SetCodeplugWritten);
+                SendCommand(COMPort.Port, CPSCommand.Finish, 2);
+                SendCommand(COMPort.Port, CPSCommand.Finish, 1);
+                SendCommand(COMPort.Port, CPSCommand.CloseUI);
                 COMPort.Port.Close();
                 COMPort.Port = null;
             }
