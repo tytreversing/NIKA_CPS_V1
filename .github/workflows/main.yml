@@ -2,26 +2,30 @@ name: Sync to GitLab
 
 on:
   push:
-    branches: [ "*" ]   # Срабатывает на пуш в любую ветку
-    tags: [ "*" ]       # Срабатывает на создание любого тега
+    branches: [ "*" ]
+    tags: [ "*" ]
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout source repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0          # Важно: загружаем всю историю, все ветки и теги
-
-      - name: Push all branches and tags to GitLab
-        env:
-          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
-          GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
-        run: |
-          # Добавляем GitLab как новый удаленный репозиторий
-          git remote add gitlab "${GITLAB_REPO}"
-          # Пушим ВСЕ (--mirror) в GitLab, используя токен для аутентификации
-          # Формат URL: https://oauth2:TOKEN@gitlab.com/...
-          git push --mirror "https://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO#https://}"
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Push to GitLab
+      env:
+        GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+        GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
+      run: |
+        # Извлекаем имя хоста и путь из URL
+        REPO_URL="https://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO#https://}"
+        
+        # Добавляем GitLab как remote с понятным именем
+        git remote add gitlab-mirror "$REPO_URL"
+        
+        # Пушим только ветки и теги, игнорируя скрытые refs
+        git push gitlab-mirror --force --all
+        git push gitlab-mirror --force --tags
