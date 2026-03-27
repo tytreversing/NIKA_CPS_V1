@@ -420,7 +420,7 @@ namespace NIKA_CPS_V1.Interfaces
     
     while (remainingBytes > 0)
     {
-        int timeoutCounter = 100;
+        int timeoutCounter = 10;
         int bytesToRead = 100;
         
         if (remainingBytes >= DEFAULT_BLOCK_SIZE)
@@ -735,6 +735,30 @@ namespace NIKA_CPS_V1.Interfaces
                 return ByteArrayToCalData(data);
             }
             return null;
+        }
+
+        public static void ResetSettings(SerialPort port)
+        {
+            byte[] cmd = new byte[BUFFER_SIZE];
+            byte[] resp = new byte[BUFFER_SIZE];
+            byte[] message = new byte[] { 70, 85, 67, 75, 66, 76, 85, 69, 68, 86 }; //FUCKBLUEDV
+            cmd[0] = CPS_COMMAND;
+            cmd[1] = (byte)CPSCommand.RestoreSettings;
+            for (int i = 2; i < 12; i++)
+            {
+                cmd[i] = message[i - 2];
+            }
+            port.Write(cmd, 0, 12);
+            while (port.BytesToWrite > 0)
+            {
+                Thread.Sleep(1);
+            }
+            while (port.BytesToRead == 0)
+            {
+                Thread.Sleep(5);
+            }
+            port.Read(resp, 0, port.BytesToRead);
+            return;
         }
     }
 }
