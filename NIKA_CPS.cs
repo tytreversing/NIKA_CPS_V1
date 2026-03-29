@@ -759,6 +759,10 @@ namespace NIKA_CPS_V1
                     Instance.msMain.Enabled = true;
                 }
             }
+            if (Instance?.pollingTimer != null)
+            {
+                Instance.pollingTimer.Enabled = true;
+            }
         }
 
         public static void playMessage(string message)
@@ -1399,6 +1403,7 @@ namespace NIKA_CPS_V1
             }
             else
             {
+                pollingTimer.Enabled = false;
                 tvMain.Visible = false;
                 tvSecondary.Visible = false;
                 tsMainControls.Enabled = false;
@@ -1420,6 +1425,7 @@ namespace NIKA_CPS_V1
             }
             else
             {
+                pollingTimer.Enabled = false;
                 tvMain.Visible = false;
                 tvSecondary.Visible = false;
                 tsMainControls.Enabled = false;
@@ -1441,17 +1447,40 @@ namespace NIKA_CPS_V1
             }
             else
             {
+                pollingTimer.Enabled = false;
                 SendCommand(COMPort.Port, CPSCommand.InitUI);
                 SendCommand(COMPort.Port, CPSCommand.ClearScreen);
                 SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 0, 3, 1, 0, "Кодплаг");
                 SendCommand(COMPort.Port, CPSCommand.WriteString, 0, 16, 3, 1, 0, "записан");
                 SendCommand(COMPort.Port, CPSCommand.UpdateScreen);
                 SendCommand(COMPort.Port, CPSCommand.SetCodeplugWritten);
+                SendCommand(COMPort.Port, CPSCommand.Finish, 2);
+                SendCommand(COMPort.Port, CPSCommand.Finish, 1);
+                SendCommand(COMPort.Port, CPSCommand.CloseUI);
                 COMPort.Port.Close();
                 COMPort.Port = null;
+                pollingTimer.Enabled = true;
             }
         }
 
-
+        private void tsmiResetSettings_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Все настройки рации будут сброшены на значения по умолчанию, рация перезагружена.\r\nПродолжить?", "Внимание!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                if (!COMPort.SetupPort())
+                {
+                    SystemSounds.Hand.Play();
+                    MessageBox.Show("Ошибка при соединении с COM-портом!", "Ошибка соединения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    tbConsole.AppendText("Сбрасываем настройки радиостанции...\r\n");
+                    FirmwareInterface.ResetSettings(COMPort.Port);
+                    COMPort.Port.Close();
+                    COMPort.Port = null;
+                }
+            }
+        }
     }
 }

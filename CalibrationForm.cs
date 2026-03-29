@@ -25,7 +25,7 @@ namespace NIKA_CPS_V1
     {
         private const int BUFFER_SIZE = 1032;
 
-        private const int CALIBRATIONS_ADDRESS = 0x10000;
+        private const int CALIBRATIONS_ADDRESS = 0x0030;
 
         private const int CALIBRATION_TABLE_SIZE = 0x150;
 
